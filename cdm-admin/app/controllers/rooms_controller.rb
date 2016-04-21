@@ -74,6 +74,15 @@ class RoomsController < ApplicationController
     end
   end
 
+  def get_room_photos
+    room = Room.find_by_id params[:id]
+    if !room.blank?
+      render :json => {:success => "true", :room_id => room.id, :photos => room.photos}
+    else
+      render :json => {:success => "false"}
+    end
+  end
+
   ###########################################
 
 
