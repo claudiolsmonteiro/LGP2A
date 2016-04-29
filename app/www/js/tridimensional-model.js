@@ -59,13 +59,13 @@ function tridimensional_model_init() {
     // models
     loadObjModel('teapot', 'obj/teapot.obj', [-200, 50, 0], 30, objects, pickable_objects, textures['sample'], scene, [20, 1, 0], 0.5);
     //loadObjModel('person', 'obj/male02.obj', [100, -150, 0], 3.5, objects, pickable_objects, textures['sample'], scene, [20, 0, 0], 0.5);
-    //loadObjModel('casa', 'obj/casadamusica/casa_da_musica_e_salas.obj', [100, -150, 0], 100, objects, pickable_objects, textures['casadamusica'], scene, [20, 0, 0], 0.5);
+    loadObjModel('casa', 'obj/casa_da_musica_salas_separadas/casa_da_musica.obj', [100, -150, 0], 100, objects, pickable_objects, textures['casadamusica'], scene, [20, 0, 0], 0.5);
 
     addSampleCubeToScene('cube1', [-230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);
     addSampleCubeToScene('cube2', [0, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);
     addSampleCubeToScene('cube3', [230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);
 
-    loadObjMtl(scene);
+    //loadObjMtl(scene);
 
     renderer = new THREE.WebGLRenderer();
 
@@ -90,8 +90,11 @@ function tridimensional_model_init() {
     //controls.minDistance = 700;
     controls.maxDistance = 1500;
 
+    renderer.setClearColor( 0x4FB9D3, 1 );
+
     renderer.domElement.setAttribute('id', 'model-main-canvas');
     document.getElementById('model-canvas-container').appendChild( renderer.domElement );
+
 
 }
 

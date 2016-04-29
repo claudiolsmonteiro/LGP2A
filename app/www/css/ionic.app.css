@@ -9735,6 +9735,10 @@ a.button {
   font-family: "casadamusica_font";
   src: url(../lib/fonts/cdm_font.ttf) format("truetype"); }
 
+@font-face {
+  font-family: "roboto";
+  src: url(../lib/fonts/Roboto-Regular.ttf) format("truetype"); }
+
 /* Empty. Add your own CSS if you like */
 #more-details-button {
   position: fixed;
@@ -9767,7 +9771,7 @@ dialog {
   padding: 10px;
   display: none;
   position: fixed;
-  background: rgba(200, 200, 200, 0.75);
+  color: #578896;
   width: 100vw;
   top: 0;
   z-index: 200; }
@@ -9776,7 +9780,6 @@ dialog {
   display: none;
   /*font-family: casadamusica_font;*/
   position: fixed;
-  background: rgba(200, 200, 200, 0.75);
   width: 100vw;
   bottom: 0;
   z-index: 200; }
@@ -9785,6 +9788,8 @@ dialog {
     margin-bottom: 15px;
     font-size: 1.2rem; }
     #bottom-navbar ul li {
+      color: #B1D5E5;
+      font-family: roboto;
       display: inline;
       margin-left: 20px;
       margin-right: 20px; }

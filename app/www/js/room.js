@@ -60,12 +60,12 @@ function room_init() {
     loadObjModel('teapot', 'obj/teapot.obj', [-200, 50, 0], 30, objects, pickable_objects, textures['sample'], scene, null, null);
     loadObjModel('person', 'obj/male02.obj', [100, -150, 0], 3.5, objects, pickable_objects, textures['sample'], scene, null, null);
 
-    addSampleCubeToScene('cube1', [-230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
-    addSampleCubeToScene('cube2', [0, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
-    addSampleCubeToScene('cube3', [230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
+    //addSampleCubeToScene('cube1', [-230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
+    //addSampleCubeToScene('cube2', [0, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
+    //addSampleCubeToScene('cube3', [230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
 
     renderer = new THREE.WebGLRenderer();
-
+    renderer.setClearColor( 0x4FB9D3, 1 );
     /*var rendererHeight, rendererWidth;
     rendererWidth = document.getElementById('model-canvas-container').offsetWidth;
     if(window.innerWidth > window.innerHeight){

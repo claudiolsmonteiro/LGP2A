@@ -58,7 +58,7 @@ function loadObjMtl(scene){
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials( materials );
         objLoader.setPath( 'obj/casa_da_musica_salas_separadas/' );
-        objLoader.load( 'casa_da_musica.obj', function ( object ) {
+        objLoader.load( 'luis5.obj', function ( object ) {
 
             //object.position.y = - 95;
             object.scale.set(150, 150, 150);
