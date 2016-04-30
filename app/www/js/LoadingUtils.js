@@ -15,7 +15,7 @@ manager.onProgress = function ( item, loaded, total ) {
  * @param scale scale (same in all three axes)
  * @param objectsArray associative array to which the model shall be added when loaded. Key will be @model_id
  */
-function loadObjModel(model_id, model_path, position, scale, objectsArray, meshesArray, texture, scene, animation, animation_span) {
+function loadObjModel(model_id, title, model_path, position, scale, objectsArray, meshesArray, texture, scene, animation, animation_span) {
     var loader = new THREE.OBJLoader( manager );
     loader.load( model_path, function ( object ) {
         object.traverse(function ( child ) {
@@ -24,11 +24,13 @@ function loadObjModel(model_id, model_path, position, scale, objectsArray, meshe
                 child.callback = function() {
                     objCallback(model_id, object, scene);
                 }
-                meshesArray.push(child);
+                if(meshesArray != null)
+                    meshesArray.push(child);
                 object.mesh = child;
             }
         });
         object.name = model_id;
+        object.title = title;
         object.original_position = position;
         object.position.x = position[0];
         object.position.y = position[1];
@@ -58,7 +60,7 @@ function loadObjMtl(scene){
         var objLoader = new THREE.OBJLoader();
         objLoader.setMaterials( materials );
         objLoader.setPath( 'obj/casa_da_musica_salas_separadas/' );
-        objLoader.load( 'luis5.obj', function ( object ) {
+        objLoader.load( 'luis1.obj', function ( object ) {
 
             //object.position.y = - 95;
             object.scale.set(150, 150, 150);
