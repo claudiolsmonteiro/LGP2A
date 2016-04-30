@@ -1,0 +1,172 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+
+//from here, this is all mine.
+@font-face {
+  font-family: "casadamusica_font";
+  src: url(../lib/fonts/cdm_font.ttf) format("truetype");
+}
+
+
+@font-face {
+  font-family: "roboto";
+  src: url(../lib/fonts/Roboto-Regular.ttf) format("truetype");
+}
+
+/* Empty. Add your own CSS if you like */
+#more-details-button{
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 200;
+  display: none;
+}
+
+dialog{
+  display: none;
+}
+
+#model-canvas-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/*#model-overlay-content{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 150;
+}*/
+
+#model-main-canvas{
+  z-index: 3;
+}
+
+#top-info-bar{
+  font-family: casadamusica_font;
+  font-size: 2rem;
+  padding: 10px;
+  display: none;
+  position: fixed;
+  //background: rgba(200,200,200,0.75);
+  color: #578896;
+  width: 100vw;
+  top: 0;
+  z-index: 200;
+}
+
+#bottom-navbar{
+  display: none;
+  /*font-family: casadamusica_font;*/
+  position: fixed;
+  //background: rgba(200,200,200,0.75);
+  width: 100vw;
+  bottom: 0;
+  z-index: 200;
+
+  ul{
+    text-align: right;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    li{
+      color: #B1D5E5;
+      font-family: roboto;
+      display: inline;
+      margin-left: 20px;
+      margin-right: 20px;
+
+      a{
+        text-decoration: none;
+        color: inherit;
+      }
+
+    }
+  }
+
+}
+
+#room-more-info-modal {
+  display: none;
+  position: fixed;
+  background-color: rgba(230, 230, 230, 0.85);
+  z-index: 2000;
+  border-radius: 5px;
+
+  .modal-header{
+    height: 3rem;
+  }
+
+  .modal-container{
+    border-top-style: solid;
+    border-top: 1px;
+  }
+}
+#room-more-info-modal-background{
+  display: none;
+  position: fixed;
+  background-color: rgba(0,0,0,0.70);
+  z-index: 1999;
+  height: 100vh;
+  width: 100vh;
+  top: 0;
+  left: 0;
+}
+
+/* Portrait */
+@media only screen
+and (orientation: portrait) {
+  #room-more-info-modal{
+    width: 80vw;
+    height: 80vh;
+    top: 50%;
+    left: 50%;
+    margin-top: -40vh; // Negative half of height.
+    margin-left: -40vw; // Negative half of width.
+  }
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 1080px)
+and (orientation: landscape) {
+  #room-more-info-modal{
+    width: 40vw;
+    height: 80vh;
+    top: 50%;
+    left: 10vw;
+    margin-top: -40vh; // Negative half of height.
+  }
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
