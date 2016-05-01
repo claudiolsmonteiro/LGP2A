@@ -59,4 +59,5 @@ Rails.application.routes.draw do
   get "api/room/:id/photos", :to => 'rooms#get_room_photos'
   get "api/photo/:id", :to => 'photo#get_photo'
   get "api/photo/:id/points", :to => 'photo#get_photo_points'
+  get "api/photo/:id/videos", :to => 'photo#get_photo_videos'
 end

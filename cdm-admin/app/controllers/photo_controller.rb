@@ -17,4 +17,13 @@ class PhotoController < ApplicationController
       render :json => {:success => "false"}
     end
   end
+
+  def get_photo_videos
+    photo = Photo.find_by_id params[:id]
+    if !photo.blank?
+      render :json => {:success => "true", :photo_id => photo.id, :videos => photo.videos}
+    else
+      render :json => {:success => "false"}
+    end
+  end
 end
