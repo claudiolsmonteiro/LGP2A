@@ -18,15 +18,15 @@ controllerModule.controller("tridimensionalModelController", function($scope, $w
 
 });
 
-/*
-
-controllerModule.controller("panoramicController", function($scope){
-
+controllerModule.controller("panoramicController", function($scope, $stateParams){
+    $scope.room = $stateParams.room;
+    $scope.room_title = models[$stateParams.room].title.toUpperCase();
 });
-*/
+
 controllerModule.controller("roomController", function($scope, $stateParams){
+    $scope.room = $stateParams.room;
+    $scope.room_title = models[$stateParams.room].title.toUpperCase();
     ionic.DomUtil.ready(function(){
-        document.getElementById('top-info-bar').innerHTML = $stateParams.room.toUpperCase();
         room_ready($stateParams.room);
     });
 

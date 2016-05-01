@@ -37,11 +37,11 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       controller:"tridimensionalModelController"
     })
 
-    /*  .state('panoramic', {
-    url: '/panoramic',
+     .state('panoramic', {
+    url: '/panoramic/:room',
     templateUrl: 'templates/360.html',
     controller:"panoramicController"
-    })*/
+    })
 
       .state('room', {
     url: '/room/:room',
