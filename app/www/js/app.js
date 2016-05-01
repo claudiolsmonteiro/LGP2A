@@ -50,7 +50,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     })
 
       .state('room', {
-    url: '/room',
+    url: '/room/:room',
     templateUrl: 'templates/room.html',
     controller:"roomController"
   });

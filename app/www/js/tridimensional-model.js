@@ -17,7 +17,7 @@ var last_animation;
 var current_animated_object_name = null;
 
 function tridimensional_model_ready(){
-    console.log("chegou aqui model ready");
+    //console.log("chegou aqui model ready");
     tridimensional_model_init();
     tridimensional_model_animate();
 }
@@ -50,36 +50,37 @@ function tridimensional_model_init() {
 
     objsContainer = [];
 
-    THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+    //THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
     //textures
-    loadTexture('sample', 'obj/texture.jpg', textures);
+    //loadTexture('sample', 'obj/texture.jpg', textures);
     //loadTexture('casadamusica', 'obj/casadamusica/texturas/casa_da_musica_uvmap.png', textures);
-
+    for(var key in models){
+        loadTexture(models[key].name, models[key].texture_path, textures);
+    }
     // models
-    loadObjModel('teapot', 'obj/teapot.obj', [-200, 50, 0], 30, objects, pickable_objects, textures['sample'], scene, [20, 1, 0], 0.5);
-    //loadObjModel('person', 'obj/male02.obj', [100, -150, 0], 3.5, objects, pickable_objects, textures['sample'], scene, [20, 0, 0], 0.5);
-    //loadObjModel('casa', 'obj/casadamusica/casa_da_musica_e_salas.obj', [100, -150, 0], 100, objects, pickable_objects, textures['casadamusica'], scene, [20, 0, 0], 0.5);
+    //loadObjModel('teapot', 'Bule', 'obj/teapot.obj', [-200, 50, 0], 30, objects, pickable_objects, textures['sample'], scene, [20, 1, 0], 0.5);
+    //loadObjModel('person', 'Pessoa', 'obj/male02.obj', [100, -150, 0], 3.5, objects, pickable_objects, textures['sample'], scene, [20, 0, 0], 0.5);
+    var y_coord = 100;
+    for(var key in models){
+        loadObjModel(models[key].name, models[key].title, models[key].path, [0, y_coord, 0], 100, objects, pickable_objects, textures[models[key].name], scene, [20, 0, 0], 0.5);
+        y_coord -= 200;
+    }
 
-    addSampleCubeToScene('cube1', [-230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);
+    /*loadObjModel('casa', 'casa', 'obj/casa_da_musica_salas_separadas/casa_da_musica.obj', [100, 200, 0], 100, objects, null, textures['casadamusica'], scene, [0, 0, 0], 0);
+
+    loadObjModel('sala_suggia', 'Sala Suggia', 'obj/casa_da_musica_salas_separadas/sala_suggia.obj', [0, 0, 0], 100, objects, pickable_objects, null, scene, [20, 0, 0], 0.5);
+    loadObjModel('sala_2', 'Sala 2', 'obj/casa_da_musica_salas_separadas/sala_concertos2.obj', [0, -200, 0], 100, objects, pickable_objects, textures['casadamusica'], scene, [20, 0, 0], 0.5);
+    loadObjModel('bar', 'Bar', 'obj/casa_da_musica_salas_separadas/bar.obj', [0, -350, 0], 100, objects, pickable_objects, textures['casadamusica'], scene, [20, 0, 0], 0.5);*/
+
+    /*addSampleCubeToScene('cube1', [-230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);
     addSampleCubeToScene('cube2', [0, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);
-    addSampleCubeToScene('cube3', [230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);
+    addSampleCubeToScene('cube3', [230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, [0, 300, 0], 0.5);*/
 
-    loadObjMtl(scene);
+    //loadObjMtl(scene);
 
     renderer = new THREE.WebGLRenderer();
 
-    /*var rendererHeight, rendererWidth;
-    rendererWidth = document.getElementById('model-canvas-container').offsetWidth;
-    if(window.innerWidth > window.innerHeight){
-        rendererHeight = window.innerHeight*0.9;
-    }
-    else rendererHeight = rendererWidth*1.2
-
-    console.log("renderer heigh: " + rendererHeight + " # width: " + rendererWidth);*/
-
-    //renderer.setSize( window.innerWidth * 0.6, window.innerHeight *0.6 );
-    //renderer.setSize( rendererWidth, rendererHeight );
     renderer.setSize( window.innerWidth, window.innerHeight);
     renderer.setPixelRatio( window.devicePixelRatio );
     controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -90,8 +91,11 @@ function tridimensional_model_init() {
     //controls.minDistance = 700;
     controls.maxDistance = 1500;
 
+    renderer.setClearColor( 0x4FB9D3, 1 );
+
     renderer.domElement.setAttribute('id', 'model-main-canvas');
     document.getElementById('model-canvas-container').appendChild( renderer.domElement );
+
 
 }
 
@@ -163,7 +167,7 @@ function animateObject(object){
     if(animation_percentage >= 1){ //if percentage > 100%, animation's over.
         object.animation_state = (object.animation_state + 1) % 4;
         if(object.animation_state == 2){
-            showObjectInfoOverlayMenus(object.name)
+            showObjectInfoOverlayMenus(object.name, object.title)
             //correct position to the exact one.
             object.position.x = object.original_position[0] + object.animation[0];
             object.position.y = object.original_position[1] + object.animation[1];
@@ -213,16 +217,17 @@ THREE.Scene.prototype.objectsBackToOriginalPositionExcept = function (object) {
     }
 }
 
-function showObjectInfoOverlayMenus(objectName){
+function showObjectInfoOverlayMenus(objectName, objectTitle){
     //$('#more-details-button').attr('data-obj', objectName).show(100);
-    $('#top-info-bar').html(objectName.toUpperCase());
+    $('#top-info-bar').html(objectTitle.toUpperCase());
 
     $('#top-info-bar').attr('data-current-object', objectName);
+    $('#room_link').attr('href', '#/room/'+objectName);
     $('#top-info-bar').slideDown();
     $('#bottom-navbar').slideDown();
 }
 
-function hideObjectInfoOverlayMenus(objectName){
+function hideObjectInfoOverlayMenus(objectName, objectTitle){
     /*if($('#more-details-button').attr('data-obj') == objectName)
         $('#more-details-button').hide(100);*/
 

@@ -11,14 +11,20 @@ var objsContainer;
 var textures = [];
 var objects = [];
 
+var current_room = null;
+
+
+
 // this variable will store the last clicked object.
 // app will ignore other clicks while this is being animated.
 var current_animated_object_name = null;
 
-function room_ready(){
+function room_ready(room_name){
+    current_room = room_name;
+    $('#top-info-bar').empty().append(models[current_room].title.toUpperCase());
+    console.log("###############################   " + models[current_room].title.toUpperCase());
     room_init();
     room_animate();
-
 
     $('#room-more-info-popup').click( function(e) {
         $('#room-more-info-modal').show();
@@ -45,6 +51,10 @@ function room_init() {
     var ambient = new THREE.AmbientLight( 0xAAAAAA );
     scene.add( ambient );
 
+    var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+    directionalLight.position.set( 0, 0, 1 ).normalize();
+    scene.add( directionalLight );
+
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
     camera.position.z = 1000;
 
@@ -54,29 +64,13 @@ function room_init() {
     objsContainer = [];
 
     //textures
-    loadTexture('sample', 'obj/texture.jpg', textures);
+    loadTexture('room_texture', models[current_room].texture_path, textures);
 
-    // models
-    loadObjModel('teapot', 'obj/teapot.obj', [-200, 50, 0], 30, objects, pickable_objects, textures['sample'], scene, null, null);
-    loadObjModel('person', 'obj/male02.obj', [100, -150, 0], 3.5, objects, pickable_objects, textures['sample'], scene, null, null);
-
-    addSampleCubeToScene('cube1', [-230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
-    addSampleCubeToScene('cube2', [0, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
-    addSampleCubeToScene('cube3', [230, -600, 0], 200, objects, pickable_objects, textures['sample'], scene, null, null);
+    loadObjModel(models[current_room].name, models[current_room].title, models[current_room].path, [0, -150, 0], 300, objects, null, textures['room_texture'], scene, [20, 0, 0], 0.5);
 
     renderer = new THREE.WebGLRenderer();
+    renderer.setClearColor( 0x4FB9D3, 1 );
 
-    /*var rendererHeight, rendererWidth;
-    rendererWidth = document.getElementById('model-canvas-container').offsetWidth;
-    if(window.innerWidth > window.innerHeight){
-        rendererHeight = window.innerHeight*0.9;
-    }
-    else rendererHeight = rendererWidth*1.2
-
-    console.log("renderer heigh: " + rendererHeight + " # width: " + rendererWidth);*/
-
-    //renderer.setSize( window.innerWidth * 0.6, window.innerHeight *0.6 );
-    //renderer.setSize( rendererWidth, rendererHeight );
     renderer.setSize( window.innerWidth, window.innerHeight);
 
     controls = new THREE.OrbitControls( camera, renderer.domElement );

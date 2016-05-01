@@ -26,9 +26,9 @@ controllerModule.controller("panoramicController", function($scope){
 
 });
 
-controllerModule.controller("roomController", function($scope){
+controllerModule.controller("roomController", function($scope, $stateParams){
     ionic.DomUtil.ready(function(){
-        room_ready();
+        room_ready($stateParams.room);
     });
 
 });
