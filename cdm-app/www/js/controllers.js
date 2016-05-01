@@ -21,6 +21,9 @@ controllerModule.controller("tridimensionalModelController", function($scope, $w
 controllerModule.controller("panoramicController", function($scope, $stateParams){
     $scope.room = $stateParams.room;
     $scope.room_title = models[$stateParams.room].title.toUpperCase();
+    ionic.DomUtil.ready(function() {
+        panorama_init();
+    });
 });
 
 controllerModule.controller("roomController", function($scope, $stateParams){

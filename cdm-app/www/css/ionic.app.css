@@ -9897,3 +9897,9 @@ dialog {
     margin-top: -40vh; } }
 
 /* Landscape */
+#panorama {
+  width: 100vw;
+  height: 100vh; }
+
+.pnlm-controls {
+  display: none; }
