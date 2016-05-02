@@ -31,11 +31,25 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-      .state('model', {
-      url: '/model',
+      /*.state('model', {
+      url: '/model/{current_room:(?:/[^/]+)?}',
       templateUrl: 'templates/tridimensional-model.html',
       controller:"tridimensionalModelController"
-    })
+    })*/
+
+      //model with parameter to animate current room
+      .state('model_current', {
+        url: '/model/:current_room',
+        templateUrl: 'templates/tridimensional-model.html',
+        controller:"tridimensionalModelController"
+      })
+
+      //model with no room "highlighted"
+      .state('model', {
+        url: '/model',
+        templateUrl: 'templates/tridimensional-model.html',
+        controller:"tridimensionalModelController"
+      })
 
      .state('panoramic', {
     url: '/panoramic/:room',

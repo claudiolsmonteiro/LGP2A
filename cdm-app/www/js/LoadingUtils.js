@@ -14,9 +14,11 @@ manager.onProgress = function ( item, loaded, total ) {
  * @param position [x,y,z]
  * @param scale scale (same in all three axes)
  * @param objectsArray associative array to which the model shall be added when loaded. Key will be @model_id
+ * @param active - if this is the current room, active will be true, and callback function will be called.
  */
-function loadObjModel(model_id, title, model_path, position, scale, objectsArray, meshesArray, texture, scene, animation, animation_span) {
+function loadObjModel(model_id, title, model_path, position, scale, objectsArray, meshesArray, texture, scene, animation, animation_span, active) {
     var loader = new THREE.OBJLoader( manager );
+    var temp_mesh = null;
     loader.load( model_path, function ( object ) {
         object.traverse(function ( child ) {
             if ( child instanceof THREE.Mesh ) {
@@ -27,6 +29,7 @@ function loadObjModel(model_id, title, model_path, position, scale, objectsArray
                 if(meshesArray != null)
                     meshesArray.push(child);
                 object.mesh = child;
+                temp_mesh = child;
             }
         });
         object.name = model_id;
@@ -44,6 +47,10 @@ function loadObjModel(model_id, title, model_path, position, scale, objectsArray
 
         objectsArray[model_id] = object;
         scene.add(object);
+        if(active) {
+            console.log('going to call callback. whooohoo ' + model_id);
+            temp_mesh.callback();
+        }
     }, onProgress, onError );
 }
 

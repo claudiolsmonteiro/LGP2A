@@ -16,14 +16,14 @@ var last_animation;
 // app will ignore other clicks while this is being animated.
 var current_animated_object_name = null;
 
-function tridimensional_model_ready(){
+function tridimensional_model_ready(current_room){
     //console.log("chegou aqui model ready");
-    tridimensional_model_init();
+    tridimensional_model_init(current_room);
     tridimensional_model_animate();
 }
 
 
-function tridimensional_model_init() {
+function tridimensional_model_init(current_room) {
     console.log('model init');
     textures = [];
     objects = [];
@@ -64,7 +64,11 @@ function tridimensional_model_init() {
     //loadObjModel('person', 'Pessoa', 'obj/male02.obj', [100, -150, 0], 3.5, objects, pickable_objects, textures['sample'], scene, [20, 0, 0], 0.5);
     var y_coord = 100;
     for(var key in models){
-        loadObjModel(models[key].name, models[key].title, models[key].path, [0, y_coord, 0], 100, objects, pickable_objects, textures[models[key].name], scene, [20, 0, 0], 0.5);
+        var active = false;
+        if(current_room != null && current_room == key)
+            active = true;
+        console.log(current_room + ' - ' + key);
+        loadObjModel(models[key].name, models[key].title, models[key].path, [0, y_coord, 0], 100, objects, pickable_objects, textures[models[key].name], scene, [20, 0, 0], 0.5, active);
         y_coord -= 200;
     }
 

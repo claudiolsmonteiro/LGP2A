@@ -1,14 +1,13 @@
 var controllerModule = angular.module('blank.controllers', []);
-var screen_orientation = 0;
 
-controllerModule.controller("tridimensionalModelController", function($scope, $window){
+controllerModule.controller("tridimensionalModelController", function($scope, $stateParams, $window){
     ionic.Platform.ready(function(){
         // will execute when device is ready, or immediately if the device is already ready.
         console.log(window.orientation);
-        window.addEventListener("orientationchange", function() {
+        /*window.addEventListener("orientationchange", function() {
           console.log(window.orientation);
           tridimensional_model_ready();
-        }, false);
+        }, false);*/
     });
 
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -17,7 +16,8 @@ controllerModule.controller("tridimensionalModelController", function($scope, $w
 
     ionic.DomUtil.ready(function(){
         //overlay_elements_ready();
-        tridimensional_model_ready();
+        console.log($stateParams.current_room);
+        tridimensional_model_ready($stateParams.current_room);
     });
 
 });
