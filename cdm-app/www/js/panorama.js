@@ -9,6 +9,9 @@ function panorama_init(){
         viewport_width: window.innerWidth
     });
     $('.thickbox').fancybox();*/
+
+  initialize_more_info_popup();
+
     pannellum.viewer('panorama', {
         "type": "equirectangular",
         "panorama": "img/sculpteur.jpg",

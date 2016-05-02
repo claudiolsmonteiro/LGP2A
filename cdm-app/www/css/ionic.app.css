@@ -9860,7 +9860,13 @@ dialog {
   position: fixed;
   background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
-  border-radius: 5px; }
+  border-radius: 5px;
+  width: 80vw;
+  height: 80vh;
+  top: 50%;
+  left: 50%;
+  margin-top: -40vh;
+  margin-left: -40vw; }
   #room-more-info-modal .modal-header {
     height: 3rem; }
   #room-more-info-modal .modal-container {
@@ -9873,28 +9879,28 @@ dialog {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 1999;
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
   top: 0;
   left: 0; }
 
 /* Portrait */
 @media only screen and (orientation: portrait) {
   #room-more-info-modal {
-    width: 80vw;
+    /*width: 80vw;
     height: 80vh;
     top: 50%;
     left: 50%;
-    margin-top: -40vh;
-    margin-left: -40vw; } }
+    margin-top: -40vh; // Negative half of height.
+    margin-left: -40vw; // Negative half of width.*/ } }
 
 /* Landscape */
 @media only screen and (min-device-width: 1080px) and (orientation: landscape) {
   #room-more-info-modal {
-    width: 40vw;
+    /*width: 40vw;
     height: 80vh;
     top: 50%;
     left: 10vw;
-    margin-top: -40vh; } }
+    margin-top: -40vh; // Negative half of height.*/ } }
 
 /* Landscape */
 #panorama {

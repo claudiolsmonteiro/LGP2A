@@ -24,6 +24,7 @@ function tridimensional_model_ready(){
 
 
 function tridimensional_model_init() {
+    console.log('model init');
     textures = [];
     objects = [];
     pickable_objects = [];
@@ -68,11 +69,12 @@ function tridimensional_model_init() {
     }
 
     //loadObjMtl(scene);
-
     renderer = new THREE.WebGLRenderer();
-
-    renderer.setSize( window.innerWidth, window.innerHeight);
     //renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    console.log('orientation ' + window.orientation);
+
+
     controls = new THREE.OrbitControls( camera, renderer.domElement );
     //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
     controls.enableDamping = true;
@@ -84,6 +86,8 @@ function tridimensional_model_init() {
     renderer.setClearColor( 0x4FB9D3, 1 );
 
     renderer.domElement.setAttribute('id', 'model-main-canvas');
+    document.getElementById('model-canvas-container').html = '';
+
     document.getElementById('model-canvas-container').appendChild( renderer.domElement );
 
 

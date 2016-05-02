@@ -24,18 +24,7 @@ function room_ready(room_name){
     room_init();
     room_animate();
 
-    $('#room-more-info-popup').click( function(e) {
-        $('#room-more-info-modal').show();
-        $('#room-more-info-modal-background').show();
-    });
-    var modal = document.getElementById('room-more-info-modal');
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            $('#room-more-info-modal').hide();
-            $('#room-more-info-modal-background').hide();
-        }
-    }
-
+    initialize_more_info_popup();
 }
 
 
@@ -90,6 +79,21 @@ function room_animate() {
     renderer.render( scene, camera );
 }
 
+function initialize_more_info_popup(){
+  console.log('initialize popup');
+  $('#room-more-info-popup').click( function(e) {
+    console.log('click  no botao');
+    $('#room-more-info-modal').show();
+    $('#room-more-info-modal-background').show();
+  });
+  var modal = document.getElementById('room-more-info-modal');
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      $('#room-more-info-modal').hide();
+      $('#room-more-info-modal-background').hide();
+    }
+  }
+}
 
 
 
