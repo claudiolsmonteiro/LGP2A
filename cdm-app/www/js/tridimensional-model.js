@@ -70,7 +70,7 @@ function tridimensional_model_init() {
 
     //loadObjMtl(scene);
     renderer = new THREE.WebGLRenderer();
-    //renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize(window.innerWidth, window.innerHeight);
     console.log('orientation ' + window.orientation);
 
@@ -80,7 +80,7 @@ function tridimensional_model_init() {
     controls.enableDamping = true;
     controls.dampingFactor = 0.9;
     controls.enableZoom = true;
-    //controls.minDistance = 700;
+    controls.minDistance = 700;
     controls.maxDistance = 1500;
 
     renderer.setClearColor( 0x4FB9D3, 1 );
@@ -123,10 +123,15 @@ function onDocumentMouseDown( event ) {
     /*mouseVector.x = ( ( event.clientX - renderer.domElement.offsetLeft ) / renderer.domElement.width ) * 2 - 1;
     mouseVector.y = - ( ( event.clientY - renderer.domElement.offsetTop ) / renderer.domElement.height ) * 2 + 1;*/
 
+    /*mouseVector.x = ( ( event.clientX - position.left  ) / renderer.domElement.width ) * 2 - 1;
+    mouseVector.y = - ( ( event.clientY - position.top ) / renderer.domElement.height ) * 2 + 1;*/
+
+
+
     var canvas_container = $("#model-main-canvas");
     var position = canvas_container.offset();
-    mouseVector.x = ( ( event.clientX - position.left  ) / renderer.domElement.width ) * 2 - 1;
-    mouseVector.y = - ( ( event.clientY - position.top ) / renderer.domElement.height ) * 2 + 1;
+    mouseVector.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+    mouseVector.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
     console.log('1---------------------------------------------------');
     console.log('##$$processing touch');
     console.log('mouse x: ' + mouseVector.x + ' -- mouse y: ' + mouseVector.y);

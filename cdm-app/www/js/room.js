@@ -56,6 +56,7 @@ function room_init() {
     loadObjModel(models[current_room].name, models[current_room].title, models[current_room].path, [0, -150, 0], 300, objects, null, textures['room_texture'], scene, [20, 0, 0], 0.5);
 
     renderer = new THREE.WebGLRenderer();
+    renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setClearColor( 0x4FB9D3, 1 );
 
     renderer.setSize( window.innerWidth, window.innerHeight);
