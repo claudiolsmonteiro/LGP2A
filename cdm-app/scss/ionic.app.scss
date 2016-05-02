@@ -87,16 +87,21 @@ dialog{
   bottom: 0;
   z-index: 200;
 
+  margin-bottom: 10px;
+
   ul{
-    text-align: right;
-    margin-bottom: 15px;
+    float: right;
+    display:table-row;
     font-size: 1.2rem;
+
     li{
+      display: table-cell;
+      vertical-align: middle;
       color: #B1D5E5;
       font-family: roboto;
-      display: inline;
-      margin-left: 20px;
-      margin-right: 20px;
+      //display: inline;
+      padding-left: 20px;
+      padding-right: 20px;
 
       a{
         text-decoration: none;
@@ -108,20 +113,33 @@ dialog{
 
 }
 
-#room-more-info-modal {
+.more-info-modal {
   display: none;
   position: fixed;
   background-color: rgba(230, 230, 230, 0.85);
-  z-index: 2000;
+  z-index: 20000;
   border-radius: 5px;
 
   .modal-header{
     height: 3rem;
+    margin: 10px;
   }
 
   .modal-container{
+    margin: 10px;
     border-top-style: solid;
     border-top: 1px;
+  }
+
+  .modal-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    button{
+      float: right;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
   }
 
   width: 80vw;
@@ -131,11 +149,11 @@ dialog{
   margin-top: -40vh; // Negative half of height.
   margin-left: -40vw; // Negative half of width.
 }
-#room-more-info-modal-background{
+.more-info-modal-background{
   display: none;
   position: fixed;
   background-color: rgba(0,0,0,0.70);
-  z-index: 1999;
+  z-index: 19999;
   height: 100vh;
   width: 100vw;
   top: 0;
@@ -145,7 +163,7 @@ dialog{
 /* Portrait */
 @media only screen
 and (orientation: portrait) {
-  #room-more-info-modal{
+  .more-info-modal{
     /*width: 80vw;
     height: 80vh;
     top: 50%;
@@ -159,7 +177,7 @@ and (orientation: portrait) {
 @media only screen
 and (min-device-width: 1080px)
 and (orientation: landscape) {
-  #room-more-info-modal{
+  .more-info-modal{
     /*width: 40vw;
     height: 80vh;
     top: 50%;

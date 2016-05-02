@@ -112,7 +112,7 @@ function tridimensional_model_animate() {
 
 
 function onDocumentMouseDown( event ) {
-    console.log("$$$$$"+event.target.getAttribute('id'));
+    //console.log("$$$$$"+event.target.getAttribute('id'));
     if(event.target.getAttribute('id') != 'model-main-canvas')
         return;
     //event.preventDefault();
