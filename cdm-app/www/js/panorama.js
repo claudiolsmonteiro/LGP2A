@@ -2,7 +2,6 @@
  * Created by João on 01/05/2016.
  */
 
-
 function panorama_init(){
     /*("img.advancedpanorama").panorama({
         auto_start: 0,
@@ -25,25 +24,36 @@ function panorama_init(){
                 "pitch": 14.1,
                 "yaw": 1.5,
                 "type": "info",
-                "text": '<a id="hotspot1" title="Click to do something" href="#" onclick="openPopup();return false;">link text</a>'/*,
+                "text": hotspotText('piano', 'Piano')/*,
                 "URL": "https://artbma.org/"*/
             },
             {
                 "pitch": -9.4,
                 "yaw": 222.6,
                 "type": "info",
-                "text": '<a id="hotspot2" title="Click to do something" href="#" onclick="openPopup();return false;">link text</a>'
+                "text": hotspotText('cadeiras', 'Cadeiras')
             },
             {
                 "pitch": -0.9,
                 "yaw": 144.4,
                 "type": "info",
-                "text": '<a id="hotspot3" title="Click to do something" href="#" onclick="openPopup();return false;">link text</a>'
+                "text": hotspotText('janelas', 'Janelas')
             }
         ]
     });
 }
 
 function openPopup(element){
-    window.alert('teste');
+    window.alert(element);
+
 }
+
+function hotspotText(hotspot_id, hotspot_title){
+  return "<div class=\"hotspot-box\">"+
+    "<p>" + hotspot_title + "</p>" +
+    "<a id=\"hotspot_" + hotspot_id + "\" title=\""+ hotspot_title +"\" href=\"#\" "+
+    " onclick=\"openPopup(\'" + hotspot_id + "\');return false;\">Mais informação</a>" +
+    "</div>";
+}
+
+
