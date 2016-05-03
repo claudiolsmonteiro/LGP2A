@@ -1,18 +1,24 @@
 var controllerModule = angular.module('blank.controllers', []);
 
-controllerModule.controller("tridimensionalModelController", function($scope, $stateParams, $window){
+controllerModule.controller("tridimensionalModelController", function($scope, $stateParams){
+    // set to either landscape
+
+
     ionic.Platform.ready(function(){
         // will execute when device is ready, or immediately if the device is already ready.
-        console.log(window.orientation);
+
+        console.log(screen);
+        if(screen.lockOrientation) {
+            //screen.lockOrientation('landscape');
+        }
+        console.log(screen.orientation);
+
         /*window.addEventListener("orientationchange", function() {
           console.log(window.orientation);
           tridimensional_model_ready();
         }, false);*/
     });
 
-    $scope.$on('$ionicView.beforeEnter', function(){
-        //$window.location.reload(true); //doesn't work. reload loop...
-    });
 
     ionic.DomUtil.ready(function(){
         //overlay_elements_ready();
