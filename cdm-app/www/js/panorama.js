@@ -13,13 +13,34 @@ function panorama_init(){
     panorama_initialize_more_info_popup();
 
     pannellum.viewer('panorama', {
-        "type": "equirectangular",
-        "panorama": "img/sculpteur.jpg",
-        "vaov" : 70,
+        "type": "cubemap",
+        "cubeMap": [
+            "/images/wyman-park-playground-cubic/face0.jpg",
+            "/images/wyman-park-playground-cubic/face1.jpg",
+            "/images/wyman-park-playground-cubic/face2.jpg",
+            "/images/wyman-park-playground-cubic/face3.jpg",
+            "/images/wyman-park-playground-cubic/face4.jpg",
+            "/images/wyman-park-playground-cubic/face5.jpg"
+        ]
+    });
+
+    pannellum.viewer('panorama', {
+        /*"type": "equirectangular",
+        "panorama": "img/sculpteur.jpg",*/
+        "type": "cubemap",
+        "cubeMap": [
+            "img/suggia/medres/suggia-0.jpg",
+            "img/suggia/medres/suggia-1.jpg",
+            "img/suggia/medres/suggia-2.jpg",
+            "img/suggia/medres/suggia-3.jpg",
+            "img/suggia/medres/suggia-4.jpg",
+            "img/suggia/medres/suggia-5.jpg"
+        ],
+        /*"vaov" : 70,
         minPitch: -10,
-        maxPitch: 10,
-        maxHfov: 40,
-        minHfov: 30,
+        maxPitch: 10,*/
+        /*maxHfov: 40,
+        minHfov: 30,*/
         "autoLoad": true,
         hotSpotDebug: true,
         "hotSpots": [

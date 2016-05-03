@@ -96,13 +96,10 @@ function tridimensional_model_init(current_room) {
 
     window.addEventListener("orientationchange", function(){
         //console.log(screen.orientation); // e.g. portrait
-        //renderer.setSize(window.innerHeight, window.innerWidth);
-
+        
         camera.aspect = window.screen.width / window.screen.height;
         camera.updateProjectionMatrix();
 
-        var physicalScreenWidth = window.screen.width * window.devicePixelRatio;
-        var physicalScreenHeight = window.screen.height * window.devicePixelRatio;
         renderer.setSize( window.screen.width, window.screen.height);
     });
 
