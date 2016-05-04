@@ -76,6 +76,10 @@ dialog{
   width: 100vw;
   top: 0;
   z-index: 200;
+
+  &.white-tones{
+    color: white;
+  }
 }
 
 #bottom-navbar{
@@ -88,7 +92,7 @@ dialog{
   z-index: 200;
 
   margin-bottom: 10px;
-
+  color: #B1D5E5;
   ul{
     float: right;
     display:table-row;
@@ -97,7 +101,7 @@ dialog{
     li{
       display: table-cell;
       vertical-align: middle;
-      color: #B1D5E5;
+
       font-family: roboto;
       //display: inline;
       padding-left: 20px;
@@ -111,13 +115,17 @@ dialog{
     }
   }
 
+  &.white-tones{
+    color: #cccccc;
+  }
+
 }
 
 .more-info-modal {
   display: none;
   position: fixed;
   background-color: rgba(230, 230, 230, 0.85);
-  z-index: 20000;
+  z-index: 2000;
   border-radius: 5px;
 
   .modal-header{
@@ -153,7 +161,7 @@ dialog{
   display: none;
   position: fixed;
   background-color: rgba(0,0,0,0.70);
-  z-index: 19999;
+  z-index: 1999;
   height: 100vh;
   width: 100vw;
   top: 0;
@@ -208,3 +216,40 @@ and (-webkit-min-device-pixel-ratio: 1) {
   display: none;
 }
 
+
+//side menu
+.sidebar{
+  font-family: casadamusica_font;
+  font-size: 1.1rem;
+  color: #B1D5E5;
+  z-index: 1500;
+  height: 100vh;
+  //display: block;
+  position: fixed;
+  left: 0;
+
+  #sidebar-menu{
+    background-color: rgba(87, 136, 150, 0.8); //#578896
+  }
+
+  .sidebar-column{
+    display: block;
+    float: left;
+  }
+
+  .sidebar-items-container{
+    height: 100vh;
+    display: table-row;
+    ul{
+      padding: 10px;
+      height: 100%;
+      display: table-cell;
+      vertical-align: middle;
+      li{
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+    }
+  }
+
+}

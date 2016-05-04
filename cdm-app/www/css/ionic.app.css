@@ -9833,6 +9833,8 @@ dialog {
   width: 100vw;
   top: 0;
   z-index: 200; }
+  #top-info-bar.white-tones {
+    color: white; }
 
 #bottom-navbar {
   display: none;
@@ -9841,7 +9843,8 @@ dialog {
   width: 100vw;
   bottom: 0;
   z-index: 200;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  color: #B1D5E5; }
   #bottom-navbar ul {
     float: right;
     display: table-row;
@@ -9849,19 +9852,20 @@ dialog {
     #bottom-navbar ul li {
       display: table-cell;
       vertical-align: middle;
-      color: #B1D5E5;
       font-family: roboto;
       padding-left: 20px;
       padding-right: 20px; }
       #bottom-navbar ul li a {
         text-decoration: none;
         color: inherit; }
+  #bottom-navbar.white-tones {
+    color: #cccccc; }
 
 .more-info-modal {
   display: none;
   position: fixed;
   background-color: rgba(230, 230, 230, 0.85);
-  z-index: 20000;
+  z-index: 2000;
   border-radius: 5px;
   width: 80vw;
   height: 80vh;
@@ -9889,7 +9893,7 @@ dialog {
   display: none;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 19999;
+  z-index: 1999;
   height: 100vh;
   width: 100vw;
   top: 0;
@@ -9924,3 +9928,28 @@ dialog {
 
 .pnlm-controls {
   display: none; }
+
+.sidebar {
+  font-family: casadamusica_font;
+  font-size: 1.1rem;
+  color: #B1D5E5;
+  z-index: 1500;
+  height: 100vh;
+  position: fixed;
+  left: 0; }
+  .sidebar #sidebar-menu {
+    background-color: rgba(87, 136, 150, 0.8); }
+  .sidebar .sidebar-column {
+    display: block;
+    float: left; }
+  .sidebar .sidebar-items-container {
+    height: 100vh;
+    display: table-row; }
+    .sidebar .sidebar-items-container ul {
+      padding: 10px;
+      height: 100%;
+      display: table-cell;
+      vertical-align: middle; }
+      .sidebar .sidebar-items-container ul li {
+        margin-top: 25px;
+        margin-bottom: 25px; }

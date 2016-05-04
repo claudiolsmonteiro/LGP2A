@@ -24,6 +24,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $s
         //overlay_elements_ready();
         console.log($stateParams.current_room);
         tridimensional_model_ready($stateParams.current_room);
+        sidebar_ready();
     });
 
 });
@@ -33,6 +34,7 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
     $scope.room_title = models[$stateParams.room].title.toUpperCase();
     ionic.DomUtil.ready(function() {
         panorama_init();
+        sidebar_ready();
     });
 });
 
@@ -41,6 +43,7 @@ controllerModule.controller("roomController", function($scope, $stateParams){
     $scope.room_title = models[$stateParams.room].title.toUpperCase();
     ionic.DomUtil.ready(function(){
         room_ready($stateParams.room);
+        sidebar_ready();
     });
 
 });
