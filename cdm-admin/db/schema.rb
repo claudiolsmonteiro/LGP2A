@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421162042) do
+ActiveRecord::Schema.define(version: 20160504013705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "languages", ["code"], name: "index_languages_on_code", unique: true, using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.string   "url"
@@ -25,10 +34,21 @@ ActiveRecord::Schema.define(version: 20160421162042) do
 
   add_index "photos", ["room_id"], name: "index_photos_on_room_id", using: :btree
 
+  create_table "point_translations", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "point_id"
+    t.integer  "language_id"
+  end
+
+  add_index "point_translations", ["language_id"], name: "index_point_translations_on_language_id", using: :btree
+  add_index "point_translations", ["point_id"], name: "index_point_translations_on_point_id", using: :btree
+
   create_table "points", force: :cascade do |t|
     t.integer  "x"
     t.integer  "y"
-    t.string   "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "photo_id"
@@ -36,11 +56,21 @@ ActiveRecord::Schema.define(version: 20160421162042) do
 
   add_index "points", ["photo_id"], name: "index_points_on_photo_id", using: :btree
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "room_translations", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "room_id"
+    t.integer  "language_id"
+  end
+
+  add_index "room_translations", ["language_id"], name: "index_room_translations_on_language_id", using: :btree
+  add_index "room_translations", ["room_id"], name: "index_room_translations_on_room_id", using: :btree
+
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "videos", force: :cascade do |t|
@@ -53,6 +83,10 @@ ActiveRecord::Schema.define(version: 20160421162042) do
   add_index "videos", ["photo_id"], name: "index_videos_on_photo_id", using: :btree
 
   add_foreign_key "photos", "rooms"
+  add_foreign_key "point_translations", "languages"
+  add_foreign_key "point_translations", "points"
   add_foreign_key "points", "photos"
+  add_foreign_key "room_translations", "languages"
+  add_foreign_key "room_translations", "rooms"
   add_foreign_key "videos", "photos"
 end
