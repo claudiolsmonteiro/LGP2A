@@ -13,18 +13,6 @@ function panorama_init(){
     panorama_initialize_more_info_popup();
 
     pannellum.viewer('panorama', {
-        "type": "cubemap",
-        "cubeMap": [
-            "/images/wyman-park-playground-cubic/face0.jpg",
-            "/images/wyman-park-playground-cubic/face1.jpg",
-            "/images/wyman-park-playground-cubic/face2.jpg",
-            "/images/wyman-park-playground-cubic/face3.jpg",
-            "/images/wyman-park-playground-cubic/face4.jpg",
-            "/images/wyman-park-playground-cubic/face5.jpg"
-        ]
-    });
-
-    pannellum.viewer('panorama', {
         /*"type": "equirectangular",
         "panorama": "img/sculpteur.jpg",*/
         "type": "cubemap",
