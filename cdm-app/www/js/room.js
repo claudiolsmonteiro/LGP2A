@@ -83,9 +83,9 @@ function room_animate() {
 function room_initialize_more_info_popup(){
     console.log('initialize popup');
     $('#room-more-info-popup').click( function(e) {
-    console.log('click  no botao');
-    $('#room-more-info-modal').show();
-    $('#room-more-info-modal-background').show();
+        console.log('click  no botao');
+        $('#room-more-info-modal').show();
+        $('#room-more-info-modal-background').show();
     });
 
     $('#room-more-info-modal .close-btn').on('click', function(){

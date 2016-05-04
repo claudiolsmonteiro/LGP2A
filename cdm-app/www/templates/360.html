@@ -1,4 +1,4 @@
-<ion-view view-title="Blank Template">
+<ion-view cache-view="false" view-title="Blank Template">
     <ion-content class="">
         <!--<img src="img/sculpteur.jpg" class="advancedpanorama" width="2448" height="375" usemap="testmap" alt="Atelier du sculpteur" />
         <map id="testmap" name="testmap">
@@ -13,13 +13,18 @@
 
     <div id="top-info-bar" class="white-tones" style="display: block;">{{room_title}}</div>
 
-    <div id="bottom-navbar" class="white-tones" style="display: block;">
-        <ul>
-            <li><a href="#/room/{{room}}">3D</a></li>
-            <li style="color: white">360º</li>
-            <li id="panorama-more-info-popup"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
-            <!--<li><a href="#/tabs">TEST</a></li>-->
-        </ul>
+    <div id="bottom-navbar" class="bottom-navbar" style="display: block">
+      <ul>
+        <li><a href="#/room/{{room}}">3D</a></li>
+        <li style="color: white">360º</li>
+        <li id="panorama-more-info-popup"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
+      </ul>
+    </div>
+
+    <div id="menu-button-bar" class="bottom-navbar">
+      <ul>
+        <li><a href="#" onclick="showSidebar();return false;">MENU</a></li>
+      </ul>
     </div>
 
     <div id="panorama-more-info-modal" class="more-info-modal">

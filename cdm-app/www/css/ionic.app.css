@@ -9836,29 +9836,33 @@ dialog {
   #top-info-bar.white-tones {
     color: white; }
 
-#bottom-navbar {
+.bottom-navbar {
   display: none;
-  /*font-family: casadamusica_font;*/
   position: fixed;
-  width: 100vw;
   bottom: 0;
   z-index: 200;
   margin-bottom: 10px;
   color: #B1D5E5; }
-  #bottom-navbar ul {
+  .bottom-navbar#menu-button-bar {
+    display: block; }
+    .bottom-navbar#menu-button-bar ul {
+      float: left; }
+  .bottom-navbar#bottom-navbar {
+    width: 100vw; }
+  .bottom-navbar ul {
     float: right;
     display: table-row;
     font-size: 1.2rem; }
-    #bottom-navbar ul li {
+    .bottom-navbar ul li {
       display: table-cell;
       vertical-align: middle;
       font-family: roboto;
       padding-left: 20px;
       padding-right: 20px; }
-      #bottom-navbar ul li a {
+      .bottom-navbar ul li a {
         text-decoration: none;
         color: inherit; }
-  #bottom-navbar.white-tones {
+  .bottom-navbar.white-tones {
     color: #cccccc; }
 
 .more-info-modal {
@@ -9936,12 +9940,12 @@ dialog {
   z-index: 1500;
   height: 100vh;
   position: fixed;
-  left: 0; }
-  .sidebar #sidebar-menu {
-    background-color: rgba(87, 136, 150, 0.8); }
+  left: 0;
+  background-color: rgba(87, 136, 150, 0.8); }
   .sidebar .sidebar-column {
     display: block;
-    float: left; }
+    float: left;
+    height: 100vh; }
   .sidebar .sidebar-items-container {
     height: 100vh;
     display: table-row; }

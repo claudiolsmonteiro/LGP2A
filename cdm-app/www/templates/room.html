@@ -1,4 +1,4 @@
-<ion-view view-title="Blank Template">
+<ion-view cache-view="false" view-title="Blank Template">
     <ion-content class="">
         <div id="room-canvas-container"></div>
     </ion-content>
@@ -7,13 +7,19 @@
 
     <div id="top-info-bar" style="display: block;">{{room_title}}</div>
 
-    <div id="bottom-navbar" style="display: block;">
-        <ul>
-            <li style="color: white">3D</li>
-            <li><a href="#/panoramic/{{room}}">360º</a></li>
-            <li id="room-more-info-popup"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
-            <!--<li><a href="#/tabs">TEST</a></li>-->
-        </ul>
+
+    <div id="bottom-navbar" class="bottom-navbar" style="display: block">
+      <ul>
+        <li style="color: white">3D</li>
+        <li><a href="#/panoramic/{{room}}">360º</a></li>
+        <li id="room-more-info-popup"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
+      </ul>
+    </div>
+
+    <div id="menu-button-bar" class="bottom-navbar">
+      <ul>
+        <li><a href="#" onclick="showSidebar();return false;">MENU</a></li>
+      </ul>
     </div>
 
     <div id="room-more-info-modal" class="more-info-modal">

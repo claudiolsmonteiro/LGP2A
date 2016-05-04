@@ -82,17 +82,26 @@ dialog{
   }
 }
 
-#bottom-navbar{
+.bottom-navbar{
+
   display: none;
-  /*font-family: casadamusica_font;*/
   position: fixed;
-  //background: rgba(200,200,200,0.75);
-  width: 100vw;
   bottom: 0;
   z-index: 200;
-
   margin-bottom: 10px;
   color: #B1D5E5;
+
+  &#menu-button-bar{
+    display: block;
+    ul{
+      float: left;
+    }
+  }
+
+  &#bottom-navbar{
+    width: 100vw;
+  }
+
   ul{
     float: right;
     display:table-row;
@@ -227,14 +236,12 @@ and (-webkit-min-device-pixel-ratio: 1) {
   //display: block;
   position: fixed;
   left: 0;
-
-  #sidebar-menu{
-    background-color: rgba(87, 136, 150, 0.8); //#578896
-  }
+  background-color: rgba(87, 136, 150, 0.8); //#578896
 
   .sidebar-column{
     display: block;
     float: left;
+    height: 100vh;
   }
 
   .sidebar-items-container{
