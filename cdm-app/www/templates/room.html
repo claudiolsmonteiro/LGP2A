@@ -1,8 +1,8 @@
-<ion-view <!--cache-view="false"--> view-title="{{room}}">
+<ion-view cache-view="false" view-title="{{room}}">
     <ion-content class="">
         <div id="room-canvas-container"></div>
         <div id="panorama"></div>
-        <div ng-include src="'templates/sidebar.html'"></div>
+
 
         <div id="top-info-bar" style="display: block;">{{room_title}}</div>
 
@@ -29,6 +29,6 @@
         <div id="room-more-info-modal-background" class="more-info-modal-background"></div>
     </ion-content>
 
-
+    <div ng-include src="'templates/sidebar.html'"></div>
 
 </ion-view>

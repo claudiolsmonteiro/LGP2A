@@ -52,21 +52,21 @@ function tridimensional_model_init(current_room) {
     pointLight.position.set( 500, 200, 500 );
     lights.push(pointLight);
 
-    var pointLight2 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
-    pointLight2.position.set( -500, 200, 500 );
-    lights.push(pointLight2);
+    pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight.position.set( -500, 200, 500 );
+    lights.push(pointLight);
 
-    var pointLight3 = new THREE.PointLight( 0xeeeeee, 1, 1000 );
-    pointLight3.position.set( 0, 700, 0 );
-    lights.push(pointLight3);
+    pointLight = new THREE.PointLight( 0xeeeeee, 1, 1000 );
+    pointLight.position.set( 0, 700, 0 );
+    lights.push(pointLight);
 
-    var pointLight4 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
-    pointLight4.position.set( -500, 200, -500 );
-    lights.push(pointLight4);
+    pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight.position.set( -500, 200, -500 );
+    lights.push(pointLight);
 
-    var pointLight5 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
-    pointLight5.position.set( 500, 200, -500 );
-    lights.push(pointLight5);
+    pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight.position.set( 500, 200, -500 );
+    lights.push(pointLight);
 
     for (var i in lights){
         scene.add(lights[i]);
