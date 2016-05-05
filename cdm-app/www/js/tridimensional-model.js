@@ -4,6 +4,7 @@
 var scene, camera, renderer, controls, mouseVector, raycaster;
 var geometry, material, mesh;
 var objsContainer;
+var lights = [];
 
 var textures = [];
 var objects = [];
@@ -36,15 +37,49 @@ function tridimensional_model_init(current_room) {
 
     scene = new THREE.Scene();
 
-    var ambient = new THREE.AmbientLight( 0xAAAAAA );
+    var ambient = new THREE.AmbientLight( 0x333333 );
     scene.add( ambient );
 
-    var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+    /*var directionalLight = new THREE.DirectionalLight( 0xffeedd );
     directionalLight.position.set( 0, 0, 1 ).normalize();
     scene.add( directionalLight );
 
+    var directionalLight2 = new THREE.DirectionalLight( 0xffeedd );
+    directionalLight2.position.set( 0, 0, 1 ).normalize();
+    scene.add( directionalLight2 );*/
+
+    var pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight.position.set( 500, 200, 500 );
+    lights.push(pointLight);
+
+    var pointLight2 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight2.position.set( -500, 200, 500 );
+    lights.push(pointLight2);
+
+    var pointLight3 = new THREE.PointLight( 0xeeeeee, 1, 1000 );
+    pointLight3.position.set( 0, 700, 0 );
+    lights.push(pointLight3);
+
+    var pointLight4 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight4.position.set( -500, 200, -500 );
+    lights.push(pointLight4);
+
+    var pointLight5 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight5.position.set( 500, 200, -500 );
+    lights.push(pointLight5);
+
+    for (var i in lights){
+        scene.add(lights[i]);
+    }
+
+    /*var sphereSize = 1;
+    var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+    scene.add( pointLightHelper );*/
+
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    camera.position.z = 1000;
+    camera.position.x = 0;
+    camera.position.y = 200;
+    camera.position.z = 400;
 
     raycaster = new THREE.Raycaster();
     mouseVector = new THREE.Vector2();
@@ -68,8 +103,8 @@ function tridimensional_model_init(current_room) {
         if(current_room != null && current_room == key)
             active = true;
         console.log(current_room + ' - ' + key);
-        loadObjModel(models[key].name, models[key].title, models[key].path, [0, y_coord, 0], 100, objects, pickable_objects, textures[models[key].name], scene, [20, 0, 0], 0.5, active);
-        y_coord -= 200;
+        loadObjModel(models[key].name, models[key].title, models[key].path, [0, y_coord, 0], 100, objects, pickable_objects, textures[models[key].name], scene, models[key].animation, 0.5, active);
+        //y_coord -= 200;
     }
 
     //loadObjMtl(scene);
@@ -84,8 +119,8 @@ function tridimensional_model_init(current_room) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.9;
     controls.enableZoom = true;
-    controls.minDistance = 700;
-    controls.maxDistance = 1500;
+    controls.minDistance = 200;
+    controls.maxDistance = 800;
 
     renderer.setClearColor( 0x4FB9D3, 1 );
 
@@ -102,6 +137,10 @@ function tridimensional_model_init(current_room) {
 
         renderer.setSize( window.screen.width, window.screen.height);
     });
+
+
+    axes = buildAxes( 1000 );
+    scene.add(axes);
 
 }
 
@@ -247,4 +286,39 @@ function hideObjectInfoOverlayMenus(objectName, objectTitle){
         $('#top-info-bar').slideUp();
         $('#bottom-navbar').slideUp();
     }
+}
+
+
+function buildAxes( length ) {
+    var axes = new THREE.Object3D();
+
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X
+    //axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y
+    //axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z
+    //axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z
+
+    return axes;
+
+}
+
+function buildAxis( src, dst, colorHex, dashed ) {
+    var geom = new THREE.Geometry(),
+        mat;
+
+    if(dashed) {
+        mat = new THREE.LineDashedMaterial({ linewidth: 3, color: colorHex, dashSize: 3, gapSize: 3 });
+    } else {
+        mat = new THREE.LineBasicMaterial({ linewidth: 3, color: colorHex });
+    }
+
+    geom.vertices.push( src.clone() );
+    geom.vertices.push( dst.clone() );
+    geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+
+    var axis = new THREE.Line( geom, mat, THREE.LinePieces );
+
+    return axis;
+
 }
