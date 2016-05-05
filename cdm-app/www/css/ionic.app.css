@@ -9966,3 +9966,21 @@ dialog {
       .sidebar .sidebar-items-container ul li {
         margin-top: 25px;
         margin-bottom: 25px; }
+
+#select-room-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-right: 10px;
+  margin-top: 10px;
+  z-index: 500;
+  font-family: Roboto;
+  font-size: 1.2rem;
+  text-align: right;
+  color: #578896; }
+
+#select-room-popover {
+  height: auto;
+  width: auto; }
+  #select-room-popover .list {
+    margin: 0; }

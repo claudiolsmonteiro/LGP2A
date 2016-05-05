@@ -1,7 +1,25 @@
 <ion-view cache-view="false" view-title="Casa da Música">
     <ion-content class="">
 
+
+      <script id="my-popover.html" type="text/ng-template">
+        <ion-popover-view id="select-room-popover">
+          <div class="list">
+            <a class="item" href="javascript:void(0);" onclick="animateRoom(suggia);return false;">Sala Suggia</a>
+          </div>
+          <div class="list">
+            <a class="item" href="javascript:void(0);" onclick="animateRoom(suggia);return false;">Sala 2</a>
+          </div>
+          <div class="list">
+            <a class="item" href="javascript:void(0);" onclick="animateRoom(suggia);return false;">Bar</a>
+          </div>
+        </ion-popover-view>
+      </script>
     </ion-content>
+
+  <p id="select-room-button">
+    <span ng-click="openSelectRoomPopover($event)">SALA <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+  </p>
 
     <div ng-include src="'templates/sidebar.html'"></div>
 
@@ -20,5 +38,13 @@
       </ul>
     </div>
 
+
+
     <div id="model-canvas-container"></div>
+
+
+
+
+
+
 </ion-view>
