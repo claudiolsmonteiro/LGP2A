@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails cdm-admin-linux: development" uuid="ad336a49-2b44-419e-abaf-531ffee456ae">
+      <first-sync>true</first-sync>
+      <user-name>xnvinwhyuswtpn</user-name>
+      <user-password>dfdadfeddf98df9edfdedfe8dfe2dfc6dfc5dfeddf9ddfc9dfe8dfe3dfffdfc4dfc1dfeddff0df92dfefdfd3dfdcdfdbdfc3df98</user-password>
+    </data-source>
+    <data-source name="Rails cdm-admin-linux: default" uuid="38dc13ba-2399-4e92-b913-2f436f20c37c">
+      <first-sync>true</first-sync>
+      <user-name>xnvinwhyuswtpn</user-name>
+      <user-password>dfdadfeddf98df9edfdedfe8dfe2dfc6dfc5dfeddf9ddfc9dfe8dfe3dfffdfc4dfc1dfeddff0df92dfefdfd3dfdcdfdbdfc3df98</user-password>
+    </data-source>
+    <data-source name="Rails cdm-admin-linux: production" uuid="54939e32-6f36-4f3b-84f0-093757edf4f1">
+      <first-sync>true</first-sync>
+      <user-name>xnvinwhyuswtpn</user-name>
+      <user-password>dfdadfeddf98df9edfdedfe8dfe2dfc6dfc5dfeddf9ddfc9dfe8dfe3dfffdfc4dfc1dfeddff0df92dfefdfd3dfdcdfdbdfc3df98</user-password>
+    </data-source>
+  </component>
+</project>

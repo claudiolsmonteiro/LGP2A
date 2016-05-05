@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Rails cdm-admin-linux: development" uuid="ad336a49-2b44-419e-abaf-531ffee456ae">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails cdm-admin-linux: default" uuid="38dc13ba-2399-4e92-b913-2f436f20c37c">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source name="Rails cdm-admin-linux: production" uuid="54939e32-6f36-4f3b-84f0-093757edf4f1">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>
