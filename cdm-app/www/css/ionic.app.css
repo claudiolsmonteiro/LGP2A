@@ -9966,3 +9966,6 @@ dialog {
       .sidebar .sidebar-items-container ul li {
         margin-top: 25px;
         margin-bottom: 25px; }
+        .sidebar .sidebar-items-container ul li a {
+          text-decoration: none;
+          color: #B1D5E5; }
