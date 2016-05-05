@@ -1,10 +1,16 @@
 language: ruby
 rvm:
-  - 2.3.0
-
+- 2.3.0
 addons:
-  postgresql: "9.4"
-
+  postgresql: '9.4'
 script:
-  - cd cdm-admin-linux
-  - bundle install
+- cd cdm-admin-linux
+- bundle install
+deploy:
+  provider: heroku
+  api_key:
+    secure: YsbpxQIB1E0JqEY2BxVGmGtCxTOflpdUjqou0Ln90c+iNxqqOcUXwsnyaN9J25bth0Hn4JHDWL412W2vN3WCTznlcjbsolGryV9m+sLhVrqnryM7WkG1SQgvsRvKsqbH+6ay9/qosArGCx76rSPeQa4SgjLv80F8NBU5lGYkFImmW/Bu/Mf8wlRiDCEo4KSN5pFnqzT1Ys6OJiV4ZNm8+HCp0oM06MiA47iP2GNW0MLNO8RqBMBVaWz7PXsNAdpvRlsG5p0mDT3XvUpXxIquCUgrb1iKaHiqBghItmqdEZ5LdsUapmfBcTyLBeqQli04LHf/+kWwmjCVgF4MXHtvSZkekx+R6sO62RTcmcsPI4jJw/mHi/QG7PXl+9UpGlUJ9UI6a6vJbZYzJlsFWfsuZ3+5EmJTNttA6KusGzJ07voY/9JqtBQaCIu71QHdQcs+Qn9ws0Fn6mZOSEYelrmdsJZwEBvnRRzJq6l4/GRVRw+tOon8Qf8IYgC9w0Kr84io2AouuWhYA3EPqQxwNLg4LgleWuDKghkCN3CgeKj/glO5DRHunwjpztPmq7zmi44p+zApIdoW2lJruYQeigeF7JuVwP6V/ETBQdvwn7TLy83u1RpK8Dy8/W5KDXzBTd4Heg5h6kYOdTJ49Ho1AJ/SaRHP+mJmxr07p2WOtVR8fbw=
+  app: cdm-admin
+  on:
+    repo: momoepro/LGP2A
+    branch: cdm-admin
