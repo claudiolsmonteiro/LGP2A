@@ -14,7 +14,7 @@ function sidebar_onDocumentMouseDown(event){
     if(event.target.getAttribute('id') != 'sidebar-menu-ul' && !$('#'+sidebar_id).hasClass('hidden')){
         hideSidebar();
     }
-    return;
+    //return;
 }
 
 function showSidebar(){

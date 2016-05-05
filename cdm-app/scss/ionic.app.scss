@@ -51,7 +51,8 @@ dialog{
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: 160;
+  max-height: 100vh;
 }
 
 /*#model-overlay-content{
@@ -87,11 +88,15 @@ dialog{
   display: none;
   position: fixed;
   bottom: 0;
+  left: 0;
   z-index: 200;
   margin-bottom: 10px;
   color: #B1D5E5;
 
   &#menu-button-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
     display: block;
     ul{
       float: left;
@@ -99,6 +104,9 @@ dialog{
   }
 
   &#bottom-navbar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100vw;
   }
 
@@ -215,11 +223,12 @@ and (-webkit-min-device-pixel-ratio: 1) {
 
 // panorama
 #panorama {
-  display: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  display: none;
 }
 .pnlm-controls{
   display: none;
@@ -231,7 +240,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
   font-family: casadamusica_font;
   font-size: 1.1rem;
   color: #B1D5E5;
-  z-index: 1500;
+  z-index: 15000;
   height: 100vh;
   //display: block;
   position: fixed;

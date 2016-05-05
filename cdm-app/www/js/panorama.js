@@ -10,7 +10,7 @@ function panorama_init(){
     });
     $('.thickbox').fancybox();*/
 
-    panorama_initialize_more_info_popup();
+    //panorama_initialize_more_info_popup();
 
     pannellum.viewer('panorama', {
         /*"type": "equirectangular",
@@ -68,7 +68,7 @@ function hotspotText(hotspot_id, hotspot_title){
     "</div>";
 }
 
-
+/*
 function panorama_initialize_more_info_popup(){
     console.log('initialize popup');
     $('#panorama-more-info-popup').click( function(e) {
@@ -81,5 +81,5 @@ function panorama_initialize_more_info_popup(){
         $('#panorama-more-info-modal').hide();
         $('#panorama-more-info-modal-background').hide();
     });
-}
+}*/
 

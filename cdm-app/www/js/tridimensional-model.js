@@ -125,44 +125,45 @@ function tridimensional_model_animate() {
 
 function onDocumentMouseDown( event ) {
     //console.log("$$$$$"+event.target.getAttribute('id'));
-    if(event.target.getAttribute('id') != 'model-main-canvas')
-        return;
+    if(event.target.getAttribute('id') == 'model-main-canvas'){
+        /*mouseVector.x = 2 * (event.clientX / renderer.domElement.clientWidth ) - 1;
+         mouseVector.y = 1 - 2 * ( event.clientY /  renderer.domElement.clientHeight );*/
+
+        /*mouseVector.x = ( ( event.clientX - renderer.domElement.offsetLeft ) / renderer.domElement.width ) * 2 - 1;
+         mouseVector.y = - ( ( event.clientY - renderer.domElement.offsetTop ) / renderer.domElement.height ) * 2 + 1;*/
+
+        /*mouseVector.x = ( ( event.clientX - position.left  ) / renderer.domElement.width ) * 2 - 1;
+         mouseVector.y = - ( ( event.clientY - position.top ) / renderer.domElement.height ) * 2 + 1;*/
+
+
+
+        var canvas_container = $("#model-main-canvas");
+        var position = canvas_container.offset();
+        mouseVector.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+        mouseVector.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+        console.log('1---------------------------------------------------');
+        console.log('##$$processing touch');
+        console.log('mouse x: ' + mouseVector.x + ' -- mouse y: ' + mouseVector.y);
+        console.log('event x: ' + event.clientX + ' -- event y: ' + event.clientY);
+        console.log('position top: ' + position.top + ' -- position left: ' + position.left);
+        console.log('width: ' + renderer.domElement.width + ' -- height: ' + renderer.domElement.height);
+
+        raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera( mouseVector.clone(), camera );
+        var intersects = raycaster.intersectObjects( pickable_objects, true );
+        console.log('intersects length: ' + intersects.length);
+        console.log('---------------------------------------------------');
+        if(intersects.length == 0)
+            return;
+
+        //only the first intersection
+        var obj = intersects[0].object;
+        obj.callback();
+        //obj.material.color.setRGB( Math.random(), Math.random(), Math.random() );
+    }
     //event.preventDefault();
 
-    /*mouseVector.x = 2 * (event.clientX / renderer.domElement.clientWidth ) - 1;
-    mouseVector.y = 1 - 2 * ( event.clientY /  renderer.domElement.clientHeight );*/
 
-    /*mouseVector.x = ( ( event.clientX - renderer.domElement.offsetLeft ) / renderer.domElement.width ) * 2 - 1;
-    mouseVector.y = - ( ( event.clientY - renderer.domElement.offsetTop ) / renderer.domElement.height ) * 2 + 1;*/
-
-    /*mouseVector.x = ( ( event.clientX - position.left  ) / renderer.domElement.width ) * 2 - 1;
-    mouseVector.y = - ( ( event.clientY - position.top ) / renderer.domElement.height ) * 2 + 1;*/
-
-
-
-    var canvas_container = $("#model-main-canvas");
-    var position = canvas_container.offset();
-    mouseVector.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-    mouseVector.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-    console.log('1---------------------------------------------------');
-    console.log('##$$processing touch');
-    console.log('mouse x: ' + mouseVector.x + ' -- mouse y: ' + mouseVector.y);
-    console.log('event x: ' + event.clientX + ' -- event y: ' + event.clientY);
-    console.log('position top: ' + position.top + ' -- position left: ' + position.left);
-    console.log('width: ' + renderer.domElement.width + ' -- height: ' + renderer.domElement.height);
-
-    raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera( mouseVector.clone(), camera );
-    var intersects = raycaster.intersectObjects( pickable_objects, true );
-    console.log('intersects length: ' + intersects.length);
-    console.log('---------------------------------------------------');
-    if(intersects.length == 0)
-        return;
-
-    //only the first intersection
-    var obj = intersects[0].object;
-    obj.callback();
-    //obj.material.color.setRGB( Math.random(), Math.random(), Math.random() );
 
 }
 

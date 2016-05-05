@@ -29,7 +29,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $s
     });
 
 });
-
+/*
 controllerModule.controller("panoramicController", function($scope, $stateParams){
     $scope.room = $stateParams.room;
     $scope.prefix = 'panorama';
@@ -38,7 +38,7 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
         panorama_init();
         sidebar_ready('panorama-sidebar-menu');
     });
-});
+});*/
 
 controllerModule.controller("roomController", function($scope, $stateParams){
     $scope.room = $stateParams.room;

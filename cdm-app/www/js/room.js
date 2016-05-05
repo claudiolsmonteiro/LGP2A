@@ -13,14 +13,15 @@ var objects = [];
 
 var current_room = null;
 
-
-
 // this variable will store the last clicked object.
 // app will ignore other clicks while this is being animated.
 var current_animated_object_name = null;
 
+var panorama_initialized = null;
+
 function room_ready(room_name){
     current_room = room_name;
+    panorama_initialized = null;
     room_init();
     room_animate();
 
@@ -94,5 +95,22 @@ function room_initialize_more_info_popup(){
     });
 }
 
+function showRoomModel(){
+    $('#panorama').hide();
+    $('#panorama-btn-bottom-navbar').attr('style', '');
+    $('#room-canvas-container').show();
+    $('#model-btn-bottom-navbar').attr('style', 'color: white');
+}
+
+function showRoomPanorama(){
+    if(panorama_initialized != current_room) {
+        panorama_initialized = current_room;
+        panorama_init();
+    }
+    $('#room-canvas-container').hide();
+    $('#model-btn-bottom-navbar').attr('style', '');
+    $('#panorama').show();
+    $('#panorama-btn-bottom-navbar').attr('style', 'color: white');
+}
 
 

@@ -9812,7 +9812,8 @@ dialog {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 0; }
+  z-index: 160;
+  max-height: 100vh; }
 
 /*#model-overlay-content{
   position: fixed;
@@ -9840,14 +9841,21 @@ dialog {
   display: none;
   position: fixed;
   bottom: 0;
+  left: 0;
   z-index: 200;
   margin-bottom: 10px;
   color: #B1D5E5; }
   .bottom-navbar#menu-button-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     display: block; }
     .bottom-navbar#menu-button-bar ul {
       float: left; }
   .bottom-navbar#bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100vw; }
   .bottom-navbar ul {
     float: right;
@@ -9924,11 +9932,12 @@ dialog {
 
 /* Landscape */
 #panorama {
-  display: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; }
+  height: 100vh;
+  display: none; }
 
 .pnlm-controls {
   display: none; }
@@ -9937,7 +9946,7 @@ dialog {
   font-family: casadamusica_font;
   font-size: 1.1rem;
   color: #B1D5E5;
-  z-index: 1500;
+  z-index: 15000;
   height: 100vh;
   position: fixed;
   left: 0;
