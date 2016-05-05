@@ -1,24 +1,29 @@
-default: &default
+default:
   adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  encoding: utf-8
   pool: 5
-  host: localhost
-  username: pguser
-  password: pguser
+  username: xnvinwhyuswtpn
+  password:  pG24tBHloG7cBIUnkGZ8Eyvqi2
+  host: ec2-79-125-126-192.eu-west-1.compute.amazonaws.com
+  port: 5432
+  database: d4ndob7itmbji5
 
 development:
-  <<: *default
-  database: cdm-admin-linux_development
-
-test:
-  <<: *default
-  database: cdm-admin-linux_test
-
+  adapter: postgresql
+  encoding: utf-8
+  pool: 5
+  username: xnvinwhyuswtpn
+  password:  pG24tBHloG7cBIUnkGZ8Eyvqi2
+  host: ec2-79-125-126-192.eu-west-1.compute.amazonaws.com
+  port: 5432
+  database: d4ndob7itmbji5
 
 production:
-  <<: *default
-  database: cdm-admin-linux_production
-  username: cdm-admin-linux
-  password: <%= ENV['CDM-ADMIN-LINUX_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: utf-8
+  pool: 5
+  username: xnvinwhyuswtpn
+  password:  pG24tBHloG7cBIUnkGZ8Eyvqi2
+  host: ec2-79-125-126-192.eu-west-1.compute.amazonaws.com
+  port: 5432
+  database: d4ndob7itmbji5
