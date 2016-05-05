@@ -9960,7 +9960,6 @@ dialog {
     display: table-row; }
     .sidebar .sidebar-items-container ul {
       padding: 10px;
-      height: 100%;
       display: table-cell;
       vertical-align: middle; }
       .sidebar .sidebar-items-container ul li {
@@ -9969,3 +9968,6 @@ dialog {
         .sidebar .sidebar-items-container ul li a {
           text-decoration: none;
           color: #B1D5E5; }
+
+.background {
+  background-color: #4FB9D3; }

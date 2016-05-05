@@ -61,7 +61,29 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     url: '/room/:room',
     templateUrl: 'templates/room.html',
     controller:"roomController"
-  });
+    })
+
+       .state('contacts', {
+    url: '/contacts',
+    templateUrl: 'templates/contactos.html',
+    controller:"contactsController"
+    })
+
+        .state('local', {
+    url: '/local',
+    templateUrl: 'templates/local.html',
+    controller:"localController"
+    })
+
+        .state('languages', {
+    url: '/languages',
+    templateUrl: 'templates/idioma.html',
+    controller:"languagesController"
+    })
+
+       ;   
+
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/model');

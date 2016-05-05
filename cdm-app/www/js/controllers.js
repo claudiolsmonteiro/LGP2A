@@ -58,3 +58,25 @@ controllerModule.controller("roomController", function($scope, $stateParams){
     });
 
 });
+
+controllerModule.controller("contactsController", function($scope, $stateParams){
+    $scope.contacts = $stateParams.contacts;
+    $scope.prefix = 'contacts';
+    //$scope.room_title = models[$stateParams.room].title.toUpperCase();
+
+    ionic.DomUtil.ready(function(){
+        sidebar_ready('contacts-sidebar-menu');
+    });
+
+});
+
+controllerModule.controller("localController", function($scope, $stateParams){
+    $scope.contacts = $stateParams.contacts;
+    $scope.prefix = 'local';
+    //$scope.room_title = models[$stateParams.room].title.toUpperCase();
+
+    ionic.DomUtil.ready(function(){
+        sidebar_ready('local-sidebar-menu');
+    });
+
+});
