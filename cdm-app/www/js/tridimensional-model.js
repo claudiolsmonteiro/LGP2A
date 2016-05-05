@@ -4,7 +4,7 @@
 var scene, camera, renderer, controls, mouseVector, raycaster;
 var geometry, material, mesh;
 var objsContainer;
-var lights = [];
+var model_lights = [];
 
 var textures = [];
 var objects = [];
@@ -28,6 +28,7 @@ function tridimensional_model_init(current_room) {
     console.log('model init');
     textures = [];
     objects = [];
+    model_lights = [];
     pickable_objects = [];
     current_animated_object_name = null;
     last_animation = (new Date()).getTime();
@@ -50,26 +51,26 @@ function tridimensional_model_init(current_room) {
 
     var pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
     pointLight.position.set( 500, 200, 500 );
-    lights.push(pointLight);
+    model_lights.push(pointLight);
 
     pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
     pointLight.position.set( -500, 200, 500 );
-    lights.push(pointLight);
+    model_lights.push(pointLight);
 
     pointLight = new THREE.PointLight( 0xeeeeee, 1, 1000 );
     pointLight.position.set( 0, 700, 0 );
-    lights.push(pointLight);
+    model_lights.push(pointLight);
 
     pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
     pointLight.position.set( -500, 200, -500 );
-    lights.push(pointLight);
+    model_lights.push(pointLight);
 
     pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
     pointLight.position.set( 500, 200, -500 );
-    lights.push(pointLight);
+    model_lights.push(pointLight);
 
-    for (var i in lights){
-        scene.add(lights[i]);
+    for (var i in model_lights){
+        scene.add(model_lights[i]);
     }
 
     /*var sphereSize = 1;
@@ -131,7 +132,7 @@ function tridimensional_model_init(current_room) {
 
     window.addEventListener("orientationchange", function(){
         //console.log(screen.orientation); // e.g. portrait
-        
+
         camera.aspect = window.screen.width / window.screen.height;
         camera.updateProjectionMatrix();
 

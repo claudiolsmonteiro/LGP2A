@@ -2,7 +2,7 @@
  * Created by João on 01/05/2016.
  */
 
-function panorama_init(){
+function panorama_init(room){
     /*("img.advancedpanorama").panorama({
         auto_start: 0,
         start_position: 1527,
@@ -16,14 +16,7 @@ function panorama_init(){
         /*"type": "equirectangular",
         "panorama": "img/sculpteur.jpg",*/
         "type": "cubemap",
-        "cubeMap": [
-            "img/suggia/medres/suggia-0.jpg",
-            "img/suggia/medres/suggia-1.jpg",
-            "img/suggia/medres/suggia-2.jpg",
-            "img/suggia/medres/suggia-3.jpg",
-            "img/suggia/medres/suggia-4.jpg",
-            "img/suggia/medres/suggia-5.jpg"
-        ],
+        "cubeMap": models[room].panorama_paths,
         /*"vaov" : 70,
         minPitch: -10,
         maxPitch: 10,*/

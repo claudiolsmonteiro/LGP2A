@@ -10,7 +10,7 @@ var objsContainer;
 
 var textures = [];
 var objects = [];
-
+var room_lights = [];
 var current_room = null;
 
 // this variable will store the last clicked object.
@@ -32,16 +32,41 @@ function room_ready(room_name){
 function room_init() {
     textures = [];
     objects = [];
+    room_lights = [];
     current_animated_object_name = null;
 
     scene = new THREE.Scene();
 
-    var ambient = new THREE.AmbientLight( 0xAAAAAA );
+    var ambient = new THREE.AmbientLight( 0x333333 );
     scene.add( ambient );
 
-    var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-    directionalLight.position.set( 0, 0, 1 ).normalize();
-    scene.add( directionalLight );
+    var pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
+    pointLight.position.set( 500, 200, 500 );
+    room_lights.push(pointLight);
+
+    pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
+    pointLight.position.set( -500, 200, 500 );
+    room_lights.push(pointLight);
+
+    pointLight = new THREE.PointLight( 0xeeeeee, 1, 1000 );
+    pointLight.position.set( 0, 700, 0 );
+    room_lights.push(pointLight);
+
+    pointLight = new THREE.PointLight( 0xeeeeee, 1, 1000 );
+    pointLight.position.set( 0, -500, 0 );
+    room_lights.push(pointLight);
+
+    pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
+    pointLight.position.set( -500, 200, -500 );
+    room_lights.push(pointLight);
+
+    pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
+    pointLight.position.set( 500, 200, -500 );
+    room_lights.push(pointLight);
+
+    for (var i in room_lights){
+      scene.add(room_lights[i]);
+    }
 
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
     camera.position.z = 1000;
@@ -105,7 +130,7 @@ function showRoomModel(){
 function showRoomPanorama(){
     if(panorama_initialized != current_room) {
         panorama_initialized = current_room;
-        panorama_init();
+        panorama_init(current_room);
     }
     $('#room-canvas-container').hide();
     $('#model-btn-bottom-navbar').attr('style', '');

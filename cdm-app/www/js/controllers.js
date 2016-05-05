@@ -44,6 +44,14 @@ controllerModule.controller("roomController", function($scope, $stateParams){
     $scope.room = $stateParams.room;
     $scope.prefix = 'room';
     $scope.room_title = models[$stateParams.room].title.toUpperCase();
+
+
+    //panorama_available -> true if the room as a panoramic picture.
+    //if not, the option won't be shown in the bottom navbar
+    $scope.panorama_available = false;
+    if (models[$scope.room].panorama_paths)
+      $scope.panorama_available = true;
+
     ionic.DomUtil.ready(function(){
         room_ready($stateParams.room);
         sidebar_ready('room-sidebar-menu');

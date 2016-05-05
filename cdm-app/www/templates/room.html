@@ -12,7 +12,7 @@
   <div id="bottom-navbar" class="bottom-navbar" style="display: block">
     <ul>
       <li id="model-btn-bottom-navbar" style="color: white"><a href="#" onclick="showRoomModel();return false;">3D</a></li>
-      <li id="panorama-btn-bottom-navbar"><a href="#" onclick="showRoomPanorama();return false;">360º</a></li>
+      <li ng-if="panorama_available" id="panorama-btn-bottom-navbar"><a href="#" onclick="showRoomPanorama();return false;">360º</a></li>
       <li id="room-more-info-popup"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
     </ul>
   </div>

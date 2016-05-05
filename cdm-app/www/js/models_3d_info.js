@@ -20,7 +20,15 @@ models['sala_suggia'] =
     texture_path: 'obj/casa_da_musica_salas_separadas/texturas/sala_suggia_uvmap.png',
     name : 'sala_suggia',
     title : 'Sala Suggia',
-    animation : [20, 0, 0]
+    animation : [23, 0, 18],
+    panorama_paths : [
+      "img/suggia/medres/suggia-0.jpg",
+      "img/suggia/medres/suggia-1.jpg",
+      "img/suggia/medres/suggia-2.jpg",
+      "img/suggia/medres/suggia-3.jpg",
+      "img/suggia/medres/suggia-4.jpg",
+      "img/suggia/medres/suggia-5.jpg"
+    ]
 };
 models['sala_2'] =
 {
@@ -28,7 +36,15 @@ models['sala_2'] =
     texture_path: 'obj/casa_da_musica_salas_separadas/texturas/sala_concertos_2_uvmap.png',
     name : 'sala_2',
     title : 'Sala 2',
-    animation : [20, 0, 0]
+    animation : [-23, 0, 18],
+    panorama_paths : [
+      "img/sala_2/medres/sala2-0.jpg",
+      "img/sala_2/medres/sala2-1.jpg",
+      "img/sala_2/medres/sala2-2.jpg",
+      "img/sala_2/medres/sala2-3.jpg",
+      "img/sala_2/medres/sala2-4.jpg",
+      "img/sala_2/medres/sala2-5.jpg"
+    ]
 };
 models['bar'] =
 {
@@ -36,7 +52,7 @@ models['bar'] =
     texture_path: 'obj/casa_da_musica_salas_separadas/texturas/Bar_uvmap.png',
     name : 'bar',
     title : 'Bar',
-    animation : [20, 0, 0]
+    animation : [-23, 0, -18]
 };
 
 
