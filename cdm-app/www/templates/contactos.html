@@ -1,0 +1,33 @@
+<ion-view cache-view="false" view-title="{{room}}">
+    <ion-content class="">
+        <div id="room-canvas-container"></div>
+        <div id="panorama"></div>
+    </ion-content>
+
+    <div ng-include src="'templates/sidebar.html'"></div>
+
+  <div id="top-info-bar" style="display: block;">{{room_title}}</div>
+
+
+  <div id="bottom-navbar" class="bottom-navbar" style="display: block">
+    <ul>
+      <li id="model-btn-bottom-navbar" style="color: white"><a href="#" onclick="showRoomModel();return false;">3D</a></li>
+      <li id="panorama-btn-bottom-navbar"><a href="#" onclick="showRoomPanorama();return false;">360º</a></li>
+      <li id="room-more-info-popup"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
+    </ul>
+  </div>
+
+  <div id="menu-button-bar" class="bottom-navbar">
+    <ul>
+      <li><a href="javascript:void(0);" onclick="showSidebar();return false;">MENU</a></li>
+    </ul>
+  </div>
+
+  <div id="room-more-info-modal" class="more-info-modal">
+    <div class="modal-header">Info</div>
+    <div class="modal-content"></div>
+    <div class="modal-footer"><button class="close-btn button button-stable">Fechar</button></div>
+  </div>
+  <div id="room-more-info-modal-background" class="more-info-modal-background"></div>
+
+</ion-view>
