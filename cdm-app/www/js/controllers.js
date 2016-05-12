@@ -6,7 +6,6 @@ controllerModule.controller("tridimensionalModelController", function($scope, $s
 
     ionic.Platform.ready(function(){
         // will execute when device is ready, or immediately if the device is already ready.
-
         console.log(screen);
         if(screen.lockOrientation) {
             //screen.lockOrientation('landscape');
@@ -20,48 +19,47 @@ controllerModule.controller("tridimensionalModelController", function($scope, $s
 
     });
 
+    // .fromTemplate() method
+    var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
+    $scope.popover = $ionicPopover.fromTemplate(template, {
+        scope: $scope
+    });
+    // .fromTemplateUrl() method
+    $ionicPopover.fromTemplateUrl('my-popover.html', {
+        scope: $scope
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
+    $scope.openSelectRoomPopover = function($event) {
+        $scope.popover.show($event);
+    };
+    $scope.closePopover = function() {
+        $scope.popover.hide();
+    };
+    //Cleanup the popover when we're done with it!
+    $scope.$on('$destroy', function() {
+        $scope.popover.remove();
+    });
+    // Execute action on hide popover
+    $scope.$on('popover.hidden', function() {
+        // Execute action
+    });
+    // Execute action on remove popover
+    $scope.$on('popover.removed', function() {
+        // Execute action
+    });
 
     ionic.DomUtil.ready(function(){
         //overlay_elements_ready();
         console.log($stateParams.current_room);
-        tridimensional_model_ready($stateParams.current_room);
+        $scope.environment = construct_tridimensional_environment([0,200,400]);
+        $scope.environment.current_room = $stateParams.current_room;
+        tridimensional_model_ready($scope.environment);
         sidebar_ready('model-sidebar-menu');
     });
 
 
-  // .fromTemplate() method
-  var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
 
-  $scope.popover = $ionicPopover.fromTemplate(template, {
-    scope: $scope
-  });
-
-  // .fromTemplateUrl() method
-  $ionicPopover.fromTemplateUrl('my-popover.html', {
-    scope: $scope
-  }).then(function(popover) {
-    $scope.popover = popover;
-  });
-
-
-  $scope.openSelectRoomPopover = function($event) {
-    $scope.popover.show($event);
-  };
-  $scope.closePopover = function() {
-    $scope.popover.hide();
-  };
-  //Cleanup the popover when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.popover.remove();
-  });
-  // Execute action on hide popover
-  $scope.$on('popover.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove popover
-  $scope.$on('popover.removed', function() {
-    // Execute action
-  });
 
 });
 /*
@@ -87,8 +85,12 @@ controllerModule.controller("roomController", function($scope, $stateParams){
     if (models[$scope.room].panorama_paths)
       $scope.panorama_available = true;
 
+    $scope.showPanorama = function () { showRoomPanorama($scope.environment); };
+
     ionic.DomUtil.ready(function(){
-        room_ready($stateParams.room);
+        $scope.environment = construct_tridimensional_environment([0,150,400]);
+        $scope.environment.current_room = $stateParams.room;
+        room_ready($scope.environment);
         sidebar_ready('room-sidebar-menu');
     });
 
