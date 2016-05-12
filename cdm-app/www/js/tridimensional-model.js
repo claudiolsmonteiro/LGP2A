@@ -1,45 +1,57 @@
 /**
  * Created by João on 10/03/2016.
  */
-var scene, camera, renderer, controls, mouseVector, raycaster;
-var geometry, material, mesh;
-var objsContainer;
+var model_scene, model_camera, model_renderer, model_controls, model_mouseVector, model_raycaster;
+//var model_geometry, model_material, model_mesh;
+var model_objsContainer;
 var model_lights = [];
 
-var textures = [];
-var objects = [];
-var pickable_objects = [];
+var model_textures = [];
+var model_objects = [];
+var model_pickable_objects = [];
+var model_current_room = null;
 
 // time stamp used to calculate animation evolution
-var last_animation;
+var model_last_animation;
 
 // this variable will store the last clicked object.
 // app will ignore other clicks while this is being animated.
 var current_animated_object_name = null;
 
+//number of textures loaded.
+var model_textures_loaded = 0;
+
 function tridimensional_model_ready(current_room){
-    //console.log("chegou aqui model ready");
+    model_current_room = current_room;
     tridimensional_model_init(current_room);
-    tridimensional_model_animate();
+    //tridimensional_model_animate();
 }
 
+function model_increment_textures_loaded(){
+    model_textures_loaded++;
+    return Object.size(models) == model_textures_loaded;
+}
 
 function tridimensional_model_init(current_room) {
     console.log('model init');
-    textures = [];
-    objects = [];
+    model_textures = [];
+    model_objects = [];
     model_lights = [];
-    pickable_objects = [];
+    model_pickable_objects = [];
     current_animated_object_name = null;
-    last_animation = (new Date()).getTime();
+    model_last_animation = (new Date()).getTime();
+    model_textures_loaded = 0;
+    model_raycaster = new THREE.Raycaster();
+    model_mouseVector = new THREE.Vector2();
+    model_objsContainer = [];
 
     //window.addEventListener( 'mousemove', onMouseMove, false );
     document.addEventListener( 'mousedown', onDocumentMouseDown, true );
 
-    scene = new THREE.Scene();
+    model_scene = new THREE.Scene();
 
     var ambient = new THREE.AmbientLight( 0x333333 );
-    scene.add( ambient );
+    model_scene.add( ambient );
 
     /*var directionalLight = new THREE.DirectionalLight( 0xffeedd );
     directionalLight.position.set( 0, 0, 1 ).normalize();
@@ -53,39 +65,36 @@ function tridimensional_model_init(current_room) {
     pointLight.position.set( 500, 200, 500 );
     model_lights.push(pointLight);
 
-    pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
-    pointLight.position.set( -500, 200, 500 );
-    model_lights.push(pointLight);
+    var pointLight2 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight2.position.set( -500, 200, 500 );
+    model_lights.push(pointLight2);
 
-    pointLight = new THREE.PointLight( 0xeeeeee, 1, 1000 );
-    pointLight.position.set( 0, 700, 0 );
-    model_lights.push(pointLight);
+    var pointLight3 = new THREE.PointLight( 0xeeeeee, 1, 1000 );
+    pointLight3.position.set( 0, 700, 0 );
+    model_lights.push(pointLight3);
 
-    pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
-    pointLight.position.set( -500, 200, -500 );
-    model_lights.push(pointLight);
+    var pointLight4 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight4.position.set( -500, 200, -500 );
+    model_lights.push(pointLight4);
 
-    pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
-    pointLight.position.set( 500, 200, -500 );
-    model_lights.push(pointLight);
+    var pointLight5 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
+    pointLight5.position.set( 500, 200, -500 );
+    model_lights.push(pointLight5);
 
     for (var i in model_lights){
-        scene.add(model_lights[i]);
+        console.log('adding light');
+        model_scene.add(model_lights[i]);
     }
 
     /*var sphereSize = 1;
     var pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
     scene.add( pointLightHelper );*/
 
-    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    camera.position.x = 0;
-    camera.position.y = 200;
-    camera.position.z = 400;
+    model_camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    model_camera.position.x = 0;
+    model_camera.position.y = 200;
+    model_camera.position.z = 400;
 
-    raycaster = new THREE.Raycaster();
-    mouseVector = new THREE.Vector2();
-
-    objsContainer = [];
 
     //THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
@@ -93,73 +102,95 @@ function tridimensional_model_init(current_room) {
     //loadTexture('sample', 'obj/texture.jpg', textures);
     //loadTexture('casadamusica', 'obj/casadamusica/texturas/casa_da_musica_uvmap.png', textures);
     for(var key in models){
-        loadTexture(models[key].name, models[key].texture_path, textures);
+       /* model_textures[models[key].name] = new THREE.MeshBasicMaterial ({
+            map: THREE.ImageUtils.loadTexture(models[key].texture_path)
+        });*/
+        loadTexture(models[key].name, models[key].texture_path, model_textures, model_increment_textures_loaded, model_loadObjects, tridimensional_model_animate);
+        console.log('######### mandou carregar uma textura ##########');
     }
     // models
     //loadObjModel('teapot', 'Bule', 'obj/teapot.obj', [-200, 50, 0], 30, objects, pickable_objects, textures['sample'], scene, [20, 1, 0], 0.5);
     //loadObjModel('person', 'Pessoa', 'obj/male02.obj', [100, -150, 0], 3.5, objects, pickable_objects, textures['sample'], scene, [20, 0, 0], 0.5);
-    var y_coord = 100;
-    for(var key in models){
-        var active = false;
-        if(current_room != null && current_room == key)
-            active = true;
-        console.log(current_room + ' - ' + key);
-        loadObjModel(models[key].name, models[key].title, models[key].path, [0, y_coord, 0], 100, objects, pickable_objects, textures[models[key].name], scene, models[key].animation, 0.5, active);
-        //y_coord -= 200;
-    }
+
 
     //loadObjMtl(scene);
-    renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    model_renderer = new THREE.WebGLRenderer();
+    model_renderer.setPixelRatio( window.devicePixelRatio );
+    model_renderer.setSize(window.innerWidth, window.innerHeight);
     console.log('orientation ' + window.orientation);
 
 
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    model_controls = new THREE.OrbitControls( model_camera, model_renderer.domElement );
     //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.9;
-    controls.enableZoom = true;
-    controls.minDistance = 200;
-    controls.maxDistance = 800;
+    model_controls.enableDamping = true;
+    model_controls.dampingFactor = 0.9;
+    model_controls.enableZoom = true;
+    model_controls.minDistance = 200;
+    model_controls.maxDistance = 800;
 
-    renderer.setClearColor( 0x4FB9D3, 1 );
+    model_renderer.setClearColor( 0x4FB9D3, 1 );
 
-    renderer.domElement.setAttribute('id', 'model-main-canvas');
+    model_renderer.domElement.setAttribute('id', 'model-main-canvas');
     document.getElementById('model-canvas-container').html = '';
 
-    document.getElementById('model-canvas-container').appendChild( renderer.domElement );
+    document.getElementById('model-canvas-container').appendChild( model_renderer.domElement );
 
     window.addEventListener("orientationchange", function(){
         //console.log(screen.orientation); // e.g. portrait
 
-        camera.aspect = window.screen.width / window.screen.height;
-        camera.updateProjectionMatrix();
+        model_camera.aspect = window.screen.width / window.screen.height;
+        model_camera.updateProjectionMatrix();
 
-        renderer.setSize( window.screen.width, window.screen.height);
+        model_renderer.setSize( window.screen.width, window.screen.height);
     });
 
 
     axes = buildAxes( 1000 );
-    scene.add(axes);
+    model_scene.add(axes);
 
 }
 
 function tridimensional_model_animate() {
+    /*console.log('#########################################');
+    console.log('textures loaded: ' + model_textures_loaded);
+    console.log('models size: ' +  Object.size(models));
+    console.log(model_objects_loaded? 'objects started loading ' : 'objects didn\'t start loading');
+    console.log(model_textures);
+    console.log('#########################################');
+
+    if(model_textures_loaded == Object.size(models) && !model_objects_loaded){
+        console.log(model_textures_loaded + ' - ' + Object.size(models));
+        model_objects_loaded = true;
+        model_loadObjects();
+     }*/
+    //console.log(model_textures_loaded);
 
     requestAnimationFrame( tridimensional_model_animate );
 
     /*mesh.rotation.x += 0.01;
      mesh.rotation.y += 0.02;*/
     var temp_millis = (new Date()).getTime();
-    if(temp_millis - last_animation > 20){
-        last_animation = temp_millis;
-        for(var key in objects){
-            animateObject(objects[key]);
+    if(temp_millis - model_last_animation > 20){
+        model_last_animation = temp_millis;
+        for(var key in model_objects){
+            animateObject(model_objects[key]);
         }
     }
-    renderer.render( scene, camera );
+    model_renderer.render( model_scene, model_camera );
 
+}
+
+
+function model_loadObjects(){
+    var y_coord = 100;
+    for(var key in models){
+        var active = false;
+        if(model_current_room != null && model_current_room == key)
+            active = true;
+        console.log(model_current_room + ' - ' + key);
+        loadObjModel(models[key].name, models[key].title, models[key].path, [0, y_coord, 0], 100, model_objects, model_pickable_objects, model_textures[models[key].name], model_scene, models[key].animation, 0.5, active);
+        //y_coord -= 200;
+    }
 }
 
 
@@ -179,20 +210,22 @@ function onDocumentMouseDown( event ) {
 
         var canvas_container = $("#model-main-canvas");
         var position = canvas_container.offset();
-        mouseVector.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
-        mouseVector.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
-        console.log('1---------------------------------------------------');
+        model_mouseVector.x = ( event.clientX / model_renderer.domElement.clientWidth ) * 2 - 1;
+        model_mouseVector.y = - ( event.clientY / model_renderer.domElement.clientHeight ) * 2 + 1;
+
+        model_raycaster = new THREE.Raycaster();
+        model_raycaster.setFromCamera( model_mouseVector.clone(), model_camera );
+        var intersects = model_raycaster.intersectObjects( model_pickable_objects, true );
+
+        /*console.log('1---------------------------------------------------');
         console.log('##$$processing touch');
-        console.log('mouse x: ' + mouseVector.x + ' -- mouse y: ' + mouseVector.y);
+        console.log('mouse x: ' + model_mouseVector.x + ' -- mouse y: ' + model_mouseVector.y);
         console.log('event x: ' + event.clientX + ' -- event y: ' + event.clientY);
         console.log('position top: ' + position.top + ' -- position left: ' + position.left);
-        console.log('width: ' + renderer.domElement.width + ' -- height: ' + renderer.domElement.height);
-
-        raycaster = new THREE.Raycaster();
-        raycaster.setFromCamera( mouseVector.clone(), camera );
-        var intersects = raycaster.intersectObjects( pickable_objects, true );
+        console.log('width: ' + model_renderer.domElement.width + ' -- height: ' + model_renderer.domElement.height);
         console.log('intersects length: ' + intersects.length);
-        console.log('---------------------------------------------------');
+        console.log('---------------------------------------------------');*/
+
         if(intersects.length == 0)
             return;
 
@@ -255,15 +288,15 @@ function animateObject(object){
 }
 
 THREE.Scene.prototype.objectsBackToOriginalPositionExcept = function (object) {
-    for(var key in objects){
+    for(var key in model_objects){
         if(key != object.name){
-            if(objects[key].animation_state == 2){
-                objects[key].current_animation_start_time = (new Date()).getTime();
-                objects[key].animation_state++;
-                hideObjectInfoOverlayMenus(objects[key].name);
+            if(model_objects[key].animation_state == 2){
+                model_objects[key].current_animation_start_time = (new Date()).getTime();
+                model_objects[key].animation_state++;
+                hideObjectInfoOverlayMenus(model_objects[key].name);
             }
-            else if(objects[key].animation_state == 1){
-                objects[key].pendent_animations++;
+            else if(model_objects[key].animation_state == 1){
+                model_objects[key].pendent_animations++;
             }
         }
     }

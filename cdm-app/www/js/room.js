@@ -4,41 +4,39 @@
 /**
  * Created by João on 10/03/2016.
  */
-var scene, camera, renderer, controls, mouseVector;
-var geometry, material, mesh;
-var objsContainer;
+var room_scene, room_camera, room_renderer, room_controls;
 
-var textures = [];
-var objects = [];
+var room_textures = [];
+var room_objects = [];
 var room_lights = [];
-var current_room = null;
-
-// this variable will store the last clicked object.
-// app will ignore other clicks while this is being animated.
-var current_animated_object_name = null;
-
-var panorama_initialized = null;
+var room_current_room = null;
+var room_textures_loaded = 0;//number of textures loaded.
+var room_panorama_initialized = null;
 
 function room_ready(room_name){
-    current_room = room_name;
-    panorama_initialized = null;
+    room_current_room = room_name;
+    room_panorama_initialized = null;
     room_init();
-    room_animate();
-
+    //room_animate();
     room_initialize_more_info_popup();
 }
 
+function room_increment_textures_loaded(){
+    //in room there is only one object and one texture
+    //so it will always return true.
+    return true;
+}
 
 function room_init() {
-    textures = [];
-    objects = [];
+    room_textures = [];
+    room_objects = [];
     room_lights = [];
-    current_animated_object_name = null;
+    room_textures_loaded = 0;
 
-    scene = new THREE.Scene();
+    room_scene = new THREE.Scene();
 
     var ambient = new THREE.AmbientLight( 0x333333 );
-    scene.add( ambient );
+    room_scene.add( ambient );
 
     var pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
     pointLight.position.set( 500, 200, 500 );
@@ -65,45 +63,56 @@ function room_init() {
     room_lights.push(pointLight);
 
     for (var i in room_lights){
-      scene.add(room_lights[i]);
+        room_scene.add(room_lights[i]);
     }
 
-    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    camera.position.z = 1000;
+    room_camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    room_camera.position.z = 1000;
 
-    raycaster = new THREE.Raycaster();
-    mouseVector = new THREE.Vector2();
+    //room_raycaster = new THREE.Raycaster();
+    //room_mouseVector = new THREE.Vector2();
 
-    objsContainer = [];
+    room_objsContainer = [];
 
     //textures
-    loadTexture('room_texture', models[current_room].texture_path, textures);
+    loadTexture('room_texture', models[room_current_room].texture_path, room_textures, room_increment_textures_loaded, room_loadObjects, room_animate);
 
-    loadObjModel(models[current_room].name, models[current_room].title, models[current_room].path, [0, -150, 0], 300, objects, null, textures['room_texture'], scene, [20, 0, 0], 0.5);
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setClearColor( 0x4FB9D3, 1 );
+    room_renderer = new THREE.WebGLRenderer();
+    room_renderer.setPixelRatio( window.devicePixelRatio );
+    room_renderer.setClearColor( 0x4FB9D3, 1 );
 
-    renderer.setSize( window.innerWidth, window.innerHeight);
+    room_renderer.setSize( window.innerWidth, window.innerHeight);
 
-    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    room_controls = new THREE.OrbitControls( room_camera, room_renderer.domElement );
     //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.9;
-    controls.enableZoom = true;
-    controls.minDistance = 700;
-    controls.maxDistance = 1500;
+    room_controls.enableDamping = true;
+    room_controls.dampingFactor = 0.9;
+    room_controls.enableZoom = true;
+    room_controls.minDistance = 700;
+    room_controls.maxDistance = 1500;
 
-    renderer.domElement.setAttribute('id', 'main-canvas');
-    document.getElementById('room-canvas-container').appendChild( renderer.domElement );
+    room_renderer.domElement.setAttribute('id', 'main-canvas');
+    document.getElementById('room-canvas-container').appendChild( room_renderer.domElement );
 
+    window.addEventListener("orientationchange", function(){
+        //console.log(screen.orientation); // e.g. portrait
+
+        room_camera.aspect = window.screen.width / window.screen.height;
+        room_camera.updateProjectionMatrix();
+
+        room_renderer.setSize( window.screen.width, window.screen.height);
+    });
 }
 
 function room_animate() {
 
     requestAnimationFrame( room_animate );
-    renderer.render( scene, camera );
+    room_renderer.render( room_scene, room_camera );
+}
+
+function room_loadObjects(){
+    loadObjModel(models[room_current_room].name, models[room_current_room].title, models[room_current_room].path, [0, -150, 0], 300, room_objects, null, room_textures['room_texture'], room_scene, null, 0.5);
 }
 
 function room_initialize_more_info_popup(){
@@ -128,9 +137,9 @@ function showRoomModel(){
 }
 
 function showRoomPanorama(){
-    if(panorama_initialized != current_room) {
-        panorama_initialized = current_room;
-        panorama_init(current_room);
+    if(room_panorama_initialized != room_current_room) {
+        room_panorama_initialized = room_current_room;
+        panorama_init(room_current_room);
     }
     $('#room-canvas-container').hide();
     $('#model-btn-bottom-navbar').attr('style', '');

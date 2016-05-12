@@ -23,7 +23,14 @@ myApp.run(function($ionicPlatform) {
   });
 });
 
-myApp.config(function($stateProvider, $urlRouterProvider) {
+myApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+  // --- native scrolling ---
+  $ionicConfigProvider.scrolling.jsScrolling(false);
+  // Or for only a single platform, use
+  // if( ionic.Platform.isAndroid() ) {
+  // $ionicConfigProvider.scrolling.jsScrolling(false);
+  // --- end native scrolling ---
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router

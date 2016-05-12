@@ -22,9 +22,11 @@ function loadObjModel(model_id, title, model_path, position, scale, objectsArray
     loader.load( model_path, function ( object ) {
         object.traverse(function ( child ) {
             if ( child instanceof THREE.Mesh ) {
+                console.log(texture);
                 child.material.map = texture;
+                //child.material = texture;
                 child.callback = function() {
-                    objCallback(model_id, object, scene);
+                    objCallback(model_id, object, scene, objectsArray);
                 }
                 if(meshesArray != null)
                     meshesArray.push(child);
@@ -48,7 +50,7 @@ function loadObjModel(model_id, title, model_path, position, scale, objectsArray
         objectsArray[model_id] = object;
         scene.add(object);
         if(active) {
-            console.log('going to call callback. whooohoo ' + model_id);
+            //console.log('going to call callback. whooohoo ' + model_id);
             temp_mesh.callback();
         }
     }, onProgress, onError );
@@ -102,13 +104,21 @@ function addSampleCubeToScene(model_id, position, size, objectsArray, meshesArra
 
 }
 
-function loadTexture(texture_id, texture_path, texturesArray){
+function loadTexture(texture_id, texture_path, texturesArray, function_increment_textures_loaded, function_load_objects, function_animate){
+    console.log('######### veio  carregar uma textura ##########');
     var texture = new THREE.Texture();
     var loader = new THREE.ImageLoader( manager );
     loader.load( texture_path, function ( image ) {
         texture.image = image;
         texture.needsUpdate = true;
-    } );
+        console.log('vai incrementar');
+        if (function_increment_textures_loaded()) {
+            function_load_objects();
+            function_animate();
+        }
+        console.log('$$$$$$$$$$$ texture loaded ' + model_textures_loaded);
+
+    });
     texturesArray[texture_id] = texture;
     return texture;
 }
@@ -125,12 +135,12 @@ var onError = function ( xhr ) {
 
 };
 
-function objCallback(model_id, object, scene){
+function objCallback(model_id, object, scene, objectsArray){
     if(object.animation == null)
         return;
 
     //if current animated object's animation is still in progress, ignore (return immediately).
-    if(current_animated_object_name != null && ( objects[current_animated_object_name].animation_state == 1 || objects[current_animated_object_name].animation_state == 3) ) {
+    if(current_animated_object_name != null && ( objectsArray[current_animated_object_name].animation_state == 1 || objectsArray[current_animated_object_name].animation_state == 3) ) {
         console.log('ignoring click. other object being animated');
         return;
     }
@@ -151,3 +161,11 @@ function objCallback(model_id, object, scene){
     }
     console.log('new animation state: ' + object.animation_state);
 }
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
