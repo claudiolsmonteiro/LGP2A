@@ -136,8 +136,8 @@ function construct_tridimensional_environment(camera_vec){
 
     object.scene = new THREE.Scene();
 
-    //object.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    object.camera = new THREE.PerspectiveCamera( 75, window.screen.width / window.screen.height, 1, 10000 );
+    object.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    //object.camera = new THREE.PerspectiveCamera( 75, window.screen.width / window.screen.height, 1, 10000 );
     object.camera.position.x = camera_vec[0];
     object.camera.position.y = camera_vec[1];
     object.camera.position.z = camera_vec[2];

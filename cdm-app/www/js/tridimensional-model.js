@@ -78,14 +78,7 @@ function tridimensional_model_animate(environment) {
     console.log(model_objects_loaded? 'objects started loading ' : 'objects didn\'t start loading');
     console.log(model_textures);
     console.log('#########################################');
-
-    if(model_textures_loaded == Object.size(models) && !model_objects_loaded){
-        console.log(model_textures_loaded + ' - ' + Object.size(models));
-        model_objects_loaded = true;
-        model_loadObjects();
-     }*/
-    //console.log(model_textures_loaded);
-
+    */
     requestAnimationFrame( function(){tridimensional_model_animate(environment)} );
 
     var temp_millis = (new Date()).getTime();

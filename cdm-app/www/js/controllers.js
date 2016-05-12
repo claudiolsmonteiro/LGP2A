@@ -49,6 +49,8 @@ controllerModule.controller("tridimensionalModelController", function($scope, $s
         // Execute action
     });
 
+    $scope.toggleSidebar = function () { showSidebar('model-sidebar-menu'); };
+
     ionic.DomUtil.ready(function(){
         //overlay_elements_ready();
         console.log($stateParams.current_room);
@@ -86,7 +88,7 @@ controllerModule.controller("roomController", function($scope, $stateParams){
       $scope.panorama_available = true;
 
     $scope.showPanorama = function () { showRoomPanorama($scope.environment); };
-
+    $scope.toggleSidebar = function () { showSidebar('room-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         $scope.environment = construct_tridimensional_environment([0,150,400]);
         $scope.environment.current_room = $stateParams.room;
@@ -100,7 +102,7 @@ controllerModule.controller("contactsController", function($scope, $stateParams)
     $scope.contacts = $stateParams.contacts;
     $scope.prefix = 'contacts';
     //$scope.room_title = models[$stateParams.room].title.toUpperCase();
-
+    $scope.toggleSidebar = function () { showSidebar('contacts-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         sidebar_ready('contacts-sidebar-menu');
     });
@@ -111,7 +113,7 @@ controllerModule.controller("localController", function($scope, $stateParams){
     $scope.contacts = $stateParams.contacts;
     $scope.prefix = 'local';
     //$scope.room_title = models[$stateParams.room].title.toUpperCase();
-
+    $scope.toggleSidebar = function () { showSidebar('local-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         sidebar_ready('local-sidebar-menu');
     });

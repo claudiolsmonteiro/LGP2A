@@ -7,10 +7,10 @@
               <a class="item" href="javascript:void(0);" onclick="animateRoom(suggia);return false;">Sala Suggia</a>
             </div>
             <div class="list">
-              <a class="item" href="javascript:void(0);" onclick="animateRoom(suggia);return false;">Sala 2</a>
+              <a class="item" href="javascript:void(0);" onclick="animateRoom(sala_2);return false;">Sala 2</a>
             </div>
             <div class="list">
-              <a class="item" href="javascript:void(0);" onclick="animateRoom(suggia);return false;">Bar</a>
+              <a class="item" href="javascript:void(0);" onclick="animateRoom(bar);return false;">Bar</a>
             </div>
           </ion-popover-view>
         </script>
@@ -31,13 +31,7 @@
         </ul>
     </div>
 
-    <div id="menu-button-bar" class="bottom-navbar">
-      <ul>
-        <li><a href="javascript:void(0);" onclick="showSidebar();return false;" native-transitions>MENU</a></li>
-      </ul>
-    </div>
-
-
+    <div ng-include src="'templates/toggle-menu-btn.html'"></div>
 
     <div id="model-canvas-container"></div>
 
