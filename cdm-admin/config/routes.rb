@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   resources :rooms
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -60,4 +62,7 @@ Rails.application.routes.draw do
   get "api/photo/:id", :to => 'photo#get_photo'
   get "api/photo/:id/points", :to => 'photo#get_photo_points'
   get "api/photo/:id/videos", :to => 'photo#get_photo_videos'
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 end
