@@ -64,5 +64,10 @@ Rails.application.routes.draw do
   get "api/photo/:id/videos", :to => 'photo#get_photo_videos'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+  get 'logout'  => 'sessions#destroy'
+
+  get '/cool' => 'gif#cool'
+  get '/sweet' => 'gif#sweet'
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
 end
