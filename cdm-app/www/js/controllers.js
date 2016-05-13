@@ -50,7 +50,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $s
     });
 
     $scope.toggleSidebar = function () { showSidebar('model-sidebar-menu'); };
-
+    $scope.animateRoom = function ( room_id ) { animateObjectAux(room_id , $scope.environment); $scope.closePopover(); };
     ionic.DomUtil.ready(function(){
         //overlay_elements_ready();
         console.log($stateParams.current_room);
@@ -58,6 +58,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $s
         $scope.environment.current_room = $stateParams.current_room;
         tridimensional_model_ready($scope.environment);
         sidebar_ready('model-sidebar-menu');
+
     });
 
 

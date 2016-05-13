@@ -153,8 +153,11 @@ function onDocumentMouseDown( event , environment ) {
 
 }
 
-function animateObject(object){
+function animateObjectAux(room_id, environment){
+    environment.objects[room_id].mesh.callback();
+}
 
+function animateObject(object){
     if(object.animation_state == 0 || object.animation_state == 2){
         return;
     }

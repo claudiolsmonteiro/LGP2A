@@ -23,7 +23,6 @@ function loadObjModel(environment, object_key, position, scale, animation_span, 
             if ( child instanceof THREE.Mesh ) {
                 //console.log(texture);
                 child.material.map = environment.textures[object_key];
-                //child.material = texture;
                 child.callback = function() {
                     objCallback(object_key, object, environment);
                 }
@@ -85,6 +84,7 @@ var onError = function ( xhr ) {
 };
 
 function objCallback(model_id, object, environment){
+    console.log(object);
     if(object.animation == null)
         return;
 

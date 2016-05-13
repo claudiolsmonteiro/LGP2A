@@ -4,13 +4,13 @@
         <script id="my-popover.html" type="text/ng-template">
           <ion-popover-view id="select-room-popover">
             <div class="list">
-              <a class="item" href="javascript:void(0);" onclick="animateRoom(suggia);return false;">Sala Suggia</a>
+              <span class="item" ng-click="animateRoom('sala_suggia')">Sala Suggia</span>
             </div>
             <div class="list">
-              <a class="item" href="javascript:void(0);" onclick="animateRoom(sala_2);return false;">Sala 2</a>
+              <span class="item" ng-click="animateRoom('sala_2')">Sala 2</span>
             </div>
             <div class="list">
-              <a class="item" href="javascript:void(0);" onclick="animateRoom(bar);return false;">Bar</a>
+              <span class="item" ng-click="animateRoom('bar')">Bar</span>
             </div>
           </ion-popover-view>
         </script>
@@ -34,10 +34,5 @@
     <div ng-include src="'templates/toggle-menu-btn.html'"></div>
 
     <div id="model-canvas-container"></div>
-
-
-
-
-
 
 </ion-view>

@@ -25,70 +25,70 @@ myApp.run(function($ionicPlatform) {
 
 myApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
-  // --- native scrolling ---
-  $ionicConfigProvider.scrolling.jsScrolling(false);
-  // Or for only a single platform, use
-  // if( ionic.Platform.isAndroid() ) {
-  // $ionicConfigProvider.scrolling.jsScrolling(false);
-  // --- end native scrolling ---
+    $ionicConfigProvider.views.maxCache(2);
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
+    // --- native scrolling ---
+    $ionicConfigProvider.scrolling.jsScrolling(false);
+    // Or for only a single platform, use
+    // if( ionic.Platform.isAndroid() ) {
+    // $ionicConfigProvider.scrolling.jsScrolling(false);
+    // --- end native scrolling ---
 
-      /*.state('model', {
-      url: '/model/{current_room:(?:/[^/]+)?}',
-      templateUrl: 'templates/tridimensional-model.html',
-      controller:"tridimensionalModelController"
-    })*/
+    // Ionic uses AngularUI Router which uses the concept of states
+    // Learn more here: https://github.com/angular-ui/ui-router
+    // Set up the various states which the app can be in.
+    // Each state's controller can be found in controllers.js
+    $stateProvider
 
-      //model with parameter to animate current room
-      .state('model_current', {
+        /*.state('model', {
+        url: '/model/{current_room:(?:/[^/]+)?}',
+        templateUrl: 'templates/tridimensional-model.html',
+        controller:"tridimensionalModelController"
+        })*/
+
+        //model with parameter to animate current room
+    .state('model_current', {
         url: '/model/:current_room',
         templateUrl: 'templates/tridimensional-model.html',
         controller:"tridimensionalModelController"
-      })
+    })
 
-      //model with no room "highlighted"
-      .state('model', {
+        //model with no room "highlighted"
+    .state('model', {
         url: '/model',
         templateUrl: 'templates/tridimensional-model.html',
         controller:"tridimensionalModelController"
-      })
+    })
 
-  /*   .state('panoramic', {
+    /*   .state('panoramic', {
     url: '/panoramic/:room',
     templateUrl: 'templates/360.html',
     controller:"panoramicController"
     })*/
 
-      .state('room', {
-    url: '/room/:room',
-    templateUrl: 'templates/room.html',
-    controller:"roomController"
+    .state('room', {
+        url: '/room/:room',
+        templateUrl: 'templates/room.html',
+        controller:"roomController"
     })
 
-       .state('contacts', {
-    url: '/contacts',
-    templateUrl: 'templates/contactos.html',
-    controller:"contactsController"
+    .state('contacts', {
+        url: '/contacts',
+        templateUrl: 'templates/contactos.html',
+        controller:"contactsController"
     })
 
-        .state('local', {
-    url: '/local',
-    templateUrl: 'templates/local.html',
-    controller:"localController"
+    .state('local', {
+        url: '/local',
+        templateUrl: 'templates/local.html',
+        controller:"localController"
     })
 
-        .state('languages', {
-    url: '/languages',
-    templateUrl: 'templates/idioma.html',
-    controller:"languagesController"
-    })
-
-       ;   
+    .state('languages', {
+        url: '/languages',
+        templateUrl: 'templates/idioma.html',
+        controller:"languagesController"
+    });
 
 
 
