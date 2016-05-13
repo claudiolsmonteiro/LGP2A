@@ -76,7 +76,12 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
     });
 });*/
 
-controllerModule.controller("roomController", function($scope, $stateParams){
+controllerModule.controller("roomController", function($scope, $stateParams, $state){
+    $scope.$on('$ionicView.beforeEnter', function(){
+        // Any thing you can think of
+
+    });
+
     $scope.room = $stateParams.room;
     $scope.prefix = 'room';
     $scope.room_title = models[$stateParams.room].title.toUpperCase();
@@ -85,11 +90,20 @@ controllerModule.controller("roomController", function($scope, $stateParams){
     //panorama_available -> true if the room as a panoramic picture.
     //if not, the option won't be shown in the bottom navbar
     $scope.panorama_available = false;
+
+    $scope.next_room_available = (models[$scope.room].next_room != null);
+    $scope.next_room_id = models[$scope.room].next_room;
+    $scope.goToNextRoom = function() { $state.go('room' , {room: models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
+
     if (models[$scope.room].panorama_paths)
       $scope.panorama_available = true;
 
+    $scope.showRoomModel = function () { showRoomModel($scope.environment.current_room); };
     $scope.showPanorama = function () { showRoomPanorama($scope.environment); };
+    $scope.showPopup = function () { room_show_more_info_popup($scope.environment.current_room); };
+    $scope.hidePopup = function () { room_hide_more_info_popup($scope.environment.current_room); };
     $scope.toggleSidebar = function () { showSidebar('room-sidebar-menu'); };
+
     ionic.DomUtil.ready(function(){
         $scope.environment = construct_tridimensional_environment([0,150,400]);
         $scope.environment.current_room = $stateParams.room;

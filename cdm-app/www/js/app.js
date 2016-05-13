@@ -25,7 +25,7 @@ myApp.run(function($ionicPlatform) {
 
 myApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
-    $ionicConfigProvider.views.maxCache(2);
+    $ionicConfigProvider.views.maxCache(1);
 
     // --- native scrolling ---
     $ionicConfigProvider.scrolling.jsScrolling(false);
@@ -69,7 +69,8 @@ myApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) 
     .state('room', {
         url: '/room/:room',
         templateUrl: 'templates/room.html',
-        controller:"roomController"
+        controller:"roomController"/*,
+        cache: false*/
     })
 
     .state('contacts', {

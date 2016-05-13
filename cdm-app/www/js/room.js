@@ -11,7 +11,7 @@ function room_ready(environment){
     room_panorama_initialized = null;
     room_init(environment);
     //room_animate();
-    room_initialize_more_info_popup();
+    //room_initialize_more_info_popup(environment.current_room);
 }
 
 function room_increment_textures_loaded(){
@@ -57,7 +57,10 @@ function room_init(environment) {
     loadTexture(environment, environment.current_room, room_increment_textures_loaded, room_loadObjects, room_animate);
 
     environment.renderer.domElement.setAttribute('id', 'main-canvas');
-    document.getElementById('room-canvas-container').appendChild( environment.renderer.domElement );
+
+    var canvas_id = environment.current_room+'-canvas-container';
+    document.getElementById(canvas_id).html = '';
+    document.getElementById(canvas_id).appendChild( environment.renderer.domElement );
 
     window.addEventListener("orientationchange", function(){
         //console.log(screen.orientation); // e.g. portrait
@@ -80,24 +83,35 @@ function room_loadObjects(environment){
     loadObjModel(environment, environment.current_room, [0, -25, 0], 100, 0.5);
 }
 
-function room_initialize_more_info_popup(){
-    console.log('initialize popup');
-    $('#room-more-info-popup').click( function(e) {
+/*function room_initialize_more_info_popup(room_id){
+    console.log('initialize popup ' + room_id);
+    $('#'+room_id+'-more-info-popup').click( function(e) {
         console.log('click  no botao');
-        $('#room-more-info-modal').show();
-        $('#room-more-info-modal-background').show();
+        $('#'+room_id+'-more-info-modal').show();
+        $('#'+room_id+'-more-info-modal-background').show();
     });
 
-    $('#room-more-info-modal .close-btn').on('click', function(){
-        $('#room-more-info-modal').hide();
-        $('#room-more-info-modal-background').hide();
+    $('#'+room_id+'-more-info-modal .close-btn').on('click', function(){
+        $('#'+room_id+'-more-info-modal').hide();
+        $('#'+room_id+'-more-info-modal-background').hide();
     });
+}*/
+
+function room_show_more_info_popup(room_id){
+    $('#'+room_id+'-more-info-modal').show();
+    $('#'+room_id+'-more-info-modal-background').show();
 }
 
-function showRoomModel(){
+function room_hide_more_info_popup(room_id){
+    $('#'+room_id+'-more-info-modal').hide();
+    $('#'+room_id+'-more-info-modal-background').hide();
+}
+
+
+function showRoomModel(room_id){
     $('#panorama').hide();
     $('#panorama-btn-bottom-navbar').attr('style', '');
-    $('#room-canvas-container').show();
+    $('#'+room_id+'-canvas-container').show();
     $('#model-btn-bottom-navbar').attr('style', 'color: white');
 }
 
@@ -106,7 +120,7 @@ function showRoomPanorama(environment){
         room_panorama_initialized = environment.current_room;
         panorama_init(environment.current_room);
     }
-    $('#room-canvas-container').hide();
+    $('#'+environment.current_room+'-canvas-container').hide();
     $('#model-btn-bottom-navbar').attr('style', '');
     $('#panorama').show();
     $('#panorama-btn-bottom-navbar').attr('style', 'color: white');
