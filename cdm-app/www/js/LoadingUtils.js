@@ -15,7 +15,7 @@ manager.onProgress = function ( item, loaded, total ) {
  * @param active - if this is the current room, active will be true, and callback function will be called.
  */
 //function loadObjModel(model_id, title, model_path, position, scale, objectsArray, meshesArray, texture, scene, animation, animation_span, active) {
-function loadObjModel(environment, object_key, position, scale, animation_span, active) {
+function loadObjModel(environment, object_key, position, scale, animation_span, active, callback_function) {
     var loader = new THREE.OBJLoader( manager );
     var temp_mesh = null;
     loader.load( models[object_key].path, function ( object ) {
@@ -24,7 +24,7 @@ function loadObjModel(environment, object_key, position, scale, animation_span, 
                 //console.log(texture);
                 child.material.map = environment.textures[object_key];
                 child.callback = function() {
-                    objCallback(object_key, object, environment);
+                    callback_function(object_key, object, environment);
                 }
                 if(environment.pickable_objects != null)
                     environment.pickable_objects.push(child);
@@ -82,36 +82,6 @@ var onProgress = function ( xhr ) {
 var onError = function ( xhr ) {
 
 };
-
-function objCallback(model_id, object, environment){
-    console.log(object);
-    if(object.animation == null)
-        return;
-
-    //if current animated object's animation is still in progress, ignore (return immediately).
-    if(environment.current_animated_object_name != null &&
-            ( environment.objects[environment.current_animated_object_name].animation_state == 1
-                || environment.objects[environment.current_animated_object_name].animation_state == 3) ) {
-        console.log('ignoring click. other object being animated');
-        return;
-    }
-
-    //console.log( model_id );
-    if(object.animation_state == 1 || object.animation_state == 3){
-        console.log('ignoring click. other animation for this object in progress.');
-        return;
-    }
-    object.animation_state = (object.animation_state + 1) % 4;
-    object.current_animation_start_time = (new Date()).getTime();
-    if(object.animation_state == 1){ //if positioning this object, put all the others back to their original position
-        environment.scene.objectsBackToOriginalPositionExcept(object, environment);
-        environment.current_animated_object_name = object.name;
-    }
-    else if (object.animation_state == 3){ //if positioning this object in its original position, immediately hide all menus
-        hideObjectInfoOverlayMenus(object.name);
-    }
-    console.log('new animation state: ' + object.animation_state);
-}
 
 Object.size = function(obj) {
     var size = 0, key;

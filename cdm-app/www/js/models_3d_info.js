@@ -29,7 +29,10 @@ models['sala_suggia'] =
       "img/suggia/medres/suggia-4.jpg",
       "img/suggia/medres/suggia-5.jpg"
     ],
-    next_room : 'sala_2'
+    next_room : 'sala_2',
+    beacon_uuid : 'e2c56db5-dffb-48d2-b060-d0f5a71096e0',
+    beacon_major: 0,
+    beacon_minor: 0
 };
 models['sala_2'] =
 {

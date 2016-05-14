@@ -6,7 +6,7 @@ function sidebar_ready(id){
 };
 
 function sidebar_onDocumentMouseDown(event, sidebar_id){
-    console.log('click - ' + event.target.getAttribute('id'));
+    //console.log('click - ' + event.target.getAttribute('id'));
     if(event.target.getAttribute('id') != 'sidebar-menu-ul'
         && event.target.getAttribute('id') != 'menu-btn'
         && !$('#'+sidebar_id).hasClass('hidden')){

@@ -1,70 +1,5 @@
-var controllerModule = angular.module('blank.controllers', []);
+var controllerModule = angular.module('blank.controllers', ['ionic','blank.controllers', 'ngCordovaBeacon']);
 
-controllerModule.controller("tridimensionalModelController", function($scope, $stateParams, $ionicPopover){
-    // set to either landscape
-    $scope.prefix = 'model';
-
-    ionic.Platform.ready(function(){
-        // will execute when device is ready, or immediately if the device is already ready.
-        console.log(screen);
-        if(screen.lockOrientation) {
-            //screen.lockOrientation('landscape');
-        }
-        console.log(screen.orientation);
-
-        /*window.addEventListener("orientationchange", function() {
-          console.log(window.orientation);
-          tridimensional_model_ready();
-        }, false);*/
-
-    });
-
-    // .fromTemplate() method
-    var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
-    $scope.popover = $ionicPopover.fromTemplate(template, {
-        scope: $scope
-    });
-    // .fromTemplateUrl() method
-    $ionicPopover.fromTemplateUrl('my-popover.html', {
-        scope: $scope
-    }).then(function(popover) {
-        $scope.popover = popover;
-    });
-    $scope.openSelectRoomPopover = function($event) {
-        $scope.popover.show($event);
-    };
-    $scope.closePopover = function() {
-        $scope.popover.hide();
-    };
-    //Cleanup the popover when we're done with it!
-    $scope.$on('$destroy', function() {
-        $scope.popover.remove();
-    });
-    // Execute action on hide popover
-    $scope.$on('popover.hidden', function() {
-        // Execute action
-    });
-    // Execute action on remove popover
-    $scope.$on('popover.removed', function() {
-        // Execute action
-    });
-
-    $scope.toggleSidebar = function () { showSidebar('model-sidebar-menu'); };
-    $scope.animateRoom = function ( room_id ) { animateObjectAux(room_id , $scope.environment); $scope.closePopover(); };
-    ionic.DomUtil.ready(function(){
-        //overlay_elements_ready();
-        console.log($stateParams.current_room);
-        $scope.environment = construct_tridimensional_environment([0,200,400]);
-        $scope.environment.current_room = $stateParams.current_room;
-        tridimensional_model_ready($scope.environment);
-        sidebar_ready('model-sidebar-menu');
-
-    });
-
-
-
-
-});
 /*
 controllerModule.controller("panoramicController", function($scope, $stateParams){
     $scope.room = $stateParams.room;
@@ -76,42 +11,6 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
     });
 });*/
 
-controllerModule.controller("roomController", function($scope, $stateParams, $state){
-    $scope.$on('$ionicView.beforeEnter', function(){
-        // Any thing you can think of
-
-    });
-
-    $scope.room = $stateParams.room;
-    $scope.prefix = 'room';
-    $scope.room_title = models[$stateParams.room].title.toUpperCase();
-
-
-    //panorama_available -> true if the room as a panoramic picture.
-    //if not, the option won't be shown in the bottom navbar
-    $scope.panorama_available = false;
-
-    $scope.next_room_available = (models[$scope.room].next_room != null);
-    $scope.next_room_id = models[$scope.room].next_room;
-    $scope.goToNextRoom = function() { $state.go('room' , {room: models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
-
-    if (models[$scope.room].panorama_paths)
-      $scope.panorama_available = true;
-
-    $scope.showRoomModel = function () { showRoomModel($scope.environment.current_room); };
-    $scope.showPanorama = function () { showRoomPanorama($scope.environment); };
-    $scope.showPopup = function () { room_show_more_info_popup($scope.environment.current_room); };
-    $scope.hidePopup = function () { room_hide_more_info_popup($scope.environment.current_room); };
-    $scope.toggleSidebar = function () { showSidebar('room-sidebar-menu'); };
-
-    ionic.DomUtil.ready(function(){
-        $scope.environment = construct_tridimensional_environment([0,150,400]);
-        $scope.environment.current_room = $stateParams.room;
-        room_ready($scope.environment);
-        sidebar_ready('room-sidebar-menu');
-    });
-
-});
 
 controllerModule.controller("contactsController", function($scope, $stateParams){
     $scope.contacts = $stateParams.contacts;
