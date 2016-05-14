@@ -30,33 +30,38 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
          tridimensional_model_ready();
          }, false);*/
 
-        // BEACONS
-        $cordovaBeacon.requestWhenInUseAuthorization();
-        $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
-            var uniqueBeaconKey;
-            for(var i = 0; i < pluginResult.beacons.length; i++) {
-                uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
-                //$scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
-                if(pluginResult.beacons[i].accuracy < 3.0 && $scope.beacons_detected[uniqueBeaconKey].detected === false){
-                    $scope.beacons_detected[uniqueBeaconKey].detected = true;
-                    var prompt_result =
-                        window.confirm('Está perto de:\n' +
-                            models[$scope.beacons_detected[uniqueBeaconKey].model_key].title + '\n' +
-                            'Deseja ver mais informação?');
-                    if(prompt_result){ //navigate to detected room
-                        $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
+        try {
+            // BEACONS
+            $cordovaBeacon.requestWhenInUseAuthorization();
+            $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
+                var uniqueBeaconKey;
+                for(var i = 0; i < pluginResult.beacons.length; i++) {
+                    uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
+                    //$scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
+                    if(pluginResult.beacons[i].accuracy < 3.0 && $scope.beacons_detected[uniqueBeaconKey].detected === false){
+                        $scope.beacons_detected[uniqueBeaconKey].detected = true;
+                        var prompt_result =
+                            window.confirm('Está perto de:\n' +
+                                models[$scope.beacons_detected[uniqueBeaconKey].model_key].title + '\n' +
+                                'Deseja ver mais informação?');
+                        if(prompt_result){ //navigate to detected room
+                            $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
+                        }
                     }
                 }
+                //$scope.$apply();
+                //console.log($scope.beacons);
+            });
+            for(var key in models){
+                if (models[key].beacon_uuid != null && models[key].beacon_uuid != undefined) {
+                    $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
+                        "beacon-" + models[key].name,
+                        models[key].beacon_uuid));
+                }
             }
-            //$scope.$apply();
-            //console.log($scope.beacons);
-        });
-        for(var key in models){
-            if (models[key].beacon_uuid != null && models[key].beacon_uuid != undefined) {
-                $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
-                    "beacon-" + models[key].name,
-                    models[key].beacon_uuid));
-            }
+            // /BEACONS
+        }catch(e) {
+            //ignoring error. probably cause because running app in browser (development), not in device.
         }
 
 
@@ -94,13 +99,13 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     });
 
     $scope.toggleSidebar = function () { showSidebar('model-sidebar-menu'); };
-    $scope.animateRoom = function ( room_id ) { $scope.animateObjectAux(room_id , $scope.environment); $scope.closePopover(); };
+    $scope.animateRoom = function ( room_id ) { $scope.animateObjectAux(room_id); $scope.closePopover(); };
     ionic.DomUtil.ready(function(){
         //overlay_elements_ready();
         //console.log($stateParams.current_room);
         $scope.environment = construct_tridimensional_environment([0,200,400]);
         $scope.environment.current_room = $stateParams.current_room;
-        $scope.tridimensional_model_ready($scope.environment);
+        $scope.tridimensional_model_ready();
         sidebar_ready('model-sidebar-menu');
 
     });
@@ -108,22 +113,22 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     // FUNCTIONS
 
-    $scope.tridimensional_model_ready = function(environment){
-        $scope.tridimensional_model_init(environment);
+    $scope.tridimensional_model_ready = function(){
+        $scope.tridimensional_model_init();
         //tridimensional_model_animate();
     }
 
-    $scope.model_increment_textures_loaded = function(environment){
-        environment.textures_loaded++;
-        return Object.size(models) == environment.textures_loaded;
+    $scope.model_increment_textures_loaded = function(){
+        $scope.environment.textures_loaded++;
+        return Object.size(models) == $scope.environment.textures_loaded;
     }
 
-    $scope.tridimensional_model_init = function(environment) {
+    $scope.tridimensional_model_init = function() {
 
-        document.addEventListener( 'mousedown', function( e ) { $scope.onDocumentMouseDown( e, environment );}, true );
+        document.addEventListener( 'mousedown', function( e ) { $scope.onDocumentMouseDown( e );}, true );
 
         var ambient = new THREE.AmbientLight( 0x333333 );
-        environment.scene.add( ambient );
+        $scope.environment.scene.add( ambient );
 
         /*var directionalLight = new THREE.DirectionalLight( 0xffeedd );
          directionalLight.position.set( 0, 0, 1 ).normalize();
@@ -135,49 +140,49 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
         var pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
         pointLight.position.set( 500, 200, 500 );
-        environment.lights.push(pointLight);
+        $scope.environment.lights.push(pointLight);
 
         var pointLight2 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
         pointLight2.position.set( -500, 200, 500 );
-        environment.lights.push(pointLight2);
+        $scope.environment.lights.push(pointLight2);
 
         var pointLight3 = new THREE.PointLight( 0xeeeeee, 1, 1000 );
         pointLight3.position.set( 0, 700, 0 );
-        environment.lights.push(pointLight3);
+        $scope.environment.lights.push(pointLight3);
 
         var pointLight4 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
         pointLight4.position.set( -500, 200, -500 );
-        environment.lights.push(pointLight4);
+        $scope.environment.lights.push(pointLight4);
 
         var pointLight5 = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
         pointLight5.position.set( 500, 200, -500 );
-        environment.lights.push(pointLight5);
+        $scope.environment.lights.push(pointLight5);
 
-        for (var i in environment.lights){
-            environment.scene.add(environment.lights[i]);
+        for (var i in $scope.environment.lights){
+            $scope.environment.scene.add($scope.environment.lights[i]);
         }
 
         //textures
         for(var key in models){
-            loadTexture(environment, key, $scope.model_increment_textures_loaded, $scope.model_loadObjects, $scope.tridimensional_model_animate);
+            loadTexture($scope.environment, key, $scope.model_increment_textures_loaded, $scope.model_loadObjects, $scope.tridimensional_model_animate);
         }
 
-        environment.renderer.domElement.setAttribute('id', 'model-main-canvas');
+        $scope.environment.renderer.domElement.setAttribute('id', 'model-main-canvas');
         document.getElementById('model-canvas-container').html = '';
-        document.getElementById('model-canvas-container').appendChild( environment.renderer.domElement );
+        document.getElementById('model-canvas-container').appendChild( $scope.environment.renderer.domElement );
         window.addEventListener("orientationchange", function(){
             //console.log(screen.orientation); // e.g. portrait
-            environment.camera.aspect = window.screen.width / window.screen.height;
-            environment.camera.updateProjectionMatrix();
-            environment.renderer.setSize( window.screen.width, window.screen.height);
+            $scope.environment.camera.aspect = window.screen.width / window.screen.height;
+            $scope.environment.camera.updateProjectionMatrix();
+            $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
         });
 
         var axes = buildAxes( 1000 );
-        environment.scene.add(axes);
+        $scope.environment.scene.add(axes);
 
     }
 
-    $scope.tridimensional_model_animate = function(environment) {
+    $scope.tridimensional_model_animate = function() {
         /*console.log('#########################################');
          console.log('textures loaded: ' + model_textures_loaded);
          console.log('models size: ' +  Object.size(models));
@@ -185,38 +190,38 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
          console.log(model_textures);
          console.log('#########################################');
          */
-        requestAnimationFrame( function(){$scope.tridimensional_model_animate(environment)} );
+        requestAnimationFrame( function(){$scope.tridimensional_model_animate()} );
 
         var temp_millis = (new Date()).getTime();
-        if(temp_millis - environment.last_animation > 20){
-            environment.last_animation = temp_millis;
-            for(var key in environment.objects){
-                $scope.animateObject(environment.objects[key]);
+        if(temp_millis - $scope.environment.last_animation > 20){
+            $scope.environment.last_animation = temp_millis;
+            for(var key in $scope.environment.objects){
+                $scope.animateObject($scope.environment.objects[key]);
             }
         }
-        environment.renderer.render( environment.scene, environment.camera );
+        $scope.environment.renderer.render( $scope.environment.scene, $scope.environment.camera );
 
     }
 
-    $scope.model_loadObjects = function(environment){
+    $scope.model_loadObjects = function(){
         var y_coord = 100;
         for(var key in models){
             var active = false;
-            if(environment.current_room != null && environment.current_room == key)
+            if($scope.environment.current_room != null && $scope.environment.current_room == key)
                 active = true;
-            loadObjModel(environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback);
+            loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback);
         }
     }
 
-    $scope.onDocumentMouseDown = function( event , environment ) {
+    $scope.onDocumentMouseDown = function( event ) {
         if(event.target.getAttribute('id') == 'model-main-canvas'){
 
-            environment.mouseVector.x = ( event.clientX / environment.renderer.domElement.clientWidth ) * 2 - 1;
-            environment.mouseVector.y = - ( event.clientY / environment.renderer.domElement.clientHeight ) * 2 + 1;
+            $scope.environment.mouseVector.x = ( event.clientX / $scope.environment.renderer.domElement.clientWidth ) * 2 - 1;
+            $scope.environment.mouseVector.y = - ( event.clientY / $scope.environment.renderer.domElement.clientHeight ) * 2 + 1;
 
-            environment.raycaster = new THREE.Raycaster();
-            environment.raycaster.setFromCamera( environment.mouseVector.clone(), environment.camera );
-            var intersects = environment.raycaster.intersectObjects( environment.pickable_objects, true );
+            //$scope.environment.raycaster = new THREE.Raycaster();
+            $scope.environment.raycaster.setFromCamera( $scope.environment.mouseVector.clone(), $scope.environment.camera );
+            var intersects = $scope.environment.raycaster.intersectObjects( $scope.environment.pickable_objects, true );
 
             /*console.log('1---------------------------------------------------');
              console.log('##$$processing touch');
@@ -236,8 +241,8 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         }
     }
 
-    $scope.animateObjectAux = function(room_id, environment){
-        environment.objects[room_id].mesh.callback();
+    $scope.animateObjectAux = function(room_id){
+        $scope.environment.objects[room_id].mesh.callback();
     }
 
     $scope.animateObject = function(object){
@@ -303,15 +308,15 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         }
     }
 
-    $scope.objCallback = function(model_id, object, environment){
+    $scope.objCallback = function(model_id, object){
         //console.log(object);
         if(object.animation == null)
             return;
 
         //if current animated object's animation is still in progress, ignore (return immediately).
-        if(environment.current_animated_object_name != null &&
-            ( environment.objects[environment.current_animated_object_name].animation_state == 1
-            || environment.objects[environment.current_animated_object_name].animation_state == 3) ) {
+        if($scope.environment.current_animated_object_name != null &&
+            ( $scope.environment.objects[$scope.environment.current_animated_object_name].animation_state == 1
+            || $scope.environment.objects[$scope.environment.current_animated_object_name].animation_state == 3) ) {
             //console.log('ignoring click. other object being animated');
             return;
         }
@@ -324,8 +329,8 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         object.animation_state = (object.animation_state + 1) % 4;
         object.current_animation_start_time = (new Date()).getTime();
         if(object.animation_state == 1){ //if positioning this object, put all the others back to their original position
-            $scope.objectsBackToOriginalPositionExcept(object, environment);
-            environment.current_animated_object_name = object.name;
+            $scope.objectsBackToOriginalPositionExcept(object);
+            $scope.environment.current_animated_object_name = object.name;
         }
         else if (object.animation_state == 3){ //if positioning this object in its original position, immediately hide all menus
             $scope.hideObjectInfoOverlayMenus(object.name);
@@ -333,16 +338,16 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         //console.log('new animation state: ' + object.animation_state);
     }
 
-    $scope.objectsBackToOriginalPositionExcept = function (object, environment) {
-        for(var key in environment.objects){
+    $scope.objectsBackToOriginalPositionExcept = function (object) {
+        for(var key in $scope.environment.objects){
             if(key != object.name){
-                if(environment.objects[key].animation_state == 2){
-                    environment.objects[key].current_animation_start_time = (new Date()).getTime();
-                    environment.objects[key].animation_state++;
-                    $scope.hideObjectInfoOverlayMenus(environment.objects[key].name);
+                if($scope.environment.objects[key].animation_state == 2){
+                    $scope.environment.objects[key].current_animation_start_time = (new Date()).getTime();
+                    $scope.environment.objects[key].animation_state++;
+                    $scope.hideObjectInfoOverlayMenus($scope.environment.objects[key].name);
                 }
-                else if(environment.objects[key].animation_state == 1){
-                    environment.objects[key].pendent_animations++;
+                else if($scope.environment.objects[key].animation_state == 1){
+                    $scope.environment.objects[key].pendent_animations++;
                 }
             }
         }

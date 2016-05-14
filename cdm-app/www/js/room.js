@@ -28,7 +28,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         $scope.panorama_available = true;
 
     $scope.showRoomModel = function () { $scope.showRoomModelAux($scope.environment.current_room); };
-    $scope.showPanorama = function () { $scope.showRoomPanorama($scope.environment); };
+    $scope.showPanorama = function () { $scope.showRoomPanorama(); };
     $scope.showPopup = function () { $scope.room_show_more_info_popup($scope.environment.current_room); };
     $scope.hidePopup = function () { $scope.room_hide_more_info_popup($scope.environment.current_room); };
     $scope.toggleSidebar = function () { showSidebar('room-sidebar-menu'); };
@@ -36,7 +36,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     ionic.DomUtil.ready(function(){
         $scope.environment = construct_tridimensional_environment([0,150,400]);
         $scope.environment.current_room = $stateParams.room;
-        $scope.room_ready($scope.environment);
+        $scope.room_ready();
         sidebar_ready('room-sidebar-menu');
     });
 
@@ -44,9 +44,9 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.room_panorama_initialized = null;
 
-    $scope.room_ready = function(environment){
+    $scope.room_ready = function(){
         $scope.room_panorama_initialized = null;
-        $scope.room_init(environment);
+        $scope.room_init();
     };
 
     $scope.room_increment_textures_loaded = function(){
@@ -55,67 +55,67 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         return true;
     };
 
-    $scope.room_init = function(environment) {
+    $scope.room_init = function() {
 
         var ambient = new THREE.AmbientLight( 0x333333 );
-        environment.scene.add( ambient );
+        $scope.environment.scene.add( ambient );
 
         var pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
         pointLight.position.set( 500, 200, 500 );
-        environment.lights.push(pointLight);
+        $scope.environment.lights.push(pointLight);
 
         pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
         pointLight.position.set( -500, 200, 500 );
-        environment.lights.push(pointLight);
+        $scope.environment.lights.push(pointLight);
 
         pointLight = new THREE.PointLight( 0xeeeeee, 1, 1000 );
         pointLight.position.set( 0, 700, 0 );
-        environment.lights.push(pointLight);
+        $scope.environment.lights.push(pointLight);
 
         pointLight = new THREE.PointLight( 0xeeeeee, 1, 1000 );
         pointLight.position.set( 0, -500, 0 );
-        environment.lights.push(pointLight);
+        $scope.environment.lights.push(pointLight);
 
         pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
         pointLight.position.set( -500, 200, -500 );
-        environment.lights.push(pointLight);
+        $scope.environment.lights.push(pointLight);
 
         pointLight = new THREE.PointLight( 0xeeeeee, 1.4, 1000 );
         pointLight.position.set( 500, 200, -500 );
-        environment.lights.push(pointLight);
+        $scope.environment.lights.push(pointLight);
 
-        for (var i in environment.lights){
-            environment.scene.add(environment.lights[i]);
+        for (var i in $scope.environment.lights){
+            $scope.environment.scene.add($scope.environment.lights[i]);
         }
 
         //textures
-        loadTexture(environment, environment.current_room, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
+        loadTexture($scope.environment, $scope.environment.current_room, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
 
-        environment.renderer.domElement.setAttribute('id', 'main-canvas');
+        $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
 
-        var canvas_id = environment.current_room+'-canvas-container';
+        var canvas_id = $scope.environment.current_room+'-canvas-container';
         document.getElementById(canvas_id).html = '';
-        document.getElementById(canvas_id).appendChild( environment.renderer.domElement );
+        document.getElementById(canvas_id).appendChild( $scope.environment.renderer.domElement );
 
         window.addEventListener("orientationchange", function(){
             //console.log(screen.orientation); // e.g. portrait
-            environment.camera.aspect = window.screen.width / window.screen.height;
-            environment.camera.updateProjectionMatrix();
-            environment.renderer.setSize( window.screen.width, window.screen.height);
+            $scope.environment.camera.aspect = window.screen.width / window.screen.height;
+            $scope.environment.camera.updateProjectionMatrix();
+            $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
         });
 
         var axes = buildAxes( 1000 );
-        environment.scene.add(axes);
+        $scope.environment.scene.add(axes);
     };
 
-    $scope.room_animate = function(environment) {
+    $scope.room_animate = function() {
 
-        requestAnimationFrame( function() {$scope.room_animate(environment);} );
-        environment.renderer.render( environment.scene, environment.camera );
+        requestAnimationFrame( function() {$scope.room_animate();} );
+        $scope.environment.renderer.render( $scope.environment.scene, $scope.environment.camera );
     };
 
-    $scope.room_loadObjects = function(environment){
-        loadObjModel(environment, environment.current_room, [0, -25, 0], 100, 0.5, null);
+    $scope.room_loadObjects = function(){
+        loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, null);
     };
 
     $scope.room_show_more_info_popup = function(room_id){
@@ -135,12 +135,12 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         jQuery('#model-btn-bottom-navbar').attr('style', 'color: white');
     };
 
-    $scope.showRoomPanorama = function(environment){
-        if($scope.room_panorama_initialized != environment.current_room) {
-            $scope.room_panorama_initialized = environment.current_room;
-            $scope.panorama_init(environment.current_room);
+    $scope.showRoomPanorama = function(){
+        if($scope.room_panorama_initialized != $scope.environment.current_room) {
+            $scope.room_panorama_initialized = $scope.environment.current_room;
+            $scope.panorama_init($scope.environment.current_room);
         }
-        jQuery('#'+environment.current_room+'-canvas-container').hide();
+        jQuery('#'+$scope.environment.current_room+'-canvas-container').hide();
         jQuery('#model-btn-bottom-navbar').attr('style', '');
         jQuery('#panorama').show();
         jQuery('#panorama-btn-bottom-navbar').attr('style', 'color: white');
