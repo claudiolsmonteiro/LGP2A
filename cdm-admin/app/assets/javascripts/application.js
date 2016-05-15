@@ -29,13 +29,6 @@ $('.toggle').click(function(){
     height: "toggle",
     'padding-top': 'toggle',
     'padding-bottom': 'toggle',
-    color: "red"
   }, "slow");
 });
 
-
-$(document).ready(function(){
-	$(".input").hover(function(){
-		alert("INFORMATICA!!!!!!");
-	});
-});
