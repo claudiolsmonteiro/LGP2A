@@ -2,20 +2,10 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state){
+controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, ModelInfoService){
 
     ////////////////////
-    window.localStorage.setItem("models", JSON.stringify(models1));
-    if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null) {
-        console.log('não tinha models no local storage');
-        //window.localStorage.setItem("models", JSON.stringify(models));
-        window.localStorage.setItem("models", JSON.stringify(models1));
-    }
-    else{
-        console.log('TINHA models no local storage');
-        //window.localStorage.getItem("models")
-    }
-    $scope.models = JSON.parse(localStorage.getItem("models"));
+    $scope.models = ModelInfoService.getModels();
     ////////////////////
 
     $scope.beacons = {};

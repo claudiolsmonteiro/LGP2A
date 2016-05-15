@@ -5,21 +5,11 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("roomController", function($scope, $stateParams, $state){
-    ////////////////////
-    window.localStorage.setItem("models", JSON.stringify(models1));
-    if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null) {
-        console.log('não tinha models no local storage');
-        //window.localStorage.setItem("models", JSON.stringify(models));
-        window.localStorage.setItem("models", JSON.stringify(models1));
-    }
-    else{
-        console.log('TINHA models no local storage');
-        //window.localStorage.getItem("models")
-    }
-    $scope.models = JSON.parse(localStorage.getItem("models"));
-    ////////////////////
+controllerModule.controller("roomController", function($scope, $stateParams, $state, ModelInfoService){
 
+    ////////////////////
+    $scope.models = ModelInfoService.getModels();
+    ////////////////////
 
     $scope.$on('$ionicView.beforeEnter', function(){
         // Any thing you can think of
@@ -125,7 +115,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.room_animate = function() {
 
-        requestAnimationFrame( function() {$scope.room_animate();} );
+        $scope.requestAnimationFrameId = requestAnimationFrame( function() {$scope.room_animate();} );
         $scope.environment.renderer.render( $scope.environment.scene, $scope.environment.camera );
     };
 
@@ -165,7 +155,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.panorama_init = function(room){
 
-        pannellum.viewer('panorama', {
+        console.log(pannellum.viewer('panorama', {
             /*"type": "equirectangular",
              "panorama": "img/sculpteur.jpg",*/
             "type": "cubemap",
@@ -198,7 +188,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
                     "text": $scope.hotspotText('janelas', 'Janelas')
                 }
             ]
-        });
+        }));
     };
 
     $scope.hotspotText = function(hotspot_id, hotspot_title){
@@ -209,6 +199,19 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
             "</div>";
     };
 
+
+    // OTHERS
+
+    $scope.$on("$destroy", function(){
+        console.log('destroying threejs room context');
+        cancelAnimationFrame($scope.requestAnimationFrameId);// Stop the animation
+        $scope.environment.renderer.domElement.addEventListener('dblclick', null, false); //remove listener to render
+        $scope.environment.scene = null;
+        //$scope.environment.projector = null;
+        $scope.environment.camera = null;
+        $scope.environment.controls = null;
+        jQuery('#'+$scope.environment.current_room+'-canvas-container').empty();
+    });
 
 });
 

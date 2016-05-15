@@ -33,3 +33,17 @@ controllerModule.controller("localController", function($scope, $stateParams){
     });
 
 });
+
+
+controllerModule.factory('ModelInfoService', function() {
+    return {
+        getModels: function() {
+            if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
+                //TODO - show loading screen overlay or something like that.
+                window.localStorage.setItem("models", JSON.stringify(models1));
+                //TODO - hide overlay after loading
+            }
+            return JSON.parse(localStorage.getItem("models"));
+        }
+    };
+});
