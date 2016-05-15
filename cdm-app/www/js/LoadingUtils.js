@@ -15,7 +15,7 @@ manager.onProgress = function ( item, loaded, total ) {
  * @param active - if this is the current room, active will be true, and callback function will be called.
  */
 //function loadObjModel(model_id, title, model_path, position, scale, objectsArray, meshesArray, texture, scene, animation, animation_span, active) {
-function loadObjModel(environment, object_key, position, scale, animation_span, active, callback_function) {
+function loadObjModel(environment, object_key, position, scale, animation_span, active, callback_function, models) {
     var loader = new THREE.OBJLoader( manager );
     var temp_mesh = null;
     loader.load( models[object_key].path, function ( object ) {
@@ -56,10 +56,10 @@ function loadObjModel(environment, object_key, position, scale, animation_span, 
 
 
 //function loadTexture(texture_id, texture_path, texturesArray, function_increment_textures_loaded, function_load_objects, function_animate){
-function loadTexture(environment, texture_id, function_increment_textures_loaded, function_load_objects, function_animate){
+function loadTexture(environment, texture_id, texture_path, function_increment_textures_loaded, function_load_objects, function_animate){
     var texture = new THREE.Texture();
     var loader = new THREE.ImageLoader( manager );
-    loader.load( models[texture_id].texture_path, function ( image ) {
+    loader.load( texture_path, function ( image ) {
         texture.image = image;
         texture.needsUpdate = true;
         if (function_increment_textures_loaded(environment)) {

@@ -4,14 +4,28 @@
 
 controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state){
 
+    ////////////////////
+    window.localStorage.setItem("models", JSON.stringify(models1));
+    if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null) {
+        console.log('não tinha models no local storage');
+        //window.localStorage.setItem("models", JSON.stringify(models));
+        window.localStorage.setItem("models", JSON.stringify(models1));
+    }
+    else{
+        console.log('TINHA models no local storage');
+        //window.localStorage.getItem("models")
+    }
+    $scope.models = JSON.parse(localStorage.getItem("models"));
+    ////////////////////
+
     $scope.beacons = {};
 
     // set to either landscape
     $scope.prefix = 'model';
 
     $scope.beacons_detected = [];
-    for(var key in models){
-        var temp_key = models[key].beacon_uuid+':'+models[key].beacon_major+':'+models[key].beacon_minor;
+    for(var key in $scope.models){
+        var temp_key = $scope.models[key].beacon_uuid+':'+$scope.models[key].beacon_major+':'+$scope.models[key].beacon_minor;
         $scope.beacons_detected[temp_key] = {};
         $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
         $scope.beacons_detected[temp_key].model_key = key;
@@ -42,7 +56,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                         $scope.beacons_detected[uniqueBeaconKey].detected = true;
                         var prompt_result =
                             window.confirm('Está perto de:\n' +
-                                models[$scope.beacons_detected[uniqueBeaconKey].model_key].title + '\n' +
+                                $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].title + '\n' +
                                 'Deseja ver mais informação?');
                         if(prompt_result){ //navigate to detected room
                             $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
@@ -52,11 +66,11 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                 //$scope.$apply();
                 //console.log($scope.beacons);
             });
-            for(var key in models){
-                if (models[key].beacon_uuid != null && models[key].beacon_uuid != undefined) {
+            for(var key in $scope.models){
+                if ($scope.models[key].beacon_uuid != null && $scope.models[key].beacon_uuid != undefined) {
                     $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
-                        "beacon-" + models[key].name,
-                        models[key].beacon_uuid));
+                        "beacon-" + $scope.models[key].name,
+                        $scope.models[key].beacon_uuid));
                 }
             }
             // /BEACONS
@@ -120,7 +134,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     $scope.model_increment_textures_loaded = function(){
         $scope.environment.textures_loaded++;
-        return Object.size(models) == $scope.environment.textures_loaded;
+        return Object.size($scope.models) == $scope.environment.textures_loaded;
     }
 
     $scope.tridimensional_model_init = function() {
@@ -163,8 +177,8 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         }
 
         //textures
-        for(var key in models){
-            loadTexture($scope.environment, key, $scope.model_increment_textures_loaded, $scope.model_loadObjects, $scope.tridimensional_model_animate);
+        for(var key in $scope.models){
+            loadTexture($scope.environment, key, $scope.models[key].texture_path, $scope.model_increment_textures_loaded, $scope.model_loadObjects, $scope.tridimensional_model_animate);
         }
 
         $scope.environment.renderer.domElement.setAttribute('id', 'model-main-canvas');
@@ -185,7 +199,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.tridimensional_model_animate = function() {
         /*console.log('#########################################');
          console.log('textures loaded: ' + model_textures_loaded);
-         console.log('models size: ' +  Object.size(models));
+         console.log('$scope.models size: ' +  Object.size($scope.models));
          console.log(model_objects_loaded? 'objects started loading ' : 'objects didn\'t start loading');
          console.log(model_textures);
          console.log('#########################################');
@@ -205,11 +219,11 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     $scope.model_loadObjects = function(){
         var y_coord = 100;
-        for(var key in models){
+        for(var key in $scope.models){
             var active = false;
             if($scope.environment.current_room != null && $scope.environment.current_room == key)
                 active = true;
-            loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback);
+            loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models);
         }
     }
 

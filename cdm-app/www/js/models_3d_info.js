@@ -1,9 +1,9 @@
 /**
  * Created by João on 30/04/2016.
  */
-var models = [];
+var models1 = {};
 
-models['casa'] =
+models1['casa'] =
 {
     //path : 'obj/casa_da_musica_salas_separadas/casa_da_musica.obj',
     //path: 'obj/experimentar_2/casa_da_musica_experimentar_2.obj',
@@ -14,7 +14,7 @@ models['casa'] =
     animation : null
 };
 
-models['sala_suggia'] =
+models1['sala_suggia'] =
 {
     path: 'obj/casa_da_musica_salas_separadas/sala_suggia.obj',
     texture_path: 'obj/casa_da_musica_salas_separadas/texturas/sala_suggia_uvmap.png',
@@ -34,7 +34,7 @@ models['sala_suggia'] =
     beacon_major: 0,
     beacon_minor: 0
 };
-models['sala_2'] =
+models1['sala_2'] =
 {
     path : 'obj/casa_da_musica_salas_separadas/sala_concertos_2.obj',
     texture_path: 'obj/casa_da_musica_salas_separadas/texturas/sala_concertos_2_uvmap.png',
@@ -51,7 +51,7 @@ models['sala_2'] =
     ],
     next_room : 'bar'
 };
-models['bar'] =
+models1['bar'] =
 {
     path : 'obj/casa_da_musica_salas_separadas/bar.obj',
     texture_path: 'obj/casa_da_musica_salas_separadas/texturas/Bar_uvmap.png',

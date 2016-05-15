@@ -6,6 +6,21 @@
  */
 
 controllerModule.controller("roomController", function($scope, $stateParams, $state){
+    ////////////////////
+    window.localStorage.setItem("models", JSON.stringify(models1));
+    if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null) {
+        console.log('não tinha models no local storage');
+        //window.localStorage.setItem("models", JSON.stringify(models));
+        window.localStorage.setItem("models", JSON.stringify(models1));
+    }
+    else{
+        console.log('TINHA models no local storage');
+        //window.localStorage.getItem("models")
+    }
+    $scope.models = JSON.parse(localStorage.getItem("models"));
+    ////////////////////
+
+
     $scope.$on('$ionicView.beforeEnter', function(){
         // Any thing you can think of
 
@@ -13,18 +28,18 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.room = $stateParams.room;
     $scope.prefix = 'room';
-    $scope.room_title = models[$stateParams.room].title.toUpperCase();
+    $scope.room_title = $scope.models[$stateParams.room].title.toUpperCase();
 
 
     //panorama_available -> true if the room as a panoramic picture.
     //if not, the option won't be shown in the bottom navbar
     $scope.panorama_available = false;
 
-    $scope.next_room_available = (models[$scope.room].next_room != null);
-    $scope.next_room_id = models[$scope.room].next_room;
-    $scope.goToNextRoom = function() { $state.go('room' , {room: models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
+    $scope.next_room_available = ($scope.models[$scope.room].next_room != null);
+    $scope.next_room_id = $scope.models[$scope.room].next_room;
+    $scope.goToNextRoom = function() { $state.go('room' , {room: $scope.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
 
-    if (models[$scope.room].panorama_paths)
+    if ($scope.models[$scope.room].panorama_paths)
         $scope.panorama_available = true;
 
     $scope.showRoomModel = function () { $scope.showRoomModelAux($scope.environment.current_room); };
@@ -89,7 +104,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         }
 
         //textures
-        loadTexture($scope.environment, $scope.environment.current_room, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
+        loadTexture($scope.environment, $scope.environment.current_room, $scope.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
 
         $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
 
@@ -115,7 +130,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     };
 
     $scope.room_loadObjects = function(){
-        loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, null);
+        loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, false, null, $scope.models);
     };
 
     $scope.room_show_more_info_popup = function(room_id){
@@ -154,7 +169,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
             /*"type": "equirectangular",
              "panorama": "img/sculpteur.jpg",*/
             "type": "cubemap",
-            "cubeMap": models[room].panorama_paths,
+            "cubeMap": $scope.models[room].panorama_paths,
             /*"vaov" : 70,
              minPitch: -10,
              maxPitch: 10,*/
