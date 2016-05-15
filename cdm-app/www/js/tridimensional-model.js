@@ -2,10 +2,12 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, ModelInfoService){
+controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService){
 
     ////////////////////
-    $scope.models = ModelInfoService.getModels();
+    $scope.models = LocalStorageService.getModelInfo();
+    $scope.texts = texts;
+    $scope.language = LocalStorageService.getLanguage();
     ////////////////////
 
     $scope.beacons = {};

@@ -12,8 +12,11 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
 });*/
 
 
-controllerModule.controller("contactsController", function($scope, $stateParams){
-    $scope.contacts = $stateParams.contacts;
+controllerModule.controller("contactsController", function($scope, $stateParams, LocalStorageService){
+    $scope.texts = texts;
+    $scope.language = 'en';
+    $scope.language = LocalStorageService.getLanguage();
+    
     $scope.prefix = 'contacts';
     //$scope.room_title = models[$stateParams.room].title.toUpperCase();
     $scope.toggleSidebar = function () { showSidebar('contacts-sidebar-menu'); };
@@ -23,8 +26,11 @@ controllerModule.controller("contactsController", function($scope, $stateParams)
 
 });
 
-controllerModule.controller("localController", function($scope, $stateParams){
-    $scope.contacts = $stateParams.contacts;
+controllerModule.controller("localController", function($scope, $stateParams, LocalStorageService){
+    $scope.texts = texts;
+    $scope.language = 'en';
+    $scope.language = LocalStorageService.getLanguage();
+
     $scope.prefix = 'local';
     //$scope.room_title = models[$stateParams.room].title.toUpperCase();
     $scope.toggleSidebar = function () { showSidebar('local-sidebar-menu'); };
@@ -35,15 +41,21 @@ controllerModule.controller("localController", function($scope, $stateParams){
 });
 
 
-controllerModule.factory('ModelInfoService', function() {
+controllerModule.factory('LocalStorageService', function() {
     return {
-        getModels: function() {
+        getModelInfo: function() {
             if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
                 //TODO - show loading screen overlay or something like that.
                 window.localStorage.setItem("models", JSON.stringify(models1));
                 //TODO - hide overlay after loading
             }
             return JSON.parse(localStorage.getItem("models"));
+        },
+        getLanguage: function(){
+            if(window.localStorage.getItem("language") === undefined || window.localStorage.getItem("language") == null){
+                window.localStorage.setItem("language", 'pt');
+            }
+            return window.localStorage.getItem("language");
         }
     };
 });

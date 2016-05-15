@@ -5,10 +5,12 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("roomController", function($scope, $stateParams, $state, ModelInfoService){
+controllerModule.controller("roomController", function($scope, $stateParams, $state, LocalStorageService){
 
     ////////////////////
-    $scope.models = ModelInfoService.getModels();
+    $scope.models = LocalStorageService.getModelInfo();
+    $scope.texts = texts;
+    $scope.language = LocalStorageService.getLanguage();
     ////////////////////
 
     $scope.$on('$ionicView.beforeEnter', function(){
