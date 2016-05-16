@@ -84,6 +84,11 @@ class RoomsController < ApplicationController
   end
 
   def get_everything
+
+    #most correct/efficient approach
+    #render :json => Room.all.to_json({:include => { :photos => {:include => { :points => {}} }}})
+
+    #different approach that allows custom keys to some objects.
     result = {}
     Room.all.each do |room|
       room_temp = room.attributes
@@ -106,11 +111,12 @@ class RoomsController < ApplicationController
         translation_language = Language.find(translation.language_id).code
         room_temp[:translations][translation_language] = translation_temp
       end
-      
+
       result[room.code] = room_temp
     end
 
     render :json => result
+    
   end
   ###########################################
 
