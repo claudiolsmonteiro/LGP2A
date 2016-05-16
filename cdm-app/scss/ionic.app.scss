@@ -245,7 +245,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
   //display: block;
   position: fixed;
   left: 0;
-  background-color: rgba(87, 136, 150, 0.8); //#578896
+  //background-color: rgba(87, 136, 150, 0.8); //#578896
 
   .sidebar-column {
     display: block;
@@ -264,9 +264,11 @@ and (-webkit-min-device-pixel-ratio: 1) {
       li{
         margin-top: 25px;
         margin-bottom: 25px;
+        color: rgba(36,36,42,0.5);
         a{
           text-decoration: none;
-          color: #B1D5E5;
+          //color: #B1D5E5;
+          color: rgba(36,36,42,0.5);
         }
       }
     }

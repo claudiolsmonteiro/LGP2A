@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.76.0 commit date:2015-11-03, commit time:10:56, hash:f337fea</authoring_tool>
+    </contributor>
+    <created>2016-05-16T16:56:55</created>
+    <modified>2016-05-16T16:56:55</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images/>
+  <library_effects>
+    <effect id="suggia-effect">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <color sid="diffuse">0.64 0.64 0.64 1</color>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.5 0.5 0.5 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">50</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="suggia-material" name="suggia">
+      <instance_effect url="#suggia-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Cube-mesh" name="Cube">
+      <mesh>
+        <source id="Cube-mesh-positions">
+          <float_array id="Cube-mesh-positions-array" count="30">-2.351851 -1.035623 0.4149814 -2.351851 -1.035623 1.094108 -2.340917 0.0621494 0.4149814 -2.340917 0.0621494 1.094108 0.9999999 -1.049986 0.2754284 1 0.04778641 0.2754284 0.9999999 -1.049986 1.009849 0.6981117 -1.049986 1.093675 0.6981118 0.04778647 1.0628 1 0.04778641 1.009849</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-positions-array" count="10" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube-mesh-normals">
+          <float_array id="Cube-mesh-normals-array" count="48">-0.9999505 0.009959936 0 -0.004351854 -0.9999893 -0.001605331 0.00436902 0.9999892 0.001675069 -0.04173445 0 -0.9991288 1 0 0 0.2674503 0.02708965 0.9631908 0.01043039 0.02811235 0.9995505 -0.9999504 0.009959638 0 0 -1 0 -0.004709124 -0.999989 0 0.004726111 0.9999889 0 1.97439e-7 1 0 -0.04159677 4.14313e-4 -0.9991345 1 -1.47861e-7 0 0.1727606 0 0.984964 1.42197e-4 -1.41622e-6 1</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-normals-array" count="16" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube-mesh-map-0">
+          <float_array id="Cube-mesh-map-0-array" count="96">0.1507352 0.6167231 8.73886e-5 0.6167107 1.0748e-4 0.3731845 0.7698081 0.3889139 0.1559411 0.2247865 0.8426007 0.2254275 0.7780618 0.6044519 0.8479878 0.7638969 0.1565868 0.7638968 0.157425 8.73886e-5 0.8418486 7.35931e-4 0.8426007 0.2254275 0.8362074 0.3756133 0.9944696 0.3719719 0.9999126 0.6085336 0.7780618 0.6044519 0.7698081 0.3889139 0.8362074 0.3756133 0.7698081 0.3889139 0.7780618 0.6044519 0.1507352 0.6167231 0.1507553 0.373197 0.1507352 0.6167231 1.0748e-4 0.3731845 0.8426007 0.2254275 0.8362074 0.3756133 0.7698081 0.3889139 0.7698081 0.3889139 0.1507553 0.373197 0.1559411 0.2247865 0.1565868 0.7638968 0.1507352 0.6167231 0.7780618 0.6044519 0.7780618 0.6044519 0.8416504 0.6121751 0.8479878 0.7638969 0.1559411 0.2247865 0.157425 8.73886e-5 0.8426007 0.2254275 0.8416504 0.6121751 0.8362074 0.3756133 0.9999126 0.6085336 0.8416504 0.6121751 0.7780618 0.6044519 0.8362074 0.3756133 0.1507553 0.373197 0.7698081 0.3889139 0.1507352 0.6167231</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-map-0-array" count="48" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Cube-mesh-vertices">
+          <input semantic="POSITION" source="#Cube-mesh-positions"/>
+        </vertices>
+        <polylist material="suggia-material" count="16">
+          <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Cube-mesh-map-0" offset="2" set="0"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>3 0 0 2 0 1 0 0 2 7 1 3 0 1 4 4 1 5 8 2 6 5 2 7 2 2 8 2 3 9 5 3 10 4 3 11 6 4 12 4 4 13 5 4 14 8 5 15 7 5 16 6 5 17 7 6 18 8 6 19 3 6 20 1 7 21 3 7 22 0 7 23 4 8 24 6 8 25 7 8 26 7 9 27 1 9 28 0 9 29 2 10 30 3 10 31 8 10 32 8 11 33 9 11 34 5 11 35 0 12 36 2 12 37 4 12 38 9 13 39 6 13 40 5 13 41 9 14 42 8 14 43 6 14 44 1 15 45 7 15 46 3 15 47</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_animations>
+    <animation id="suggia_location_X">
+      <source id="suggia_location_X-input">
+        <float_array id="suggia_location_X-input-array" count="3">0.08333331 1.25 2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_X-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_X-output">
+        <float_array id="suggia_location_X-output-array" count="3">0.9860045 4.673231 5.153669</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_X-output-array" count="3" stride="1">
+            <param name="X" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_X-interpolation">
+        <Name_array id="suggia_location_X-interpolation-array" count="3">LINEAR BEZIER BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_location_X-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_X-intangent">
+        <float_array id="suggia_location_X-intangent-array" count="6">0 0 0.9902007 1.738223 1.75799 5.153669</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_X-intangent-array" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_X-outtangent">
+        <float_array id="suggia_location_X-outtangent-array" count="6">0 0 1.283396 5.050513 2.408676 5.153669</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_X-outtangent-array" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_location_X-sampler">
+        <input semantic="INPUT" source="#suggia_location_X-input"/>
+        <input semantic="OUTPUT" source="#suggia_location_X-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_location_X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_location_X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_location_X-outtangent"/>
+      </sampler>
+      <channel source="#suggia_location_X-sampler" target="suggia/location.X"/>
+    </animation>
+    <animation id="suggia_location_Y">
+      <source id="suggia_location_Y-input">
+        <float_array id="suggia_location_Y-input-array" count="3">0.08333331 1.25 2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Y-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Y-output">
+        <float_array id="suggia_location_Y-output-array" count="3">-0.14191 -2.847342 -3.218067</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Y-output-array" count="3" stride="1">
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Y-interpolation">
+        <Name_array id="suggia_location_Y-interpolation-array" count="3">LINEAR BEZIER BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_location_Y-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Y-intangent">
+        <float_array id="suggia_location_Y-intangent-array" count="6">0 0 1.031535 -1.205932 1.75799 -3.218067</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Y-intangent-array" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Y-outtangent">
+        <float_array id="suggia_location_Y-outtangent-array" count="6">0 0 1.278652 -3.062614 2.408676 -3.218067</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Y-outtangent-array" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_location_Y-sampler">
+        <input semantic="INPUT" source="#suggia_location_Y-input"/>
+        <input semantic="OUTPUT" source="#suggia_location_Y-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_location_Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_location_Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_location_Y-outtangent"/>
+      </sampler>
+      <channel source="#suggia_location_Y-sampler" target="suggia/location.Y"/>
+    </animation>
+    <animation id="suggia_location_Z">
+      <source id="suggia_location_Z-input">
+        <float_array id="suggia_location_Z-input-array" count="3">0.08333331 1.25 2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Z-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Z-output">
+        <float_array id="suggia_location_Z-output-array" count="3">0.1531562 0.1531562 0.1531562</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Z-output-array" count="3" stride="1">
+            <param name="Z" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Z-interpolation">
+        <Name_array id="suggia_location_Z-interpolation-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_location_Z-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Z-intangent">
+        <float_array id="suggia_location_Z-intangent-array" count="6">-0.3721467 0.1531562 0.7945199 0.1531562 1.75799 0.1531562</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Z-intangent-array" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_location_Z-outtangent">
+        <float_array id="suggia_location_Z-outtangent-array" count="6">0.5388134 0.1531562 1.575343 0.1531562 2.408676 0.1531562</float_array>
+        <technique_common>
+          <accessor source="#suggia_location_Z-outtangent-array" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_location_Z-sampler">
+        <input semantic="INPUT" source="#suggia_location_Z-input"/>
+        <input semantic="OUTPUT" source="#suggia_location_Z-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_location_Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_location_Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_location_Z-outtangent"/>
+      </sampler>
+      <channel source="#suggia_location_Z-sampler" target="suggia/location.Z"/>
+    </animation>
+    <animation id="suggia_rotation_euler_X">
+      <source id="suggia_rotation_euler_X-input">
+        <float_array id="suggia_rotation_euler_X-input-array" count="1">2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_X-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_X-output">
+        <float_array id="suggia_rotation_euler_X-output-array" count="1">0</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_X-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_X-interpolation">
+        <Name_array id="suggia_rotation_euler_X-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_X-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_X-intangent">
+        <float_array id="suggia_rotation_euler_X-intangent-array" count="2">2.041667 0</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_X-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_X-outtangent">
+        <float_array id="suggia_rotation_euler_X-outtangent-array" count="2">2.125 0</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_X-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_rotation_euler_X-sampler">
+        <input semantic="INPUT" source="#suggia_rotation_euler_X-input"/>
+        <input semantic="OUTPUT" source="#suggia_rotation_euler_X-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_rotation_euler_X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_rotation_euler_X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_rotation_euler_X-outtangent"/>
+      </sampler>
+      <channel source="#suggia_rotation_euler_X-sampler" target="suggia/rotationX.ANGLE"/>
+    </animation>
+    <animation id="suggia_rotation_euler_Y">
+      <source id="suggia_rotation_euler_Y-input">
+        <float_array id="suggia_rotation_euler_Y-input-array" count="1">2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Y-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Y-output">
+        <float_array id="suggia_rotation_euler_Y-output-array" count="1">0</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Y-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Y-interpolation">
+        <Name_array id="suggia_rotation_euler_Y-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Y-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Y-intangent">
+        <float_array id="suggia_rotation_euler_Y-intangent-array" count="2">2.041667 0</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Y-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Y-outtangent">
+        <float_array id="suggia_rotation_euler_Y-outtangent-array" count="2">2.125 0</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Y-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_rotation_euler_Y-sampler">
+        <input semantic="INPUT" source="#suggia_rotation_euler_Y-input"/>
+        <input semantic="OUTPUT" source="#suggia_rotation_euler_Y-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_rotation_euler_Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_rotation_euler_Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_rotation_euler_Y-outtangent"/>
+      </sampler>
+      <channel source="#suggia_rotation_euler_Y-sampler" target="suggia/rotationY.ANGLE"/>
+    </animation>
+    <animation id="suggia_rotation_euler_Z">
+      <source id="suggia_rotation_euler_Z-input">
+        <float_array id="suggia_rotation_euler_Z-input-array" count="1">2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Z-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Z-output">
+        <float_array id="suggia_rotation_euler_Z-output-array" count="1">-37.65517</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Z-output-array" count="1" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Z-interpolation">
+        <Name_array id="suggia_rotation_euler_Z-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Z-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Z-intangent">
+        <float_array id="suggia_rotation_euler_Z-intangent-array" count="2">2.041667 -37.65517</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Z-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_rotation_euler_Z-outtangent">
+        <float_array id="suggia_rotation_euler_Z-outtangent-array" count="2">2.125 -37.65517</float_array>
+        <technique_common>
+          <accessor source="#suggia_rotation_euler_Z-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_rotation_euler_Z-sampler">
+        <input semantic="INPUT" source="#suggia_rotation_euler_Z-input"/>
+        <input semantic="OUTPUT" source="#suggia_rotation_euler_Z-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_rotation_euler_Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_rotation_euler_Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_rotation_euler_Z-outtangent"/>
+      </sampler>
+      <channel source="#suggia_rotation_euler_Z-sampler" target="suggia/rotationZ.ANGLE"/>
+    </animation>
+    <animation id="suggia_scale_X">
+      <source id="suggia_scale_X-input">
+        <float_array id="suggia_scale_X-input-array" count="1">2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_X-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_X-output">
+        <float_array id="suggia_scale_X-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_X-output-array" count="1" stride="1">
+            <param name="X" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_X-interpolation">
+        <Name_array id="suggia_scale_X-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_scale_X-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_X-intangent">
+        <float_array id="suggia_scale_X-intangent-array" count="2">2.041667 1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_X-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_X-outtangent">
+        <float_array id="suggia_scale_X-outtangent-array" count="2">2.125 1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_X-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_scale_X-sampler">
+        <input semantic="INPUT" source="#suggia_scale_X-input"/>
+        <input semantic="OUTPUT" source="#suggia_scale_X-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_scale_X-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_scale_X-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_scale_X-outtangent"/>
+      </sampler>
+      <channel source="#suggia_scale_X-sampler" target="suggia/scale.X"/>
+    </animation>
+    <animation id="suggia_scale_Y">
+      <source id="suggia_scale_Y-input">
+        <float_array id="suggia_scale_Y-input-array" count="1">2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Y-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Y-output">
+        <float_array id="suggia_scale_Y-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Y-output-array" count="1" stride="1">
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Y-interpolation">
+        <Name_array id="suggia_scale_Y-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Y-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Y-intangent">
+        <float_array id="suggia_scale_Y-intangent-array" count="2">2.041667 1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Y-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Y-outtangent">
+        <float_array id="suggia_scale_Y-outtangent-array" count="2">2.125 1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Y-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_scale_Y-sampler">
+        <input semantic="INPUT" source="#suggia_scale_Y-input"/>
+        <input semantic="OUTPUT" source="#suggia_scale_Y-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_scale_Y-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_scale_Y-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_scale_Y-outtangent"/>
+      </sampler>
+      <channel source="#suggia_scale_Y-sampler" target="suggia/scale.Y"/>
+    </animation>
+    <animation id="suggia_scale_Z">
+      <source id="suggia_scale_Z-input">
+        <float_array id="suggia_scale_Z-input-array" count="1">2.083333</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Z-input-array" count="1" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Z-output">
+        <float_array id="suggia_scale_Z-output-array" count="1">1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Z-output-array" count="1" stride="1">
+            <param name="Z" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Z-interpolation">
+        <Name_array id="suggia_scale_Z-interpolation-array" count="1">BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Z-interpolation-array" count="1" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Z-intangent">
+        <float_array id="suggia_scale_Z-intangent-array" count="2">2.041667 1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Z-intangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="suggia_scale_Z-outtangent">
+        <float_array id="suggia_scale_Z-outtangent-array" count="2">2.125 1</float_array>
+        <technique_common>
+          <accessor source="#suggia_scale_Z-outtangent-array" count="1" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="suggia_scale_Z-sampler">
+        <input semantic="INPUT" source="#suggia_scale_Z-input"/>
+        <input semantic="OUTPUT" source="#suggia_scale_Z-output"/>
+        <input semantic="INTERPOLATION" source="#suggia_scale_Z-interpolation"/>
+        <input semantic="IN_TANGENT" source="#suggia_scale_Z-intangent"/>
+        <input semantic="OUT_TANGENT" source="#suggia_scale_Z-outtangent"/>
+      </sampler>
+      <channel source="#suggia_scale_Z-sampler" target="suggia/scale.Z"/>
+    </animation>
+  </library_animations>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="suggia" name="suggia" type="NODE">
+        <translate sid="location">5.153669 -3.218067 0.1531563</translate>
+        <rotate sid="rotationZ">0 0 1 -37.65517</rotate>
+        <rotate sid="rotationY">0 1 0 0</rotate>
+        <rotate sid="rotationX">1 0 0 0</rotate>
+        <scale sid="scale">1 1 1</scale>
+        <instance_geometry url="#Cube-mesh" name="suggia">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="suggia-material" target="#suggia-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

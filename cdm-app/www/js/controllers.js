@@ -16,7 +16,7 @@ controllerModule.controller("contactsController", function($scope, $stateParams,
     $scope.texts = texts;
     $scope.language = 'en';
     $scope.language = LocalStorageService.getLanguage();
-    
+
     $scope.prefix = 'contacts';
     //$scope.room_title = models[$stateParams.room].title.toUpperCase();
     $scope.toggleSidebar = function () { showSidebar('contacts-sidebar-menu'); };
@@ -44,6 +44,7 @@ controllerModule.controller("localController", function($scope, $stateParams, Lo
 controllerModule.factory('LocalStorageService', function() {
     return {
         getModelInfo: function() {
+            window.localStorage.setItem("models", JSON.stringify(models1));
             if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
                 //TODO - show loading screen overlay or something like that.
                 window.localStorage.setItem("models", JSON.stringify(models1));

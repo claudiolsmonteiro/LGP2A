@@ -55,6 +55,104 @@ function loadObjModel(environment, object_key, position, scale, animation_span, 
 }
 
 
+//  obj mtl loading tests
+function loadObjMtl(environment, object_key, position, scale, animation_span, active, callback_function, models){
+  var mtlLoader = new THREE.MTLLoader();
+  var material_path_parts = models[object_key].material_path.split('/');
+  var object_path_parts = models[object_key].path.split('/');
+  var directory = '';
+  for(var i = 0; i < material_path_parts.length - 1; i++){
+    directory = directory + material_path_parts[i] + '/';
+  }
+  mtlLoader.setBaseUrl( directory);
+  mtlLoader.setPath( directory);
+  mtlLoader.load( material_path_parts[material_path_parts.length - 1], function( materials ) {
+
+    materials.preload();
+
+    var objLoader = new THREE.OBJLoader();
+    console.log(materials.materials);
+    objLoader.setMaterials( materials );
+    objLoader.setPath( directory );
+    objLoader.load( object_path_parts[object_path_parts.length - 1], function ( object ) {
+      console.log(object);
+      object.traverse( function ( child ) {
+        console.log(child);
+        //iterate over materials array to find if there is any material used in this child
+
+        if ( child instanceof THREE.Mesh ) {
+          //child.material.ambient.setHex(0xFF0000);
+          console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+          console.log('child name: ' + child.name);
+          console.log(child);
+          for(var i in materials.materials){
+            console.log('   material name: ' + materials.materials[i].name);
+            console.log(materials.materials[i]);
+
+            if(child.name.contains(i)) {
+              console.log('vai aplicar cor');
+              console.log('cor velha:');
+              console.log(child.material.color);
+              console.log('cor nova:');
+              console.log(materials.materials[i].color);
+              child.material.color = materials.materials[i].color;
+            }
+            console.log('######################');
+          }
+        }
+      } );
+
+      object.name = object_key;
+      object.title = models[object_key].title;
+      object.original_position = position;
+      object.position.x = 200;
+      object.position.y = -100;
+      object.position.z = -200;
+      object.scale.set(scale, scale, scale);
+      object.animation_state = 0; //0 - initial_stopped, 1 - during initial, 2 - final stopped, 3 - during final
+      object.current_animation_start_time = 0;
+      object.animation = models[object_key].animation;
+      object.animation_span = animation_span;
+      object.pendent_animations = 0;
+
+      environment.objects[object_key] = object;
+      environment.scene.add(object);
+
+    }, onProgress, onError );
+
+  });
+
+}
+
+//load colada (.dae) files
+function loadDAE(environment, object_key, position, scale, animation_span, active, callback_function, models){
+  // instantiate a loader
+  var loader = new THREE.ColladaLoader();
+
+  loader.load(
+    // resource URL
+    models[object_key].model_dae_path,
+    // Function when resource is loaded
+    function ( collada ) {
+      console.log(collada);
+      collada.scene.children[0].scale.set(scale, scale, scale);
+      /*for (var i in collada.scene.children[0].children[0].material.materials){
+        collada.scene.children[0].children[0].material.materials[i].transparent = true;
+        collada.scene.children[0].children[0].material.materials[i].opacity = 0.6;
+      }*/
+      //collada.scene.children[0].children[0].rotation.x = 90 * Math.PI / 180;
+      //collada.scene.children[0].children[0].rotation.x = x * Math.PI / 180;
+      //collada.scene.children[0].children[0].rotation.z = 90 * Math.PI / 180;
+      environment.scene.add( collada.scene );
+    },
+    // Function called when download progresses
+    function ( xhr ) {
+      console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+    }
+  );
+}
+
+
 //function loadTexture(texture_id, texture_path, texturesArray, function_increment_textures_loaded, function_load_objects, function_animate){
 function loadTexture(environment, texture_id, texture_path, function_increment_textures_loaded, function_load_objects, function_animate){
     var texture = new THREE.Texture();
