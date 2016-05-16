@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
-
+  attr_accessor :room_translations
   # GET /rooms
   # GET /rooms.json
   def index
@@ -83,8 +83,36 @@ class RoomsController < ApplicationController
     end
   end
 
-  ###########################################
+  def get_everything
+    result = {}
+    Room.all.each do |room|
+      room_temp = room.attributes
+      room_temp[:photos] = Array.new
 
+      room.photos.each do |photo|
+        photo_temp = photo.attributes
+        photo_temp[:points] = Array.new
+
+        photo.points.each do |point|
+          point_temp = point.attributes
+          photo_temp[:points].push(point_temp)
+        end
+        room_temp[:photos].push(photo_temp)
+      end
+
+      room_temp[:translations] = {}
+      room.room_translations.each do |translation|
+        translation_temp = translation.attributes
+        translation_language = Language.find(translation.language_id).code
+        room_temp[:translations][translation_language] = translation_temp
+      end
+      
+      result[room.code] = room_temp
+    end
+
+    render :json => result
+  end
+  ###########################################
 
 
 

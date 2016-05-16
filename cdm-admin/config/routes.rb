@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   get "api/photo/:id", :to => 'photo#get_photo'
   get "api/photo/:id/points", :to => 'photo#get_photo_points'
   get "api/photo/:id/videos", :to => 'photo#get_photo_videos'
+  get "api/everything", :to => 'rooms#get_everything'
   get 'login'   => 'sessions#new'
   post'login'   => 'sessions#create'
   get 'logout'  => 'sessions#destroy'
