@@ -14,3 +14,28 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+// Toggle Function
+$('.toggle').click(function(){
+  // Switches the Icon
+  $(this).children('i').toggleClass('fa-pencil');
+  // Switches the forms  
+  $('.form').animate({
+    height: "toggle",
+    'padding-top': 'toggle',
+    'padding-bottom': 'toggle',
+    opacity: "toggle"
+  }, "slow");
+  $('.input').animate({
+    height: "toggle",
+    'padding-top': 'toggle',
+    'padding-bottom': 'toggle',
+    color: "red"
+  }, "slow");
+});
+
+
+$(document).ready(function(){
+	$(".input").hover(function(){
+		alert("INFORMATICA!!!!!!");
+	});
+});
