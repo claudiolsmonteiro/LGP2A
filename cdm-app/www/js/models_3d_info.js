@@ -48,7 +48,7 @@ models1['sala_suggia'] =
     ],
     next_room : 'sala_2',
     beacon_uuid : 'e2c56db5-dffb-48d2-b060-d0f5a71096e0',
-    beacon_major: 0,
+    beacon_major: 1,
     beacon_minor: 0
 };
 models1['sala_2'] =
@@ -68,7 +68,10 @@ models1['sala_2'] =
       "img/sala_2/medres/sala2-4.jpg",
       "img/sala_2/medres/sala2-5.jpg"
     ],
-    next_room : 'bar'
+    next_room : 'bar',
+    beacon_uuid : 'e2c56db5-dffb-48d2-b060-d0f5a71096e0',
+    beacon_major: 2,
+    beacon_minor: 0
 };
 models1['bar'] =
 {

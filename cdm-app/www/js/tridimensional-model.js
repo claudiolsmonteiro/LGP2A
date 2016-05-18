@@ -16,12 +16,18 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.prefix = 'model';
 
     $scope.beacons_detected = [];
+    var temp_uuids = [];
     for(var key in $scope.models){
         var temp_key = $scope.models[key].beacon_uuid+':'+$scope.models[key].beacon_major+':'+$scope.models[key].beacon_minor;
         $scope.beacons_detected[temp_key] = {};
         $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
         $scope.beacons_detected[temp_key].model_key = key;
+        temp_uuids.push($scope.models[key].beacon_uuid);
     }
+    $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
+    $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array
+        if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
+    });
 
     ionic.Platform.ready(function(){
         // will execute when device is ready, or immediately if the device is already ready.
@@ -41,6 +47,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             $cordovaBeacon.requestWhenInUseAuthorization();
             $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
                 var uniqueBeaconKey;
+                console.log( pluginResult.beacons);
                 for(var i = 0; i < pluginResult.beacons.length; i++) {
                     uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
                     //$scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
@@ -58,12 +65,11 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                 //$scope.$apply();
                 //console.log($scope.beacons);
             });
-            for(var key in $scope.models){
-                if ($scope.models[key].beacon_uuid != null && $scope.models[key].beacon_uuid != undefined) {
-                    $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
-                        "beacon-" + $scope.models[key].name,
-                        $scope.models[key].beacon_uuid));
-                }
+
+            console.log($scope.beacons_unique_uuids);
+            for(var key in $scope.beacons_unique_uuids){
+                $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
+                    "beacon-" + $scope.beacons_unique_uuids[key], $scope.beacons_unique_uuids[key]));
             }
             // /BEACONS
         }catch(e) {
