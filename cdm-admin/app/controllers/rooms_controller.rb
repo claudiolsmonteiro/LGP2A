@@ -88,9 +88,9 @@ class RoomsController < ApplicationController
     Room.all.each do |room|
       room_temp = room.attributes
       
-      room_temp[:photo] = {}
       photo = room.photo
       if !photo.nil?
+        room_temp[:photo] = {}
         photo_temp = photo.attributes
         photo_temp[:points] = Array.new
 
