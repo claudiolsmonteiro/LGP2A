@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516202947) do
+ActiveRecord::Schema.define(version: 20160518214108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 20160516202947) do
 
   create_table "photos", force: :cascade do |t|
     t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "room_id"
+    t.string   "url_cube_map",              array: true
   end
 
   add_index "photos", ["room_id"], name: "index_photos_on_room_id", using: :btree
@@ -69,9 +70,18 @@ ActiveRecord::Schema.define(version: 20160516202947) do
   add_index "room_translations", ["room_id"], name: "index_room_translations_on_room_id", using: :btree
 
   create_table "rooms", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
     t.string   "code"
+    t.string   "model_path"
+    t.string   "model_detail_path"
+    t.string   "texture_path"
+    t.string   "texture_detail_path"
+    t.float    "animation",           default: [0.0, 0.0, 0.0],              array: true
+    t.string   "beacon_uuid"
+    t.integer  "beacon_major"
+    t.integer  "beacon_minor"
+    t.string   "next_room"
   end
 
   create_table "submissions", force: :cascade do |t|
