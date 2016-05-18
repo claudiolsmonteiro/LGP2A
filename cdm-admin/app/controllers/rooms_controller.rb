@@ -89,15 +89,17 @@ class RoomsController < ApplicationController
       room_temp = room.attributes
       
       room_temp[:photo] = {}
-      photo = Room.photo
-      photo_temp = photo.attributes
-      photo_temp[:points] = Array.new
+      photo = room.photo
+      if !photo.nil?
+        photo_temp = photo.attributes
+        photo_temp[:points] = Array.new
 
-      photo.points.each do |point|
-        point_temp = point.attributes
-        photo_temp[:points].push(point_temp)
+        photo.points.each do |point|
+          point_temp = point.attributes
+          photo_temp[:points].push(point_temp)
+        end
+        room_temp[:photo] = photo_temp
       end
-      room_temp[:photo] = photo_temp
 
       room_temp[:translations] = {}
       room.room_translations.each do |translation|
