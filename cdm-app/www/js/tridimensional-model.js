@@ -213,11 +213,12 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             $scope.environment.camera.aspect = window.screen.width / window.screen.height;
             $scope.environment.camera.updateProjectionMatrix();
             $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
+
         });
 
-        var axes = buildAxes( 1000 );
+       /* var axes = buildAxes( 1000 );
         $scope.environment.scene.add(axes);
-
+*/
     }
 
     $scope.tridimensional_model_animate = function() {
@@ -396,6 +397,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     }
 });
 
+
 function buildAxes( length ) {
     var axes = new THREE.Object3D();
 
@@ -429,3 +431,5 @@ function buildAxis( src, dst, colorHex, dashed ) {
     return axis;
 
 }
+
+
