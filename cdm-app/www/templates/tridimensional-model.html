@@ -3,14 +3,8 @@
         <!-- POPOVER SELECT ROOMS -->
         <script id="my-popover.html" type="text/ng-template">
           <ion-popover-view id="select-room-popover">
-            <div class="list">
-              <span class="item" ng-click="animateRoom('sala_suggia')">Sala Suggia</span>
-            </div>
-            <div class="list">
-              <span class="item" ng-click="animateRoom('sala_2')">Sala 2</span>
-            </div>
-            <div class="list">
-              <span class="item" ng-click="animateRoom('bar')">Bar</span>
+            <div class="list" ng-repeat="room in models">
+              <span ng-show="room.code != 'casa'" class="item" ng-click="animateRoom('{{room.code}}')">{{room.translations[language].name}}</span>
             </div>
           </ion-popover-view>
         </script>

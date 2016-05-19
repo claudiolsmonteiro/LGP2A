@@ -2,10 +2,10 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService){
+controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService, $http){
 
     ////////////////////
-    $scope.models = LocalStorageService.getModelInfo();
+    $scope.models = LocalStorageService.getModelInfoRemote($http);
     $scope.texts = texts;
     $scope.language = LocalStorageService.getLanguage();
     ////////////////////
@@ -248,10 +248,10 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             if($scope.environment.current_room != null && $scope.environment.current_room == key)
                 active = true;
             if($scope.models[key].model_dae_path != null)
-              loadDAE($scope.environment, key, [0, y_coord, 0], 10, 0.5, active, $scope.objCallback, $scope.models);
+              loadDAE($scope.environment, key, [0, y_coord, 0], 10, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
             else if($scope.models[key].material_path != null)
-              loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models);
-            else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models);
+              loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
+            else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models[key], $scope.language);
         }
     }
 

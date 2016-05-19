@@ -20,7 +20,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.room = $stateParams.room;
     $scope.prefix = 'room';
-    $scope.room_title = $scope.models[$stateParams.room].title.toUpperCase();
+    $scope.room_title = $scope.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
 
 
     //panorama_available -> true if the room as a panoramic picture.
@@ -31,7 +31,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     $scope.next_room_id = $scope.models[$scope.room].next_room;
     $scope.goToNextRoom = function() { $state.go('room' , {room: $scope.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
 
-    if ($scope.models[$scope.room].panorama_paths)
+    if ($scope.models[$scope.room].photo != null && $scope.models[$scope.room].photo != undefined)
         $scope.panorama_available = true;
 
     $scope.showRoomModel = function () { $scope.showRoomModelAux($scope.environment.current_room); };
@@ -122,7 +122,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     };
 
     $scope.room_loadObjects = function(){
-        loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, false, null, $scope.models);
+        loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, false, null, $scope.models[$scope.environment.current_room], $scope.language);
     };
 
     $scope.room_show_more_info_popup = function(room_id){
@@ -157,11 +157,13 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.panorama_init = function(room){
 
-        console.log(pannellum.viewer('panorama', {
-            /*"type": "equirectangular",
-             "panorama": "img/sculpteur.jpg",*/
-            "type": "cubemap",
-            "cubeMap": $scope.models[room].panorama_paths,
+        var type = $scope.models[room].photo.url == null? 'cubemap' : 'equirectangular';
+        var equirectangular_path = $scope.models[room].photo.url;
+        var cubemap_array = $scope.models[room].photo.url_cube_map;
+        pannellum.viewer('panorama', {
+            "type": type,
+            "panorama": equirectangular_path,
+            "cubeMap": cubemap_array,
             /*"vaov" : 70,
              minPitch: -10,
              maxPitch: 10,*/
@@ -190,7 +192,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
                     "text": $scope.hotspotText('janelas', 'Janelas')
                 }
             ]
-        }));
+        });
     };
 
     $scope.hotspotText = function(hotspot_id, hotspot_title){

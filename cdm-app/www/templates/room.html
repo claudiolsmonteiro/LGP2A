@@ -22,7 +22,7 @@
 
   <div id="{{environment.current_room}}-more-info-modal" class="more-info-modal">
     <div class="modal-header">{{texts.tour.more_info_modal.title[language]}}</div>
-    <div class="modal-content"></div>
+    <div class="modal-content">{{models[environment.current_room].translations[language].description}}</div>
     <div class="modal-footer"><button class="close-btn button button-stable" ng-click="hidePopup()" >{{texts.misc.close[language]}}</button></div>
   </div>
   <div id="{{environment.current_room}}-more-info-modal-background" class="more-info-modal-background"></div>
