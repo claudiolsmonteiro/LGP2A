@@ -55,7 +55,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                         $scope.beacons_detected[uniqueBeaconKey].detected = true;
                         var prompt_result =
                             window.confirm('Está perto de:\n' +
-                                $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].title + '\n' +
+                                $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].translations[$scope.language].name + '\n' +
                                 'Deseja ver mais informação?');
                         if(prompt_result){ //navigate to detected room
                             $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
