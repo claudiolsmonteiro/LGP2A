@@ -71,4 +71,7 @@ Rails.application.routes.draw do
   get '/sweet' => 'gif#sweet'
   get '/signup' => 'users#new'
   post'/users' => 'users#create'
+
+  get'/panel' => 'panel#index'
+
 end

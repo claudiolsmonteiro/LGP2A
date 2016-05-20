@@ -9,3 +9,16 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( lumino.glyphs.js )
+Rails.application.config.assets.precompile += %w( jquery-1.11.1.min.js )
+Rails.application.config.assets.precompile += %w( bootstrap.min.js )
+Rails.application.config.assets.precompile += %w( chart.min.js )
+Rails.application.config.assets.precompile += %w( chart-data.js )
+Rails.application.config.assets.precompile += %w( easypiechart.js )
+Rails.application.config.assets.precompile += %w( easypiechart-data.js )
+Rails.application.config.assets.precompile += %w( bootstrap-datepicker.js )
+
+Rails.application.config.assets.precompile += %w( bootstrap.min.css )
+Rails.application.config.assets.precompile += %w( datepicker3.css )
+Rails.application.config.assets.precompile += %w( styles.css )
+ 

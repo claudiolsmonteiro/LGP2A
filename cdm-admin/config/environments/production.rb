@@ -76,4 +76,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.assets.precompile += %w( lumino.glyphs.js )
+  config.assets.precompile += %w( jquery-1.11.1.min.js )
+  config.assets.precompile += %w( bootstrap.min.js )
+  config.assets.precompile += %w( chart.min.js )
+  config.assets.precompile += %w( chart-data.js )
+  config.assets.precompile += %w( easypiechart.js )
+  config.assets.precompile += %w( easypiechart-data.js )
+  config.assets.precompile += %w( bootstrap-datepicker.js )
 end
