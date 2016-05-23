@@ -72,6 +72,11 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post'/users' => 'users#create'
 
+  get '/rooms' => 'rooms#new'
+  post '/rooms' => 'rooms#create'
+
   get'/panel' => 'panel#index'
+
+
 
 end
