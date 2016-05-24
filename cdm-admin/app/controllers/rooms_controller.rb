@@ -128,6 +128,6 @@ class RoomsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
       #params.fetch(:room, {})
-      params.require(:rooms).permit(:name, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :beacon_uuid, :beacon_major, :beacon_minor, :next_room)
+      params.require(:rooms).permit(:name, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room)
     end
 end
