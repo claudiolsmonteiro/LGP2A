@@ -1,5 +1,18 @@
-<h1>New Room</h1>
-
-<%= render 'form' %>
+<div class="module form-module">
+  <div class="form">
+    <h2>Crie uma nova sala</h2>
+    <%= form_for :rooms, url: '/rooms' do |f| %>
+        Name: <%= f.text_field :code %>
+        Model Path: <%= f.text_field :model_path %>
+        Texture Path: <%= f.text_field :texture_path %>
+        Animation: <%= f.text_field :animation %>
+        Beacon UUID: <%= f.text_field :beacon_uuid %>
+        Beacon Major: <%= f.text_field :beacon_major %>
+        Beacon Minor <%= f.text_field :beacon_minor %>
+        Next Room: <%= f.text_field :next_room %>
+        <%= f.submit "Submit", class:"button" %>
+    <% end %>
+  </div>
+</div>
 
 <%= link_to 'Back', rooms_path %>

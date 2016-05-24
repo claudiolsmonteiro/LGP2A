@@ -26,6 +26,8 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
 
+    @room.model_detail_path= @room.model_path;
+    @room.texture_detail_path= @room.texture_path;
     respond_to do |format|
       if @room.save
         format.html { redirect_to @room, notice: 'Room was successfully created.' }
@@ -125,6 +127,7 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.fetch(:room, {})
+      #params.fetch(:room, {})
+      params.require(:rooms).permit(:name, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room)
     end
 end
