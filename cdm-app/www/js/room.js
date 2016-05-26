@@ -139,7 +139,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         jQuery('#panorama').hide();
         jQuery('#panorama-btn-bottom-navbar').attr('style', '');
         jQuery('#'+room_id+'-canvas-container').show();
-        jQuery('#model-btn-bottom-navbar').attr('style', 'color: white');
+        jQuery('#model-btn-bottom-navbar').attr('style', 'opacity: 1');
     };
 
     $scope.showRoomPanorama = function(){
@@ -150,7 +150,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         jQuery('#'+$scope.environment.current_room+'-canvas-container').hide();
         jQuery('#model-btn-bottom-navbar').attr('style', '');
         jQuery('#panorama').show();
-        jQuery('#panorama-btn-bottom-navbar').attr('style', 'color: white');
+        jQuery('#panorama-btn-bottom-navbar').attr('style', 'opacity: 1');
     };
 
     // PANORAMA FUNCTIONS
