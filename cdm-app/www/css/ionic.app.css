@@ -9949,7 +9949,8 @@ dialog {
   z-index: 15000;
   height: 100vh;
   position: fixed;
-  left: 0; }
+  left: 0;
+  background-color: rgba(87, 136, 150, 0.8); }
   .sidebar .sidebar-column {
     display: block;
     float: left;

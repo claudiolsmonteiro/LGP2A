@@ -170,7 +170,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
             /*maxHfov: 40,
              minHfov: 30,*/
             "autoLoad": true,
-            //hotSpotDebug: true,
+            hotSpotDebug: true,
             "hotSpots": [
                 {
                     "pitch": 14.1,
@@ -190,6 +190,12 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
                     "yaw": 144.4,
                     "type": "info",
                     "text": $scope.hotspotText('janelas', 'Janelas')
+                },
+                {
+                	"pitch": -4.457723542200572, 
+                	"yaw": 22.95745920559277,
+                	"type": "info",
+                	"text": $scope.hotspotVideo('video','Video')
                 }
             ]
         });
@@ -201,6 +207,13 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
             "<a id=\"hotspot_" + hotspot_id + "\" title=\""+ hotspot_title +"\" href=\"#\" "+
             " onclick=\"openPopup(\'" + hotspot_id + "\');return false;\">Mais informação</a>" +
             "</div>";
+    };
+
+    $scope.hotspotVideo = function(hotspot_id, hotspot_title){
+        return "<div class=\"video-container\">"+
+                    "<iframe src=\"https://www.youtube.com/embed/wyVM1evRxNw\" frameborder=\"20\" width=\"560\" height=\"315\" allowfullscreen>"+"</iframe>"+
+                "</div>";
+
     };
 
 
