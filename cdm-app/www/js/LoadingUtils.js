@@ -222,7 +222,7 @@ function construct_tridimensional_environment(camera_vec){
     object.controls.minDistance = 200;
     object.controls.maxDistance = 1000;
 
-    object.renderer.setClearColor( 0x4FB9D3, 1 );
+    object.renderer.setClearColor( 0x009ABE, 1 );
 
     return object;
 }

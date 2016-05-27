@@ -9830,7 +9830,7 @@ dialog {
   padding: 10px;
   display: none;
   position: fixed;
-  color: #578896;
+  color: rgba(36, 36, 42, 0.5);
   width: 100vw;
   top: 0;
   z-index: 200; }
