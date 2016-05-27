@@ -14,7 +14,6 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
 
 controllerModule.controller("contactsController", function($scope, $stateParams, LocalStorageService){
     $scope.texts = texts;
-    $scope.language = 'en';
     $scope.language = LocalStorageService.getLanguage();
 
     $scope.prefix = 'contacts';
@@ -28,7 +27,6 @@ controllerModule.controller("contactsController", function($scope, $stateParams,
 
 controllerModule.controller("localController", function($scope, $stateParams, LocalStorageService){
     $scope.texts = texts;
-    $scope.language = 'en';
     $scope.language = LocalStorageService.getLanguage();
 
     $scope.prefix = 'local';
