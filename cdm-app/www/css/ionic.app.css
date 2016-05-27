@@ -9797,15 +9797,15 @@ a.button {
   font-family: "roboto";
   src: url(../lib/fonts/Roboto-Regular.ttf) format("truetype"); }
 
+body {
+  background-color: #009ABE; }
+
 /* Empty. Add your own CSS if you like */
 #more-details-button {
   position: fixed;
   bottom: 50px;
   right: 50px;
   z-index: 200;
-  display: none; }
-
-dialog {
   display: none; }
 
 #model-canvas-container {
@@ -9815,14 +9815,11 @@ dialog {
   z-index: 160;
   max-height: 100vh; }
 
-/*#model-overlay-content{
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 150;
-}*/
 #model-main-canvas {
   z-index: 3; }
+
+dialog {
+  display: none; }
 
 #top-info-bar {
   font-family: casadamusica_font;
