@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519000044) do
+ActiveRecord::Schema.define(version: 20160527142509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20160519000044) do
   create_table "rooms", force: :cascade do |t|
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
-    t.string   "code"
     t.string   "model_path"
     t.string   "model_detail_path"
     t.string   "texture_path"
@@ -82,13 +81,7 @@ ActiveRecord::Schema.define(version: 20160519000044) do
     t.integer  "beacon_major"
     t.integer  "beacon_minor"
     t.string   "next_room"
-  end
-
-  create_table "submissions", force: :cascade do |t|
-    t.string   "name"
-    t.string   "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "code"
   end
 
   create_table "users", force: :cascade do |t|
