@@ -1,0 +1,30 @@
+<ion-view cache-view="false" view-title="{{room}}">
+  <ion-content class="">
+    <div id="materials-{{room}}-canvas-container"></div>
+    <!--<div id="panorama"></div>-->
+  </ion-content>
+
+  <div ng-include src="'templates/sidebar.html'"></div>
+
+  <div id="top-info-bar" style="display: block;">{{room_title}}</div>
+
+  <div id="bottom-navbar" class="bottom-navbar" style="display: block">
+    <ul>
+      <li><a ng-href="#/room/{{room}}">3D</a></li>
+      <li ng-if="panorama_available"><a ng-href="#/panoramic/{{room}}">360º</a></li>
+      <li class="selected"><img src="img/icon_materiais_33.png"></li>
+      <li id="more-info-popup" ng-click="showPopup()"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
+      <li ng-if="next_room_available"><span ng-click="goToNextRoom()"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></span></li>
+    </ul>
+  </div>
+
+  <div ng-include src="'templates/toggle-menu-btn.html'"></div>
+
+  <div id="materials-{{environment.current_room}}-more-info-modal" class="more-info-modal">
+    <div class="modal-header">{{texts.tour.more_info_modal.title[language]}}</div>
+    <div class="modal-content">{{models[environment.current_room].translations[language].description}}</div>
+    <div class="modal-footer"><button class="close-btn button button-stable" ng-click="hidePopup()" >{{texts.misc.close[language]}}</button></div>
+  </div>
+  <div id="materials-{{environment.current_room}}-more-info-modal-background" class="more-info-modal-background"></div>
+
+</ion-view>

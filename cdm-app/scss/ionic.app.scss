@@ -100,6 +100,9 @@ dialog{
     display: block;
     ul{
       float: left;
+      li.selected{
+        opacity: 1;
+      }
     }
   }
 
@@ -114,7 +117,7 @@ dialog{
     float: right;
     display:table-row;
     font-size: 1.2rem;
-
+    color: white;
     li{
       display: table-cell;
       vertical-align: middle;
@@ -123,6 +126,11 @@ dialog{
       //display: inline;
       padding-left: 20px;
       padding-right: 20px;
+      opacity: 0.5;
+
+      &.selected{
+        opacity: 1;
+      }
 
       a{
         text-decoration: none;
@@ -228,7 +236,6 @@ and (-webkit-min-device-pixel-ratio: 1) {
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: none;
 }
 .pnlm-controls{
   display: none;
