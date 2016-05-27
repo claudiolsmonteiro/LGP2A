@@ -9852,6 +9852,8 @@ dialog {
     display: block; }
     .bottom-navbar#menu-button-bar ul {
       float: left; }
+      .bottom-navbar#menu-button-bar ul li.selected {
+        opacity: 1; }
   .bottom-navbar#bottom-navbar {
     position: fixed;
     bottom: 0;
@@ -9860,13 +9862,17 @@ dialog {
   .bottom-navbar ul {
     float: right;
     display: table-row;
-    font-size: 1.2rem; }
+    font-size: 1.2rem;
+    color: white; }
     .bottom-navbar ul li {
       display: table-cell;
       vertical-align: middle;
       font-family: roboto;
       padding-left: 20px;
-      padding-right: 20px; }
+      padding-right: 20px;
+      opacity: 0.5; }
+      .bottom-navbar ul li.selected {
+        opacity: 1; }
       .bottom-navbar ul li a {
         text-decoration: none;
         color: inherit; }
@@ -9936,8 +9942,7 @@ dialog {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  display: none; }
+  height: 100vh; }
 
 .pnlm-controls {
   display: none; }

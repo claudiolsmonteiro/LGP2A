@@ -6,6 +6,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     ////////////////////
     $scope.models = LocalStorageService.getModelInfoRemote($http);
+  console.log($scope.models);
     $scope.texts = texts;
     $scope.language = LocalStorageService.getLanguage();
     ////////////////////

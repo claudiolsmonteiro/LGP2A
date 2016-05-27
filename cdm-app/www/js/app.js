@@ -60,17 +60,23 @@ myApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) 
         controller:"tridimensionalModelController"
     })
 
-    /*   .state('panoramic', {
-    url: '/panoramic/:room',
-    templateUrl: 'templates/360.html',
-    controller:"panoramicController"
-    })*/
-
     .state('room', {
         url: '/room/:room',
         templateUrl: 'templates/room.html',
         controller:"roomController"/*,
         cache: false*/
+    })
+
+    .state('panoramic', {
+      url: '/panoramic/:room',
+      templateUrl: 'templates/360.html',
+      controller:"panoramaController"
+    })
+
+    .state('materials', {
+      url: '/materials/:room',
+      templateUrl: 'templates/materials.html',
+      controller:"materialsController"
     })
 
     .state('contacts', {
@@ -84,12 +90,6 @@ myApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) 
         templateUrl: 'templates/local.html',
         controller:"localController"
     })
-
-    .state('languages', {
-        url: '/languages',
-        templateUrl: 'templates/idioma.html',
-        controller:"languagesController"
-    });
 
 
 

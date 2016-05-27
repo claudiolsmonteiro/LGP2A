@@ -135,75 +135,6 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         jQuery('#'+room_id+'-more-info-modal-background').hide();
     };
 
-    $scope.showRoomModelAux = function(room_id){
-        jQuery('#panorama').hide();
-        jQuery('#panorama-btn-bottom-navbar').attr('style', '');
-        jQuery('#'+room_id+'-canvas-container').show();
-        jQuery('#model-btn-bottom-navbar').attr('style', 'color: white');
-    };
-
-    $scope.showRoomPanorama = function(){
-        if($scope.room_panorama_initialized != $scope.environment.current_room) {
-            $scope.room_panorama_initialized = $scope.environment.current_room;
-            $scope.panorama_init($scope.environment.current_room);
-        }
-        jQuery('#'+$scope.environment.current_room+'-canvas-container').hide();
-        jQuery('#model-btn-bottom-navbar').attr('style', '');
-        jQuery('#panorama').show();
-        jQuery('#panorama-btn-bottom-navbar').attr('style', 'color: white');
-    };
-
-    // PANORAMA FUNCTIONS
-
-    $scope.panorama_init = function(room){
-
-        var type = $scope.models[room].photo.url == null? 'cubemap' : 'equirectangular';
-        var equirectangular_path = $scope.models[room].photo.url;
-        var cubemap_array = $scope.models[room].photo.url_cube_map;
-        pannellum.viewer('panorama', {
-            "type": type,
-            "panorama": equirectangular_path,
-            "cubeMap": cubemap_array,
-            /*"vaov" : 70,
-             minPitch: -10,
-             maxPitch: 10,*/
-            /*maxHfov: 40,
-             minHfov: 30,*/
-            "autoLoad": true,
-            //hotSpotDebug: true,
-            "hotSpots": [
-                {
-                    "pitch": 14.1,
-                    "yaw": 1.5,
-                    "type": "info",
-                    "text": $scope.hotspotText('piano', 'Piano')/*,
-                 "URL": "https://artbma.org/"*/
-                },
-                {
-                    "pitch": -9.4,
-                    "yaw": 222.6,
-                    "type": "info",
-                    "text": $scope.hotspotText('cadeiras', 'Cadeiras')
-                },
-                {
-                    "pitch": -0.9,
-                    "yaw": 144.4,
-                    "type": "info",
-                    "text": $scope.hotspotText('janelas', 'Janelas')
-                }
-            ]
-        });
-    };
-
-    $scope.hotspotText = function(hotspot_id, hotspot_title){
-        return "<div class=\"hotspot-box\">"+
-            "<p>" + hotspot_title + "</p>" +
-            "<a id=\"hotspot_" + hotspot_id + "\" title=\""+ hotspot_title +"\" href=\"#\" "+
-            " onclick=\"openPopup(\'" + hotspot_id + "\');return false;\">Mais informação</a>" +
-            "</div>";
-    };
-
-
     // OTHERS
 
     $scope.$on("$destroy", function(){
@@ -218,7 +149,3 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     });
 
 });
-
-function openPopup(element){
-    window.alert(element);
-};
