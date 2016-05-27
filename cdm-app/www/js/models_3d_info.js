@@ -1,7 +1,7 @@
 /**
  * Created by João on 30/04/2016.
  */
-var models1 = {};
+var models2 = {};
 /*
 models1['vidro'] =
 {
@@ -16,7 +16,8 @@ models1['vidro'] =
   animation : null
 };
 */
-models1['casa'] =
+//models2['casa'] =
+var model_casa =
 {
     //path : 'obj/casa_da_musica_salas_separadas/casa_da_musica.obj',
     //path: 'obj/experimentar_2/casa_da_musica_experimentar_2.obj',
@@ -29,7 +30,7 @@ models1['casa'] =
     animation : null
 };
 
-models1['sala_suggia'] =
+models2['sala_suggia'] =
 {
     path: 'obj/casa_da_musica_salas_separadas/sala_suggia.obj',
     material_path: null,
@@ -48,10 +49,10 @@ models1['sala_suggia'] =
     ],
     next_room : 'sala_2',
     beacon_uuid : 'e2c56db5-dffb-48d2-b060-d0f5a71096e0',
-    beacon_major: 0,
+    beacon_major: 1,
     beacon_minor: 0
 };
-models1['sala_2'] =
+models2['sala_2'] =
 {
     path : 'obj/casa_da_musica_salas_separadas/sala_concertos_2.obj',
     material_path : null,
@@ -68,9 +69,12 @@ models1['sala_2'] =
       "img/sala_2/medres/sala2-4.jpg",
       "img/sala_2/medres/sala2-5.jpg"
     ],
-    next_room : 'bar'
+    next_room : 'bar',
+    beacon_uuid : 'e2c56db5-dffb-48d2-b060-d0f5a71096e0',
+    beacon_major: 2,
+    beacon_minor: 0
 };
-models1['bar'] =
+models2['bar'] =
 {
     path : 'obj/casa_da_musica_salas_separadas/bar.obj',
     material_path : null,

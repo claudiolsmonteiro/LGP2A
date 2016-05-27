@@ -43,13 +43,28 @@ controllerModule.controller("localController", function($scope, $stateParams, Lo
 
 controllerModule.factory('LocalStorageService', function() {
     return {
-        getModelInfo: function() {
-            window.localStorage.setItem("models", JSON.stringify(models1));
+        getModelInfoRemote: function() {
+            jQuery.ajax({
+                url: 'http://cdm-admin.herokuapp.com/api/everything',
+                async: false,
+                success: function(data){
+                    //console.log(data);
+                    window.localStorage.setItem("models", JSON.stringify(data));
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            });
+
             if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
                 //TODO - show loading screen overlay or something like that.
-                window.localStorage.setItem("models", JSON.stringify(models1));
+                window.localStorage.setItem("models", JSON.stringify(temp_resp));
                 //TODO - hide overlay after loading
+
             }
+            return JSON.parse(localStorage.getItem("models"));
+        },
+        getModelInfo: function() {
             return JSON.parse(localStorage.getItem("models"));
         },
         getLanguage: function(){

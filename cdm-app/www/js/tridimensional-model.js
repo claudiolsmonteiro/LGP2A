@@ -2,10 +2,10 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService){
+controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService, $http){
 
     ////////////////////
-    $scope.models = LocalStorageService.getModelInfo();
+    $scope.models = LocalStorageService.getModelInfoRemote($http);
     $scope.texts = texts;
     $scope.language = LocalStorageService.getLanguage();
     ////////////////////
@@ -16,12 +16,18 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.prefix = 'model';
 
     $scope.beacons_detected = [];
+    var temp_uuids = [];
     for(var key in $scope.models){
         var temp_key = $scope.models[key].beacon_uuid+':'+$scope.models[key].beacon_major+':'+$scope.models[key].beacon_minor;
         $scope.beacons_detected[temp_key] = {};
         $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
         $scope.beacons_detected[temp_key].model_key = key;
+        temp_uuids.push($scope.models[key].beacon_uuid);
     }
+    $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
+    $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array
+        if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
+    });
 
     ionic.Platform.ready(function(){
         // will execute when device is ready, or immediately if the device is already ready.
@@ -41,6 +47,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             $cordovaBeacon.requestWhenInUseAuthorization();
             $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
                 var uniqueBeaconKey;
+                console.log( pluginResult.beacons);
                 for(var i = 0; i < pluginResult.beacons.length; i++) {
                     uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
                     //$scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
@@ -48,7 +55,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                         $scope.beacons_detected[uniqueBeaconKey].detected = true;
                         var prompt_result =
                             window.confirm('Está perto de:\n' +
-                                $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].title + '\n' +
+                                $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].translations[$scope.language].name + '\n' +
                                 'Deseja ver mais informação?');
                         if(prompt_result){ //navigate to detected room
                             $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
@@ -58,12 +65,11 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                 //$scope.$apply();
                 //console.log($scope.beacons);
             });
-            for(var key in $scope.models){
-                if ($scope.models[key].beacon_uuid != null && $scope.models[key].beacon_uuid != undefined) {
-                    $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
-                        "beacon-" + $scope.models[key].name,
-                        $scope.models[key].beacon_uuid));
-                }
+
+            console.log($scope.beacons_unique_uuids);
+            for(var key in $scope.beacons_unique_uuids){
+                $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
+                    "beacon-" + $scope.beacons_unique_uuids[key], $scope.beacons_unique_uuids[key]));
             }
             // /BEACONS
         }catch(e) {
@@ -207,11 +213,12 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             $scope.environment.camera.aspect = window.screen.width / window.screen.height;
             $scope.environment.camera.updateProjectionMatrix();
             $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
+
         });
 
-        var axes = buildAxes( 1000 );
+       /* var axes = buildAxes( 1000 );
         $scope.environment.scene.add(axes);
-
+*/
     }
 
     $scope.tridimensional_model_animate = function() {
@@ -242,10 +249,10 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             if($scope.environment.current_room != null && $scope.environment.current_room == key)
                 active = true;
             if($scope.models[key].model_dae_path != null)
-              loadDAE($scope.environment, key, [0, y_coord, 0], 10, 0.5, active, $scope.objCallback, $scope.models);
+              loadDAE($scope.environment, key, [0, y_coord, 0], 10, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
             else if($scope.models[key].material_path != null)
-              loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models);
-            else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models);
+              loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
+            else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models[key], $scope.language);
         }
     }
 
@@ -390,6 +397,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     }
 });
 
+
 function buildAxes( length ) {
     var axes = new THREE.Object3D();
 
@@ -423,3 +431,5 @@ function buildAxis( src, dst, colorHex, dashed ) {
     return axis;
 
 }
+
+

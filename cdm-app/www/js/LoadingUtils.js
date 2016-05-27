@@ -15,10 +15,10 @@ manager.onProgress = function ( item, loaded, total ) {
  * @param active - if this is the current room, active will be true, and callback function will be called.
  */
 //function loadObjModel(model_id, title, model_path, position, scale, objectsArray, meshesArray, texture, scene, animation, animation_span, active) {
-function loadObjModel(environment, object_key, position, scale, animation_span, active, callback_function, models) {
+function loadObjModel(environment, object_key, position, scale, animation_span, active, callback_function, model, language) {
     var loader = new THREE.OBJLoader( manager );
     var temp_mesh = null;
-    loader.load( models[object_key].path, function ( object ) {
+    loader.load( model.model_path, function ( object ) {
         object.traverse(function ( child ) {
             if ( child instanceof THREE.Mesh ) {
                 //console.log(texture);
@@ -33,7 +33,7 @@ function loadObjModel(environment, object_key, position, scale, animation_span, 
             }
         });
         object.name = object_key;
-        object.title = models[object_key].title;
+        object.title = model.translations[language].name;
         object.original_position = position;
         object.position.x = position[0];
         object.position.y = position[1];
@@ -41,7 +41,7 @@ function loadObjModel(environment, object_key, position, scale, animation_span, 
         object.scale.set(scale, scale, scale);
         object.animation_state = 0; //0 - initial_stopped, 1 - during initial, 2 - final stopped, 3 - during final
         object.current_animation_start_time = 0;
-        object.animation = models[object_key].animation;
+        object.animation = model.animation.length > 0 ? model.animation : null;
         object.animation_span = animation_span;
         object.pendent_animations = 0;
 
