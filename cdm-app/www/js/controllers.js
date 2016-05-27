@@ -41,26 +41,26 @@ controllerModule.controller("localController", function($scope, $stateParams, Lo
 
 controllerModule.factory('LocalStorageService', function() {
     return {
-        getModelInfoRemote: function() {
+        getModelInfoRemote: function(ready_function) {
             jQuery.ajax({
                 url: 'http://cdm-admin.herokuapp.com/api/everything',
-                async: false,
                 success: function(data){
                     //console.log(data);
                     window.localStorage.setItem("models", JSON.stringify(data));
+                    ready_function(true);
                 },
                 error: function(err){
                     console.log(err);
-                }
+                    if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
+                        ready_function(false);
+                    }
+                    else ready_function(true);
+                },
+                timeout: 7000 // sets timeout to 7 seconds
             });
 
-            if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
-                //TODO - show loading screen overlay or something like that.
-                window.localStorage.setItem("models", JSON.stringify(temp_resp));
-                //TODO - hide overlay after loading
 
-            }
-            return JSON.parse(localStorage.getItem("models"));
+            //return JSON.parse(localStorage.getItem("models"));
         },
         getModelInfo: function() {
             return JSON.parse(localStorage.getItem("models"));

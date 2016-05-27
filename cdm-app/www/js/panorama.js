@@ -13,9 +13,12 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
   $scope.language = LocalStorageService.getLanguage();
   ////////////////////
 
-  $scope.$on('$ionicView.beforeEnter', function(){
-    // Any thing you can think of
-
+  ionic.Platform.ready(function() {
+    // will execute when device is ready, or immediately if the device is already ready.
+    //console.log(screen);
+    if (screen.lockOrientation) {
+      screen.lockOrientation('landscape');
+    }
   });
 
   $scope.room = $stateParams.room;

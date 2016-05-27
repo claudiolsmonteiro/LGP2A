@@ -2,84 +2,119 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService, $http){
+controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService, $ionicLoading){
+    //ionic.Platform.fullScreen(true, false);
 
-    ////////////////////
-    $scope.models = LocalStorageService.getModelInfoRemote($http);
-  console.log($scope.models);
-    $scope.texts = texts;
-    $scope.language = LocalStorageService.getLanguage();
-    ////////////////////
+    $scope.getRemoteModels = function (){
+        $ionicLoading.hide();
+        $ionicLoading.show({
+            content: 'Loading',
+            animation: 'fade-in',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+        });
+        $scope.models = LocalStorageService.getModelInfoRemote($scope.model_ready);
+    };
 
-    $scope.beacons = {};
+    /*
+     @param success - boolean indicating weather the remote loading of models worked.
+     */
+    $scope.model_ready = function(success){
+        $ionicLoading.hide();
+        var template_modal =
+            '<div class="custom-modal">'+
+            '<div class="modal-title">Connection problem</div>'+
+            '<div class="modal-body">Check your internet connection...</div>'+
+            '<div class="modal-buttons button-bar">'+
+            '<button class="button button-outline button-small button-light" ng-click="getRemoteModels()">'+
+            'Try again'+
+            '</button>'+
+            '</div>'+
+            '</div>';
 
-    // set to either landscape
-    $scope.prefix = 'model';
-
-    $scope.beacons_detected = [];
-    var temp_uuids = [];
-    for(var key in $scope.models){
-        var temp_key = $scope.models[key].beacon_uuid+':'+$scope.models[key].beacon_major+':'+$scope.models[key].beacon_minor;
-        $scope.beacons_detected[temp_key] = {};
-        $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
-        $scope.beacons_detected[temp_key].model_key = key;
-        temp_uuids.push($scope.models[key].beacon_uuid);
-    }
-    $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
-    $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array
-        if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
-    });
-
-    ionic.Platform.ready(function(){
-        // will execute when device is ready, or immediately if the device is already ready.
-        //console.log(screen);
-        if(screen.lockOrientation) {
-            //screen.lockOrientation('landscape');
-        }
-        //console.log(screen.orientation);
-
-        /*window.addEventListener("orientationchange", function() {
-         console.log(window.orientation);
-         tridimensional_model_ready();
-         }, false);*/
-
-        try {
-            // BEACONS
-            $cordovaBeacon.requestWhenInUseAuthorization();
-            $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
-                var uniqueBeaconKey;
-                console.log( pluginResult.beacons);
-                for(var i = 0; i < pluginResult.beacons.length; i++) {
-                    uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
-                    //$scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
-                    if(pluginResult.beacons[i].accuracy < 3.0 && $scope.beacons_detected[uniqueBeaconKey].detected === false){
-                        $scope.beacons_detected[uniqueBeaconKey].detected = true;
-                        var prompt_result =
-                            window.confirm('Está perto de:\n' +
-                                $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].translations[$scope.language].name + '\n' +
-                                'Deseja ver mais informação?');
-                        if(prompt_result){ //navigate to detected room
-                            $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
-                        }
-                    }
+        if(success){
+            $scope.models = LocalStorageService.getModelInfo();
+            ionic.Platform.ready(function(){
+                // will execute when device is ready, or immediately if the device is already ready.
+                //console.log(screen);
+                if(screen.lockOrientation) {
+                    screen.lockOrientation('landscape');
                 }
-                //$scope.$apply();
-                //console.log($scope.beacons);
+                //console.log(screen.orientation);
+
+                /*window.addEventListener("orientationchange", function() {
+                 console.log(window.orientation);
+                 tridimensional_model_ready();
+                 }, false);*/
+                $scope.beacons_init();
+                try {
+                    // BEACONS
+                    $cordovaBeacon.requestWhenInUseAuthorization();
+                    $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
+                        var uniqueBeaconKey;
+                        console.log( pluginResult.beacons);
+                        for(var i = 0; i < pluginResult.beacons.length; i++) {
+                            uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
+                            //$scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
+                            if(pluginResult.beacons[i].accuracy < 3.0 && $scope.beacons_detected[uniqueBeaconKey].detected === false){
+                                $scope.beacons_detected[uniqueBeaconKey].detected = true;
+                                var prompt_result =
+                                    window.confirm('Está perto de:\n' +
+                                        $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].translations[$scope.language].name + '\n' +
+                                        'Deseja ver mais informação?');
+                                if(prompt_result){ //navigate to detected room
+                                    $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
+                                }
+                            }
+                        }
+                        //$scope.$apply();
+                        //console.log($scope.beacons);
+                    });
+
+                    console.log($scope.beacons_unique_uuids);
+                    for(var key in $scope.beacons_unique_uuids){
+                        $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
+                            "beacon-" + $scope.beacons_unique_uuids[key], $scope.beacons_unique_uuids[key]));
+                    }
+                    // /BEACONS
+                }catch(e) {
+                    //ignoring error. probably cause because running app in browser (development), not in device.
+                }
+
+
+
             });
 
-            console.log($scope.beacons_unique_uuids);
-            for(var key in $scope.beacons_unique_uuids){
-                $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
-                    "beacon-" + $scope.beacons_unique_uuids[key], $scope.beacons_unique_uuids[key]));
-            }
-            // /BEACONS
-        }catch(e) {
-            //ignoring error. probably cause because running app in browser (development), not in device.
+            ionic.DomUtil.ready(function(){
+                $scope.environment.current_room = $stateParams.current_room;
+                $scope.tridimensional_model_init();
+                sidebar_ready('model-sidebar-menu');
+            });
+        }
+        else{
+            $ionicLoading.show({
+                template: template_modal,
+                scope: $scope,
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 400,
+                showDelay: 0
+            });
         }
 
+    };
+
+    ////////////////////
+    $scope.getRemoteModels();
+    console.log($scope.models);
+    $scope.texts = texts;
+    $scope.language = LocalStorageService.getLanguage();
+    $scope.environment = construct_tridimensional_environment([0,200,400]);
+    $scope.prefix = 'model';
+    ////////////////////
 
 
-    });
 
     // .fromTemplate() method
     var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
@@ -113,23 +148,9 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     $scope.toggleSidebar = function () { showSidebar('model-sidebar-menu'); };
     $scope.animateRoom = function ( room_id ) { $scope.animateObjectAux(room_id); $scope.closePopover(); };
-    ionic.DomUtil.ready(function(){
-        //overlay_elements_ready();
-        //console.log($stateParams.current_room);
-        $scope.environment = construct_tridimensional_environment([0,200,400]);
-        $scope.environment.current_room = $stateParams.current_room;
-        $scope.tridimensional_model_ready();
-        sidebar_ready('model-sidebar-menu');
-
-    });
 
 
     // FUNCTIONS
-
-    $scope.tridimensional_model_ready = function(){
-        $scope.tridimensional_model_init();
-        //tridimensional_model_animate();
-    }
 
     $scope.model_increment_textures_loaded = function(){
         $scope.environment.textures_loaded++;
@@ -206,9 +227,6 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             loadTexture($scope.environment, key, $scope.models[key].texture_path, $scope.model_increment_textures_loaded, $scope.model_loadObjects, $scope.tridimensional_model_animate);
         }
 
-        $scope.environment.renderer.domElement.setAttribute('id', 'model-main-canvas');
-        document.getElementById('model-canvas-container').html = '';
-        document.getElementById('model-canvas-container').appendChild( $scope.environment.renderer.domElement );
         window.addEventListener("orientationchange", function(){
             //console.log(screen.orientation); // e.g. portrait
             $scope.environment.camera.aspect = window.screen.width / window.screen.height;
@@ -216,6 +234,19 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
 
         });
+
+        // Listen for resize changes
+        window.addEventListener("resize", function() {
+            $scope.environment.camera.aspect = window.screen.width / window.screen.height;
+            $scope.environment.camera.updateProjectionMatrix();
+            $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
+        }, false);
+
+
+        $scope.environment.renderer.domElement.setAttribute('id', 'model-main-canvas');
+        document.getElementById('model-canvas-container').html = '';
+        document.getElementById('model-canvas-container').appendChild( $scope.environment.renderer.domElement );
+
 
        /* var axes = buildAxes( 1000 );
         $scope.environment.scene.add(axes);
@@ -241,7 +272,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         }
         $scope.environment.renderer.render( $scope.environment.scene, $scope.environment.camera );
 
-    }
+    };
 
     $scope.model_loadObjects = function(){
         var y_coord = 0;
@@ -255,7 +286,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
               loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
             else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models[key], $scope.language);
         }
-    }
+    };
 
     $scope.onDocumentMouseDown = function( event ) {
         if(event.target.getAttribute('id') == 'model-main-canvas'){
@@ -283,11 +314,11 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             var obj = intersects[0].object;
             obj.callback();
         }
-    }
+    };
 
     $scope.animateObjectAux = function(room_id){
         $scope.environment.objects[room_id].mesh.callback();
-    }
+    };
 
     $scope.animateObject = function(object){
         if(object.animation_state == 0 || object.animation_state == 2){
@@ -333,7 +364,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         object.position.y = object.original_position[1] + animation_percentage*object.animation[1];
         object.position.z = object.original_position[2] + animation_percentage*object.animation[2];
 
-    }
+    };
 
     $scope.showObjectInfoOverlayMenus = function(objectName, objectTitle){
         jQuery('#top-info-bar').html(objectTitle.toUpperCase());
@@ -342,7 +373,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         jQuery('#room_link').attr('href', '#/room/'+objectName);
         jQuery('#top-info-bar').slideDown();
         jQuery('#bottom-navbar').slideDown();
-    }
+    };
 
     $scope.hideObjectInfoOverlayMenus = function(objectName, objectTitle){
 
@@ -350,7 +381,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             jQuery('#top-info-bar').slideUp();
             jQuery('#bottom-navbar').slideUp();
         }
-    }
+    };
 
     $scope.objCallback = function(model_id, object){
         //console.log(object);
@@ -380,7 +411,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             $scope.hideObjectInfoOverlayMenus(object.name);
         }
         //console.log('new animation state: ' + object.animation_state);
-    }
+    };
 
     $scope.objectsBackToOriginalPositionExcept = function (object) {
         for(var key in $scope.environment.objects){
@@ -395,7 +426,24 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                 }
             }
         }
-    }
+    };
+
+    $scope.beacons_init = function (){
+        $scope.beacons = {};
+        $scope.beacons_detected = [];
+        var temp_uuids = [];
+        for(var key in $scope.models){
+            var temp_key = $scope.models[key].beacon_uuid+':'+$scope.models[key].beacon_major+':'+$scope.models[key].beacon_minor;
+            $scope.beacons_detected[temp_key] = {};
+            $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
+            $scope.beacons_detected[temp_key].model_key = key;
+            temp_uuids.push($scope.models[key].beacon_uuid);
+        }
+        $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
+        $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array
+            if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
+        });
+    };
 });
 
 

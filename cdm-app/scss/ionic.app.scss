@@ -17,6 +17,8 @@ $dark:                            #444 !default;
 
 $dark-blue: #24242A;
 $dark-blue-opacity: rgba( $dark-blue, .5 );
+$background-blue : #009ABE;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
@@ -36,6 +38,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   src: url(../lib/fonts/Roboto-Regular.ttf) format("truetype");
 }
 
+body{
+  background-color: $background-blue;
+}
+
 /* Empty. Add your own CSS if you like */
 #more-details-button{
   position: fixed;
@@ -49,24 +55,6 @@ dialog{
   display: none;
 }
 
-#model-canvas-container{
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 160;
-  max-height: 100vh;
-}
-
-/*#model-overlay-content{
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 150;
-}*/
-
-#model-main-canvas{
-  z-index: 3;
-}
 
 #top-info-bar{
   font-family: casadamusica_font;
