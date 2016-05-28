@@ -34,19 +34,13 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             '</div>';
 
         if(success){
+
             $scope.models = LocalStorageService.getModelInfo();
             ionic.Platform.ready(function(){
-                // will execute when device is ready, or immediately if the device is already ready.
-                //console.log(screen);
                 if(screen.lockOrientation) {
+                    console.log('locking to landscape');
                     screen.lockOrientation('landscape');
                 }
-                //console.log(screen.orientation);
-
-                /*window.addEventListener("orientationchange", function() {
-                 console.log(window.orientation);
-                 tridimensional_model_ready();
-                 }, false);*/
                 $scope.beacons_init();
                 try {
                     // BEACONS
@@ -79,7 +73,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                     }
                     // /BEACONS
                 }catch(e) {
-                    //ignoring error. probably cause because running app in browser (development), not in device.
+                    //ignoring error. probably because running app in browser (development), not in device.
                 }
 
 

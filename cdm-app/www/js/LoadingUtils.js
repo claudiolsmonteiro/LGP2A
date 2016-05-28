@@ -23,8 +23,10 @@ function loadObjModel(environment, object_key, position, scale, animation_span, 
             if ( child instanceof THREE.Mesh ) {
                 //console.log(texture);
                 child.material.map = environment.textures[object_key];
-                child.callback = function() {
-                    callback_function(object_key, object, environment);
+                if(object_key != 'casa'){
+                    child.callback = function() {
+                        callback_function(object_key, object, environment);
+                    };
                 }
                 if(environment.pickable_objects != null)
                     environment.pickable_objects.push(child);

@@ -9812,8 +9812,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 160;
-  max-height: 100vh; }
+  z-index: 160; }
 
 #model-main-canvas {
   z-index: 3; }
