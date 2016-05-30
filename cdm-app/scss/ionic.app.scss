@@ -24,7 +24,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
+//JSON.parse(document.body.textContent)
 
 //from here, this is all mine.
 @font-face {
@@ -152,7 +152,7 @@ dialog{
 .more-info-modal {
   display: none;
   position: fixed;
-  background-color: rgba(230, 230, 230, 0.85);
+ // background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
 
@@ -188,7 +188,7 @@ dialog{
 .more-info-modal-background{
   display: none;
   position: fixed;
-  background-color: rgba(0,0,0,0.70);
+ // background-color: rgba(0,0,0,0.70);
   z-index: 1999;
   height: 100vh;
   width: 100vw;
@@ -255,7 +255,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
   //display: block;
   position: fixed;
   left: 0;
-  //background-color: rgba(87, 136, 150, 0.8); //#578896
+  background-color: rgba(87, 136, 150, 0.8); //#578896
 
   .sidebar-column {
     display: block;

@@ -73,8 +73,15 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     var type = $scope.models[room].photo.url == null? 'cubemap' : 'equirectangular';
     var equirectangular_path = $scope.models[room].photo.url;
     var cubemap_array = $scope.models[room].photo.url_cube_map;
+    var point;
     console.log(type);
-    pannellum.viewer('panorama', {
+    console.log($scope.models[room]);
+     console.log("testes dos pontos");
+    
+    for (point in $scope.models[room].photo.points) {
+    console.log( $scope.models[room].photo.points[point]);
+
+      pannellum.viewer('panorama', {
       "type": type,
       "panorama": equirectangular_path,
       "cubeMap": cubemap_array,
@@ -86,19 +93,31 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
       "autoLoad": true,
       //hotSpotDebug: true,
       "hotSpots": [
+        
         {
-          "pitch": 14.1,
-          "yaw": 1.5,
+          "pitch": $scope.models[room].photo.points[point].x,
+          "yaw": $scope.models[room].photo.points[point].y,
           "type": "info",
-          "text": $scope.hotspotText('piano', 'Piano')/*,
-         "URL": "https://artbma.org/"*/
-        },
-        {
-          "pitch": -9.4,
-          "yaw": 222.6,
-          "type": "info",
-          "text": $scope.hotspotText('cadeiras', 'Cadeiras')
-        },
+          "text": $scope.hotspotText('janelas', 'Janelas')
+        }
+      ]
+    });
+}
+     /*
+     
+    pannellum.viewer('panorama', {
+      "type": type,
+      "panorama": equirectangular_path,
+      "cubeMap": cubemap_array,
+      /*"vaov" : 70,
+       minPitch: -10,
+       maxPitch: 10,*/
+      /*maxHfov: 40,
+       minHfov: 30,*/
+     /* "autoLoad": true,
+      //hotSpotDebug: true,
+      "hotSpots": [
+        
         {
           "pitch": -0.9,
           "yaw": 144.4,
@@ -107,6 +126,36 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
         }
       ]
     });
+
+pannellum.viewer('panorama', {
+      "type": type,
+      "panorama": equirectangular_path,
+      "cubeMap": cubemap_array,
+      /*"vaov" : 70,
+       minPitch: -10,
+       maxPitch: 10,*/
+      /*maxHfov: 40,
+       minHfov: 30,*/
+     /* "autoLoad": true,
+      //hotSpotDebug: true,
+      "hotSpots": [
+        {
+          "pitch": 14.1,
+          "yaw": 1.5,
+          "type": "info",
+          "text": $scope.hotspotText('piano', 'Piano')/*,
+         "URL": "https://artbma.org/"*/
+    /*    },
+        {
+          "pitch": -9.4,
+          "yaw": 222.6,
+          "type": "info",
+          "text": $scope.hotspotText('cadeiras', 'Cadeiras')
+        }
+      ]
+    });*/
+
+
   };
 
   $scope.hotspotText = function(hotspot_id, hotspot_title){

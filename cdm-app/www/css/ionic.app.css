@@ -9878,7 +9878,6 @@ dialog {
 .more-info-modal {
   display: none;
   position: fixed;
-  background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
   width: 80vw;
@@ -9906,7 +9905,6 @@ dialog {
 .more-info-modal-background {
   display: none;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1999;
   height: 100vh;
   width: 100vw;
@@ -9950,7 +9948,8 @@ dialog {
   z-index: 15000;
   height: 100vh;
   position: fixed;
-  left: 0; }
+  left: 0;
+  background-color: rgba(87, 136, 150, 0.8); }
   .sidebar .sidebar-column {
     display: block;
     float: left;
