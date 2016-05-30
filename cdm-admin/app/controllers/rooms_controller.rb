@@ -111,6 +111,12 @@ class RoomsController < ApplicationController
         room_temp[:photo] = photo_temp
       end
 
+      room_temp[:materials] = []
+      room.materials.each do |material|
+        material_temp = material.attributes
+        room_temp[:materials].push(material_temp)
+      end
+
       room_temp[:translations] = {}
       room.room_translations.each do |translation|
         translation_temp = translation.attributes

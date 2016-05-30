@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527142509) do
+ActiveRecord::Schema.define(version: 20160530225647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20160527142509) do
   end
 
   add_index "languages", ["code"], name: "index_languages_on_code", unique: true, using: :btree
+
+  create_table "materials", force: :cascade do |t|
+    t.string  "path"
+    t.integer "room_id"
+  end
+
+  add_index "materials", ["room_id"], name: "index_materials_on_room_id", using: :btree
 
   create_table "photos", force: :cascade do |t|
     t.string   "url"
@@ -101,6 +108,7 @@ ActiveRecord::Schema.define(version: 20160527142509) do
 
   add_index "videos", ["photo_id"], name: "index_videos_on_photo_id", using: :btree
 
+  add_foreign_key "materials", "rooms"
   add_foreign_key "photos", "rooms"
   add_foreign_key "point_translations", "languages"
   add_foreign_key "point_translations", "points"
