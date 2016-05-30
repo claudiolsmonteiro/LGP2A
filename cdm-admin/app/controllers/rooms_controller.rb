@@ -98,6 +98,14 @@ class RoomsController < ApplicationController
 
         photo.points.each do |point|
           point_temp = point.attributes
+
+          point_temp[:translations] = {}
+          point.point_translations.each do |translation|
+            translation_temp = translation.attributes
+            translation_language = Language.find(translation.language_id).code
+            point_temp[:translations][translation_language] = translation_temp
+          end
+
           photo_temp[:points].push(point_temp)
         end
         room_temp[:photo] = photo_temp
