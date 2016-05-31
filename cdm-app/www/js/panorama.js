@@ -116,7 +116,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
       /*maxHfov: 40,
        minHfov: 30,*/
       "autoLoad": true,
-      hotSpotDebug: true,
+      //hotSpotDebug: true,
       "hotSpots": [
         
         {
