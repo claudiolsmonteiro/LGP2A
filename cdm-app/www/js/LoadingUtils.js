@@ -127,13 +127,13 @@ function loadObjMtl(environment, object_key, position, scale, animation_span, ac
 }
 
 //load colada (.dae) files
-function loadDAE(environment, object_key, position, scale, animation_span, active, callback_function, models){
+function loadDAE(environment, model_path, position, scale){
   // instantiate a loader
   var loader = new THREE.ColladaLoader();
 
   loader.load(
     // resource URL
-    models[object_key].model_dae_path,
+    model_path,
     // Function when resource is loaded
     function ( collada ) {
       console.log(collada);
@@ -221,7 +221,7 @@ function construct_tridimensional_environment(camera_vec){
     object.controls.enableDamping = true;
     object.controls.dampingFactor = 0.9;
     object.controls.enableZoom = true;
-    object.controls.minDistance = 200;
+    //object.controls.minDistance = 200;
     object.controls.maxDistance = 1000;
 
     object.renderer.setClearColor( 0x009ABE, 1 );

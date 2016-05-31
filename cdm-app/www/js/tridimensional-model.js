@@ -274,9 +274,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             var active = false;
             if($scope.environment.current_room != null && $scope.environment.current_room == key)
                 active = true;
-            if($scope.models[key].model_dae_path != null)
-              loadDAE($scope.environment, key, [0, y_coord, 0], 10, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
-            else if($scope.models[key].material_path != null)
+            if($scope.models[key].material_path != null)
               loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
             else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models[key], $scope.language);
         }

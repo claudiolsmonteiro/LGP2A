@@ -89,6 +89,9 @@ controllerModule.controller("materialsController", function($scope, $stateParams
 
     //textures
     //loadTexture($scope.environment, $scope.environment.current_room, $scope.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
+    for(var i in $scope.models[$scope.room].materials){
+      loadDAE($scope.environment, $scope.models[$scope.room].materials[i].path, [0,0,0], 5);
+    }
 
     $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
 
