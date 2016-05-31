@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="Rails cdm-admin: production" uuid="a995cc94-d13c-427b-86ff-35062d14bf1f">
+    <data-source name="Rails cdm-admin: production" uuid="3411743f-4f83-4f9a-a5a0-07d6b131523f">
       <user-name>xnvinwhyuswtpn</user-name>
       <user-password>dfdadfeddf98df9edfdedfe8dfe2dfc6dfc5dfeddf9ddfc9dfe8dfe3dfffdfc4dfc1dfeddff0df92dfefdfd3dfdcdfdbdfc3df98</user-password>
     </data-source>
-    <data-source name="Rails cdm-admin: development" uuid="3b80c709-e30a-4bba-8f70-05670d437d1a">
+    <data-source name="Rails cdm-admin: default" uuid="73fa9219-bb5d-4a65-b195-3bdccc5bebba">
+      <first-sync>true</first-sync>
       <user-name>xnvinwhyuswtpn</user-name>
       <user-password>dfdadfeddf98df9edfdedfe8dfe2dfc6dfc5dfeddf9ddfc9dfe8dfe3dfffdfc4dfc1dfeddff0df92dfefdfd3dfdcdfdbdfc3df98</user-password>
     </data-source>
-    <data-source name="Rails cdm-admin: default" uuid="fb640a3f-eeec-4adf-871c-068041c7ab6f">
+    <data-source name="Rails cdm-admin: development" uuid="6df485b1-7891-4c6b-acbf-c799447849e6">
       <user-name>xnvinwhyuswtpn</user-name>
       <user-password>dfdadfeddf98df9edfdedfe8dfe2dfc6dfc5dfeddf9ddfc9dfe8dfe3dfffdfc4dfc1dfeddff0df92dfefdfd3dfdcdfdbdfc3df98</user-password>
-      <schema-pattern>d4ndob7itmbji5.pg_catalog d4ndob7itmbji5.public</schema-pattern>
-      <default-schemas>d4ndob7itmbji5.public</default-schemas>
     </data-source>
   </component>
 </project>

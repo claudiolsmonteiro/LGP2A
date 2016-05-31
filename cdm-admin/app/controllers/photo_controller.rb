@@ -1,5 +1,4 @@
 class PhotoController < ApplicationController
-
   def get_photo
     photo = Photo.find_by_id params[:id]
     if !photo.blank?

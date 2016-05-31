@@ -1,0 +1,99 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-target=
+          "#sidebar-collapse" data-toggle="collapse" type=
+                  "button"><span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span> <span class="icon-bar"></span>
+        <span class="icon-bar"></span></button> <a class="navbar-brand" href="#"><span>Casa da musica App</span> Admin</a>
+      <ul class="user-menu">
+        <li class="dropdown pull-right">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><svg class="glyph stroked male-user">
+            <use xlink:href="#stroked-male-user"></use></svg>
+            <% if current_user %>
+                 <%= current_user.name %>
+            <% end %>
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="#"><svg class=
+                                   "glyph stroked male-user">
+                <use xlink:href="#stroked-male-user">
+                </use></svg> Profile</a>
+            </li>
+            <li>
+              <a href="#"><svg class="glyph stroked gear">
+                <use xlink:href="#stroked-gear"></use></svg>
+                Settings</a>
+            </li>
+            <li>
+              <a href="#"><svg class="glyph stroked cancel">
+                <use xlink:href="#stroked-cancel"></use></svg>
+                Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="col-sm-3 col-lg-2 sidebar" id="sidebar-collapse">
+  <form role="search">
+    <div class="form-group">
+      <input class="form-control" placeholder="Search" type="text">
+    </div>
+  </form>
+  <ul class="nav menu">
+    <li class="active">
+      <a href="index.html"><svg class="glyph stroked dashboard-dial">
+        <use xlink:href="#stroked-dashboard-dial"></use></svg>
+        Dashboard</a>
+    </li>
+    <li>
+      <a href="rooms">
+    <svg class="glyph stroked weight-plate">
+      <use xlink:href="#stroked-weight-plate"></use></svg>Rooms</a>
+
+    </li>
+    <li>
+      <a href="/newpoint"><svg class="glyph stroked location pin">
+        <use xlink:href="#stroked-location-pin"></use></svg> Adicionar
+        etiqueta</a>
+    </li>
+    <li>
+      <a href="panels.html"><svg class="glyph stroked app-window">
+        <use xlink:href="#stroked-app-window"></use></svg> Alerts &amp;
+        Panels</a>
+    </li>
+    <li>
+      <a href="icons.html"><svg class="glyph stroked star">
+        <use xlink:href="#stroked-star"></use></svg> Icons</a>
+    </li>
+    <li class="parent">
+      <a href="#"><span data-toggle="collapse"><svg class=
+                                                        "glyph stroked chevron-down">
+                <use xlink:href="#stroked-chevron-down"></use></svg></span>
+        Dropdown</a>
+      <ul class="children collapse" id="sub-item-1">
+        <li>
+          <a class="" href="#"><svg class=
+                                        "glyph stroked chevron-right">
+            <use xlink:href="#stroked-chevron-right"></use></svg>
+            Sub Item 1</a>
+        </li>
+        <li>
+          <a class="" href="#"><svg class=
+                                        "glyph stroked chevron-right">
+            <use xlink:href="#stroked-chevron-right"></use></svg>
+            Sub Item 2</a>
+        </li>
+        <li>
+          <a class="" href="#"><svg class=
+                                        "glyph stroked chevron-right">
+            <use xlink:href="#stroked-chevron-right"></use></svg>
+            Sub Item 3</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div><!--/.sidebar-->

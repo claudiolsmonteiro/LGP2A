@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>CdmAdmin</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<% if current_user %>
-	Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
-<% else %>
-	<%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-<% end %>
+  <head>
 
-<%= yield %>
-</body>
+    <title>CdmAdmin</title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "bootstrap.min.css" %>
+    <%= stylesheet_link_tag "datepicker3.css" %>
+    <%= stylesheet_link_tag "styles.css" %><!--Icons-->
+    <%= javascript_include_tag "lumino.glyphs.js" %><!--[if lt IE 9]-->
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+  <% if current_user %>
+	  Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
+    <%= render 'layouts/header' %>
+    <div class="container">
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+    </div>
+  <% else %>
+      <!-- <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %> -->
+    <%= yield %>
+    <!-- TODO: temos de mudar este yield -->
+    <%= render 'layouts/footer' %>
+  <% end %>
+
+  </body>
 </html>

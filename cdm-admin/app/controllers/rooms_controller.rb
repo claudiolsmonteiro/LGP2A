@@ -1,28 +1,14 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
-  attr_accessor :room_translations
-  # GET /rooms
-  # GET /rooms.json
-  def index
-    @rooms = Room.all
-  end
-
-  # GET /rooms/1
-  # GET /rooms/1.json
   def show
   end
 
-  # GET /rooms/new
   def new
     @room = Room.new
   end
 
-  # GET /rooms/1/edit
   def edit
   end
 
-  # POST /rooms
-  # POST /rooms.json
   def create
     @room = Room.new(room_params)
 
@@ -39,8 +25,6 @@ class RoomsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /rooms/1
-  # PATCH/PUT /rooms/1.json
   def update
     respond_to do |format|
       if @room.update(room_params)
@@ -53,8 +37,6 @@ class RoomsController < ApplicationController
     end
   end
 
-  # DELETE /rooms/1
-  # DELETE /rooms/1.json
   def destroy
     @room.destroy
     respond_to do |format|
@@ -62,10 +44,6 @@ class RoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-
-
-  ###########################################
 
   def get_room
     room = Room.find_by_id params[:id]
@@ -85,11 +63,15 @@ class RoomsController < ApplicationController
     end
   end
 
+  def index
+    @rooms=Room.all
+  end
+
   def get_everything
     result = {}
     Room.all.each do |room|
       room_temp = room.attributes
-      
+
       photo = room.photo
       if !photo.nil?
         room_temp[:photo] = {}
@@ -130,25 +112,23 @@ class RoomsController < ApplicationController
         translation_language = Language.find(translation.language_id).code
         room_temp[:translations][translation_language] = translation_temp
       end
-      
+
       result[room.code] = room_temp
     end
 
     render :json => result
   end
-  ###########################################
-
-
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_room
+    @room = Room.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def room_params
-      #params.fetch(:room, {})
-      params.require(:rooms).permit(:name, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def room_params
+    #params.fetch(:room, {})
+    params.require(:rooms).permit(:name, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room)
+  end
+
 end

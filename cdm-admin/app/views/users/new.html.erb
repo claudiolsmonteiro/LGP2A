@@ -1,12 +1,12 @@
 <div class="module form-module">
   <div class="form">
     <h2>Crie a sua conta</h2>
-   	<%= form_for :user, url: '/users' do |f| %>
-		Name: <%= f.text_field :name %>
-		Email: <%= f.text_field :email %>
-		Password: <%= f.password_field :password %>
-		Password Confirmation: <%= f.password_field :password_confirmation %>
-		<%= f.submit "Submit", class:"button" %>
-	<% end %>
+    <%= form_for :user, url: '/users' do |f| %>
+        Name: <%= f.text_field :name %>
+        Email: <%= f.text_field :email %>
+        Password: <%= f.password_field :password %>
+        Password Confirmation: <%= f.password_field :password_confirmation %>
+        <%= f.submit "Submit", class:"button" %>
+    <% end %>
   </div>
 </div>
