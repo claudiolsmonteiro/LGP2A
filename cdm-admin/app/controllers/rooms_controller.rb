@@ -108,6 +108,13 @@ class RoomsController < ApplicationController
 
           photo_temp[:points].push(point_temp)
         end
+
+        if !photo.video.nil?
+          photo_temp[:video] = photo.video.attributes
+        else
+          photo_temp[:video] = nil
+        end
+
         room_temp[:photo] = photo_temp
       end
 
