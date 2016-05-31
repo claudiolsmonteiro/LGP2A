@@ -69,17 +69,18 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
 
   $scope.panorama_init = function(room){
     console.log('init panorama');
-    console.log($scope.models[room]);
+    //console.log($scope.models[room]);
     var type = $scope.models[room].photo.url == null? 'cubemap' : 'equirectangular';
     var equirectangular_path = $scope.models[room].photo.url;
     var cubemap_array = $scope.models[room].photo.url_cube_map;
     var point;
     console.log(type);
-    console.log($scope.models[room]);
-     console.log("testes dos pontos");
-    
+    //console.log($scope.models[room]);
+    //console.log("testes dos pontos");
+    //<iframe width="560" height="315" src="https://www.youtube.com/embed/Mhp037U6YR8" frameborder="0" allowfullscreen></iframe>
     for (point in $scope.models[room].photo.points) {
-    console.log( $scope.models[room].photo.points[point]);
+    //console.log( $scope.models[room].photo.points[point]);
+	//console.log($scope.language);
 
       pannellum.viewer('panorama', {
       "type": type,
@@ -91,21 +92,21 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
       /*maxHfov: 40,
        minHfov: 30,*/
       "autoLoad": true,
-      //hotSpotDebug: true,
+      hotSpotDebug: true,
       "hotSpots": [
         
         {
           "pitch": $scope.models[room].photo.points[point].x,
           "yaw": $scope.models[room].photo.points[point].y,
           "type": "info",
-          "text": $scope.hotspotText('janelas', 'Janelas')
+          "text": $scope.hotspotText($scope.models[room].photo.points[point].translations[$scope.language], $scope.models[room].photo.points[point].translations.pt.title)
         }
       ]
     });
+  
+
 }
-     /*
-     
-    pannellum.viewer('panorama', {
+      pannellum.viewer('panorama', {
       "type": type,
       "panorama": equirectangular_path,
       "cubeMap": cubemap_array,
@@ -114,58 +115,50 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
        maxPitch: 10,*/
       /*maxHfov: 40,
        minHfov: 30,*/
-     /* "autoLoad": true,
-      //hotSpotDebug: true,
+      "autoLoad": true,
+      hotSpotDebug: true,
       "hotSpots": [
         
         {
-          "pitch": -0.9,
-          "yaw": 144.4,
+          "pitch": $scope.models[room].photo.video.x,
+          "yaw": $scope.models[room].photo.video.y,
           "type": "info",
-          "text": $scope.hotspotText('janelas', 'Janelas')
+          "text": $scope.hotspotVideo($scope.models[room].photo.video.url)
         }
       ]
     });
-
-pannellum.viewer('panorama', {
-      "type": type,
-      "panorama": equirectangular_path,
-      "cubeMap": cubemap_array,
-      /*"vaov" : 70,
-       minPitch: -10,
-       maxPitch: 10,*/
-      /*maxHfov: 40,
-       minHfov: 30,*/
-     /* "autoLoad": true,
-      //hotSpotDebug: true,
-      "hotSpots": [
-        {
-          "pitch": 14.1,
-          "yaw": 1.5,
-          "type": "info",
-          "text": $scope.hotspotText('piano', 'Piano')/*,
-         "URL": "https://artbma.org/"*/
-    /*    },
-        {
-          "pitch": -9.4,
-          "yaw": 222.6,
-          "type": "info",
-          "text": $scope.hotspotText('cadeiras', 'Cadeiras')
-        }
-      ]
-    });*/
-
+  
 
   };
 
   $scope.hotspotText = function(hotspot_id, hotspot_title){
     return "<div class=\"hotspot-box\">"+
       "<p>" + hotspot_title + "</p>" +
-      "<a id=\"hotspot_" + hotspot_id + "\" title=\""+ hotspot_title +"\" href=\"#\" "+
-      " onclick=\"openPopup(\'" + hotspot_id + "\');return false;\">Mais informação</a>" +
+      "<a id=\"hotspot_" + hotspot_id.id + "\" title=\""+ hotspot_title +"\" href=\"#\" "+
+      " onclick=\"openPopup(\'" + hotspot_id.description + "\');return false;\">Mais informação</a>" +
       "</div>";
   };
 
+  $scope.hotspotVideo = function(hotspot_url){
+        return "<div class=\"video-container\">"+
+                    "<iframe src=" +hotspot_url +" frameborder=\"20\" width=\"560\" height=\"315\" allowfullscreen>"+"</iframe>"+
+                "</div>";
+
+    };
+
+ $scope.validURL = function (str) {
+  var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
+    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
+    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
+    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+    '(\#[-a-z\d_]*)?$','i'); // fragment locater
+  if(!pattern.test(str)) {
+    return false;
+  } else {
+    return true;
+  }
+};
 
 });
 
