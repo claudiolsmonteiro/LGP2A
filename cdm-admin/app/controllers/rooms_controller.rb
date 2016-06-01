@@ -1,4 +1,8 @@
 class RoomsController < ApplicationController
+  
+  before_filter :cors_preflight_check, only: [:get_everything]
+  after_filter :cors_set_access_control_headers, only: [:get_everything]
+
   def show
   end
 
@@ -129,6 +133,25 @@ class RoomsController < ApplicationController
   def room_params
     #params.fetch(:room, {})
     params.require(:rooms).permit(:name, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room)
+  end
+
+  #cors headers
+  def cors_set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+    headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept, Authorization, Token'
+    headers['Access-Control-Max-Age'] = "1728000"
+  end
+
+  def cors_preflight_check
+    if request.method == 'OPTIONS'
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+      headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version, Token'
+      headers['Access-Control-Max-Age'] = '1728000'
+
+      render :text => '', :content_type => 'text/plain'
+    end
   end
 
 end
