@@ -23,7 +23,7 @@
   <preference name="CrosswalkAnimatable" value="true" />
 
   <preference name="Fullscreen" value="true" />
-
+  <allow-navigation href="http://cdm-admin.herokuapp.com/*" />
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
