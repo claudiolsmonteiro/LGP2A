@@ -14,7 +14,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             maxWidth: 200,
             showDelay: 0
         });
-        $scope.models = LocalStorageService.getModelInfoRemote($scope.model_ready);
+        LocalStorageService.getModelInfoRemote($scope.model_ready);
     };
 
     /*

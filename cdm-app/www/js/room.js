@@ -98,8 +98,9 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
             $scope.environment.scene.add($scope.environment.lights[i]);
         }
 
-        //textures
-        loadTexture($scope.environment, $scope.environment.current_room, $scope.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
+        //load model
+        loadDAE($scope.environment, $scope.models[$scope.room].model_detail_path, [0,0,0], 5);
+        console.log($scope.models[$scope.room]);
 
         $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
 
@@ -116,6 +117,8 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
         var axes = buildAxes( 1000 );
         $scope.environment.scene.add(axes);
+
+        $scope.room_animate();
     };
 
     $scope.room_animate = function() {

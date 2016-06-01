@@ -89,8 +89,8 @@ controllerModule.controller("materialsController", function($scope, $stateParams
 
     //textures
     //loadTexture($scope.environment, $scope.environment.current_room, $scope.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
-    for(var i in $scope.models[$scope.room].materials){
-      loadDAE($scope.environment, $scope.models[$scope.room].materials[i].path, [0,0,0], 5);
+    for(var j in $scope.models[$scope.room].materials){
+      loadDAE($scope.environment, $scope.models[$scope.room].materials[j].path, [0,0,0], 5);
     }
 
     $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
@@ -133,10 +133,15 @@ controllerModule.controller("materialsController", function($scope, $stateParams
     jQuery('#materials-'+room_id+'-more-info-modal-background').hide();
   };
 
+
+  $scope.objCallback = function(object){
+
+  };
+
   // OTHERS
 
   $scope.$on("$destroy", function(){
-    console.log('destroying threejs room context');
+    console.log('destroying threejs materials context');
     cancelAnimationFrame($scope.requestAnimationFrameId);// Stop the animation
     $scope.environment.renderer.domElement.addEventListener('dblclick', null, false); //remove listener to render
     $scope.environment.scene = null;
