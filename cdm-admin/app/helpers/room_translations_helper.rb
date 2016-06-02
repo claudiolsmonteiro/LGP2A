@@ -1,0 +1,2 @@
+module RoomTranslationsHelper
+end

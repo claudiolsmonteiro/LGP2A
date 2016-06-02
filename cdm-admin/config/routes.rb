@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
 
+  get 'room_translations/new'
+
+  get 'room_translations/create'
+
+  get 'room_translations/update'
+
+  get 'room_translations/destroy'
+
+  get 'room_translation/new'
+
+  get 'room_translation/edit'
+
+  get 'room_translation/update'
+
+  get 'room_translation/destroy'
+
   #root
   root             'sessions#new'
   #login/logout

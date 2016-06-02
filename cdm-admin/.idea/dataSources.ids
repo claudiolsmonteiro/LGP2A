@@ -1,12 +1,1710 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="Rails cdm-admin: production" uuid="3411743f-4f83-4f9a-a5a0-07d6b131523f">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="PostgreSQL" version="9.4.8" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.5">
+      <database id="1" name="d4ndob7itmbji5"/>
+      <schema id="2" parent="1" name="public">
+        <object-id>9000983</object-id>
+        <introspection-state-number>217444390</introspection-state-number>
+        <introspection-timestamp>2016-05-31.17:29:01.347</introspection-timestamp>
+      </schema>
+      <sequence id="3" parent="2" name="languages_id_seq">
+        <object-id>9009376</object-id>
+        <state-number>204250043</state-number>
+      </sequence>
+      <sequence id="4" parent="2" name="materials_id_seq">
+        <object-id>9407157</object-id>
+        <state-number>217301585</state-number>
+      </sequence>
+      <sequence id="5" parent="2" name="photos_id_seq">
+        <object-id>9009388</object-id>
+        <state-number>204250058</state-number>
+      </sequence>
+      <sequence id="6" parent="2" name="point_translations_id_seq">
+        <object-id>9009400</object-id>
+        <state-number>204250064</state-number>
+      </sequence>
+      <sequence id="7" parent="2" name="points_id_seq">
+        <object-id>9009413</object-id>
+        <state-number>204250078</state-number>
+      </sequence>
+      <sequence id="8" parent="2" name="room_translations_id_seq">
+        <object-id>9009422</object-id>
+        <state-number>204250082</state-number>
+      </sequence>
+      <sequence id="9" parent="2" name="rooms_id_seq">
+        <object-id>9009435</object-id>
+        <state-number>204250096</state-number>
+      </sequence>
+      <sequence id="10" parent="2" name="users_id_seq">
+        <object-id>9009448</object-id>
+        <state-number>204250112</state-number>
+      </sequence>
+      <sequence id="11" parent="2" name="videos_id_seq">
+        <object-id>9009459</object-id>
+        <state-number>204250114</state-number>
+      </sequence>
+      <table id="12" parent="2" name="languages">
+        <object-id>9009378</object-id>
+        <state-number>204250121</state-number>
+      </table>
+      <table id="13" parent="2" name="materials">
+        <object-id>9407159</object-id>
+        <state-number>217301585</state-number>
+      </table>
+      <table id="14" parent="2" name="photos">
+        <object-id>9009390</object-id>
+        <state-number>204250123</state-number>
+      </table>
+      <table id="15" parent="2" name="point_translations">
+        <object-id>9009402</object-id>
+        <state-number>204250119</state-number>
+      </table>
+      <table id="16" parent="2" name="points">
+        <object-id>9009415</object-id>
+        <state-number>204250120</state-number>
+      </table>
+      <table id="17" parent="2" name="room_translations">
+        <object-id>9009424</object-id>
+        <state-number>204250122</state-number>
+      </table>
+      <table id="18" parent="2" name="rooms">
+        <object-id>9009437</object-id>
+        <state-number>217301585</state-number>
+      </table>
+      <table id="19" parent="2" name="schema_migrations">
+        <object-id>9001038</object-id>
+        <state-number>204040471</state-number>
+      </table>
+      <table id="20" parent="2" name="users">
+        <object-id>9009450</object-id>
+        <state-number>204250112</state-number>
+      </table>
+      <table id="21" parent="2" name="videos">
+        <object-id>9009461</object-id>
+        <state-number>217444390</state-number>
+      </table>
+      <column id="22" parent="12" name="id">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;languages_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="23" parent="12" name="code">
+        <state-number>204250043</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="24" parent="12" name="name">
+        <state-number>204250043</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="25" parent="12" name="created_at">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="26" parent="12" name="updated_at">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="27" parent="12" name="languages_pkey">
+        <object-id>9009385</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="28" parent="12" name="index_languages_on_code">
+        <object-id>9009387</object-id>
+        <columns>code</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="29" parent="12" name="languages_pkey">
+        <columns>id</columns>
+        <underlying-index>languages_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="30" parent="13" name="id">
+        <state-number>217301585</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;materials_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="31" parent="13" name="path">
+        <state-number>217301585</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="32" parent="13" name="room_id">
+        <state-number>217301585</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="33" parent="13" name="materials_pkey">
+        <object-id>9407166</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="34" parent="13" name="index_materials_on_room_id">
+        <object-id>9407168</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="35" parent="13" name="materials_pkey">
+        <columns>id</columns>
+        <underlying-index>materials_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="36" parent="13" name="fk_rails_5d218b6ef1">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="37" parent="14" name="id">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;photos_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="38" parent="14" name="url">
+        <state-number>204250058</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="39" parent="14" name="created_at">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="40" parent="14" name="updated_at">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="41" parent="14" name="room_id">
+        <state-number>204250058</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="42" parent="14" name="url_cube_map">
+        <state-number>204250058</state-number>
+        <data-type>varchar[]</data-type>
+      </column>
+      <index id="43" parent="14" name="photos_pkey">
+        <object-id>9009397</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="44" parent="14" name="index_photos_on_room_id">
+        <object-id>9009399</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="45" parent="14" name="photos_pkey">
+        <columns>id</columns>
+        <underlying-index>photos_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="46" parent="14" name="fk_rails_705ab2a075">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="47" parent="15" name="id">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;point_translations_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="48" parent="15" name="title">
+        <state-number>204250064</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="49" parent="15" name="description">
+        <state-number>204250064</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="50" parent="15" name="created_at">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="51" parent="15" name="updated_at">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="52" parent="15" name="point_id">
+        <state-number>204250064</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="53" parent="15" name="language_id">
+        <state-number>204250064</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="54" parent="15" name="point_translations_pkey">
+        <object-id>9009409</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="55" parent="15" name="index_point_translations_on_point_id">
+        <object-id>9009412</object-id>
+        <columns>point_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="56" parent="15" name="index_point_translations_on_language_id">
+        <object-id>9009411</object-id>
+        <columns>language_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="57" parent="15" name="point_translations_pkey">
+        <columns>id</columns>
+        <underlying-index>point_translations_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="58" parent="15" name="fk_rails_3b19b7fc7b">
+        <columns>point_id</columns>
+        <ref-key>~.points.points_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="59" parent="15" name="fk_rails_791a49abd4">
+        <columns>language_id</columns>
+        <ref-key>~.languages.languages_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="60" parent="16" name="id">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;points_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="61" parent="16" name="x">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="62" parent="16" name="y">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="63" parent="16" name="created_at">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="64" parent="16" name="updated_at">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="65" parent="16" name="photo_id">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="66" parent="16" name="points_pkey">
+        <object-id>9009419</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="67" parent="16" name="index_points_on_photo_id">
+        <object-id>9009421</object-id>
+        <columns>photo_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="68" parent="16" name="points_pkey">
+        <columns>id</columns>
+        <underlying-index>points_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="69" parent="16" name="fk_rails_3fba94928d">
+        <columns>photo_id</columns>
+        <ref-key>~.photos.photos_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="70" parent="17" name="id">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;room_translations_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="71" parent="17" name="name">
+        <state-number>204250082</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="72" parent="17" name="description">
+        <state-number>204250082</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="73" parent="17" name="created_at">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="74" parent="17" name="updated_at">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="75" parent="17" name="room_id">
+        <state-number>204250082</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="76" parent="17" name="language_id">
+        <state-number>204250082</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="77" parent="17" name="room_translations_pkey">
+        <object-id>9009431</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="78" parent="17" name="index_room_translations_on_room_id">
+        <object-id>9009434</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="79" parent="17" name="index_room_translations_on_language_id">
+        <object-id>9009433</object-id>
+        <columns>language_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="80" parent="17" name="room_translations_pkey">
+        <columns>id</columns>
+        <underlying-index>room_translations_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="81" parent="17" name="fk_rails_2c930b556c">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="82" parent="17" name="fk_rails_1dabcd9813">
+        <columns>language_id</columns>
+        <ref-key>~.languages.languages_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="83" parent="18" name="id">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;rooms_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="84" parent="18" name="created_at">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="85" parent="18" name="updated_at">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="86" parent="18" name="model_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="87" parent="18" name="model_detail_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="88" parent="18" name="texture_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="89" parent="18" name="texture_detail_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="90" parent="18" name="animation">
+        <state-number>204250096</state-number>
+        <data-type>double precision[]</data-type>
+        <default-expression>&apos;{0,0,0}&apos;::double precision[]</default-expression>
+      </column>
+      <column id="91" parent="18" name="beacon_uuid">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="92" parent="18" name="beacon_major">
+        <state-number>204250096</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="93" parent="18" name="beacon_minor">
+        <state-number>204250096</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="94" parent="18" name="next_room">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="95" parent="18" name="code">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <index id="96" parent="18" name="rooms_pkey">
+        <object-id>9009445</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="97" parent="18" name="rooms_pkey">
+        <columns>id</columns>
+        <underlying-index>rooms_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="98" parent="19" name="version">
+        <state-number>204040471</state-number>
+        <mandatory>1</mandatory>
+        <data-type>varchar</data-type>
+      </column>
+      <index id="99" parent="19" name="unique_schema_migrations">
+        <object-id>9001093</object-id>
+        <columns>version</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <column id="100" parent="20" name="id">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;users_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="101" parent="20" name="name">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="102" parent="20" name="email">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="103" parent="20" name="password_digest">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="104" parent="20" name="created_at">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="105" parent="20" name="updated_at">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="106" parent="20" name="users_pkey">
+        <object-id>9009457</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="107" parent="20" name="users_pkey">
+        <columns>id</columns>
+        <underlying-index>users_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="108" parent="21" name="id">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;videos_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="109" parent="21" name="url">
+        <state-number>204250114</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="110" parent="21" name="created_at">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="111" parent="21" name="updated_at">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="112" parent="21" name="photo_id">
+        <state-number>204250114</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="113" parent="21" name="x">
+        <state-number>217444390</state-number>
+        <data-type>double precision</data-type>
+      </column>
+      <column id="114" parent="21" name="y">
+        <state-number>217444390</state-number>
+        <data-type>double precision</data-type>
+      </column>
+      <index id="115" parent="21" name="videos_pkey">
+        <object-id>9009468</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="116" parent="21" name="index_videos_on_photo_id">
+        <object-id>9009470</object-id>
+        <columns>photo_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="117" parent="21" name="videos_pkey">
+        <columns>id</columns>
+        <underlying-index>videos_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="118" parent="21" name="fk_rails_b94f414fa4">
+        <columns>photo_id</columns>
+        <ref-key>~.photos.photos_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
   </data-source>
   <data-source name="Rails cdm-admin: default" uuid="73fa9219-bb5d-4a65-b195-3bdccc5bebba">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="PostgreSQL" version="9.4.8" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.5">
+      <database id="1" name="d4ndob7itmbji5"/>
+      <schema id="2" parent="1" name="public">
+        <object-id>9000983</object-id>
+        <introspection-state-number>217444390</introspection-state-number>
+        <introspection-timestamp>2016-05-31.17:29:01.379</introspection-timestamp>
+      </schema>
+      <sequence id="3" parent="2" name="languages_id_seq">
+        <object-id>9009376</object-id>
+        <state-number>204250043</state-number>
+      </sequence>
+      <sequence id="4" parent="2" name="materials_id_seq">
+        <object-id>9407157</object-id>
+        <state-number>217301585</state-number>
+      </sequence>
+      <sequence id="5" parent="2" name="photos_id_seq">
+        <object-id>9009388</object-id>
+        <state-number>204250058</state-number>
+      </sequence>
+      <sequence id="6" parent="2" name="point_translations_id_seq">
+        <object-id>9009400</object-id>
+        <state-number>204250064</state-number>
+      </sequence>
+      <sequence id="7" parent="2" name="points_id_seq">
+        <object-id>9009413</object-id>
+        <state-number>204250078</state-number>
+      </sequence>
+      <sequence id="8" parent="2" name="room_translations_id_seq">
+        <object-id>9009422</object-id>
+        <state-number>204250082</state-number>
+      </sequence>
+      <sequence id="9" parent="2" name="rooms_id_seq">
+        <object-id>9009435</object-id>
+        <state-number>204250096</state-number>
+      </sequence>
+      <sequence id="10" parent="2" name="users_id_seq">
+        <object-id>9009448</object-id>
+        <state-number>204250112</state-number>
+      </sequence>
+      <sequence id="11" parent="2" name="videos_id_seq">
+        <object-id>9009459</object-id>
+        <state-number>204250114</state-number>
+      </sequence>
+      <table id="12" parent="2" name="languages">
+        <object-id>9009378</object-id>
+        <state-number>204250121</state-number>
+      </table>
+      <table id="13" parent="2" name="materials">
+        <object-id>9407159</object-id>
+        <state-number>217301585</state-number>
+      </table>
+      <table id="14" parent="2" name="photos">
+        <object-id>9009390</object-id>
+        <state-number>204250123</state-number>
+      </table>
+      <table id="15" parent="2" name="point_translations">
+        <object-id>9009402</object-id>
+        <state-number>204250119</state-number>
+      </table>
+      <table id="16" parent="2" name="points">
+        <object-id>9009415</object-id>
+        <state-number>204250120</state-number>
+      </table>
+      <table id="17" parent="2" name="room_translations">
+        <object-id>9009424</object-id>
+        <state-number>204250122</state-number>
+      </table>
+      <table id="18" parent="2" name="rooms">
+        <object-id>9009437</object-id>
+        <state-number>217301585</state-number>
+      </table>
+      <table id="19" parent="2" name="schema_migrations">
+        <object-id>9001038</object-id>
+        <state-number>204040471</state-number>
+      </table>
+      <table id="20" parent="2" name="users">
+        <object-id>9009450</object-id>
+        <state-number>204250112</state-number>
+      </table>
+      <table id="21" parent="2" name="videos">
+        <object-id>9009461</object-id>
+        <state-number>217444390</state-number>
+      </table>
+      <column id="22" parent="12" name="id">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;languages_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="23" parent="12" name="code">
+        <state-number>204250043</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="24" parent="12" name="name">
+        <state-number>204250043</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="25" parent="12" name="created_at">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="26" parent="12" name="updated_at">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="27" parent="12" name="languages_pkey">
+        <object-id>9009385</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="28" parent="12" name="index_languages_on_code">
+        <object-id>9009387</object-id>
+        <columns>code</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="29" parent="12" name="languages_pkey">
+        <columns>id</columns>
+        <underlying-index>languages_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="30" parent="13" name="id">
+        <state-number>217301585</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;materials_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="31" parent="13" name="path">
+        <state-number>217301585</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="32" parent="13" name="room_id">
+        <state-number>217301585</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="33" parent="13" name="materials_pkey">
+        <object-id>9407166</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="34" parent="13" name="index_materials_on_room_id">
+        <object-id>9407168</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="35" parent="13" name="materials_pkey">
+        <columns>id</columns>
+        <underlying-index>materials_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="36" parent="13" name="fk_rails_5d218b6ef1">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="37" parent="14" name="id">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;photos_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="38" parent="14" name="url">
+        <state-number>204250058</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="39" parent="14" name="created_at">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="40" parent="14" name="updated_at">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="41" parent="14" name="room_id">
+        <state-number>204250058</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="42" parent="14" name="url_cube_map">
+        <state-number>204250058</state-number>
+        <data-type>varchar[]</data-type>
+      </column>
+      <index id="43" parent="14" name="photos_pkey">
+        <object-id>9009397</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="44" parent="14" name="index_photos_on_room_id">
+        <object-id>9009399</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="45" parent="14" name="photos_pkey">
+        <columns>id</columns>
+        <underlying-index>photos_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="46" parent="14" name="fk_rails_705ab2a075">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="47" parent="15" name="id">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;point_translations_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="48" parent="15" name="title">
+        <state-number>204250064</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="49" parent="15" name="description">
+        <state-number>204250064</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="50" parent="15" name="created_at">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="51" parent="15" name="updated_at">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="52" parent="15" name="point_id">
+        <state-number>204250064</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="53" parent="15" name="language_id">
+        <state-number>204250064</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="54" parent="15" name="point_translations_pkey">
+        <object-id>9009409</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="55" parent="15" name="index_point_translations_on_point_id">
+        <object-id>9009412</object-id>
+        <columns>point_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="56" parent="15" name="index_point_translations_on_language_id">
+        <object-id>9009411</object-id>
+        <columns>language_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="57" parent="15" name="point_translations_pkey">
+        <columns>id</columns>
+        <underlying-index>point_translations_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="58" parent="15" name="fk_rails_3b19b7fc7b">
+        <columns>point_id</columns>
+        <ref-key>~.points.points_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="59" parent="15" name="fk_rails_791a49abd4">
+        <columns>language_id</columns>
+        <ref-key>~.languages.languages_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="60" parent="16" name="id">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;points_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="61" parent="16" name="x">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="62" parent="16" name="y">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="63" parent="16" name="created_at">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="64" parent="16" name="updated_at">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="65" parent="16" name="photo_id">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="66" parent="16" name="points_pkey">
+        <object-id>9009419</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="67" parent="16" name="index_points_on_photo_id">
+        <object-id>9009421</object-id>
+        <columns>photo_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="68" parent="16" name="points_pkey">
+        <columns>id</columns>
+        <underlying-index>points_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="69" parent="16" name="fk_rails_3fba94928d">
+        <columns>photo_id</columns>
+        <ref-key>~.photos.photos_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="70" parent="17" name="id">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;room_translations_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="71" parent="17" name="name">
+        <state-number>204250082</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="72" parent="17" name="description">
+        <state-number>204250082</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="73" parent="17" name="created_at">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="74" parent="17" name="updated_at">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="75" parent="17" name="room_id">
+        <state-number>204250082</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="76" parent="17" name="language_id">
+        <state-number>204250082</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="77" parent="17" name="room_translations_pkey">
+        <object-id>9009431</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="78" parent="17" name="index_room_translations_on_room_id">
+        <object-id>9009434</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="79" parent="17" name="index_room_translations_on_language_id">
+        <object-id>9009433</object-id>
+        <columns>language_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="80" parent="17" name="room_translations_pkey">
+        <columns>id</columns>
+        <underlying-index>room_translations_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="81" parent="17" name="fk_rails_2c930b556c">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="82" parent="17" name="fk_rails_1dabcd9813">
+        <columns>language_id</columns>
+        <ref-key>~.languages.languages_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="83" parent="18" name="id">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;rooms_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="84" parent="18" name="created_at">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="85" parent="18" name="updated_at">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="86" parent="18" name="model_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="87" parent="18" name="model_detail_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="88" parent="18" name="texture_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="89" parent="18" name="texture_detail_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="90" parent="18" name="animation">
+        <state-number>204250096</state-number>
+        <data-type>double precision[]</data-type>
+        <default-expression>&apos;{0,0,0}&apos;::double precision[]</default-expression>
+      </column>
+      <column id="91" parent="18" name="beacon_uuid">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="92" parent="18" name="beacon_major">
+        <state-number>204250096</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="93" parent="18" name="beacon_minor">
+        <state-number>204250096</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="94" parent="18" name="next_room">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="95" parent="18" name="code">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <index id="96" parent="18" name="rooms_pkey">
+        <object-id>9009445</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="97" parent="18" name="rooms_pkey">
+        <columns>id</columns>
+        <underlying-index>rooms_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="98" parent="19" name="version">
+        <state-number>204040471</state-number>
+        <mandatory>1</mandatory>
+        <data-type>varchar</data-type>
+      </column>
+      <index id="99" parent="19" name="unique_schema_migrations">
+        <object-id>9001093</object-id>
+        <columns>version</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <column id="100" parent="20" name="id">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;users_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="101" parent="20" name="name">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="102" parent="20" name="email">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="103" parent="20" name="password_digest">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="104" parent="20" name="created_at">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="105" parent="20" name="updated_at">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="106" parent="20" name="users_pkey">
+        <object-id>9009457</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="107" parent="20" name="users_pkey">
+        <columns>id</columns>
+        <underlying-index>users_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="108" parent="21" name="id">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;videos_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="109" parent="21" name="url">
+        <state-number>204250114</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="110" parent="21" name="created_at">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="111" parent="21" name="updated_at">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="112" parent="21" name="photo_id">
+        <state-number>204250114</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="113" parent="21" name="x">
+        <state-number>217444390</state-number>
+        <data-type>double precision</data-type>
+      </column>
+      <column id="114" parent="21" name="y">
+        <state-number>217444390</state-number>
+        <data-type>double precision</data-type>
+      </column>
+      <index id="115" parent="21" name="videos_pkey">
+        <object-id>9009468</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="116" parent="21" name="index_videos_on_photo_id">
+        <object-id>9009470</object-id>
+        <columns>photo_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="117" parent="21" name="videos_pkey">
+        <columns>id</columns>
+        <underlying-index>videos_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="118" parent="21" name="fk_rails_b94f414fa4">
+        <columns>photo_id</columns>
+        <ref-key>~.photos.photos_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
   </data-source>
   <data-source name="Rails cdm-admin: development" uuid="6df485b1-7891-4c6b-acbf-c799447849e6">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="PostgreSQL" version="9.4.8" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.5">
+      <database id="1" name="d4ndob7itmbji5"/>
+      <schema id="2" parent="1" name="public">
+        <object-id>9000983</object-id>
+        <introspection-state-number>217444390</introspection-state-number>
+        <introspection-timestamp>2016-05-31.17:29:01.299</introspection-timestamp>
+      </schema>
+      <sequence id="3" parent="2" name="languages_id_seq">
+        <object-id>9009376</object-id>
+        <state-number>204250043</state-number>
+      </sequence>
+      <sequence id="4" parent="2" name="materials_id_seq">
+        <object-id>9407157</object-id>
+        <state-number>217301585</state-number>
+      </sequence>
+      <sequence id="5" parent="2" name="photos_id_seq">
+        <object-id>9009388</object-id>
+        <state-number>204250058</state-number>
+      </sequence>
+      <sequence id="6" parent="2" name="point_translations_id_seq">
+        <object-id>9009400</object-id>
+        <state-number>204250064</state-number>
+      </sequence>
+      <sequence id="7" parent="2" name="points_id_seq">
+        <object-id>9009413</object-id>
+        <state-number>204250078</state-number>
+      </sequence>
+      <sequence id="8" parent="2" name="room_translations_id_seq">
+        <object-id>9009422</object-id>
+        <state-number>204250082</state-number>
+      </sequence>
+      <sequence id="9" parent="2" name="rooms_id_seq">
+        <object-id>9009435</object-id>
+        <state-number>204250096</state-number>
+      </sequence>
+      <sequence id="10" parent="2" name="users_id_seq">
+        <object-id>9009448</object-id>
+        <state-number>204250112</state-number>
+      </sequence>
+      <sequence id="11" parent="2" name="videos_id_seq">
+        <object-id>9009459</object-id>
+        <state-number>204250114</state-number>
+      </sequence>
+      <table id="12" parent="2" name="languages">
+        <object-id>9009378</object-id>
+        <state-number>204250121</state-number>
+      </table>
+      <table id="13" parent="2" name="materials">
+        <object-id>9407159</object-id>
+        <state-number>217301585</state-number>
+      </table>
+      <table id="14" parent="2" name="photos">
+        <object-id>9009390</object-id>
+        <state-number>204250123</state-number>
+      </table>
+      <table id="15" parent="2" name="point_translations">
+        <object-id>9009402</object-id>
+        <state-number>204250119</state-number>
+      </table>
+      <table id="16" parent="2" name="points">
+        <object-id>9009415</object-id>
+        <state-number>204250120</state-number>
+      </table>
+      <table id="17" parent="2" name="room_translations">
+        <object-id>9009424</object-id>
+        <state-number>204250122</state-number>
+      </table>
+      <table id="18" parent="2" name="rooms">
+        <object-id>9009437</object-id>
+        <state-number>217301585</state-number>
+      </table>
+      <table id="19" parent="2" name="schema_migrations">
+        <object-id>9001038</object-id>
+        <state-number>204040471</state-number>
+      </table>
+      <table id="20" parent="2" name="users">
+        <object-id>9009450</object-id>
+        <state-number>204250112</state-number>
+      </table>
+      <table id="21" parent="2" name="videos">
+        <object-id>9009461</object-id>
+        <state-number>217444390</state-number>
+      </table>
+      <column id="22" parent="12" name="id">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;languages_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="23" parent="12" name="code">
+        <state-number>204250043</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="24" parent="12" name="name">
+        <state-number>204250043</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="25" parent="12" name="created_at">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="26" parent="12" name="updated_at">
+        <state-number>204250043</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="27" parent="12" name="languages_pkey">
+        <object-id>9009385</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="28" parent="12" name="index_languages_on_code">
+        <object-id>9009387</object-id>
+        <columns>code</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="29" parent="12" name="languages_pkey">
+        <columns>id</columns>
+        <underlying-index>languages_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="30" parent="13" name="id">
+        <state-number>217301585</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;materials_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="31" parent="13" name="path">
+        <state-number>217301585</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="32" parent="13" name="room_id">
+        <state-number>217301585</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="33" parent="13" name="materials_pkey">
+        <object-id>9407166</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="34" parent="13" name="index_materials_on_room_id">
+        <object-id>9407168</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="35" parent="13" name="materials_pkey">
+        <columns>id</columns>
+        <underlying-index>materials_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="36" parent="13" name="fk_rails_5d218b6ef1">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="37" parent="14" name="id">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;photos_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="38" parent="14" name="url">
+        <state-number>204250058</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="39" parent="14" name="created_at">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="40" parent="14" name="updated_at">
+        <state-number>204250058</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="41" parent="14" name="room_id">
+        <state-number>204250058</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="42" parent="14" name="url_cube_map">
+        <state-number>204250058</state-number>
+        <data-type>varchar[]</data-type>
+      </column>
+      <index id="43" parent="14" name="photos_pkey">
+        <object-id>9009397</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="44" parent="14" name="index_photos_on_room_id">
+        <object-id>9009399</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="45" parent="14" name="photos_pkey">
+        <columns>id</columns>
+        <underlying-index>photos_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="46" parent="14" name="fk_rails_705ab2a075">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="47" parent="15" name="id">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;point_translations_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="48" parent="15" name="title">
+        <state-number>204250064</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="49" parent="15" name="description">
+        <state-number>204250064</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="50" parent="15" name="created_at">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="51" parent="15" name="updated_at">
+        <state-number>204250064</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="52" parent="15" name="point_id">
+        <state-number>204250064</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="53" parent="15" name="language_id">
+        <state-number>204250064</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="54" parent="15" name="point_translations_pkey">
+        <object-id>9009409</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="55" parent="15" name="index_point_translations_on_point_id">
+        <object-id>9009412</object-id>
+        <columns>point_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="56" parent="15" name="index_point_translations_on_language_id">
+        <object-id>9009411</object-id>
+        <columns>language_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="57" parent="15" name="point_translations_pkey">
+        <columns>id</columns>
+        <underlying-index>point_translations_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="58" parent="15" name="fk_rails_3b19b7fc7b">
+        <columns>point_id</columns>
+        <ref-key>~.points.points_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="59" parent="15" name="fk_rails_791a49abd4">
+        <columns>language_id</columns>
+        <ref-key>~.languages.languages_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="60" parent="16" name="id">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;points_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="61" parent="16" name="x">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="62" parent="16" name="y">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="63" parent="16" name="created_at">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="64" parent="16" name="updated_at">
+        <state-number>204250078</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="65" parent="16" name="photo_id">
+        <state-number>204250078</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="66" parent="16" name="points_pkey">
+        <object-id>9009419</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="67" parent="16" name="index_points_on_photo_id">
+        <object-id>9009421</object-id>
+        <columns>photo_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="68" parent="16" name="points_pkey">
+        <columns>id</columns>
+        <underlying-index>points_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="69" parent="16" name="fk_rails_3fba94928d">
+        <columns>photo_id</columns>
+        <ref-key>~.photos.photos_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="70" parent="17" name="id">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;room_translations_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="71" parent="17" name="name">
+        <state-number>204250082</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="72" parent="17" name="description">
+        <state-number>204250082</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="73" parent="17" name="created_at">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="74" parent="17" name="updated_at">
+        <state-number>204250082</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="75" parent="17" name="room_id">
+        <state-number>204250082</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="76" parent="17" name="language_id">
+        <state-number>204250082</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <index id="77" parent="17" name="room_translations_pkey">
+        <object-id>9009431</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="78" parent="17" name="index_room_translations_on_room_id">
+        <object-id>9009434</object-id>
+        <columns>room_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="79" parent="17" name="index_room_translations_on_language_id">
+        <object-id>9009433</object-id>
+        <columns>language_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="80" parent="17" name="room_translations_pkey">
+        <columns>id</columns>
+        <underlying-index>room_translations_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="81" parent="17" name="fk_rails_2c930b556c">
+        <columns>room_id</columns>
+        <ref-key>~.rooms.rooms_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="82" parent="17" name="fk_rails_1dabcd9813">
+        <columns>language_id</columns>
+        <ref-key>~.languages.languages_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="83" parent="18" name="id">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;rooms_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="84" parent="18" name="created_at">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="85" parent="18" name="updated_at">
+        <state-number>204250096</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="86" parent="18" name="model_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="87" parent="18" name="model_detail_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="88" parent="18" name="texture_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="89" parent="18" name="texture_detail_path">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="90" parent="18" name="animation">
+        <state-number>204250096</state-number>
+        <data-type>double precision[]</data-type>
+        <default-expression>&apos;{0,0,0}&apos;::double precision[]</default-expression>
+      </column>
+      <column id="91" parent="18" name="beacon_uuid">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="92" parent="18" name="beacon_major">
+        <state-number>204250096</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="93" parent="18" name="beacon_minor">
+        <state-number>204250096</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="94" parent="18" name="next_room">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="95" parent="18" name="code">
+        <state-number>204250096</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <index id="96" parent="18" name="rooms_pkey">
+        <object-id>9009445</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="97" parent="18" name="rooms_pkey">
+        <columns>id</columns>
+        <underlying-index>rooms_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="98" parent="19" name="version">
+        <state-number>204040471</state-number>
+        <mandatory>1</mandatory>
+        <data-type>varchar</data-type>
+      </column>
+      <index id="99" parent="19" name="unique_schema_migrations">
+        <object-id>9001093</object-id>
+        <columns>version</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <column id="100" parent="20" name="id">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;users_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="101" parent="20" name="name">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="102" parent="20" name="email">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="103" parent="20" name="password_digest">
+        <state-number>204250112</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="104" parent="20" name="created_at">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="105" parent="20" name="updated_at">
+        <state-number>204250112</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <index id="106" parent="20" name="users_pkey">
+        <object-id>9009457</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="107" parent="20" name="users_pkey">
+        <columns>id</columns>
+        <underlying-index>users_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <column id="108" parent="21" name="id">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>integer</data-type>
+        <default-expression>nextval(&apos;videos_id_seq&apos;::regclass)</default-expression>
+      </column>
+      <column id="109" parent="21" name="url">
+        <state-number>204250114</state-number>
+        <data-type>varchar</data-type>
+      </column>
+      <column id="110" parent="21" name="created_at">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="111" parent="21" name="updated_at">
+        <state-number>204250114</state-number>
+        <mandatory>1</mandatory>
+        <data-type>timestamp</data-type>
+      </column>
+      <column id="112" parent="21" name="photo_id">
+        <state-number>204250114</state-number>
+        <data-type>integer</data-type>
+      </column>
+      <column id="113" parent="21" name="x">
+        <state-number>217444390</state-number>
+        <data-type>double precision</data-type>
+      </column>
+      <column id="114" parent="21" name="y">
+        <state-number>217444390</state-number>
+        <data-type>double precision</data-type>
+      </column>
+      <index id="115" parent="21" name="videos_pkey">
+        <object-id>9009468</object-id>
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="116" parent="21" name="index_videos_on_photo_id">
+        <object-id>9009470</object-id>
+        <columns>photo_id</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="117" parent="21" name="videos_pkey">
+        <columns>id</columns>
+        <underlying-index>videos_pkey</underlying-index>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="118" parent="21" name="fk_rails_b94f414fa4">
+        <columns>photo_id</columns>
+        <ref-key>~.photos.photos_pkey</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
   </data-source>
 </component>

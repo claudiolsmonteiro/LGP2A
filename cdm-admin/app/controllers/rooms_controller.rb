@@ -1,9 +1,12 @@
 class RoomsController < ApplicationController
+  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  attr_accessor :room_translations
   def show
   end
 
   def new
     @room = Room.new
+    @room.room_translations.build
   end
 
   def edit
@@ -11,11 +14,11 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-
-    @room.model_detail_path= @room.model_path;
-    @room.texture_detail_path= @room.texture_path;
+    @room.model_detail_path= @room.model_path
+    @room.texture_detail_path= @room.texture_path
     respond_to do |format|
       if @room.save
+
         format.html { redirect_to @room, notice: 'Room was successfully created.' }
         format.json { render :show, status: :created, location: @room }
       else
@@ -128,7 +131,7 @@ class RoomsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def room_params
     #params.fetch(:room, {})
-    params.require(:rooms).permit(:name, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room)
+    params.require(:room).permit(:code, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room, room_translations_attributes: [:name, :description, :language_id])
   end
 
 end
