@@ -17,7 +17,7 @@ class PointsController < ApplicationController
     if @point.save
       redirect_to @point
     else
-      render 'f/newpoint'
+      render '/newpoint'
     end
   end
 
