@@ -1,10 +1,10 @@
-<%= form_for(@room) do |f| %>
-  <% if @room.errors.any? %>
+<%= form_for(@point) do |f| %>
+  <% if @point.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+      <h2><%= pluralize(@point.errors.count, "error") %> prohibited this point from being saved:</h2>
 
       <ul>
-      <% @room.errors.full_messages.each do |message| %>
+      <% @point.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

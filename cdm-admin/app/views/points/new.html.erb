@@ -13,8 +13,11 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="col-md-12">
-            <%= form_for :point, url: '/point' do |f| %>
-
+            <%= form_for @point, url: '/points' do |f| %>
+                <div class="form-group">
+                  <label>Id da foto correspondente</label>
+                  <%= f.number_field :photo_id , class:"form-control" %>
+                </div>
                 <div class="form-group">
                   <label>Coordenadas X da etiqueta</label>
                   <%= f.number_field :x , class:"form-control" %>
@@ -22,12 +25,23 @@
                 <div class="form-group">
                   <label>Coordenadas Y da etiqueta</label>
                   <%= f.number_field :y , class:"form-control" %>
+                </div>
 
-                </div>
-                <div class="form-group">
-                  <label>Id da foto correspondente</label>
-                  <%= f.number_field :photo_id , class:"form-control" %>
-                </div>
+                <%= f.fields_for :point_translations do |rt| %>
+                    <div class="form-group">
+                      <label>Point title</label>
+                      <%= rt.text_field :title , class:"form-control" %>
+                    </div>
+                    <div class="form-group">
+                      <label>Point description</label>
+                      <%= rt.text_area :description , class:"form-control" %>
+                    </div>
+                    <div class="form-group">
+                      <label>Language Id</label>
+                      <%= rt.text_field :language_id , class:"form-control" %>
+                    </div>
+                <% end %>
+
 
                 <%= f.submit "Submit", class:"button" %>
             <% end %>

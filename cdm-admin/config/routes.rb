@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'point_translations_controller/new'
+
+  get 'point_translations_controller/create'
+
+  get 'point_translations_controller/edit'
+
+  get 'point_translations_controller/update'
+
+  get 'point_translations_controller/destroy'
+
+  get 'point_translations_controller/show'
+
   get 'room_translations/new'
 
   get 'room_translations/create'
@@ -15,6 +27,8 @@ Rails.application.routes.draw do
   get 'room_translation/update'
 
   get 'room_translation/destroy'
+
+
 
   #root
   root             'sessions#new'
@@ -42,7 +56,8 @@ Rails.application.routes.draw do
   post '/rooms' => 'rooms#create'
   #points
   resources :points
-  get '/newpoint' => 'points#new'
-  post '/point' => 'points#create'
+  get "api/point/:id", :to => 'points#get_room'
+  get '/points' => 'points#new'
+  post '/points' => 'points#create'
 
 end

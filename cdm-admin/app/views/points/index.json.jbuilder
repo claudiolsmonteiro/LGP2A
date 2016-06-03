@@ -1,4 +1,4 @@
-json.array!(@rooms) do |room|
-  json.extract! room, :id
-  json.url room_url(room, format: :json)
+json.array!(@points) do |point|
+  json.extract! point, :id
+  json.url point_url(point, format: :json)
 end
