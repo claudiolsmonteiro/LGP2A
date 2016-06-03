@@ -19,8 +19,6 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
-    @room.model_detail_path= @room.model_path
-    @room.texture_detail_path= @room.texture_path
     respond_to do |format|
       if @room.save
 
