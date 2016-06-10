@@ -5,12 +5,11 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("roomController", function($scope, $stateParams, $state, LocalStorageService){
+controllerModule.controller("roomController", function($scope, $stateParams, $state, customLocalStorage){
 
     ////////////////////
-    $scope.models = LocalStorageService.getModelInfo();
     $scope.texts = texts;
-    $scope.language = LocalStorageService.getLanguage();
+    $scope.language = customLocalStorage.getLanguage();
     ////////////////////
 
     ionic.Platform.ready(function() {
@@ -23,18 +22,18 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.room = $stateParams.room;
     $scope.prefix = 'room';
-    $scope.room_title = $scope.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
-
+    $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
+    $scope.room_description = customLocalStorage.models[$stateParams.room].translations[$scope.language].description;
 
     //panorama_available -> true if the room as a panoramic picture.
     //if not, the option won't be shown in the bottom navbar
     $scope.panorama_available = false;
 
-    $scope.next_room_available = ($scope.models[$scope.room].next_room != null);
-    $scope.next_room_id = $scope.models[$scope.room].next_room;
-    $scope.goToNextRoom = function() { $state.go('room' , {room: $scope.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
+    $scope.next_room_available = (customLocalStorage.models[$scope.room].next_room != null);
+    $scope.next_room_id = customLocalStorage.models[$scope.room].next_room;
+    $scope.goToNextRoom = function() { $state.go('room' , {room: customLocalStorage.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
 
-    if ($scope.models[$scope.room].photo != null && $scope.models[$scope.room].photo != undefined)
+    if (customLocalStorage.models[$scope.room].photo != null && customLocalStorage.models[$scope.room].photo != undefined)
         $scope.panorama_available = true;
 
     $scope.showRoomModel = function () { $scope.showRoomModelAux($scope.environment.current_room); };
@@ -98,9 +97,11 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
             $scope.environment.scene.add($scope.environment.lights[i]);
         }
 
-        //load model
-        loadDAE($scope.environment, $scope.models[$scope.room].model_detail_path, [0,0,0], 5);
-        console.log($scope.models[$scope.room]);
+        //load model - está comentada a linha do modelo DAE porque a app fica muito pesada.
+        // descomentar o DAE e comentar a linha abaixo (loadTexture) para usar o modelo detalhado
+        //loadDAE($scope.environment, customLocalStorage.models[$scope.room].model_detail_path, [0,0,0], 5);
+        loadTexture($scope.environment, $scope.environment.current_room, customLocalStorage.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
+        console.log(customLocalStorage.models[$scope.room]);
 
         $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
 
@@ -128,7 +129,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     };
 
     $scope.room_loadObjects = function(){
-        loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, false, null, $scope.models[$scope.environment.current_room], $scope.language);
+        loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, false, null, customLocalStorage.models[$scope.environment.current_room], $scope.language);
     };
 
     $scope.room_show_more_info_popup = function(room_id){

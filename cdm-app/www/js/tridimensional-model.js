@@ -2,7 +2,7 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, LocalStorageService, $ionicLoading){
+controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, customLocalStorage, $ionicLoading){
     //ionic.Platform.fullScreen(true, false);
 
     $scope.getRemoteModels = function (){
@@ -14,14 +14,16 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             maxWidth: 200,
             showDelay: 0
         });
-        LocalStorageService.getModelInfoRemote($scope.model_ready);
+        customLocalStorage.getModelInfoRemote($scope.model_ready);
     };
 
     /*
      @param success - boolean indicating weather the remote loading of models worked.
      */
     $scope.model_ready = function(success){
+        console.log("model ready");
         $ionicLoading.hide();
+        console.log("1");
         var template_modal =
             '<div class="custom-modal">'+
             '<div class="modal-title">Connection problem</div>'+
@@ -34,8 +36,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             '</div>';
 
         if(success){
-
-            $scope.models = LocalStorageService.getModelInfo();
+            console.log("2");
             ionic.Platform.ready(function(){
                 if(screen.lockOrientation) {
                     console.log('locking to landscape');
@@ -55,7 +56,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                                 $scope.beacons_detected[uniqueBeaconKey].detected = true;
                                 var prompt_result =
                                     window.confirm('Está perto de:\n' +
-                                        $scope.models[$scope.beacons_detected[uniqueBeaconKey].model_key].translations[$scope.language].name + '\n' +
+                                        customLocalStorage.models[$scope.beacons_detected[uniqueBeaconKey].model_key].translations[$scope.language].name + '\n' +
                                         'Deseja ver mais informação?');
                                 if(prompt_result){ //navigate to detected room
                                     $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
@@ -76,10 +77,10 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                     //ignoring error. probably because running app in browser (development), not in device.
                 }
 
-
+                console.log("3");
 
             });
-
+            console.log("4");
             ionic.DomUtil.ready(function(){
                 $scope.environment.current_room = $stateParams.current_room;
                 $scope.tridimensional_model_init();
@@ -96,14 +97,14 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                 showDelay: 0
             });
         }
+        console.log("5");
 
     };
 
     ////////////////////
     $scope.getRemoteModels();
-    console.log($scope.models);
     $scope.texts = texts;
-    $scope.language = LocalStorageService.getLanguage();
+    $scope.language = customLocalStorage.getLanguage();
     $scope.environment = construct_tridimensional_environment([0,200,400]);
     $scope.prefix = 'model';
     ////////////////////
@@ -148,11 +149,11 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     $scope.model_increment_textures_loaded = function(){
         $scope.environment.textures_loaded++;
-        return Object.size($scope.models) == $scope.environment.textures_loaded;
+        return Object.size(customLocalStorage.models) == $scope.environment.textures_loaded;
     }
 
     $scope.tridimensional_model_init = function() {
-
+        console.log(customLocalStorage.models);
         document.addEventListener( 'mousedown', function( e ) { $scope.onDocumentMouseDown( e );}, true );
 
         var ambient = new THREE.AmbientLight( 0x333333 );
@@ -217,8 +218,9 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         }
 
         //textures
-        for(var key in $scope.models){
-            loadTexture($scope.environment, key, $scope.models[key].texture_path, $scope.model_increment_textures_loaded, $scope.model_loadObjects, $scope.tridimensional_model_animate);
+        for(var key in customLocalStorage.models){
+            console.log("gonna load texture: " + key);
+            loadTexture($scope.environment, key, customLocalStorage.models[key].texture_path, $scope.model_increment_textures_loaded, $scope.model_loadObjects, $scope.tridimensional_model_animate);
         }
 
         window.addEventListener("orientationchange", function(){
@@ -250,7 +252,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.tridimensional_model_animate = function() {
         /*console.log('#########################################');
          console.log('textures loaded: ' + model_textures_loaded);
-         console.log('$scope.models size: ' +  Object.size($scope.models));
+         console.log('customLocalStorage.models size: ' +  Object.size(customLocalStorage.models));
          console.log(model_objects_loaded? 'objects started loading ' : 'objects didn\'t start loading');
          console.log(model_textures);
          console.log('#########################################');
@@ -270,13 +272,13 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     $scope.model_loadObjects = function(){
         var y_coord = 0;
-        for(var key in $scope.models){
+        for(var key in customLocalStorage.models){
             var active = false;
             if($scope.environment.current_room != null && $scope.environment.current_room == key)
                 active = true;
-            if($scope.models[key].material_path != null)
-              loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models, $scope.language);
-            else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, $scope.models[key], $scope.language);
+            if(customLocalStorage.models[key].material_path != null)
+              loadObjMtl($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, customLocalStorage.models, $scope.language);
+            else loadObjModel($scope.environment, key, [0, y_coord, 0], 100, 0.5, active, $scope.objCallback, customLocalStorage.models[key], $scope.language);
         }
     };
 
@@ -424,12 +426,12 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         $scope.beacons = {};
         $scope.beacons_detected = [];
         var temp_uuids = [];
-        for(var key in $scope.models){
-            var temp_key = $scope.models[key].beacon_uuid+':'+$scope.models[key].beacon_major+':'+$scope.models[key].beacon_minor;
+        for(var key in customLocalStorage.models){
+            var temp_key = customLocalStorage.models[key].beacon_uuid+':'+customLocalStorage.models[key].beacon_major+':'+customLocalStorage.models[key].beacon_minor;
             $scope.beacons_detected[temp_key] = {};
             $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
             $scope.beacons_detected[temp_key].model_key = key;
-            temp_uuids.push($scope.models[key].beacon_uuid);
+            temp_uuids.push(customLocalStorage.models[key].beacon_uuid);
         }
         $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
         $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array

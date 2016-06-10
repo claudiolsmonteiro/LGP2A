@@ -152,13 +152,23 @@ dialog{
 .more-info-modal {
   display: none;
   position: fixed;
- // background-color: rgba(230, 230, 230, 0.85);
+  background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
+  padding: 25px;
 
   .modal-header{
     height: 3rem;
-    margin: 10px;
+    //margin: 10px;
+
+    .modal-title{
+      font-size: 1.3rem;
+    }
+    .close-btn-container{
+      float: right;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
   }
 
   .modal-container{
@@ -171,11 +181,7 @@ dialog{
     position: absolute;
     bottom: 0;
     width: 100%;
-    button{
-      float: right;
-      margin-right: 10px;
-      margin-bottom: 10px;
-    }
+
   }
 
   width: 80vw;
@@ -255,7 +261,8 @@ and (-webkit-min-device-pixel-ratio: 1) {
   //display: block;
   position: fixed;
   left: 0;
-  background-color: rgba(87, 136, 150, 0.8); //#578896
+  //background-color: rgba(87, 136, 150, 0.8); //#578896
+  background-color: $dark-blue-opacity;
 
   .sidebar-column {
     display: block;
@@ -274,11 +281,13 @@ and (-webkit-min-device-pixel-ratio: 1) {
       li{
         margin-top: 25px;
         margin-bottom: 25px;
-        color: rgba(36,36,42,0.5);
+        //color: rgba(36,36,42,0.5);
+        color: rgba( 255, 255, 255, 0.5);
         a{
           text-decoration: none;
           //color: #B1D5E5;
-          color: rgba(36,36,42,0.5);
+          //color: rgba(36,36,42,0.5);
+          color: rgba( 255, 255, 255, 0.5);
         }
       }
     }

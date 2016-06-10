@@ -5,12 +5,11 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("materialsController", function($scope, $stateParams, $state, LocalStorageService){
+controllerModule.controller("materialsController", function($scope, $stateParams, $state, customLocalStorage){
 
   ////////////////////
-  $scope.models = LocalStorageService.getModelInfo();
   $scope.texts = texts;
-  $scope.language = LocalStorageService.getLanguage();
+  $scope.language = customLocalStorage.getLanguage();
   ////////////////////
 
   $scope.$on('$ionicView.beforeEnter', function(){
@@ -20,17 +19,18 @@ controllerModule.controller("materialsController", function($scope, $stateParams
 
   $scope.room = $stateParams.room;
   $scope.prefix = 'materials';
-  $scope.room_title = $scope.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
+  $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
+  $scope.room_description = customLocalStorage.models[$stateParams.room].translations[$scope.language].description;
 
   //panorama_available -> true if the room as a panoramic picture.
   //if not, the option won't be shown in the bottom navbar
   $scope.panorama_available = false;
-  if ($scope.models[$scope.room].photo != null && $scope.models[$scope.room].photo != undefined)
+  if (customLocalStorage.models[$scope.room].photo != null && customLocalStorage.models[$scope.room].photo != undefined)
     $scope.panorama_available = true;
 
-  $scope.next_room_available = ($scope.models[$scope.room].next_room != null);
-  $scope.next_room_id = $scope.models[$scope.room].next_room;
-  $scope.goToNextRoom = function() { $state.go('room' , {room: $scope.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
+  $scope.next_room_available = (customLocalStorage.models[$scope.room].next_room != null);
+  $scope.next_room_id = customLocalStorage.models[$scope.room].next_room;
+  $scope.goToNextRoom = function() { $state.go('room' , {room: customLocalStorage.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
 
   $scope.showPopup = function () { $scope.show_more_info_popup($scope.environment.current_room); };
   $scope.hidePopup = function () { $scope.hide_more_info_popup($scope.environment.current_room); };
@@ -88,9 +88,9 @@ controllerModule.controller("materialsController", function($scope, $stateParams
     }
 
     //textures
-    //loadTexture($scope.environment, $scope.environment.current_room, $scope.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
-    for(var j in $scope.models[$scope.room].materials){
-      loadDAE($scope.environment, $scope.models[$scope.room].materials[j].path, [0,0,0], 5);
+    //loadTexture($scope.environment, $scope.environment.current_room, customLocalStorage.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
+    for(var j in customLocalStorage.models[$scope.room].materials){
+      loadDAE($scope.environment, customLocalStorage.models[$scope.room].materials[j].path, [0,0,0], 5);
     }
 
     $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
@@ -120,7 +120,7 @@ controllerModule.controller("materialsController", function($scope, $stateParams
   };
 
   $scope.loadObjects = function(){
-    loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, false, null, $scope.models[$scope.environment.current_room], $scope.language);
+    loadObjModel($scope.environment, $scope.environment.current_room, [0, -25, 0], 100, 0.5, false, null, customLocalStorage.models[$scope.environment.current_room], $scope.language);
   };
 
   $scope.show_more_info_popup = function(room_id){

@@ -5,12 +5,11 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("panoramaController", function($scope, $stateParams, $state, LocalStorageService){
+controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage){
 
   ////////////////////
-  $scope.models = LocalStorageService.getModelInfo();
   $scope.texts = texts;
-  $scope.language = LocalStorageService.getLanguage();
+  $scope.language = customLocalStorage.getLanguage();
   ////////////////////
 
   ionic.Platform.ready(function() {
@@ -23,18 +22,18 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
 
   $scope.room = $stateParams.room;
   $scope.prefix = 'panorama';
-  $scope.room_title = $scope.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
-
+  $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
+  $scope.room_description = customLocalStorage.models[$stateParams.room].translations[$scope.language].description;
 
   //panorama_available -> true if the room as a panoramic picture.
   //if not, the option won't be shown in the bottom navbar
   $scope.panorama_available = false;
 
-  $scope.next_room_available = ($scope.models[$scope.room].next_room != null);
-  $scope.next_room_id = $scope.models[$scope.room].next_room;
-  $scope.goToNextRoom = function() { $state.go('room' , {room: $scope.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
+  $scope.next_room_available = (customLocalStorage.models[$scope.room].next_room != null);
+  $scope.next_room_id = customLocalStorage.models[$scope.room].next_room;
+  $scope.goToNextRoom = function() { $state.go('room' , {room: customLocalStorage.models[$scope.room].next_room }, {reload: true, inherit: false, notify: true} ) ; }
 
-  if ($scope.models[$scope.room].photo != null && $scope.models[$scope.room].photo != undefined)
+  if (customLocalStorage.models[$scope.room].photo != null && customLocalStorage.models[$scope.room].photo != undefined)
     $scope.panorama_available = true;
 
 
@@ -69,17 +68,17 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
 
   $scope.panorama_init = function(room){
     console.log('init panorama');
-    //console.log($scope.models[room]);
-    var type = $scope.models[room].photo.url == null? 'cubemap' : 'equirectangular';
-    var equirectangular_path = $scope.models[room].photo.url;
-    var cubemap_array = $scope.models[room].photo.url_cube_map;
+    //console.log(customLocalStorage.models[room]);
+    var type = customLocalStorage.models[room].photo.url == null? 'cubemap' : 'equirectangular';
+    var equirectangular_path = customLocalStorage.models[room].photo.url;
+    var cubemap_array = customLocalStorage.models[room].photo.url_cube_map;
     var point;
     console.log(type);
-    //console.log($scope.models[room]);
+    //console.log(customLocalStorage.models[room]);
     //console.log("testes dos pontos");
     //<iframe width="560" height="315" src="https://www.youtube.com/embed/Mhp037U6YR8" frameborder="0" allowfullscreen></iframe>
-    for (point in $scope.models[room].photo.points) {
-    //console.log( $scope.models[room].photo.points[point]);
+    for (point in customLocalStorage.models[room].photo.points) {
+    //console.log( customLocalStorage.models[room].photo.points[point]);
 	//console.log($scope.language);
 
       pannellum.viewer('panorama', {
@@ -96,10 +95,10 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
       "hotSpots": [
         
         {
-          "pitch": $scope.models[room].photo.points[point].x,
-          "yaw": $scope.models[room].photo.points[point].y,
+          "pitch": customLocalStorage.models[room].photo.points[point].x,
+          "yaw": customLocalStorage.models[room].photo.points[point].y,
           "type": "info",
-          "text": $scope.hotspotText($scope.models[room].photo.points[point].translations[$scope.language], $scope.models[room].photo.points[point].translations.pt.title)
+          "text": $scope.hotspotText(customLocalStorage.models[room].photo.points[point].translations[$scope.language], customLocalStorage.models[room].photo.points[point].translations.pt.title)
         }
       ]
     });
@@ -120,10 +119,10 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
       "hotSpots": [
         
         {
-          "pitch": $scope.models[room].photo.video.x,
-          "yaw": $scope.models[room].photo.video.y,
+          "pitch": customLocalStorage.models[room].photo.video.x,
+          "yaw": customLocalStorage.models[room].photo.video.y,
           "type": "info",
-          "text": $scope.hotspotVideo($scope.models[room].photo.video.url)
+          "text": $scope.hotspotVideo(customLocalStorage.models[room].photo.video.url)
         }
       ]
     });

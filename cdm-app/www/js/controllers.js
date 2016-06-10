@@ -39,37 +39,46 @@ controllerModule.controller("localController", function($scope, $stateParams, Lo
 });
 
 
-controllerModule.factory('LocalStorageService', function() {
-    return {
-        getModelInfoRemote: function(ready_function) {
-            jQuery.ajax({
-                url: 'http://cdm-admin.herokuapp.com/api/everything',
-                success: function(data){
-                    //console.log(data);
-                    window.localStorage.setItem("models", JSON.stringify(data));
+controllerModule.service('customLocalStorage', function () {
+    var customLocalStorage = this;
+
+    customLocalStorage.models = null;
+
+    customLocalStorage.getModelInfoRemote = function(ready_function) {
+        console.log("vai ajax");
+        jQuery.ajax({
+            url: 'http://cdm-admin.herokuapp.com/api/everything',
+            success: function(data){
+                //console.log(data);
+                console.log("ajax sucesso");
+                window.localStorage.setItem("models", JSON.stringify(data));
+                customLocalStorage.models = data;
+                ready_function(true);
+            },
+            error: function(err){
+                console.log(err);
+                console.log("ajax erro");
+                if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
+                    ready_function(false);
+                }
+                else{
+                    customLocalStorage.models = JSON.parse(localStorage.getItem("models"));
                     ready_function(true);
-                },
-                error: function(err){
-                    console.log(err);
-                    if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
-                        ready_function(false);
-                    }
-                    else ready_function(true);
-                },
-                timeout: 7000 // sets timeout to 7 seconds
-            });
+                }
+            },
+            timeout: 7000 // sets timeout to 7 seconds
+        });
+        //return JSON.parse(localStorage.getItem("models"));
+    };
 
+    /*customLocalStorage.getModelInfo = function() {
+        return JSON.parse(localStorage.getItem("models"));
+    };*/
 
-            //return JSON.parse(localStorage.getItem("models"));
-        },
-        getModelInfo: function() {
-            return JSON.parse(localStorage.getItem("models"));
-        },
-        getLanguage: function(){
-            if(window.localStorage.getItem("language") === undefined || window.localStorage.getItem("language") == null){
-                window.localStorage.setItem("language", 'pt');
-            }
-            return window.localStorage.getItem("language");
+    customLocalStorage.getLanguage = function(){
+        if(window.localStorage.getItem("language") === undefined || window.localStorage.getItem("language") == null){
+            window.localStorage.setItem("language", 'pt');
         }
+        return window.localStorage.getItem("language");
     };
 });
