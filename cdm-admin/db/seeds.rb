@@ -177,7 +177,7 @@ PointTranslation.create!(
 PointTranslation.create!(
     :title => 'Baroque organ',
     :description => 'Usually the baroque organ stands in the left side of the orchestra. This is a copy of the Mexican organ.',
-    :point_id => 3,
+    :point_id => 2,
     :language_id => 2
 )
 
