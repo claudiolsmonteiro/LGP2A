@@ -2,7 +2,8 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover, $cordovaBeacon, $state, customLocalStorage, $ionicLoading){
+controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover,
+            $cordovaBeacon, $state, customLocalStorage, $ionicLoading, sidebarUtils){
     //ionic.Platform.fullScreen(true, false);
 
     $scope.getRemoteModels = function (){
@@ -21,9 +22,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
      @param success - boolean indicating weather the remote loading of models worked.
      */
     $scope.model_ready = function(success){
-        console.log("model ready");
         $ionicLoading.hide();
-        console.log("1");
         var template_modal =
             '<div class="custom-modal">'+
             '<div class="modal-title">Connection problem</div>'+
@@ -36,7 +35,6 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             '</div>';
 
         if(success){
-            console.log("2");
             ionic.Platform.ready(function(){
                 if(screen.lockOrientation) {
                     console.log('locking to landscape');
@@ -84,7 +82,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             ionic.DomUtil.ready(function(){
                 $scope.environment.current_room = $stateParams.current_room;
                 $scope.tridimensional_model_init();
-                sidebar_ready('model-sidebar-menu');
+                sidebarUtils.sidebar_ready('model-sidebar-menu');
             });
         }
         else{
@@ -128,10 +126,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.closePopover = function() {
         $scope.popover.hide();
     };
-    //Cleanup the popover when we're done with it!
-    $scope.$on('$destroy', function() {
-        $scope.popover.remove();
-    });
+
     // Execute action on hide popover
     $scope.$on('popover.hidden', function() {
         // Execute action
@@ -141,7 +136,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         // Execute action
     });
 
-    $scope.toggleSidebar = function () { showSidebar('model-sidebar-menu'); };
+    $scope.toggleSidebar = function () { sidebarUtils.showSidebar('model-sidebar-menu'); };
     $scope.animateRoom = function ( room_id ) { $scope.animateObjectAux(room_id); $scope.closePopover(); };
 
 
@@ -257,7 +252,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
          console.log(model_textures);
          console.log('#########################################');
          */
-        requestAnimationFrame( function(){$scope.tridimensional_model_animate()} );
+        $scope.requestAnimationFrameId = requestAnimationFrame( function(){$scope.tridimensional_model_animate()} );
 
         var temp_millis = (new Date()).getTime();
         if(temp_millis - $scope.environment.last_animation > 20){
@@ -438,6 +433,19 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
         });
     };
+
+    $scope.$on('$destroy', function() {
+        $scope.popover.remove();//Cleanup the popover when we're done with it!
+        console.log('destroying threejs main model context');
+        cancelAnimationFrame($scope.requestAnimationFrameId);// Stop the animation
+        $scope.environment.renderer.domElement.addEventListener('dblclick', null, false); //remove listener to render
+        $scope.environment.camera = null;
+        $scope.environment.controls = null;
+        $scope.environment.scene = null;
+        //$scope.environment.projector = null;
+        jQuery('#model-canvas-container').empty();
+        $scope.environment = null;
+    });
 });
 
 

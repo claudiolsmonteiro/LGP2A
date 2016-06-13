@@ -12,39 +12,39 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
 });*/
 
 
-controllerModule.controller("contactsController", function($scope, $stateParams, customLocalStorage){
+controllerModule.controller("contactsController", function($scope, $stateParams, customLocalStorage, sidebarUtils){
     $scope.texts = texts;
     $scope.language = customLocalStorage.getLanguage();
 
     $scope.prefix = 'contacts';
-    $scope.toggleSidebar = function () { showSidebar('contacts-sidebar-menu'); };
+    $scope.toggleSidebar = function () { sidebarUtils.showSidebar('contacts-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
-        sidebar_ready('contacts-sidebar-menu');
+        sidebarUtils.sidebar_ready('contacts-sidebar-menu');
     });
 
 });
 
-controllerModule.controller("localController", function($scope, $stateParams, customLocalStorage){
+controllerModule.controller("localController", function($scope, $stateParams, customLocalStorage, sidebarUtils){
     $scope.texts = texts;
     $scope.language = customLocalStorage.getLanguage();
 
     $scope.prefix = 'local';
-    $scope.toggleSidebar = function () { showSidebar('local-sidebar-menu'); };
+    $scope.toggleSidebar = function () { sidebarUtils.showSidebar('local-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
-        sidebar_ready('local-sidebar-menu');
+        sidebarUtils.sidebar_ready('local-sidebar-menu');
     });
 
 });
 
-controllerModule.controller("languageController", function($scope, $stateParams, customLocalStorage){
+controllerModule.controller("languageController", function($scope, $stateParams, customLocalStorage, sidebarUtils){
     $scope.texts = texts;
     $scope.language = customLocalStorage.getLanguage();
     console.log($scope.language);
     
     $scope.prefix = 'language';
-    $scope.toggleSidebar = function () { showSidebar('language-sidebar-menu'); };
+    $scope.toggleSidebar = function () { sidebarUtils.showSidebar('language-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
-        sidebar_ready('language-sidebar-menu');
+        sidebarUtils.sidebar_ready('language-sidebar-menu');
     });
 
     $scope.setLanguage = function (language){
@@ -92,6 +92,7 @@ controllerModule.service('customLocalStorage', function () {
     };*/
 
     customLocalStorage.getLanguage = function(){
+        //window.localStorage.setItem("language", 'pt');
         if(window.localStorage.getItem("language") === undefined || window.localStorage.getItem("language") == null){
             window.localStorage.setItem("language", 'pt');
         }

@@ -5,7 +5,7 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("roomController", function($scope, $stateParams, $state, customLocalStorage){
+controllerModule.controller("roomController", function($scope, $stateParams, $state, customLocalStorage, sidebarUtils){
 
     ////////////////////
     $scope.texts = texts;
@@ -40,13 +40,13 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     $scope.showPanorama = function () { $scope.showRoomPanorama(); };
     $scope.showPopup = function () { $scope.room_show_more_info_popup($scope.environment.current_room); };
     $scope.hidePopup = function () { $scope.room_hide_more_info_popup($scope.environment.current_room); };
-    $scope.toggleSidebar = function () { showSidebar('room-sidebar-menu'); };
+    $scope.toggleSidebar = function () { sidebarUtils.showSidebar('room-sidebar-menu'); };
 
     ionic.DomUtil.ready(function(){
         $scope.environment = construct_tridimensional_environment([0,150,400]);
         $scope.environment.current_room = $stateParams.room;
         $scope.room_ready();
-        sidebar_ready('room-sidebar-menu');
+        sidebarUtils.sidebar_ready('room-sidebar-menu');
     });
 
     // ROOM MODEL FUNCTIONS
@@ -119,11 +119,14 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         var axes = buildAxes( 1000 );
         //$scope.environment.scene.add(axes);
 
+        $scope.running = true; //when false, render will stop
         $scope.room_animate();
+
     };
 
     $scope.room_animate = function() {
-
+        if(!$scope.running)
+            return;
         $scope.requestAnimationFrameId = requestAnimationFrame( function() {$scope.room_animate();} );
         $scope.environment.renderer.render( $scope.environment.scene, $scope.environment.camera );
     };
@@ -148,11 +151,13 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         console.log('destroying threejs room context');
         cancelAnimationFrame($scope.requestAnimationFrameId);// Stop the animation
         $scope.environment.renderer.domElement.addEventListener('dblclick', null, false); //remove listener to render
-        $scope.environment.scene = null;
-        //$scope.environment.projector = null;
         $scope.environment.camera = null;
         $scope.environment.controls = null;
+        $scope.environment.scene = null;
+        //$scope.environment.projector = null;
         jQuery('#'+$scope.environment.current_room+'-canvas-container').empty();
+        $scope.environment = null;
+        $scope.running = false;
     });
 
 });

@@ -5,7 +5,7 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage){
+controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage, sidebarUtils){
 
   ////////////////////
   $scope.texts = texts;
@@ -39,12 +39,12 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
 
   $scope.showPopup = function () { $scope.room_show_more_info_popup($scope.current_room); };
   $scope.hidePopup = function () { $scope.room_hide_more_info_popup($scope.current_room); };
-  $scope.toggleSidebar = function () { showSidebar('panorama-sidebar-menu'); };
+  $scope.toggleSidebar = function () { sidebarUtils.showSidebar('panorama-sidebar-menu'); };
 
   ionic.DomUtil.ready(function(){
     $scope.current_room = $stateParams.room;
     $scope.panorama_ready();
-    sidebar_ready('panorama-sidebar-menu');
+    sidebarUtils.sidebar_ready('panorama-sidebar-menu');
   });
 
 
@@ -77,11 +77,29 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     //console.log(customLocalStorage.models[room]);
     //console.log("testes dos pontos");
     //<iframe width="560" height="315" src="https://www.youtube.com/embed/Mhp037U6YR8" frameborder="0" allowfullscreen></iframe>
-    for (point in customLocalStorage.models[room].photo.points) {
-    //console.log( customLocalStorage.models[room].photo.points[point]);
-	//console.log($scope.language);
 
-      pannellum.viewer('panorama', {
+    var hotspots = [];
+    for (point in customLocalStorage.models[room].photo.points) {
+      //console.log( customLocalStorage.models[room].photo.points[point]);
+      //console.log($scope.language);
+      hotspots.push({
+        "pitch": customLocalStorage.models[room].photo.points[point].x,
+        "yaw": customLocalStorage.models[room].photo.points[point].y,
+        "type": "info",
+        "text": $scope.hotspotText(customLocalStorage.models[room].photo.points[point])
+      });
+    }
+
+    if(customLocalStorage.models[room].photo.video != null){
+      hotspots.push({
+        "pitch": customLocalStorage.models[room].photo.video.x,
+        "yaw": customLocalStorage.models[room].photo.video.y,
+        "type": "info",
+        "text": $scope.hotspotVideo(customLocalStorage.models[room].photo.video.url)
+      });
+    }
+
+    pannellum.viewer('panorama', {
       "type": type,
       "panorama": equirectangular_path,
       "cubeMap": cubemap_array,
@@ -92,49 +110,17 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
        minHfov: 30,*/
       "autoLoad": true,
       hotSpotDebug: true,
-      "hotSpots": [
-        
-        {
-          "pitch": customLocalStorage.models[room].photo.points[point].x,
-          "yaw": customLocalStorage.models[room].photo.points[point].y,
-          "type": "info",
-          "text": $scope.hotspotText(customLocalStorage.models[room].photo.points[point].translations[$scope.language], customLocalStorage.models[room].photo.points[point].translations.pt.title)
-        }
-      ]
+      "hotSpots": hotspots
     });
-  
-
-}
-      pannellum.viewer('panorama', {
-      "type": type,
-      "panorama": equirectangular_path,
-      "cubeMap": cubemap_array,
-      /*"vaov" : 70,
-       minPitch: -10,
-       maxPitch: 10,*/
-      /*maxHfov: 40,
-       minHfov: 30,*/
-      "autoLoad": true,
-      //hotSpotDebug: true,
-      "hotSpots": [
-        
-        {
-          "pitch": customLocalStorage.models[room].photo.video.x,
-          "yaw": customLocalStorage.models[room].photo.video.y,
-          "type": "info",
-          "text": $scope.hotspotVideo(customLocalStorage.models[room].photo.video.url)
-        }
-      ]
-    });
-  
 
   };
 
-  $scope.hotspotText = function(hotspot_id, hotspot_title){
+  $scope.hotspotText = function(hotspot){
+    console.log(hotspot);
     return "<div class=\"hotspot-box\">"+
-      "<p>" + hotspot_title + "</p>" +
-      "<a id=\"hotspot_" + hotspot_id.id + "\" title=\""+ hotspot_title +"\" href=\"#\" "+
-      " onclick=\"openPopup(\'" + hotspot_id.description + "\');return false;\">Mais informação</a>" +
+      "<p>" + hotspot.translations[$scope.language].title + "</p>" +
+      "<a id=\"hotspot_" + hotspot.id + "\" href=\"#\" "+
+      " onclick=\"openPopup(\'" + hotspot.description + "\');return false;\">Mais informação</a>" +
       "</div>";
   };
 
