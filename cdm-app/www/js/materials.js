@@ -5,7 +5,7 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("materialsController", function($scope, $stateParams, $state, customLocalStorage){
+controllerModule.controller("materialsController", function($scope, $stateParams, $state, customLocalStorage, sidebarUtils){
 
   ////////////////////
   $scope.texts = texts;
@@ -34,13 +34,13 @@ controllerModule.controller("materialsController", function($scope, $stateParams
 
   $scope.showPopup = function () { $scope.show_more_info_popup($scope.environment.current_room); };
   $scope.hidePopup = function () { $scope.hide_more_info_popup($scope.environment.current_room); };
-  $scope.toggleSidebar = function () { showSidebar('materials-sidebar-menu'); };
+  $scope.toggleSidebar = function () { sidebarUtils.showSidebar('materials-sidebar-menu'); };
 
   ionic.DomUtil.ready(function(){
     $scope.environment = construct_tridimensional_environment([0,150,400]);
     $scope.environment.current_room = $stateParams.room;
     $scope.materials_ready();
-    sidebar_ready('materials-sidebar-menu');
+    sidebarUtils.sidebar_ready('materials-sidebar-menu');
   });
 
 

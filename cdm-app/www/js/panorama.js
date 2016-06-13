@@ -118,32 +118,32 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
   $scope.hotspotText = function(hotspot){
     console.log(hotspot);
     return "<div class=\"hotspot-box\">"+
-      "<p>" + hotspot.translations[$scope.language].title + "</p>" +
-      "<a id=\"hotspot_" + hotspot.id + "\" href=\"#\" "+
-      " onclick=\"openPopup(\'" + hotspot.description + "\');return false;\">Mais informação</a>" +
-      "</div>";
+        "<p>" + hotspot.translations[$scope.language].title + "</p>" +
+        "<a id=\"hotspot_" + hotspot.id + "\" href=\"#\" "+
+        " onclick=\"openPopup(\'" + hotspot.description + "\');return false;\">Mais informação</a>" +
+        "</div>";
   };
 
   $scope.hotspotVideo = function(hotspot_url){
-        return "<div class=\"video-container\">"+
-                    "<iframe src=" +hotspot_url +" frameborder=\"20\" width=\"560\" height=\"315\" allowfullscreen>"+"</iframe>"+
-                "</div>";
+    return "<div class=\"video-container\">"+
+        "<iframe src=" +hotspot_url +" frameborder=\"20\" width=\"560\" height=\"315\" allowfullscreen>"+"</iframe>"+
+        "</div>";
 
-    };
+  };
 
- $scope.validURL = function (str) {
-  var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
-    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
-    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
-    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
-    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
-    '(\#[-a-z\d_]*)?$','i'); // fragment locater
-  if(!pattern.test(str)) {
-    return false;
-  } else {
-    return true;
-  }
-};
+  $scope.validURL = function (str) {
+    var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
+        '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+        '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
+        '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
+        '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+        '(\#[-a-z\d_]*)?$','i'); // fragment locater
+    if(!pattern.test(str)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
 });
 

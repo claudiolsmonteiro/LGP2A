@@ -2,11 +2,11 @@
     <ion-content class="">
         <!-- POPOVER SELECT ROOMS -->
         <script id="my-popover.html" type="text/ng-template">
-          <ion-popover-view id="select-room-popover">
-            <div class="list" ng-repeat="room in models">
-              <span ng-show="room.code != 'casa'" class="item" ng-click="animateRoom('{{room.code}}')">{{room.translations[language].name}}</span>
-            </div>
-          </ion-popover-view>
+            <ion-popover-view id="select-room-popover">
+                <div class="list" ng-repeat="room in models">
+                    <span ng-show="room.code != 'casa'" class="item" ng-click="animateRoom('{{room.code}}')">{{room.translations[language].name}}</span>
+                </div>
+            </ion-popover-view>
         </script>
 
         <p id="select-room-button">

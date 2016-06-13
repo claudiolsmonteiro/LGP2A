@@ -155,11 +155,15 @@ dialog{
   background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
-  padding: 25px;
+
+  & > *{
+    margin-left: 25px;
+    margin-right: 25px;
+  }
 
   .modal-header{
     height: 3rem;
-    //margin: 10px;
+    margin-top: 25px;
 
     .modal-title{
       font-size: 1.3rem;
@@ -171,17 +175,27 @@ dialog{
     }
   }
 
-  .modal-container{
-    margin: 10px;
+  .modal-content{
+    //margin: 10px;
     border-top-style: solid;
     border-top: 1px;
+    max-height: calc(100% - 6rem - 25px); // 5 rem = 2 rem (header height) + 3 rem (footer height)
+    overflow-y: scroll;
+    &::-webkit-scrollbar { width: 0 !important }
   }
 
   .modal-footer{
+    height: 3rem;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: calc(100% - 50px); //50px = 2*25px (margins)
 
+    audio{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+
+    }
   }
 
   width: 80vw;

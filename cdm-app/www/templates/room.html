@@ -3,41 +3,41 @@
         <div id="{{room}}-canvas-container"></div>
         <!--<div id="panorama"></div>-->
 
-
-      <div id="{{environment.current_room}}-more-info-modal" class="more-info-modal">
-        <div class="modal-header">
-          <span class="modal-title">{{texts.tour.more_info_modal.title[language]}}</span>
-          <span class="close-btn-container"><i class="fa fa-times fa-2x" ng-click="hidePopup()" aria-hidden="true"></i></span>
-        </div>
-        <div class="modal-content" ng-bind-html="room_description"></div>
-        <div class="modal-footer">
-          <div data-tap-disabled="true" >
-            <audio controls="controls">
-              <source src="audio/mpthreetest.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-        </div>
-      </div>
     </ion-content>
 
     <div ng-include src="'templates/sidebar.html'"></div>
 
-  <div id="top-info-bar" style="display: block;">{{room_title}}</div>
+    <div id="top-info-bar" style="display: block;">{{room_title}}</div>
 
-  <div id="bottom-navbar" class="bottom-navbar" style="display: block">
-    <ul>
-      <li class="selected">3D</li>
-      <li ng-if="panorama_available"><a ng-href="#/panoramic/{{room}}">360º</a></li>
-      <li><a ng-href="#/materials/{{room}}"><img src="img/icon_materiais_33.png"></a></li>
-      <li id="room-more-info-popup" ng-click="showPopup()"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
-      <li ng-if="next_room_available"><span ng-click="goToNextRoom()"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></span></li>
-    </ul>
-  </div>
+    <div id="bottom-navbar" class="bottom-navbar" style="display: block">
+        <ul>
+            <li class="selected">3D</li>
+            <li ng-if="panorama_available"><a ng-href="#/panoramic/{{room}}">360º</a></li>
+            <li><a ng-href="#/materials/{{room}}"><img src="img/icon_materiais_33.png"></a></li>
+            <li id="room-more-info-popup" ng-click="showPopup()"><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></li>
+            <li ng-if="next_room_available"><span ng-click="goToNextRoom()"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></span></li>
+        </ul>
+    </div>
 
     <div ng-include src="'templates/toggle-menu-btn.html'"></div>
 
 
-  <div id="{{environment.current_room}}-more-info-modal-background" class="more-info-modal-background"></div>
+    <div id="{{environment.current_room}}-more-info-modal" class="more-info-modal">
+        <div class="modal-header">
+            <span class="modal-title">{{texts.tour.more_info_modal.title[language]}}</span>
+            <span class="close-btn-container"><i class="fa fa-times fa-2x" ng-click="hidePopup()" aria-hidden="true"></i></span>
+        </div>
+        <div class="modal-content" ng-bind-html="room_description"></div>
+        <div class="modal-footer">
+            <div data-tap-disabled="true" >
+                <audio controls="controls">
+                    <source src="audio/mpthreetest.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+
+    <div id="{{environment.current_room}}-more-info-modal-background" class="more-info-modal-background"></div>
 
 </ion-view>

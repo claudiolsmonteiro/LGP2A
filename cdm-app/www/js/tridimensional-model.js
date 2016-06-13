@@ -18,6 +18,23 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         customLocalStorage.getModelInfoRemote($scope.model_ready);
     };
 
+    $scope.beacons_init = function (){
+        $scope.beacons = {};
+        $scope.beacons_detected = [];
+        var temp_uuids = [];
+        for(var key in customLocalStorage.models){
+            var temp_key = customLocalStorage.models[key].beacon_uuid+':'+customLocalStorage.models[key].beacon_major+':'+customLocalStorage.models[key].beacon_minor;
+            $scope.beacons_detected[temp_key] = {};
+            $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
+            $scope.beacons_detected[temp_key].model_key = key;
+            temp_uuids.push(customLocalStorage.models[key].beacon_uuid);
+        }
+        $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
+        $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array
+            if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
+        });
+    };
+
     /*
      @param success - boolean indicating weather the remote loading of models worked.
      */
@@ -417,22 +434,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         }
     };
 
-    $scope.beacons_init = function (){
-        $scope.beacons = {};
-        $scope.beacons_detected = [];
-        var temp_uuids = [];
-        for(var key in customLocalStorage.models){
-            var temp_key = customLocalStorage.models[key].beacon_uuid+':'+customLocalStorage.models[key].beacon_major+':'+customLocalStorage.models[key].beacon_minor;
-            $scope.beacons_detected[temp_key] = {};
-            $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
-            $scope.beacons_detected[temp_key].model_key = key;
-            temp_uuids.push(customLocalStorage.models[key].beacon_uuid);
-        }
-        $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
-        $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array
-            if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
-        });
-    };
+
 
     $scope.$on('$destroy', function() {
         $scope.popover.remove();//Cleanup the popover when we're done with it!

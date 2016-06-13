@@ -9881,29 +9881,40 @@ dialog {
   background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
-  padding: 25px;
   width: 80vw;
   height: 80vh;
   top: 50%;
   left: 50%;
   margin-top: -40vh;
   margin-left: -40vw; }
+  .more-info-modal > * {
+    margin-left: 25px;
+    margin-right: 25px; }
   .more-info-modal .modal-header {
-    height: 3rem; }
+    height: 3rem;
+    margin-top: 25px; }
     .more-info-modal .modal-header .modal-title {
       font-size: 1.3rem; }
     .more-info-modal .modal-header .close-btn-container {
       float: right;
       margin-right: 10px;
       margin-bottom: 10px; }
-  .more-info-modal .modal-container {
-    margin: 10px;
+  .more-info-modal .modal-content {
     border-top-style: solid;
-    border-top: 1px; }
+    border-top: 1px;
+    max-height: calc(100% - 6rem - 25px);
+    overflow-y: scroll; }
+    .more-info-modal .modal-content::-webkit-scrollbar {
+      width: 0 !important; }
   .more-info-modal .modal-footer {
+    height: 3rem;
     position: absolute;
     bottom: 0;
-    width: 100%; }
+    width: calc(100% - 50px); }
+    .more-info-modal .modal-footer audio {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; }
 
 .more-info-modal-background {
   display: none;
