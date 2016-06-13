@@ -296,7 +296,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
 }
 
 .background {
-  background-color: #4FB9D3;
+  background-color: $background-blue;
 }
 
 #select-room-button{
@@ -309,7 +309,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
   font-family: Roboto;
   font-size: 1.2rem;
   text-align: right;
-  color: #578896;
+  color: rgba(255,255,255,1);
 }
 
 #select-room-popover{
@@ -319,3 +319,21 @@ and (-webkit-min-device-pixel-ratio: 1) {
     margin: 0;
   }
 }
+
+//language
+
+.options-container{
+
+  text-align: center;
+  font-family: casadamusica_font;
+  font-size: 2rem;
+  .option{
+    height: 4rem;
+    color: rgba(255,255,255,0.5);
+
+    .current{
+      color: rgba(255,255,255,1);
+    }
+  }
+}
+

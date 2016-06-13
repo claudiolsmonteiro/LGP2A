@@ -1,0 +1,25 @@
+<ion-view cache-view="false" view-title="Language" class="background">
+    <ion-content class="">
+
+        <div style="height: 100%;display:flex;justify-content:center;align-items:center;">
+            <div class="options-container">
+                <div ng-repeat="(code, lang) in texts.language.languages" class="option" ng-click="setLanguage(code)">
+                    <span ng-if="code == language" class="current">
+                        {{lang.name.toUpperCase()}}
+                    </span>
+                    <span ng-if="code != language">
+                        {{lang.name.toUpperCase()}}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+    <div ng-include src="'templates/sidebar.html'"></div>
+    <div id="top-info-bar" style="display: block;">{{texts.language.title[language].toUpperCase()}}</div>
+    <div ng-include src="'templates/toggle-menu-btn.html'"></div>
+
+
+
+
+</ion-view>

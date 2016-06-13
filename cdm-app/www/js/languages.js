@@ -41,6 +41,14 @@ texts['language'] = {
     title: {
         pt : 'Idioma',
         en : 'Language'
+    },
+    languages: {
+        pt: {
+            name: 'Português'
+        },
+        en: {
+            name: 'English'
+        }
     }
 };
 

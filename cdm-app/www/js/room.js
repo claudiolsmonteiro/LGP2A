@@ -117,7 +117,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         });
 
         var axes = buildAxes( 1000 );
-        $scope.environment.scene.add(axes);
+        //$scope.environment.scene.add(axes);
 
         $scope.room_animate();
     };

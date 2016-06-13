@@ -8,11 +8,13 @@
             </div>
           </ion-popover-view>
         </script>
+
+        <p id="select-room-button">
+            <span ng-click="openSelectRoomPopover($event)">{{texts.tour.room_dropdown.title[language].toUpperCase()}} <i class="fa fa-caret-down" aria-hidden="true"></i></span>
+        </p>
     </ion-content>
 
-  <p id="select-room-button">
-    <span ng-click="openSelectRoomPopover($event)">{{texts.tour.room_dropdown.title[language].toUpperCase()}} <i class="fa fa-caret-down" aria-hidden="true"></i></span>
-  </p>
+
 
     <div ng-include src="'templates/sidebar.html'"></div>
 

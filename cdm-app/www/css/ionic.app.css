@@ -9973,7 +9973,7 @@ dialog {
           color: rgba(255, 255, 255, 0.5); }
 
 .background {
-  background-color: #4FB9D3; }
+  background-color: #009ABE; }
 
 #select-room-button {
   position: fixed;
@@ -9985,10 +9985,20 @@ dialog {
   font-family: Roboto;
   font-size: 1.2rem;
   text-align: right;
-  color: #578896; }
+  color: white; }
 
 #select-room-popover {
   height: auto;
   width: auto; }
   #select-room-popover .list {
     margin: 0; }
+
+.options-container {
+  text-align: center;
+  font-family: casadamusica_font;
+  font-size: 2rem; }
+  .options-container .option {
+    height: 4rem;
+    color: rgba(255, 255, 255, 0.5); }
+    .options-container .option .current {
+      color: white; }

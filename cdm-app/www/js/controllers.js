@@ -12,12 +12,11 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
 });*/
 
 
-controllerModule.controller("contactsController", function($scope, $stateParams, LocalStorageService){
+controllerModule.controller("contactsController", function($scope, $stateParams, customLocalStorage){
     $scope.texts = texts;
-    $scope.language = LocalStorageService.getLanguage();
+    $scope.language = customLocalStorage.getLanguage();
 
     $scope.prefix = 'contacts';
-    //$scope.room_title = models[$stateParams.room].title.toUpperCase();
     $scope.toggleSidebar = function () { showSidebar('contacts-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         sidebar_ready('contacts-sidebar-menu');
@@ -25,16 +24,33 @@ controllerModule.controller("contactsController", function($scope, $stateParams,
 
 });
 
-controllerModule.controller("localController", function($scope, $stateParams, LocalStorageService){
+controllerModule.controller("localController", function($scope, $stateParams, customLocalStorage){
     $scope.texts = texts;
-    $scope.language = LocalStorageService.getLanguage();
+    $scope.language = customLocalStorage.getLanguage();
 
     $scope.prefix = 'local';
-    //$scope.room_title = models[$stateParams.room].title.toUpperCase();
     $scope.toggleSidebar = function () { showSidebar('local-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         sidebar_ready('local-sidebar-menu');
     });
+
+});
+
+controllerModule.controller("languageController", function($scope, $stateParams, customLocalStorage){
+    $scope.texts = texts;
+    $scope.language = customLocalStorage.getLanguage();
+    console.log($scope.language);
+    
+    $scope.prefix = 'language';
+    $scope.toggleSidebar = function () { showSidebar('language-sidebar-menu'); };
+    ionic.DomUtil.ready(function(){
+        sidebar_ready('language-sidebar-menu');
+    });
+
+    $scope.setLanguage = function (language){
+        customLocalStorage.setLanguage(language);
+        $scope.language = customLocalStorage.getLanguage();
+    }
 
 });
 
@@ -45,19 +61,19 @@ controllerModule.service('customLocalStorage', function () {
     customLocalStorage.models = null;
 
     customLocalStorage.getModelInfoRemote = function(ready_function) {
-        console.log("vai ajax");
+        //console.log("vai ajax");
         jQuery.ajax({
             url: 'http://cdm-admin.herokuapp.com/api/everything',
             success: function(data){
                 //console.log(data);
-                console.log("ajax sucesso");
+                //console.log("ajax sucesso");
                 window.localStorage.setItem("models", JSON.stringify(data));
                 customLocalStorage.models = data;
                 ready_function(true);
             },
             error: function(err){
-                console.log(err);
-                console.log("ajax erro");
+                //console.log(err);
+                //console.log("ajax erro");
                 if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
                     ready_function(false);
                 }
@@ -80,5 +96,9 @@ controllerModule.service('customLocalStorage', function () {
             window.localStorage.setItem("language", 'pt');
         }
         return window.localStorage.getItem("language");
+    };
+
+    customLocalStorage.setLanguage = function(language){
+        window.localStorage.setItem("language", language);
     };
 });

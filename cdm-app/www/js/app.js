@@ -91,6 +91,12 @@ myApp.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) 
         controller:"localController"
     })
 
+    .state('language', {
+        url: '/language',
+        templateUrl: 'templates/language.html',
+        controller:"languageController"
+    });
+
 
 
   // if none of the above states are matched, use this as the fallback
