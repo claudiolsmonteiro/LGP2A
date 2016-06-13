@@ -37,7 +37,7 @@ class PointsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @point.update(room_params)
+      if @point.update(points_params)
         format.html { redirect_to @point, notice: 'Point was successfully updated.' }
         format.json { render :show, status: :ok, location: @point }
       else

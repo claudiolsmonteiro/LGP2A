@@ -54,10 +54,12 @@ Rails.application.routes.draw do
 
   get '/rooms' => 'rooms#new'
   post '/rooms' => 'rooms#create'
+  patch '/rooms' => 'rooms#update'
   #points
   resources :points
   get "api/point/:id", :to => 'points#get_room'
   get '/points' => 'points#new'
   post '/points' => 'points#create'
+  patch '/points' => 'points#update'
 
 end

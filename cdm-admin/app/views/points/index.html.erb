@@ -26,7 +26,7 @@
             </thead>
             <% @points.each do |point| %>
                 <tr>
-                  <td data-field="id" data-align="right"><%= link_to point %></td>
+                  <td data-field="id" data-align="right"><%= link_to point.id %></td>
                   <td><%= link_to 'Show', point %></td>
                   <td><%= link_to 'Edit', edit_point_path(point) %></td>
                   <td><%= link_to 'Destroy', point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
