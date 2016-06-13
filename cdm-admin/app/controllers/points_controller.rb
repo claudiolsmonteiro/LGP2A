@@ -70,6 +70,6 @@ class PointsController < ApplicationController
     @point = Point.find(params[:id])
   end
   def points_params
-    params.require(:point).permit(:x, :y, :photo_id, point_translations_attributes: [:title, :description, :language_id])
+    params.require(:point).permit(:x, :y, :photo_id, point_translations_attributes: [:id, :title, :description, :language_id])
   end
 end

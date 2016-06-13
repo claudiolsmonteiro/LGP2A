@@ -137,7 +137,7 @@ class RoomsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def room_params
     #params.fetch(:room, {})
-    params.require(:room).permit(:id, :code, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room, room_translations_attributes: [:name, :description, :language_id])
+    params.require(:room).permit(:id, :code, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room, room_translations_attributes: [:id, :name, :description, :language_id])
   end
 
   #cors headers
