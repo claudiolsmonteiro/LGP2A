@@ -22,9 +22,9 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
 
     $scope.room = $stateParams.room;
     $scope.prefix = 'room';
-    $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
+    $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase().replace(' ', '<br>');
     $scope.room_description = customLocalStorage.models[$stateParams.room].translations[$scope.language].description;
-
+    $scope.menu_highlight = 'casa';
     //panorama_available -> true if the room as a panoramic picture.
     //if not, the option won't be shown in the bottom navbar
     $scope.panorama_available = false;

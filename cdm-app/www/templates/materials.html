@@ -6,7 +6,7 @@
 
   <div ng-include src="'templates/sidebar.html'"></div>
 
-  <div id="top-info-bar" style="display: block;">{{room_title}}</div>
+  <div id="top-info-bar" style="display: block;"><p class="title-container" ng-bind-html="room_title"></p></div>
 
   <div id="bottom-navbar" class="bottom-navbar" style="display: block">
     <ul>
@@ -20,14 +20,6 @@
 
   <div ng-include src="'templates/toggle-menu-btn.html'"></div>
 
-  <div id="materials-{{environment.current_room}}-more-info-modal" class="more-info-modal">
-    <div class="modal-header">
-      <span class="modal-title">{{texts.tour.more_info_modal.title[language]}}</span>
-      <span class="close-btn-container"><i class="fa fa-times fa-2x" ng-click="hidePopup()" aria-hidden="true"></i></span>
-    </div>
-    <div class="modal-content" ng-bind-html="room_description"></div>
-    <div class="modal-footer"></div>
-  </div>
-  <div id="materials-{{environment.current_room}}-more-info-modal-background" class="more-info-modal-background"></div>
+  <span ng-include src="'templates/room-more-info-popup.html'"></span>
 
 </ion-view>

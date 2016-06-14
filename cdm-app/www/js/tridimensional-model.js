@@ -122,6 +122,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.language = customLocalStorage.getLanguage();
     $scope.environment = construct_tridimensional_environment([0,200,400]);
     $scope.prefix = 'model';
+    $scope.menu_highlight = 'casa';
     ////////////////////
 
 
@@ -171,26 +172,6 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         var ambient = new THREE.AmbientLight( 0x333333 );
         $scope.environment.scene.add( ambient );
 
-        /*var directionalLight = new THREE.DirectionalLight( 0x555555 );
-         directionalLight.position.set( 1, 0, 1 ).normalize();
-         $scope.environment.scene.add( directionalLight );
-
-        var directionalLight2 = new THREE.DirectionalLight( 0x555555 );
-        directionalLight2.position.set( 1, 0, -1 ).normalize();
-        $scope.environment.scene.add( directionalLight2 );
-
-        var directionalLight3 = new THREE.DirectionalLight( 0x555555 );
-        directionalLight3.position.set( -1, 0, 1 ).normalize();
-        $scope.environment.scene.add( directionalLight3 );
-
-        var directionalLight4 = new THREE.DirectionalLight( 0xaaaaaa );
-        directionalLight4.position.set( -1, 0, -1 ).normalize();
-        $scope.environment.scene.add( directionalLight4 );*/
-        /*var hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
-        $scope.environment.scene.add(hemiLight);*/
-      /*var directionalLight2 = new THREE.DirectionalLight( 0xffeedd );
-      directionalLight2.position.set( 0, 0, 1 ).normalize();
-      scene.add( directionalLight2 );*/
 
         var pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
         pointLight.position.set( 500, 200, 500 );
@@ -215,15 +196,6 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
         var pointLight6 = new THREE.PointLight( 0xeeeeee, 1, 1000 );
         pointLight6.position.set( 0, -400, 200);
         $scope.environment.lights.push(pointLight6);
-
-        //testes vidro
-        /*var pointLight = new THREE.PointLight( 0xeeeeee, 1.7, 1000 );
-        pointLight.position.set( 0, 0, 500 );
-        $scope.environment.lights.push(pointLight);
-
-        var pointLight2 = new THREE.PointLight( 0xeeeeee, 1.7, 700 );
-        pointLight2.position.set( 100, 0, -500 );
-        $scope.environment.lights.push(pointLight2);*/
 
         for (var i in $scope.environment.lights){
             $scope.environment.scene.add($scope.environment.lights[i]);
@@ -373,7 +345,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     };
 
     $scope.showObjectInfoOverlayMenus = function(objectName, objectTitle){
-        jQuery('#top-info-bar').html(objectTitle.toUpperCase());
+        jQuery('#top-info-bar .title-container').html(objectTitle.toUpperCase().replace(' ', '<br>'));
 
         jQuery('#top-info-bar').attr('data-current-object', objectName);
         jQuery('#room_link').attr('href', '#/room/'+objectName);
