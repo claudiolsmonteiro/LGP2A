@@ -6,9 +6,6 @@ addons:
 script:
 - cd cdm-admin
 - bundle install
-- RAILS_ENV=test bundle exec rake db:schema:load --trace
-- bundle exec rake db:test:prepare
-- bundle exec rspec spec/
 deploy:
   provider: heroku
   api_key:
