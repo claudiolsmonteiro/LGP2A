@@ -19,7 +19,7 @@ controllerModule.controller("materialsController", function($scope, $stateParams
 
   $scope.room = $stateParams.room;
   $scope.prefix = 'materials';
-  $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
+  $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase().replace(' ', '<br>');
   $scope.room_description = customLocalStorage.models[$stateParams.room].translations[$scope.language].description;
 
   //panorama_available -> true if the room as a panoramic picture.

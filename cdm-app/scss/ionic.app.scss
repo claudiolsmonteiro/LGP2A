@@ -72,6 +72,7 @@ dialog{
 #top-info-bar{
   font-family: casadamusica_font;
   font-size: 2rem;
+  line-height: 3rem;
   padding: 10px;
   display: none;
   position: fixed;
@@ -80,6 +81,10 @@ dialog{
   width: 100vw;
   top: 0;
   z-index: 200;
+
+  .title-container{
+    padding-top: 1rem;
+  }
 
   &.white-tones{
     color: white;
