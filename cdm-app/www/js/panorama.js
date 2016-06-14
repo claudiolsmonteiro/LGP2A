@@ -120,7 +120,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     return "<div class=\"hotspot-box\">"+
         "<p>" + hotspot.translations[$scope.language].title + "</p>" +
         "<a id=\"hotspot_" + hotspot.id + "\" href=\"#\" "+
-        " onclick=\"openPopup(\'" + hotspot.description + "\');return false;\">Mais informação</a>" +
+        " onclick=\"openPopup(\'" + hotspot.translations[$scope.language].description + "\');return false;\">Mais informação</a>" +
         "</div>";
   };
 
