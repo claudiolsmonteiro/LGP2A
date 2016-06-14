@@ -122,6 +122,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.language = customLocalStorage.getLanguage();
     $scope.environment = construct_tridimensional_environment([0,200,400]);
     $scope.prefix = 'model';
+    $scope.menu_highlight = 'casa';
     ////////////////////
 
 

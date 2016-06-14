@@ -2,10 +2,10 @@
     <div class="sidebar-column" >
         <div class="sidebar-items-container">
             <ul id="sidebar-menu-ul">
-                <li><a href="#/model">{{texts.tour.title[language].toUpperCase()}}</a></li>
-                <li><a href="#/contacts">{{texts.contacts.title[language].toUpperCase()}}</a></li>
-                <li><a href="#/local">{{texts.localization.title[language].toUpperCase()}}</a></li>
-                <li><a href="#/language">{{texts.language.title[language].toUpperCase()}}</a></li>
+                <li class="{{menu_highlight == 'casa' ? 'selected' : ''}}"><a href="#/model">{{texts.tour.title[language].toUpperCase()}}</a></li>
+                <li class="{{menu_highlight == 'contacts' ? 'selected' : ''}}"><a href="#/contacts">{{texts.contacts.title[language].toUpperCase()}}</a></li>
+                <li class="{{menu_highlight == 'localization' ? 'selected' : ''}}"><a href="#/local">{{texts.localization.title[language].toUpperCase()}}</a></li>
+                <li class="{{menu_highlight == 'language' ? 'selected' : ''}}"><a href="#/language">{{texts.language.title[language].toUpperCase()}}</a></li>
             </ul>
         </div>
     </div>

@@ -9964,9 +9964,11 @@ dialog {
         margin-top: 25px;
         margin-bottom: 25px;
         color: rgba(255, 255, 255, 0.5); }
+        .sidebar .sidebar-items-container ul li.selected {
+          color: white; }
         .sidebar .sidebar-items-container ul li a {
           text-decoration: none;
-          color: rgba(255, 255, 255, 0.5); }
+          color: inherit; }
 
 .background {
   background-color: #009ABE; }

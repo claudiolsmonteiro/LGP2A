@@ -276,11 +276,15 @@ dialog{
         margin-bottom: 25px;
         //color: rgba(36,36,42,0.5);
         color: rgba( 255, 255, 255, 0.5);
+        &.selected{
+          color: rgba( 255, 255, 255, 1);
+        }
         a{
           text-decoration: none;
           //color: #B1D5E5;
           //color: rgba(36,36,42,0.5);
-          color: rgba( 255, 255, 255, 0.5);
+          //color: rgba( 255, 255, 255, 0.5);
+          color: inherit;
         }
       }
     }

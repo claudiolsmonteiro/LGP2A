@@ -15,8 +15,8 @@ controllerModule.controller("panoramicController", function($scope, $stateParams
 controllerModule.controller("contactsController", function($scope, $stateParams, customLocalStorage, sidebarUtils){
     $scope.texts = texts;
     $scope.language = customLocalStorage.getLanguage();
-
     $scope.prefix = 'contacts';
+    $scope.menu_highlight = 'contacts';
     $scope.toggleSidebar = function () { sidebarUtils.showSidebar('contacts-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         sidebarUtils.sidebar_ready('contacts-sidebar-menu');
@@ -27,8 +27,9 @@ controllerModule.controller("contactsController", function($scope, $stateParams,
 controllerModule.controller("localController", function($scope, $stateParams, customLocalStorage, sidebarUtils){
     $scope.texts = texts;
     $scope.language = customLocalStorage.getLanguage();
-
     $scope.prefix = 'local';
+    $scope.menu_highlight = 'localization';
+
     $scope.toggleSidebar = function () { sidebarUtils.showSidebar('local-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         sidebarUtils.sidebar_ready('local-sidebar-menu');
@@ -39,9 +40,9 @@ controllerModule.controller("localController", function($scope, $stateParams, cu
 controllerModule.controller("languageController", function($scope, $stateParams, customLocalStorage, sidebarUtils){
     $scope.texts = texts;
     $scope.language = customLocalStorage.getLanguage();
-    console.log($scope.language);
-    
     $scope.prefix = 'language';
+    $scope.menu_highlight = 'language';
+
     $scope.toggleSidebar = function () { sidebarUtils.showSidebar('language-sidebar-menu'); };
     ionic.DomUtil.ready(function(){
         sidebarUtils.sidebar_ready('language-sidebar-menu');
