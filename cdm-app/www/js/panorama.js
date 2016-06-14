@@ -24,7 +24,8 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
   $scope.prefix = 'panorama';
   $scope.room_title = customLocalStorage.models[$stateParams.room].translations[$scope.language].name.toUpperCase();
   $scope.room_description = customLocalStorage.models[$stateParams.room].translations[$scope.language].description;
-
+  $scope.sidebar_background = true;
+  
   //panorama_available -> true if the room as a panoramic picture.
   //if not, the option won't be shown in the bottom navbar
   $scope.panorama_available = false;
@@ -54,6 +55,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
 
 
   $scope.room_show_more_info_popup = function(room_id){
+    console.log('tenta mostrar popup');
     jQuery('#'+room_id+'-more-info-modal').show();
     jQuery('#'+room_id+'-more-info-modal-background').show();
   };

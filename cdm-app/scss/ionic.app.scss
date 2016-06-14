@@ -151,10 +151,20 @@ dialog{
 
 .more-info-modal {
   display: none;
-  position: fixed;
+  position: relative;
+  float: right;
   background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
+
+  width: 40vw;
+  margin-right: 5vw;
+
+  height: 80vh;
+  top: 50%;
+  //left: 50%;
+  margin-top: -40vh; // Negative half of height.
+  //margin-left: -40vw; // Negative half of width.
 
   & > *{
     margin-left: 25px;
@@ -167,6 +177,7 @@ dialog{
 
     .modal-title{
       font-size: 1.3rem;
+      font-family: casadamusica_font;
     }
     .close-btn-container{
       float: right;
@@ -198,12 +209,7 @@ dialog{
     }
   }
 
-  width: 80vw;
-  height: 80vh;
-  top: 50%;
-  left: 50%;
-  margin-top: -40vh; // Negative half of height.
-  margin-left: -40vw; // Negative half of width.
+
 }
 .more-info-modal-background{
   display: none;
@@ -216,40 +222,6 @@ dialog{
   left: 0;
 }
 
-/* Portrait */
-@media only screen
-and (orientation: portrait) {
-  .more-info-modal{
-    /*width: 80vw;
-    height: 80vh;
-    top: 50%;
-    left: 50%;
-    margin-top: -40vh; // Negative half of height.
-    margin-left: -40vw; // Negative half of width.*/
-  }
-}
-
-/* Landscape */
-@media only screen
-and (min-device-width: 1080px)
-and (orientation: landscape) {
-  .more-info-modal{
-    /*width: 40vw;
-    height: 80vh;
-    top: 50%;
-    left: 10vw;
-    margin-top: -40vh; // Negative half of height.*/
-  }
-}
-
-/* Landscape */
-@media only screen
-and (min-device-width: 768px)
-and (max-device-width: 1024px)
-and (orientation: landscape)
-and (-webkit-min-device-pixel-ratio: 1) {
-
-}
 
 
 // panorama
@@ -276,7 +248,9 @@ and (-webkit-min-device-pixel-ratio: 1) {
   position: fixed;
   left: 0;
   //background-color: rgba(87, 136, 150, 0.8); //#578896
-  background-color: $dark-blue-opacity;
+  &.background{
+    background-color: $dark-blue-opacity;
+  }
 
   .sidebar-column {
     display: block;

@@ -124,13 +124,13 @@ controllerModule.controller("materialsController", function($scope, $stateParams
   };
 
   $scope.show_more_info_popup = function(room_id){
-    jQuery('#materials-'+room_id+'-more-info-modal').show();
-    jQuery('#materials-'+room_id+'-more-info-modal-background').show();
+    jQuery('#'+room_id+'-more-info-modal').show();
+    jQuery('#'+room_id+'-more-info-modal-background').show();
   };
 
   $scope.hide_more_info_popup = function(room_id){
-    jQuery('#materials-'+room_id+'-more-info-modal').hide();
-    jQuery('#materials-'+room_id+'-more-info-modal-background').hide();
+    jQuery('#'+room_id+'-more-info-modal').hide();
+    jQuery('#'+room_id+'-more-info-modal-background').hide();
   };
 
 
