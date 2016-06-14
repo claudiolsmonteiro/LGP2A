@@ -4,3 +4,10 @@
 
 <%= link_to 'Show', @room %> |
 <%= link_to 'Back', rooms_path %>
+
+<script>
+  $( document ).ready(function() {
+    $('.menu li').removeClass('active');
+    $('.menu .espacos').addClass('active');
+  });
+</script>

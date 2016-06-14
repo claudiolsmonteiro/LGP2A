@@ -16,11 +16,11 @@
           <table  class="table table-hover">
             <thead>
             <tr>
-              <th data-field="id" data-align="right">Código do Ponto</th>
-              <th data-field="id" data-align="right">Show</th>
-              <th data-field="id" data-align="right">Edit</th>
-              <th data-field="id" data-align="right">Destroy</th>
-              <th data-field="id" data-align="right">Adicionar etiqueta</th>
+              <th data-field="id" data-align="right">Título do Ponto</th>
+              <th data-field="id" data-align="right">Espaço do ponto</th>
+              <th data-field="id" data-align="right">Mostrar</th>
+              <th data-field="id" data-align="right">Editar</th>
+              <th data-field="id" data-align="right">Eliminar</th>
             </tr>
 
             </thead>
@@ -28,14 +28,21 @@
                 <tr>
                   <td data-field="id" data-align="right"><%= link_to point %></td>
                   <td><%= link_to 'Show', point %></td>
-                  <td><%= link_to 'Edit', edit_point_path(point) %></td>
-                  <td><%= link_to 'Destroy', point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td><%= link_to 'Mostrar', point %></td>
+                  <td><%= link_to 'Editar', edit_point_path(point) %></td>
+                  <td><%= link_to 'Eliminar', point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 </tr>
             <% end %>
           </table>
-          <%= link_to 'New Point', new_point_path %>
         </div>
       </div>
+      <%= link_to 'Novo ponto', new_point_path , class:"btn btn-primary" %>
     </div>
   </div>
 </div>
+<script>
+  $( document ).ready(function() {
+    $('.menu li').removeClass('active');
+    $('.menu .etiquetas').addClass('active');
+  });
+</script>

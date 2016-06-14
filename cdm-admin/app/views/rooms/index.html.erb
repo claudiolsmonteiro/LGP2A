@@ -16,26 +16,32 @@
           <table  class="table table-hover">
             <thead>
             <tr>
-              <th data-field="id" data-align="right">Código da sala</th>
-              <th data-field="id" data-align="right">Show</th>
-              <th data-field="id" data-align="right">Edit</th>
-              <th data-field="id" data-align="right">Destroy</th>
-              <th data-field="id" data-align="right">Adicionar etiqueta</th>
+              <th data-field="id" data-align="right">Código do espaço</th>
+              <th data-field="id" data-align="right">Mostrar</th>
+              <th data-field="id" data-align="right">Editar</th>
+              <th data-field="id" data-align="right">Eliminar</th>
             </tr>
 
             </thead>
             <% @rooms.each do |room| %>
                 <tr>
                   <td data-field="id" data-align="right"><%= link_to room.code, room %></td>
-                  <td><%= link_to 'Show', room %></td>
-                  <td><%= link_to 'Edit', edit_room_path(room) %></td>
-                  <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  <td><%= link_to 'Mostrar', room %></td>
+                  <td><%= link_to 'Editar', edit_room_path(room) %></td>
+                  <td><%= link_to 'Eliminar', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 </tr>
             <% end %>
           </table>
-          <%= link_to 'New Room', new_room_path %>
+
         </div>
       </div>
+      <%= link_to 'Novo espaço', new_room_path,   class:"btn btn-primary" %>
     </div>
   </div>
 </div>
+<script>
+  $( document ).ready(function() {
+    $('.menu li').removeClass('active');
+    $('.menu .espacos').addClass('active');
+  });
+</script>

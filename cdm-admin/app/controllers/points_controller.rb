@@ -16,10 +16,12 @@ class PointsController < ApplicationController
   def new
     @point = Point.new
     @point.point_translations.build
+    @rooms = Room.all
   end
 
   def create
     @point = Point.new(points_params)
+
     respond_to do |format|
       if @point.save
 

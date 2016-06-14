@@ -15,9 +15,18 @@
           <div class="col-md-12">
             <%= form_for @point, url: '/points' do |f| %>
                 <div class="form-group">
-                  <label>Id da foto correspondente</label>
-                  <%= f.number_field :photo_id , class:"form-control" %>
+                  <label>Selecionar foto correspondente</label>
+                  <!-- <%= f.number_field :photo_id  %> -->
+                  <select name="point[photo_id]", class="form-control">
+
+                    <% @rooms.each do |p| %>
+                        <% if !p.photo.nil? %>
+                            <option value="<%= p.photo.id %>" ><%= p.code %></option>
+                        <%end%>
+                    <% end %>
+                  </select>
                 </div>
+
                 <div class="form-group">
                   <label>Coordenadas X da etiqueta</label>
                   <%= f.number_field :x , class:"form-control" %>
@@ -29,25 +38,31 @@
 
                 <%= f.fields_for :point_translations do |rt| %>
                     <div class="form-group">
-                      <label>Point title</label>
+                      <label>Título do ponto</label>
                       <%= rt.text_field :title , class:"form-control" %>
                     </div>
                     <div class="form-group">
-                      <label>Point description</label>
+                      <label>Descrição do ponto</label>
                       <%= rt.text_area :description , class:"form-control" %>
                     </div>
                     <div class="form-group">
-                      <label>Language Id</label>
+                      <label>Selecionar Linguagem</label>
                       <%= rt.text_field :language_id , class:"form-control" %>
                     </div>
                 <% end %>
 
 
-                <%= f.submit "Submit", class:"button" %>
+                <%= f.submit "Enviar", class:"btn btn-primary" %>
             <% end %>
-            </div>
           </div>
         </div>
-      </div><!-- /.col-->
-    </div><!-- /.row -->
-  </div><!--/.main-->
+      </div>
+    </div><!-- /.col-->
+  </div><!-- /.row -->
+</div><!--/.main-->
+<script>
+  $( document ).ready(function() {
+    $('.menu li').removeClass('active');
+    $('.menu .etiquetas').addClass('active');
+  });
+</script>
