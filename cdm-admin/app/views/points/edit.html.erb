@@ -1,8 +1,63 @@
-<h1>Points#edit</h1>
-<p>Find me in app/views/points/edit.html.erb</p>
+
+
 <script>
 $( document ).ready(function() {
 $('.menu li').removeClass('active');
 $('.menu .etiquetas').addClass('active');
 });
 </script>
+
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Editar etiqueta de uma sala</h1>
+    </div>
+  </div><!--/.row-->
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="col-md-12">
+            <%= form_for @point, :url => {:action => "update", :controller => "points"} do |f| %>
+                <div class="form-group">
+                  <label>Id da foto correspondente</label>
+                  <%= f.number_field :photo_id , class:"form-control" %>
+                </div>
+                <div class="form-group">
+                  <label>Coordenadas X da etiqueta</label>
+                  <%= f.number_field :x , class:"form-control" %>
+                </div>
+                <div class="form-group">
+                  <label>Coordenadas Y da etiqueta</label>
+                  <%= f.number_field :y , class:"form-control" %>
+                </div>
+
+                <%= f.fields_for :point_translations do |rt| %>
+                    <div class="form-group">
+                      <label>Point title</label>
+                      <%= rt.text_field :title , class:"form-control" %>
+                    </div>
+                    <div class="form-group">
+                      <label>Point description</label>
+                      <%= rt.text_area :description , class:"form-control" %>
+                    </div>
+                    <div class="form-group">
+                      <label>Language Id</label>
+                      <%= rt.text_field :language_id , class:"form-control" %>
+                    </div>
+                <% end %>
+
+
+                <%= f.submit "Submit", class:"button" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.col-->
+  </div><!-- /.row -->
+</div><!--/.main-->
+

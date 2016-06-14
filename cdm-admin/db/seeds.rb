@@ -12,9 +12,8 @@ Language.create!(:code => "en", :name => "English")
 Room.create!(
     :code => "sala_suggia",
     :model_path => "obj/casa_da_musica_salas_separadas/sala_suggia.obj",
-    :model_detail_path => "obj/casa_da_musica_salas_separadas/sala_suggia.obj",
+    :model_detail_path => "obj/salas_detail/suggia.dae",
     :texture_path => "obj/casa_da_musica_salas_separadas/texturas/sala_suggia_uvmap.png",
-    :texture_detail_path => "obj/casa_da_musica_salas_separadas/texturas/sala_suggia_uvmap.png",
     :animation => [150,0,120],
     :beacon_uuid => "e2c56db5-dffb-48d2-b060-d0f5a71096e0",
     :beacon_major => 1,
@@ -26,9 +25,8 @@ Room.create!(
 Room.create!(
     :code => "sala_2",
     :model_path => "obj/casa_da_musica_salas_separadas/sala_concertos_2.obj",
-    :model_detail_path => "obj/casa_da_musica_salas_separadas/sala_concertos_2.obj",
+    :model_detail_path => "obj/salas_detail/sala_2.dae",
     :texture_path => "obj/casa_da_musica_salas_separadas/texturas/sala_concertos_2_uvmap.png",
-    :texture_detail_path => "obj/casa_da_musica_salas_separadas/texturas/sala_concertos_2_uvmap.png",
     :animation => [-70,0,50],
     :beacon_uuid => "e2c56db5-dffb-48d2-b060-d0f5a71096e0",
     :beacon_major => 2,
@@ -39,9 +37,8 @@ Room.create!(
 Room.create!(
     :code => "bar",
     :model_path => "obj/casa_da_musica_salas_separadas/bar.obj",
-    :model_detail_path => "obj/casa_da_musica_salas_separadas/bar.obj",
+    :model_detail_path => "obj/salas_detail/bar.dae",
     :texture_path => "obj/casa_da_musica_salas_separadas/texturas/Bar_uvmap.png",
-    :texture_detail_path => "obj/casa_da_musica_salas_separadas/texturas/Bar_uvmap.png",
     :animation => [-23,0,-18]
 )
 
@@ -180,7 +177,7 @@ PointTranslation.create!(
 PointTranslation.create!(
     :title => 'Baroque organ',
     :description => 'Usually the baroque organ stands in the left side of the orchestra. This is a copy of the Mexican organ.',
-    :point_id => 3,
+    :point_id => 2,
     :language_id => 2
 )
 

@@ -39,7 +39,7 @@ class PointsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @point.update(room_params)
+      if @point.update(points_params)
         format.html { redirect_to @point, notice: 'Point was successfully updated.' }
         format.json { render :show, status: :ok, location: @point }
       else
@@ -72,6 +72,6 @@ class PointsController < ApplicationController
     @point = Point.find(params[:id])
   end
   def points_params
-    params.require(:point).permit(:x, :y, :photo_id, point_translations_attributes: [:title, :description, :language_id])
+    params.require(:point).permit(:x, :y, :photo_id, point_translations_attributes: [:id, :title, :description, :language_id])
   end
 end

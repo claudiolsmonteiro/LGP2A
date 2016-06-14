@@ -15,15 +15,13 @@ class RoomsController < ApplicationController
   end
 
   def edit
+    @room = Room.find_by_id params[:id]
   end
 
   def create
     @room = Room.new(room_params)
-    @room.model_detail_path= @room.model_path
-    @room.texture_detail_path= @room.texture_path
     respond_to do |format|
       if @room.save
-
         format.html { redirect_to @room, notice: 'Room was successfully created.' }
         format.json { render :show, status: :created, location: @room }
       else
@@ -34,8 +32,10 @@ class RoomsController < ApplicationController
   end
 
   def update
+    @room = Room.find_by_id params[:id]
     respond_to do |format|
-      if @room.update(room_params)
+      if @room.update!(room_params)
+        @room.room_translations.destroy
         format.html { redirect_to @room, notice: 'Room was successfully updated.' }
         format.json { render :show, status: :ok, location: @room }
       else
@@ -130,13 +130,14 @@ class RoomsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_room
-    @room = Room.find(params[:id])
+    @room = Room.find_by_id params[:id]
+    #redirect_to rooms_path, flash: {error: "The post does not exists"} if @room.nil?
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def room_params
     #params.fetch(:room, {})
-    params.require(:room).permit(:code, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room, room_translations_attributes: [:name, :description, :language_id])
+    params.require(:room).permit(:id, :code, :model_path, :model_detail_path, :texture_path, :texture_detail_path, :animation, :beacon_uuid, :beacon_major, :beacon_minor, :next_room, room_translations_attributes: [:id, :name, :description, :language_id])
   end
 
   #cors headers
