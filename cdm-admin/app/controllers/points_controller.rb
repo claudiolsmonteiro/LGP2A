@@ -4,10 +4,12 @@ class PointsController < ApplicationController
 
   def index
     @points = Point.all
+    @point_ts = PointTranslation.all
   end
 
   def show
     @point = Point.find(params[:id])
+
   end
 
   def edit

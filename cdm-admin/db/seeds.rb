@@ -9,6 +9,12 @@
 Language.create!(:code => "pt", :name => "Português")
 Language.create!(:code => "en", :name => "English")
 
+User.create!(
+        :name => "Admin",
+        :email => "teste@teste.pt",
+        :password =>"123456"
+)
+
 Room.create!(
     :code => "sala_suggia",
     :model_path => "obj/casa_da_musica_salas_separadas/sala_suggia.obj",

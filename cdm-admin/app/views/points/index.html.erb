@@ -26,9 +26,9 @@
             </thead>
             <% @points.each do |point| %>
                 <tr>
+                  <td><%= @point_ts.where(point_id: point.id, language_id: '1').first.title %></td>
                   <td data-field="id" data-align="right"><%= link_to point.id %></td>
-                  <td><%= link_to 'Show', point %></td>
-                  <td><%= link_to 'Mostrar', point %></td>
+                  <td><%= link_to 'Mostar', point %></td>
                   <td><%= link_to 'Editar', edit_point_path(point) %></td>
                   <td><%= link_to 'Eliminar', point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 </tr>
