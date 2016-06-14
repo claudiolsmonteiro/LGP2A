@@ -61,19 +61,16 @@ controllerModule.service('customLocalStorage', function () {
     customLocalStorage.models = null;
 
     customLocalStorage.getModelInfoRemote = function(ready_function) {
-        //console.log("vai ajax");
+        //descomentar primeira linha e comentar o restante para usar dados locais (se disponiveis)
+        //customLocalStorage.models = JSON.parse(localStorage.getItem("models")); ready_function(true);
         jQuery.ajax({
             url: 'http://cdm-admin.herokuapp.com/api/everything',
             success: function(data){
-                //console.log(data);
-                //console.log("ajax sucesso");
                 window.localStorage.setItem("models", JSON.stringify(data));
                 customLocalStorage.models = data;
                 ready_function(true);
             },
             error: function(err){
-                //console.log(err);
-                //console.log("ajax erro");
                 if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
                     ready_function(false);
                 }
@@ -84,7 +81,6 @@ controllerModule.service('customLocalStorage', function () {
             },
             timeout: 7000 // sets timeout to 7 seconds
         });
-        //return JSON.parse(localStorage.getItem("models"));
     };
 
     /*customLocalStorage.getModelInfo = function() {
