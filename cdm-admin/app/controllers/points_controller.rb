@@ -16,9 +16,6 @@ class PointsController < ApplicationController
     @languages = Language.all
   end
 
-  def edit
-  end
-
   def new
     @point = Point.new
     @point.point_translations.build
