@@ -51,8 +51,14 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             '</div>'+
             '</div>';
 
-        if(success){
-            ionic.Platform.ready(function(){
+        ionic.Platform.ready(function(){
+            if(success){
+                ionic.DomUtil.ready(function(){
+                    $scope.environment.current_room = $stateParams.current_room;
+                    $scope.tridimensional_model_init();
+                    sidebarUtils.sidebar_ready('model-sidebar-menu');
+                });
+
                 if(screen.lockOrientation) {
                     console.log('locking to landscape');
                     screen.lockOrientation('landscape');
@@ -92,28 +98,19 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
                     //ignoring error. probably because running app in browser (development), not in device.
                 }
 
-                console.log("3");
 
-            });
-            console.log("4");
-            ionic.DomUtil.ready(function(){
-                $scope.environment.current_room = $stateParams.current_room;
-                $scope.tridimensional_model_init();
-                sidebarUtils.sidebar_ready('model-sidebar-menu');
-            });
-        }
-        else{
-            $ionicLoading.show({
-                template: template_modal,
-                scope: $scope,
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 400,
-                showDelay: 0
-            });
-        }
-        console.log("5");
-
+            }
+            else{
+                $ionicLoading.show({
+                    template: template_modal,
+                    scope: $scope,
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    maxWidth: 400,
+                    showDelay: 0
+                });
+            }
+        });
     };
 
     ////////////////////
@@ -126,7 +123,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     ////////////////////
 
 
-
+    // SELECT ROOM POPOVER
     // .fromTemplate() method
     var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
     $scope.popover = $ionicPopover.fromTemplate(template, {
@@ -144,15 +141,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.closePopover = function() {
         $scope.popover.hide();
     };
-
-    // Execute action on hide popover
-    $scope.$on('popover.hidden', function() {
-        // Execute action
-    });
-    // Execute action on remove popover
-    $scope.$on('popover.removed', function() {
-        // Execute action
-    });
+    // END OF SELECT ROOM POPOVER
 
     $scope.toggleSidebar = function () { sidebarUtils.showSidebar('model-sidebar-menu'); };
     $scope.animateRoom = function ( room_id ) { $scope.animateObjectAux(room_id); $scope.closePopover(); };
@@ -166,7 +155,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     }
 
     $scope.tridimensional_model_init = function() {
-        console.log(customLocalStorage.models);
+        $scope.models = customLocalStorage.models;
         document.addEventListener( 'mousedown', function( e ) { $scope.onDocumentMouseDown( e );}, true );
 
         var ambient = new THREE.AmbientLight( 0x333333 );
