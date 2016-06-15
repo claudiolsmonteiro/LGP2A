@@ -5,11 +5,14 @@ class PointsController < ApplicationController
   def index
     @points = Point.all
     @point_ts = PointTranslation.all
+    @photos = Photo.all
+    @rooms = Room.all
+    @rooms_ts = RoomTranslation.all
   end
 
   def show
     @point = Point.find(params[:id])
-
+    @point_ts = PointTranslation.all
   end
 
   def edit

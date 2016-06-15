@@ -13,7 +13,7 @@
   </div>
 </div>
 
-<p id="notice"><%= notice %></p> -->
+<p id="notice"><%= notice %></p>
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
@@ -26,7 +26,53 @@
   </div>
 
 
-</div> <!--/.class-->
+</div>
+<script>
+  $( document ).ready(function() {
+    $('.menu li').removeClass('active');
+    $('.menu .etiquetas').addClass('active');
+  });
+</script>-->
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Todos os pontos</h1>
+    </div>
+  </div><!--/.row-->
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table  class="table table-hover">
+            <thead>
+            <tr>
+              <th data-field="id" data-align="right">CoordX</th>
+              <th data-field="id" data-align="right">CoordY</th>
+              <th data-field="id" data-align="right">Título</th>
+              <th data-field="id" data-align="right">Descrição</th>
+              <th data-field="id" data-align="right">Linguagem</th>
+            </tr>
+
+            </thead>
+
+            <tr>
+              <td><%= @point.x %></td>
+              <td><%= @point.y %></td>
+              <td><%= @point_ts.where(point_id: @point.id).first.title %></td>
+              <td><%= @point_ts.where(point_id: @point.id).first.description %></td>
+              <td><%= @point_ts.where(point_id: @point.id).first.language_id %></td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <script>
   $( document ).ready(function() {
     $('.menu li').removeClass('active');

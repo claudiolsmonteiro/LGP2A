@@ -27,7 +27,7 @@
             <% @points.each do |point| %>
                 <tr>
                   <td><%= @point_ts.where(point_id: point.id, language_id: '1').first.title %></td>
-                  <td data-field="id" data-align="right"><%= link_to point.id %></td>
+                  <td><%= @rooms_ts.where(room_id: @rooms.where(id: @photos.where(id: point.photo_id).first.room_id).first.id).first.name %></td>
                   <td><%= link_to 'Mostar', point %></td>
                   <td><%= link_to 'Editar', edit_point_path(point) %></td>
                   <td><%= link_to 'Eliminar', point, method: :delete, data: { confirm: 'Are you sure?' } %></td>
