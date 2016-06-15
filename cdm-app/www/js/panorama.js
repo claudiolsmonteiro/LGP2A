@@ -5,8 +5,7 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage,
-                                                           sidebarUtils, beaconsService){
+controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage, sidebarUtils){
 
   ////////////////////
   $scope.texts = texts;
@@ -48,7 +47,6 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     $scope.current_room = $stateParams.room;
     $scope.panorama_ready();
     sidebarUtils.sidebar_ready('panorama-sidebar-menu');
-    beaconsService.start_ranging();
   });
 
 
@@ -79,6 +77,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     var cubemap_array = customLocalStorage.models[room].photo.url_cube_map;
     var point;
     console.log(type);
+    
     //console.log(customLocalStorage.models[room]);
     //console.log("testes dos pontos");
     //<iframe width="560" height="315" src="https://www.youtube.com/embed/Mhp037U6YR8" frameborder="0" allowfullscreen></iframe>
@@ -94,22 +93,13 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
         "text": $scope.hotspotText(customLocalStorage.models[room].photo.points[point])
       });
     }
-
-    if(customLocalStorage.models[room].photo.video != null){
-      hotspots.push({
-        "pitch": customLocalStorage.models[room].photo.video.x,
-        "yaw": customLocalStorage.models[room].photo.video.y,
-        "type": "info",
-        "text": $scope.hotspotVideo(customLocalStorage.models[room].photo.video.url)
-      });
-    }
+   
+   
 
     pannellum.viewer('panorama', {
       "type": type,
       "panorama": equirectangular_path,
       "cubeMap": cubemap_array,
-      "showFullscreenCtrl": false,
-      "showZoomCtrl" : false,
       /*"vaov" : 70,
        minPitch: -10,
        maxPitch: 10,*/
@@ -120,6 +110,28 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
       "hotSpots": hotspots
     });
 
+
+pannellum.viewer('panorama', {
+      "type": type,
+      "panorama": equirectangular_path,
+      "cubeMap": cubemap_array,
+      /*"vaov" : 70,
+       minPitch: -10,
+       maxPitch: 10,*/
+      /*maxHfov: 40,
+       minHfov: 30,*/
+      "autoLoad": true,
+      hotSpotDebug: true,
+      "hotSpots": [{
+      	 "pitch": customLocalStorage.models[room].photo.video.x,
+        "yaw": customLocalStorage.models[room].photo.video.y,
+        "type": "info",
+        "text": $scope.hotspotVideo(customLocalStorage.models[room].photo.video.url)
+      }]
+    });
+
+
+
   };
 
   $scope.hotspotText = function(hotspot){
@@ -127,7 +139,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     return "<div class=\"hotspot-box\">"+
         "<p>" + hotspot.translations[$scope.language].title + "</p>" +
         "<a id=\"hotspot_" + hotspot.id + "\" href=\"#\" "+
-        " onclick=\"openPopup(\'" + hotspot.translations[$scope.language].description + "\');return false;\">"+texts['tour'].more_info[$scope.language]+"</a>" +
+        " onclick=\"openPopup(\'" + hotspot.translations[$scope.language].description + "\');return false;\">Mais informação</a>" +
         "</div>";
   };
 
