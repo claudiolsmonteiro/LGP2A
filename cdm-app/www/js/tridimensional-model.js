@@ -3,7 +3,7 @@
  */
 
 controllerModule.controller("tridimensionalModelController", function($scope, $rootScope, $stateParams, $ionicPopover,
-            $cordovaBeacon, $state, customLocalStorage, $ionicLoading, sidebarUtils){
+            $cordovaBeacon, $state, customLocalStorage, $ionicLoading, sidebarUtils, beaconsService){
     //ionic.Platform.fullScreen(true, false);
 
     $scope.getRemoteModels = function (){
@@ -16,23 +16,6 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             showDelay: 0
         });
         customLocalStorage.getModelInfoRemote($scope.model_ready);
-    };
-
-    $scope.beacons_init = function (){
-        $scope.beacons = {};
-        $scope.beacons_detected = [];
-        var temp_uuids = [];
-        for(var key in customLocalStorage.models){
-            var temp_key = customLocalStorage.models[key].beacon_uuid+':'+customLocalStorage.models[key].beacon_major+':'+customLocalStorage.models[key].beacon_minor;
-            $scope.beacons_detected[temp_key] = {};
-            $scope.beacons_detected[temp_key].detected = false; //will determine if the user has already been prompted for this beacon
-            $scope.beacons_detected[temp_key].model_key = key;
-            temp_uuids.push(customLocalStorage.models[key].beacon_uuid);
-        }
-        $scope.beacons_unique_uuids = []; //array with uuids (no duplicates);
-        $.each(temp_uuids, function(i, el){ //populate beacons_unique_uuids with unique values from the uuids temp array
-            if($.inArray(el, $scope.beacons_unique_uuids) === -1 && el != undefined) $scope.beacons_unique_uuids.push(el);
-        });
     };
 
     /*
@@ -52,53 +35,19 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             '</div>';
 
         ionic.Platform.ready(function(){
+
+            if(screen.lockOrientation) {
+                console.log('locking to landscape');
+                screen.lockOrientation('landscape');
+            }
+
             if(success){
                 ionic.DomUtil.ready(function(){
                     $scope.environment.current_room = $stateParams.current_room;
                     $scope.tridimensional_model_init();
                     sidebarUtils.sidebar_ready('model-sidebar-menu');
+                    beaconsService.start_ranging();
                 });
-
-                if(screen.lockOrientation) {
-                    console.log('locking to landscape');
-                    screen.lockOrientation('landscape');
-                }
-                $scope.beacons_init();
-                try {
-                    // BEACONS
-                    $cordovaBeacon.requestWhenInUseAuthorization();
-                    $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
-                        var uniqueBeaconKey;
-                        console.log( pluginResult.beacons);
-                        for(var i = 0; i < pluginResult.beacons.length; i++) {
-                            uniqueBeaconKey = pluginResult.beacons[i].uuid + ":" + pluginResult.beacons[i].major + ":" + pluginResult.beacons[i].minor;
-                            //$scope.beacons[uniqueBeaconKey] = pluginResult.beacons[i];
-                            if(pluginResult.beacons[i].accuracy < 3.0 && $scope.beacons_detected[uniqueBeaconKey].detected === false){
-                                $scope.beacons_detected[uniqueBeaconKey].detected = true;
-                                var prompt_result =
-                                    window.confirm('Está perto de:\n' +
-                                        customLocalStorage.models[$scope.beacons_detected[uniqueBeaconKey].model_key].translations[$scope.language].name + '\n' +
-                                        'Deseja ver mais informação?');
-                                if(prompt_result){ //navigate to detected room
-                                    $state.go('room' , {room: $scope.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
-                                }
-                            }
-                        }
-                        //$scope.$apply();
-                        //console.log($scope.beacons);
-                    });
-
-                    console.log($scope.beacons_unique_uuids);
-                    for(var key in $scope.beacons_unique_uuids){
-                        $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion(
-                            "beacon-" + $scope.beacons_unique_uuids[key], $scope.beacons_unique_uuids[key]));
-                    }
-                    // /BEACONS
-                }catch(e) {
-                    //ignoring error. probably because running app in browser (development), not in device.
-                }
-
-
             }
             else{
                 $ionicLoading.show({

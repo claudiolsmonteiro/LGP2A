@@ -5,7 +5,8 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage, sidebarUtils){
+controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage,
+                                                           sidebarUtils, beaconsService){
 
   ////////////////////
   $scope.texts = texts;
@@ -47,6 +48,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     $scope.current_room = $stateParams.room;
     $scope.panorama_ready();
     sidebarUtils.sidebar_ready('panorama-sidebar-menu');
+    beaconsService.start_ranging();
   });
 
 

@@ -5,7 +5,8 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("roomController", function($scope, $stateParams, $state, customLocalStorage, sidebarUtils){
+controllerModule.controller("roomController", function($scope, $stateParams, $state, customLocalStorage,
+                                                       sidebarUtils, beaconsService){
 
     ////////////////////
     $scope.texts = texts;
@@ -47,6 +48,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         $scope.environment.current_room = $stateParams.room;
         $scope.room_ready();
         sidebarUtils.sidebar_ready('room-sidebar-menu');
+        beaconsService.start_ranging();
     });
 
     // ROOM MODEL FUNCTIONS
@@ -100,8 +102,9 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
         //load model - está comentada a linha do modelo DAE porque a app fica muito pesada.
         // descomentar o DAE e comentar a linha abaixo (loadTexture) para usar o modelo detalhado
         //loadDAE($scope.environment, customLocalStorage.models[$scope.room].model_detail_path, [0,0,0], 5);
-        loadTexture($scope.environment, $scope.environment.current_room, customLocalStorage.models[$scope.environment.current_room].texture_path, $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
-        console.log(customLocalStorage.models[$scope.room]);
+        loadTexture($scope.environment, $scope.environment.current_room,
+            customLocalStorage.models[$scope.environment.current_room].texture_path,
+            $scope.room_increment_textures_loaded, $scope.room_loadObjects, $scope.room_animate);
 
         $scope.environment.renderer.domElement.setAttribute('id', 'main-canvas');
 
@@ -116,7 +119,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
             $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
         });
 
-        var axes = buildAxes( 1000 );
+        //var axes = buildAxes( 1000 );
         //$scope.environment.scene.add(axes);
 
         $scope.running = true; //when false, render will stop

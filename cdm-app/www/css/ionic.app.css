@@ -9828,7 +9828,6 @@ dialog {
   display: none;
   position: fixed;
   color: rgba(36, 36, 42, 0.5);
-  width: 100vw;
   top: 0;
   z-index: 200; }
   #top-info-bar .title-container {
