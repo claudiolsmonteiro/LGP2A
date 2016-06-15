@@ -7,7 +7,7 @@ var texts = {};
 texts['tour'] = {
     title: {
         pt : 'A Casa',
-        en : 'A Casa?'
+        en : 'A Casa'
     },
     room_dropdown: {
         title: {
@@ -20,8 +20,27 @@ texts['tour'] = {
             pt: 'Detalhes',
             en: 'Details'
         }
+    },
+    more_info: {
+        pt: 'Mais informação',
+        en: 'More info'
     }
 };
+
+texts['beacons'] = {
+    alert_text_generator : function(room_name, language){
+        switch(language){
+            case 'pt':
+                return 'Está perto de:\n' +
+                    room_name + '\n' +
+                    'Deseja navegar para esta sala?';
+            case 'en':
+                return 'You are near:\n' +
+                    room_name + '\n' +
+                    'Do you wish to naviagte to this room?'
+        }
+    }
+}
 
 texts['contacts'] = {
     title: {

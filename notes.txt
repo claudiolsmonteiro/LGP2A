@@ -1,6 +1,7 @@
 
 cordova plugin add ionic-plugin-keyboard
 cordova plugin add https://github.com/petermetz/cordova-plugin-ibeacon.git
+	( https://www.thepolyglotdeveloper.com/2015/09/support-ibeacons-in-your-ionic-framework-mobile-app/ )
 cordova plugin add cordova-plugin-screen-orientation
 ionic plugin add https://github.com/apache/cordova-plugin-whitelist.git
 	- adicionar no config.xml -> <allow-navigation href="http://cdm-admin.herokuapp.com/*" />

@@ -135,9 +135,7 @@ controllerModule.service('beaconsService', function (customLocalStorage, $cordov
                     if(pluginResult.beacons[i].accuracy < 3.0 && beaconsService.beacons_detected[uniqueBeaconKey].detected === false){
                         beaconsService.beacons_detected[uniqueBeaconKey].detected = true;
                         var prompt_result =
-                            window.confirm('Está perto de:\n' +
-                                customLocalStorage.models[beaconsService.beacons_detected[uniqueBeaconKey].model_key].translations[language].name + '\n' +
-                                'Deseja ver mais informação?');
+                            window.confirm(texts['beacons'].alert_text_generator(customLocalStorage.models[beaconsService.beacons_detected[uniqueBeaconKey].model_key].translations[language].name , language));
                         if(prompt_result){ //navigate to detected room
                             $state.go('room' , {room: beaconsService.beacons_detected[uniqueBeaconKey].model_key }, {reload: true, inherit: false, notify: true} ) ;
                             break;

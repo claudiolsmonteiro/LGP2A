@@ -76,7 +76,6 @@ dialog{
   padding: 10px;
   display: none;
   position: fixed;
-  //background: rgba(200,200,200,0.75);
   color: $dark-blue-opacity;
   //width: 100vw;
   top: 0;
@@ -106,6 +105,7 @@ dialog{
     bottom: 0;
     left: 0;
     display: block;
+    z-index: 250;
     ul{
       float: left;
       li.selected{
@@ -156,14 +156,14 @@ dialog{
 
 .more-info-modal {
   display: none;
-  position: relative;
-  float: right;
+  position: fixed;
+  //float: right;
   background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
 
   width: 40vw;
-  margin-right: 5vw;
+  right: 5vw;
 
   height: 80vh;
   top: 50%;
@@ -216,6 +216,7 @@ dialog{
 
 
 }
+
 .more-info-modal-background{
   display: none;
   position: fixed;
@@ -237,10 +238,6 @@ dialog{
   width: 100vw;
   height: 100vh;
 }
-.pnlm-controls{
-  display: none;
-}
-
 
 //side menu
 .sidebar{

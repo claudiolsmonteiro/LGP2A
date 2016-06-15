@@ -9847,7 +9847,8 @@ dialog {
     position: fixed;
     bottom: 0;
     left: 0;
-    display: block; }
+    display: block;
+    z-index: 250; }
     .bottom-navbar#menu-button-bar ul {
       float: left; }
       .bottom-navbar#menu-button-bar ul li.selected {
@@ -9879,13 +9880,12 @@ dialog {
 
 .more-info-modal {
   display: none;
-  position: relative;
-  float: right;
+  position: fixed;
   background-color: rgba(230, 230, 230, 0.85);
   z-index: 2000;
   border-radius: 5px;
   width: 40vw;
-  margin-right: 5vw;
+  right: 5vw;
   height: 80vh;
   top: 50%;
   margin-top: -40vh; }
@@ -9934,9 +9934,6 @@ dialog {
   left: 0;
   width: 100vw;
   height: 100vh; }
-
-.pnlm-controls {
-  display: none; }
 
 .sidebar {
   font-family: casadamusica_font;

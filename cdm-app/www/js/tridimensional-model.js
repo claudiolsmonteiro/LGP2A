@@ -69,6 +69,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
     $scope.environment = construct_tridimensional_environment([0,200,400]);
     $scope.prefix = 'model';
     $scope.menu_highlight = 'casa';
+    $scope.models = [];
     ////////////////////
 
 
@@ -105,6 +106,8 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
 
     $scope.tridimensional_model_init = function() {
         $scope.models = customLocalStorage.models;
+        //$scope.$apply();
+        
         document.addEventListener( 'mousedown', function( e ) { $scope.onDocumentMouseDown( e );}, true );
 
         var ambient = new THREE.AmbientLight( 0x333333 );
