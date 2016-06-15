@@ -37,7 +37,7 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Todos os pontos</h1>
+      <h1 class="page-header">Título da etiqueta: <%= @points_ts.where(point_id: @point.id).first.title %> / <%= @points_ts.where(point_id: @point.id).last.title %></h1>
     </div>
   </div><!--/.row-->
 
@@ -57,15 +57,25 @@
             </tr>
 
             </thead>
-
+            <!-- first PT, last En : TODO: Mudar para recursivo -->
+            <% if !@points_ts.first.nil? %> <!-- acho que esta verificação é irrelevante, mas vou deixar para já -->
             <tr>
               <td><%= @point.x %></td>
               <td><%= @point.y %></td>
-              <td><%= @point_ts.where(point_id: @point.id).first.title %></td>
-              <td><%= @point_ts.where(point_id: @point.id).first.description %></td>
-              <td><%= @point_ts.where(point_id: @point.id).first.language_id %></td>
+              <td><%= @points_ts.where(point_id: @point.id).first.title %></td>
+              <td><%= @points_ts.where(point_id: @point.id).first.description %></td>
+              <td><%= @languages.where(id: @points_ts.where(point_id: @point.id).first.language_id).first.name %></td>
             </tr>
-
+            <%end%>
+            <% if !@points_ts.last.nil? %>
+            <tr>
+              <td><%= @point.x %></td>
+              <td><%= @point.y %></td>
+              <td><%= @points_ts.where(point_id: @point.id).last.title %></td>
+              <td><%= @points_ts.where(point_id: @point.id).last.description %></td>
+              <td><%= @languages.where(id: @points_ts.where(point_id: @point.id).last.language_id).first.name %></td>
+            </tr>
+            <%end%>
           </table>
         </div>
       </div>

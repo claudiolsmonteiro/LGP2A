@@ -12,7 +12,8 @@ class PointsController < ApplicationController
 
   def show
     @point = Point.find(params[:id])
-    @point_ts = PointTranslation.all
+    @points_ts = PointTranslation.all
+    @languages = Language.all
   end
 
   def edit
@@ -22,6 +23,7 @@ class PointsController < ApplicationController
     @point = Point.new
     @point.point_translations.build
     @rooms = Room.all
+    @languages = Language.all
   end
 
   def create
