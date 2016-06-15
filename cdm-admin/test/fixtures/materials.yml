@@ -1,9 +1,1 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  belongs_to: MyString
-  room: MyString
-
-two:
-  belongs_to: MyString
-  room: MyString
