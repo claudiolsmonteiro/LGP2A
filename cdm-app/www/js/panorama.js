@@ -133,7 +133,8 @@ pannellum.viewer('panorama', {
 
 
   };
-
+  
+  /*
   $scope.hotspotText = function(hotspot){
     console.log(hotspot);
     return "<div class=\"hotspot-box\">"+
@@ -141,12 +142,19 @@ pannellum.viewer('panorama', {
         "<a id=\"hotspot_" + hotspot.id + "\" href=\"#\" "+
         " onclick=\"openPopup(\'" + hotspot.translations[$scope.language].description + "\');return false;\">Mais informação</a>" +
         "</div>";
+  };  */
+
+  $scope.hotspotText = function(hotspot){
+    console.log(hotspot);
+    return "<div class=\"hotspot-box\">"+
+        "<p id=\"hotspot_title\">" + hotspot.translations[$scope.language].title + "</p>" +
+      	"<p>" + hotspot.translations[$scope.language].description +"</p>" + "</div>";
   };
 
   $scope.hotspotVideo = function(hotspot_url){
-    return "<div class=\"video-container\">"+
-        "<iframe src=" +hotspot_url +" frameborder=\"20\" width=\"560\" height=\"315\" allowfullscreen>"+"</iframe>"+
-        "</div>";
+    return "<div class=\"hotspot-box\">"+
+        			"<iframe src=" +hotspot_url +"  width=\"560\" height=\"315\" allowfullscreen=\"true\">"+"</iframe>"+
+        		"</div>" ;
 
   };
 
