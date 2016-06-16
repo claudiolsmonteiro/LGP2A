@@ -1,1 +1,6 @@
 /* Empty. Add your own CSS if you like */
+#hotspot_title{
+	color:red;
+	font-weight:bold;
+	 font-size:130%;
+}

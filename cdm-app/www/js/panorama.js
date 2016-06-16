@@ -38,7 +38,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     if (customLocalStorage.models[$scope.room].photo != null && customLocalStorage.models[$scope.room].photo != undefined)
         $scope.panorama_available = true;
 
-
+  
     $scope.showPopup = function () { $scope.room_show_more_info_popup($scope.current_room); };
     $scope.hidePopup = function () { $scope.room_hide_more_info_popup($scope.current_room); };
     $scope.toggleSidebar = function () { sidebarUtils.showSidebar('panorama-sidebar-menu'); };
@@ -130,28 +130,21 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
             }]
         });
     };
-/*
-    $scope.hotspotText = function(hotspot){
-        console.log(hotspot);
-        return "<div class=\"hotspot-box\">"+
-            "<p>" + hotspot.translations[$scope.language].title + "</p>" +
-            "<a id=\"hotspot_" + hotspot.id + "\" href=\"#\" "+
-            " onclick=\"openPopup(\'" + hotspot.translations[$scope.language].description + "\');return false;\">Mais informação</a>" +
+
+    $scope.hotspotVideo = function(hotspot_url){
+        return "<div class=\"video-container\">"+
+            "<iframe src=" +hotspot_url +" frameborder=\"20\" width=\"560\" height=\"315\" allowfullscreen>"+"</iframe>"+
             "</div>";
-    }; */
+
+    };
 
     $scope.hotspotText = function(hotspot){
       console.log(hotspot);
       return "<div class=\"hotspot-box\">"+
-         "<p id=\"hotspot_title\">" + hotspot.translations[$scope.language].title + "</p>" +
-     	 "<p>" + hotspot.translations[$scope.language].description +"</p>" + "</div>";
+          "<p id=\"hotspot_title\">" + hotspot.translations[$scope.language].title + "</p>" +
+            "<p>" + hotspot.translations[$scope.language].description +"</p>" + "</div>";
     };
 
-    $scope.hotspotVideo = function(hotspot_url){
-        return "<div class=\"hotspot-box\">"+
-      			"<iframe src=" +hotspot_url +"  width=\"560\" height=\"315\" allowfullscreen=\"true\">"+"</iframe>"+
-         		"</div>" ;
-    };
 
     $scope.validURL = function (str) {
         var pattern = new RegExp('^(https?:\/\/)?'+ // protocol

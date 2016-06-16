@@ -67,8 +67,9 @@
   </platform>
   <icon src="resources\android\icon\drawable-xhdpi-icon.png"/>
 
-  <allow-navigation href="http://cdm-admin.herokuapp.com/*" />
-  <allow-navigation href="http://www.youtube.com/*" />
-     <allow-navigation href="http://youtube.com/*" />
+	<allow-navigation href="http://cdm-admin.herokuapp.com/*" />
+	<allow-navigation href="http://www.youtube.com/*" />
+	<allow-navigation href="https://www.youtube.com/*" />
+	
 
 </widget>
