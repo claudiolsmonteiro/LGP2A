@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
 
 
   def show
+    @room = Room.find(params[:id])
   end
 
   def new
@@ -73,6 +74,7 @@ class RoomsController < ApplicationController
 
   def index
     @rooms=Room.all
+    @rooms_ts = RoomTranslation.all
   end
 
   def get_everything

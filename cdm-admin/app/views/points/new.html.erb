@@ -48,10 +48,10 @@
                     <div class="form-group">
                       <label>Selecionar Idioma</label>
                       <!-- <%= rt.text_field :language_id , class:"form-control" %> -->
-                      <select name="point_translations_attributes[language_id]", class="form-control">
+                      <select name="point[point_translations_attributes][language_id]", class="form-control">
 
                         <% @languages.each do |language| %>
-                                <option value="<%= language.id %>" ><%= language.name %></option>
+                                <option  value=<%= language.id %> ><%= language.name %></option>
                         <% end %>
                       </select>
                     </div>

@@ -1,16 +1,50 @@
-<p id="notice"><%= notice %></p>
-
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Sala criada</h1>
-      <%= link_to 'Edit', edit_room_path(@room) %> |
-      <%= link_to 'Back', rooms_path %>
+      <h1 class="page-header">Título do espaço: <%= @rooms.where(point_id: @point.id).first.title %> / <%= @points_ts.where(point_id: @point.id).last.title %></h1>
     </div>
   </div><!--/.row-->
 
+  <div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table  class="table table-hover">
+          <thead>
+          <tr>
+            <th data-field="id" data-align="right">CoordX</th>
+            <th data-field="id" data-align="right">CoordY</th>
+            <th data-field="id" data-align="right">Título</th>
+            <th data-field="id" data-align="right">Descrição</th>
+            <th data-field="id" data-align="right">Idioma</th>
+          </tr>
 
+          </thead>
+          <!-- first PT, last En : TODO: Mudar para recursivo -->
+          <% if !@points_ts.first.nil? %> <!-- acho que esta verificação é irrelevante, mas vou deixar para já -->
+              <tr>
+                <td><%= @point.x %></td>
+                <td><%= @point.y %></td>
+                <td><%= @points_ts.where(point_id: @point.id).first.title %></td>
+                <td><%= @points_ts.where(point_id: @point.id).first.description %></td>
+                <td><%= @languages.where(id: @points_ts.where(point_id: @point.id).first.language_id).first.name %></td>
+              </tr>
+          <%end%>
+          <% if !@points_ts.last.nil? %>
+              <tr>
+                <td><%= @point.x %></td>
+                <td><%= @point.y %></td>
+                <td><%= @points_ts.where(point_id: @point.id).last.title %></td>
+                <td><%= @points_ts.where(point_id: @point.id).last.description %></td>
+                <td><%= @languages.where(id: @points_ts.where(point_id: @point.id).last.language_id).first.name %></td>
+              </tr>
+          <%end%>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 </div> <!--/.class-->
 <script>
   $( document ).ready(function() {
