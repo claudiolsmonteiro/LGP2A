@@ -9915,13 +9915,11 @@ dialog {
     bottom: 0;
     width: calc(100% - 50px); }
     .more-info-modal .modal-footer audio {
-      display: block;
-      padding-top:0.1em ;
-	  width:45px ;
-      margin-left: 0.1em;
-      margin-right: auto; 
-  	  }
-
+      display: none;
+      margin-left: auto;
+      margin-right: auto; }
+    .more-info-modal .modal-footer .custom-controls {
+      text-align: center; }
 
 .more-info-modal-background {
   display: none;
@@ -10000,23 +9998,3 @@ dialog {
     color: rgba(255, 255, 255, 0.5); }
     .options-container .option .current {
       color: white; }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> master
-#hotspot_title{
-	font-weight:bold;
-	font-size:120%;
-	padding-bottom:0.1em;
-<<<<<<< HEAD
-}
-
-.audio_play_only{
-
-	padding-top:0.1em ;
-	width:45px ;
-	margin-left:0.1em;
-=======
->>>>>>> master
-}

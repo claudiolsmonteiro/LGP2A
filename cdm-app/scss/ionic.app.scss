@@ -207,11 +207,16 @@ dialog{
     width: calc(100% - 50px); //50px = 2*25px (margins)
 
     audio{
-      display: block;
+      display: none;
       margin-left: auto;
       margin-right: auto;
-
     }
+
+    .custom-controls{
+      text-align: center;
+    }
+
+
   }
 
 

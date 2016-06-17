@@ -154,7 +154,7 @@ controllerModule.controller("tridimensionalModelController", function($scope, $r
             $scope.environment.camera.updateProjectionMatrix();
             $scope.environment.renderer.setSize( window.screen.width, window.screen.height);
 
-        });
+        }, false);
 
         // Listen for resize changes
         window.addEventListener("resize", function() {

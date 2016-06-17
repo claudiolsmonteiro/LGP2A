@@ -1,11 +1,4 @@
-<head>
-<script>
-function EvalSound(soundobj) {
-  var thissound=document.getElementById(room_description_audio);
-  thissound.play();
-}
-</script>
-</head>
+
 
 <div id="{{room}}-more-info-modal" class="more-info-modal">
     <div class="modal-header">
@@ -14,11 +7,14 @@ function EvalSound(soundobj) {
     </div>
     <div class="modal-content" ng-bind-html="room_description"></div>
     <div class="modal-footer">
-        <div data-tap-disabled="true" >
+        <div id="room-description-audio" data-tap-disabled="true" >
             <audio controls="controls">
-                <source src="audio/mpthreetest.mp3" type="audio/mpeg">
+                <source src="{{description_audio_path}}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            <div class="custom-controls">
+                <i class="fa fa-play fa-3x audio-btn" ng-click="toggleDescriptionAudio()"></i>
+            </div>
         </div>
     </div>
 </div>

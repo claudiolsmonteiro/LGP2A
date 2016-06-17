@@ -73,6 +73,16 @@ controllerModule.service('customLocalStorage', function () {
         });
     };
 
+    //doesn't fetch from remote API. just populates models variable.
+    customLocalStorage.populateModels = function(){
+        if(window.localStorage.getItem("models") === undefined || window.localStorage.getItem("models") == null){
+
+        }
+        else{
+            customLocalStorage.models = JSON.parse(localStorage.getItem("models"));
+        }
+    };
+
     /*customLocalStorage.getModelInfo = function() {
         return JSON.parse(localStorage.getItem("models"));
     };*/
@@ -89,8 +99,6 @@ controllerModule.service('customLocalStorage', function () {
         window.localStorage.setItem("language", language);
     };
 });
-
-
 
 controllerModule.service('beaconsService', function (customLocalStorage, $cordovaBeacon, $rootScope, $state) {
     var beaconsService = this;
@@ -154,4 +162,30 @@ controllerModule.service('beaconsService', function (customLocalStorage, $cordov
             console.log(e);
         }
     }
+});
+
+controllerModule.service('audioService', function(){
+
+    var audioService = this;
+
+    audioService.toggleDescriptionAudio = function(){
+
+        var description_audio = document.querySelector('#room-description-audio audio');
+        var description_audio_icon = document.querySelector('#room-description-audio .custom-controls i');
+
+
+        if (angular.element(description_audio).hasClass('playing')) {
+            description_audio.pause();
+            description_audio.classList.remove('playing');
+            description_audio_icon.classList.remove('fa-pause')
+            description_audio_icon.classList.add('fa-play');
+        }
+        else {
+            description_audio.play();
+            description_audio.classList.add('playing');
+            description_audio_icon.classList.remove('fa-play')
+            description_audio_icon.classList.add('fa-pause');
+        }
+    };
+
 });

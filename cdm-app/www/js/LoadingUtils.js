@@ -221,7 +221,7 @@ function construct_tridimensional_environment(camera_vec){
     object.controls.enableDamping = true;
     object.controls.dampingFactor = 0.9;
     object.controls.enableZoom = true;
-    //object.controls.minDistance = 200;
+    object.controls.minDistance = 200;
     object.controls.maxDistance = 1000;
 
     object.renderer.setClearColor( 0x009ABE, 1 );

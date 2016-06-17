@@ -6,11 +6,12 @@
  */
 
 controllerModule.controller("roomController", function($scope, $stateParams, $state, customLocalStorage,
-                                                       sidebarUtils, beaconsService){
+                                                       sidebarUtils, beaconsService, audioService){
 
     ////////////////////
     $scope.texts = texts;
     $scope.language = customLocalStorage.getLanguage();
+    customLocalStorage.populateModels();
     ////////////////////
 
     ionic.Platform.ready(function() {
@@ -29,6 +30,7 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     //panorama_available -> true if the room as a panoramic picture.
     //if not, the option won't be shown in the bottom navbar
     $scope.panorama_available = false;
+    $scope.description_audio_path = customLocalStorage.models[$stateParams.room].audios[$scope.language].path
 
     $scope.next_room_available = (customLocalStorage.models[$scope.room].next_room != null);
     $scope.next_room_id = customLocalStorage.models[$scope.room].next_room;
@@ -42,6 +44,10 @@ controllerModule.controller("roomController", function($scope, $stateParams, $st
     $scope.showPopup = function () { $scope.room_show_more_info_popup($scope.environment.current_room); };
     $scope.hidePopup = function () { $scope.room_hide_more_info_popup($scope.environment.current_room); };
     $scope.toggleSidebar = function () { sidebarUtils.showSidebar('room-sidebar-menu'); };
+
+    $scope.toggleDescriptionAudio = function() {
+        audioService.toggleDescriptionAudio();
+    };
 
     ionic.DomUtil.ready(function(){
         $scope.environment = construct_tridimensional_environment([0,150,400]);

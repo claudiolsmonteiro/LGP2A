@@ -6,7 +6,7 @@
  */
 
 controllerModule.controller("materialsController", function($scope, $stateParams, $state, customLocalStorage,
-                                                            sidebarUtils, beaconsService){
+                                                            sidebarUtils, beaconsService, audioService){
 
     ////////////////////
     $scope.texts = texts;
@@ -28,6 +28,7 @@ controllerModule.controller("materialsController", function($scope, $stateParams
     $scope.panorama_available = false;
     if (customLocalStorage.models[$scope.room].photo != null && customLocalStorage.models[$scope.room].photo != undefined)
         $scope.panorama_available = true;
+    $scope.description_audio_path = customLocalStorage.models[$stateParams.room].audios[$scope.language].path
 
     $scope.next_room_available = (customLocalStorage.models[$scope.room].next_room != null);
     $scope.next_room_id = customLocalStorage.models[$scope.room].next_room;
@@ -36,6 +37,11 @@ controllerModule.controller("materialsController", function($scope, $stateParams
     $scope.showPopup = function () { $scope.show_more_info_popup($scope.environment.current_room); };
     $scope.hidePopup = function () { $scope.hide_more_info_popup($scope.environment.current_room); };
     $scope.toggleSidebar = function () { sidebarUtils.showSidebar('materials-sidebar-menu'); };
+
+    $scope.toggleDescriptionAudio = function() {
+        audioService.toggleDescriptionAudio();
+    };
+
 
     ionic.DomUtil.ready(function(){
         $scope.environment = construct_tridimensional_environment([0,150,400]);

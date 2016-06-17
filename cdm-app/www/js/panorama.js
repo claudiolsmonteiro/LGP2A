@@ -5,7 +5,8 @@
  * Created by João on 10/03/2016.
  */
 
-controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage, sidebarUtils){
+controllerModule.controller("panoramaController", function($scope, $stateParams, $state, customLocalStorage,
+                                                           sidebarUtils, audioService){
 
     ////////////////////
     $scope.texts = texts;
@@ -30,6 +31,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
     //panorama_available -> true if the room as a panoramic picture.
     //if not, the option won't be shown in the bottom navbar
     $scope.panorama_available = false;
+    $scope.description_audio_path = customLocalStorage.models[$stateParams.room].audios[$scope.language].path
 
     $scope.next_room_available = (customLocalStorage.models[$scope.room].next_room != null);
     $scope.next_room_id = customLocalStorage.models[$scope.room].next_room;
@@ -66,6 +68,9 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
         jQuery('#'+room_id+'-more-info-modal-background').hide();
     };
 
+    $scope.toggleDescriptionAudio = function() {
+        audioService.toggleDescriptionAudio();
+    };
 
     // PANORAMA FUNCTIONS
 
@@ -94,14 +99,14 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
             });
         }
 
-        /*if(customLocalStorage.models[room].photo.video != null){
+        if(customLocalStorage.models[room].photo.video != null){
             hotspots.push({
                 "pitch": customLocalStorage.models[room].photo.video.x,
                 "yaw": customLocalStorage.models[room].photo.video.y,
                 "type": "info",
                 "text": $scope.hotspotVideo(customLocalStorage.models[room].photo.video.url)
             });
-        }*/
+        }
 
         pannellum.viewer('panorama', {
             "type": type,
@@ -114,7 +119,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
             "hotSpots": hotspots
         });
 
-        pannellum.viewer('panorama', {
+        /*pannellum.viewer('panorama', {
             "type": type,
             "panorama": equirectangular_path,
             "cubeMap": cubemap_array,
@@ -128,7 +133,7 @@ controllerModule.controller("panoramaController", function($scope, $stateParams,
                 "type": "info",
                 "text": $scope.hotspotVideo(customLocalStorage.models[room].photo.video.url)
             }]
-        });
+        });*/
     };
 
     $scope.hotspotVideo = function(hotspot_url){
