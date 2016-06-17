@@ -13,19 +13,10 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
-  <% if current_user %>
-	  Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
-    <%= render 'layouts/header' %>
-    <div class="container">
+  <%= render 'layouts/header' %>
+  <div class="container">
     <%= yield %>
     <%= render 'layouts/footer' %>
-    </div>
-  <% else %>
-      <!-- <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %> -->
-    <%= yield %>
-    <!-- TODO: temos de mudar este yield -->
-    <%= render 'layouts/footer' %>
-  <% end %>
-
+  </div>
   </body>
 </html>
