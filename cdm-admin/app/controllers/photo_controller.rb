@@ -1,4 +1,7 @@
 class PhotoController < ApplicationController
+
+  before_filter :authorize
+
   def get_photo
     photo = Photo.find_by_id params[:id]
     if !photo.blank?

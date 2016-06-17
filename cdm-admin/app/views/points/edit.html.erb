@@ -23,6 +23,7 @@ $('.menu .etiquetas').addClass('active');
         <div class="panel-body">
           <div class="col-md-12">
             <%= form_for @point, :url => {:action => "update", :controller => "points"} do |f| %>
+                <h3>Dados gerais</h3>
                 <div class="form-group">
                   <%= f.hidden_field :photo_id , class:"form-control" %>
                 </div>
@@ -34,7 +35,9 @@ $('.menu .etiquetas').addClass('active');
                   <label>Coordenadas Y da etiqueta</label>
                   <%= f.number_field :y , class:"form-control" %>
                 </div>
-
+                <br/>
+                <br/>
+                <h3>Dados categorizadores</h3>
                 <%= f.fields_for :point_translations do |rt| %>
                     <div class="form-group">
                       <label>Título do ponto</label>
@@ -45,13 +48,16 @@ $('.menu .etiquetas').addClass('active');
                       <%= rt.text_area :description , class:"form-control" %>
                     </div>
                     <div class="form-group">
-                      <label>Idioma Id</label>
-                      <%= rt.text_field :language_id , class:"form-control" %>
+                      <label>Idioma </label>
+                      <br/>
+                      <%= rt.collection_select(:language_id, Language.all, :id, :name )  %>
                     </div>
+                    <br/>
+                    <br/>
                 <% end %>
 
 
-                <%= f.submit "Submit", class:"button" %>
+                <%= f.submit "Enviar", class:"btn btn-primary", style:"margin: 5px;" %><%= link_to 'Voltar', points_path, class:"btn btn-default"%>
             <% end %>
           </div>
         </div>

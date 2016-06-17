@@ -1,8 +1,9 @@
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+<% if !@room.nil? %>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Título do espaço: <%= @rooms.where(point_id: @point.id).first.title %> / <%= @points_ts.where(point_id: @point.id).last.title %></h1>
+      <h1 class="page-header">Título do espaço: <%= @rooms_ts.where(room_id: @room.id).first.name %> / <%= @rooms_ts.where(room_id: @room.id).last.name %></h1>
     </div>
   </div><!--/.row-->
 
@@ -13,39 +14,50 @@
         <table  class="table table-hover">
           <thead>
           <tr>
-            <th data-field="id" data-align="right">CoordX</th>
-            <th data-field="id" data-align="right">CoordY</th>
-            <th data-field="id" data-align="right">Título</th>
             <th data-field="id" data-align="right">Descrição</th>
-            <th data-field="id" data-align="right">Idioma</th>
+            <th data-field="id" data-align="right">Caminho textura</th>
+            <th data-field="id" data-align="right">Caminho modelo</th>
+            <% if !@room.beacon_uuid.nil? %>
+            <th data-field="id" data-align="right">Beacon UUID</th>
+            <%end%>
+            <% if !@room.next_room.nil? %>
+            <th data-field="id" data-align="right">Próximo espaço</th>
+            <%end%>
           </tr>
 
           </thead>
-          <!-- first PT, last En : TODO: Mudar para recursivo -->
-          <% if !@points_ts.first.nil? %> <!-- acho que esta verificação é irrelevante, mas vou deixar para já -->
+
               <tr>
-                <td><%= @point.x %></td>
-                <td><%= @point.y %></td>
-                <td><%= @points_ts.where(point_id: @point.id).first.title %></td>
-                <td><%= @points_ts.where(point_id: @point.id).first.description %></td>
-                <td><%= @languages.where(id: @points_ts.where(point_id: @point.id).first.language_id).first.name %></td>
+                <td><%= @rooms_ts.where(room_id: @room.id).first.description %></td>
+                <td><%= @room.model_path %></td>
+                <td><%= @room.texture_path  %></td>
+                <% if !@room.beacon_uuid.nil? %>
+                <td><%= @room.beacon_uuid %></td>
+                <%end%>
+                <% if !@room.next_room.nil? %>
+                <td><%= @rooms_ts.where(room_id: @rooms.where(code: @room.next_room).first.id).first.name %></td>
+                <%end%>
               </tr>
-          <%end%>
-          <% if !@points_ts.last.nil? %>
-              <tr>
-                <td><%= @point.x %></td>
-                <td><%= @point.y %></td>
-                <td><%= @points_ts.where(point_id: @point.id).last.title %></td>
-                <td><%= @points_ts.where(point_id: @point.id).last.description %></td>
-                <td><%= @languages.where(id: @points_ts.where(point_id: @point.id).last.language_id).first.name %></td>
-              </tr>
-          <%end%>
+
+          <tr>
+            <td><%= @rooms_ts.where(room_id: @room.id).last.description %></td>
+            <td><%= @room.model_path %></td>
+            <td><%= @room.texture_path  %></td>
+            <% if !@room.beacon_uuid.nil? %>
+            <td><%= @room.beacon_uuid %></td>
+            <%end%>
+            <% if !@room.next_room.nil? %>
+            <td><%= @rooms_ts.where(room_id: @rooms.where(code: @room.next_room).first.id).last.name %></td>
+            <%end%>
+          </tr>
+
         </table>
       </div>
     </div>
   </div>
 </div>
 </div> <!--/.class-->
+    <%end%>
 <script>
   $( document ).ready(function() {
     $('.menu li').removeClass('active');

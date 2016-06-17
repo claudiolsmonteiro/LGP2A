@@ -1,4 +1,6 @@
 class PointTranslationsControllerController < ApplicationController
+
+  before_filter :authorize
   attr_accessor :title, :description, :language_id
 
   def new

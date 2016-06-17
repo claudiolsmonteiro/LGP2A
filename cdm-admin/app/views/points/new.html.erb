@@ -21,7 +21,7 @@
 
                     <% @rooms.each do |p| %>
                         <% if !p.photo.nil? %>
-                            <option value="<%= p.photo.id %>" ><%= p.code %></option>
+                            <option value="<%= p.photo.id %>" ><%= @rooms_ts.where(room_id: p.id).first.name %></option>
                         <%end%>
                     <% end %>
                   </select>
@@ -48,11 +48,11 @@
                     <div class="form-group">
                       <label>Selecionar Idioma</label>
                       <br/>
-                      <%= rt.collection_select(:language_id, Language.all, :id, :name , class:"form-control")  %>
+                      <%= rt.collection_select(:language_id, Language.all, :id, :name )  %>
                     </div>
                 <% end %>
 
-                <%= f.submit "Enviar", class:"btn btn-primary" %>
+                <%= f.submit "Enviar", class:"btn btn-primary", style:"margin: 5px;" %><%= link_to 'Voltar', points_path, class:"btn btn-default"%>
             <% end %>
           </div>
         </div>

@@ -1,6 +1,6 @@
 <% if current_user %>
 
-</end><nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    </end><nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <button class="navbar-toggle collapsed" data-target=
@@ -18,18 +18,7 @@
             <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              <a href="#"><svg class=
-                                   "glyph stroked male-user">
-                <use xlink:href="#stroked-male-user">
-                </use></svg> Profile</a>
-            </li>
-            <li>
-              <a href="#"><svg class="glyph stroked gear">
-                <use xlink:href="#stroked-gear"></use></svg>
-                Settings</a>
-            </li>
-            <li>
-              <a href="#"><svg class="glyph stroked cancel">
+              <a href="/logout"><svg class="glyph stroked cancel">
                 <use xlink:href="#stroked-cancel"></use></svg>
                 Logout</a>
             </li>
@@ -39,30 +28,30 @@
     </div>
   </div><!-- /.container-fluid -->
 </nav>
-<div class="col-sm-3 col-lg-2 sidebar" id="sidebar-collapse">
-  <form role="search">
-    <div class="form-group">
-      <input class="form-control" placeholder="Search" type="text">
-    </div>
-  </form>
-  <ul class="nav menu">
-    <li class="dashboard">
-      <a href="index.html"><svg class="glyph stroked dashboard-dial">
-        <use xlink:href="#stroked-dashboard-dial"></use></svg>Dashboard</a>
-    </li>
-    <li class="espacos">
-      <a href="/rooms">
-        <svg class="glyph stroked app-window">
-          <use xlink:href="#stroked-app-window"></use></svg>Espaços</a>
+    <div class="col-sm-3 col-lg-2 sidebar" id="sidebar-collapse">
+      <form role="search">
+        <div class="form-group">
+          <input class="form-control" placeholder="Search" type="text">
+        </div>
+      </form>
+      <ul class="nav menu">
+        <li class="dashboard">
+          <a href="index.html"><svg class="glyph stroked dashboard-dial">
+            <use xlink:href="#stroked-dashboard-dial"></use></svg>Dashboard</a>
+        </li>
+        <li class="espacos">
+          <a href="/rooms">
+            <svg class="glyph stroked app-window">
+              <use xlink:href="#stroked-app-window"></use></svg>Espaços</a>
 
-    </li>
+        </li>
 
-    <li class="etiquetas">
-      <a href="/points"><svg class="glyph stroked location pin">
-        <use xlink:href="#stroked-location-pin"></use></svg>Etiquetas</a>
+        <li class="etiquetas">
+          <a href="/points"><svg class="glyph stroked location pin">
+            <use xlink:href="#stroked-location-pin"></use></svg>Etiquetas</a>
 
-    </li>
+        </li>
 
-  </ul>
-</div><!--/.sidebar-->
+      </ul>
+    </div><!--/.sidebar-->
 <%end%>

@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_filter :authorize, :except => [:get_everything]
   before_filter :cors_preflight_check, only: [:get_everything]
   after_filter :cors_set_access_control_headers, only: [:get_everything]
 
@@ -7,7 +8,9 @@ class RoomsController < ApplicationController
 
 
   def show
+    @rooms = Room.all
     @room = Room.find(params[:id])
+    @rooms_ts = RoomTranslation.all
   end
 
   def new
@@ -23,7 +26,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     respond_to do |format|
       if @room.save
-        format.html { redirect_to @room, notice: 'Room was successfully created.' }
+        format.html { redirect_to @room, notice: 'Espaço criado com sucesso.' }
         format.json { render :show, status: :created, location: @room }
       else
         format.html { render :new }
@@ -37,7 +40,7 @@ class RoomsController < ApplicationController
     respond_to do |format|
       if @room.update!(room_params)
         @room.room_translations.destroy
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
+        format.html { redirect_to @room, notice: 'Espaço atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @room }
       else
         format.html { render :edit }
@@ -49,7 +52,7 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     respond_to do |format|
-      format.html { redirect_to rooms_url, notice: 'Room was successfully destroyed.' }
+      format.html { redirect_to rooms_url, notice: 'Espaço apagado com sucesso.' }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,5 @@
 class RoomTranslationsController < ApplicationController
+  before_filter :authorize
   attr_accessor :name, :description, :language_id
 
   def new

@@ -20,21 +20,21 @@
         <div class="panel-body">
           <div class="col-md-12">
             <%= form_for @room, :url => {:action => "update", :controller => "rooms"} do |f| %>
-
+                <h3>Dados gerais</h3>
                 <div class="form-group">
-                  <label>Room code</label>
-                  <%= f.text_field :code , class:"form-control" %>
+                  <!--<label>Room code</label>-->
+                  <%= f.hidden_field :code , class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label>Model Path</label>
+                  <label>Caminho modelo</label>
                   <%= f.text_field :model_path , class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label>Texture Path</label>
+                  <label>Caminho textura</label>
                   <%= f.text_field :texture_path , class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label>Animation</label>
+                  <label>Tansformações da animação </label>
                   <%= f.text_field :animation , class:"form-control" %>
                 </div>
                 <div class="form-group">
@@ -42,35 +42,42 @@
                   <%= f.text_field :beacon_uuid , class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label>Beacon Major</label>
+                  <label>Beacon principal</label>
                   <%= f.text_field :beacon_major , class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label>Beacon Minor</label>
+                  <label>Beacon secundário</label>
                   <%= f.text_field :beacon_minor , class:"form-control" %>
                 </div>
                 <div class="form-group">
-                  <label>Next Room</label>
-                  <%= f.text_field :next_room , class:"form-control" %>
+                  <label>Próximo espaço</label>
+                  <br/>
+                  <%= f.collection_select(:next_room, Room.all, :code, :code )  %>
                 </div>
+                <br/>
+                <br/>
+                <h3>Dados categorizadores</h3>
                 <%= f.fields_for :room_translations do |rt| %>
                     <div class="form-group">
-                      <label>Room name</label>
+                      <label>Nome do espaço</label>
                       <%= rt.text_field :name , class:"form-control" %>
                     </div>
                     <div class="form-group">
-                      <label>Room description</label>
+                      <label>Descrição</label>
                       <%= rt.text_area :description , class:"form-control" %>
                     </div>
                     <div class="form-group">
-                      <label>Language Id</label>
-                      <%= rt.text_field :language_id , class:"form-control" %>
+                      <label>Idioma</label>
+                      <br/>
+                      <%= rt.collection_select(:language_id, Language.all, :id, :name )  %>
                     </div>
+                    <br/>
+                    <br/>
                 <% end %>
 
-                <%= f.submit "Submit", class:"button" %>
+                <%= f.submit "Enviar", class:"btn btn-primary", style:"margin: 5px;" %><%= link_to 'Voltar', rooms_path, class:"btn btn-default"%>
             <% end %>
-            <%= link_to 'Back', rooms_path %>
+
           </div>
         </div>
       </div>

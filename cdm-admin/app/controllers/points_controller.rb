@@ -1,4 +1,5 @@
 class PointsController < ApplicationController
+  before_filter :authorize
   before_action :set_point, only: [:show, :edit, :update, :destroy]
   attr_accessor :point_translations
 
@@ -20,6 +21,7 @@ class PointsController < ApplicationController
     @point = Point.new
     @point.point_translations.build
     @rooms = Room.all
+    @rooms_ts = RoomTranslation.all
     @languages = Language.all
   end
 
