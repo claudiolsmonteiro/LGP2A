@@ -156,6 +156,7 @@ Point.create!(:x => 10.0, :y => -140.0, :photo_id => 2)
 Point.create!(:x => 25.0, :y => 0.0, :photo_id => 2)
 Point.create!(:x => -160.0, :y => -20, :photo_id => 2)
 
+# POINT TRANSLATIONS
 
 #point translations sala suggia
 PointTranslation.create!(
@@ -258,17 +259,64 @@ PointTranslation.create!(
     :point_id => 7,
     :language_id => 2
 )
+# END POINT TRANSLATIONS
 
+# VIDEOS
 Video.create!(
-:url => 'https://www.youtube.com/embed/veRSr9lgg_k',
-:photo_id => 1,
-:x => -5.0,
-:y => 20.0
+    :url => 'https://www.youtube.com/embed/veRSr9lgg_k',
+    :photo_id => 1,
+    :x => -5.0,
+    :y => 20.0
 )
 
 Video.create!(
-:url => 'https://www.youtube.com/embed/veRSr9lgg_k',
-:photo_id => 2,
-:x => 5.0,
-:y => 0.0
+    :url => 'https://www.youtube.com/embed/veRSr9lgg_k',
+    :photo_id => 2,
+    :x => 5.0,
+    :y => 0.0
 )
+#END VIDEOS
+
+# AUDIOS
+
+# SUGGIA
+Audio.create!(
+    :path => 'audio/sala_suggia_pt.mp3',
+    :room_id => 1,
+    :language_id => 1
+)
+
+Audio.create!(
+    :path => 'audio/sala_suggia_en.mp3',
+    :room_id => 1,
+    :language_id => 2
+
+)
+
+# 2
+Audio.create!(
+    :path => 'audio/sala_2_pt.mp3',
+    :room_id => 2,
+    :language_id => 1
+)
+
+Audio.create!(
+    :path => 'audio/sala_2_en.mp3',
+    :room_id => 2,
+    :language_id => 2
+)
+
+# BAR
+Audio.create!(
+    :path => 'audio/bar_pt.mp3',
+    :room_id => 3,
+    :language_id => 1
+)
+
+Audio.create!(
+    :path => 'audio/bar_en.mp3',
+    :room_id => 3,
+    :language_id => 2
+)
+
+# END AUDIOS
