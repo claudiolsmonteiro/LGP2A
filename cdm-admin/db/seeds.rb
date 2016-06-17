@@ -146,15 +146,15 @@ Photo.create!(
 )
 
 #points sala suggia
-Point.create!(:x => 14.1, :y => 1.5, :photo_id => 1)
-Point.create!(:x => -9.4, :y => 222.6, :photo_id => 1)
-Point.create!(:x => -0.9, :y => 144.4, :photo_id => 1)
-Point.create!(:x => 13.5, :y => 144.4, :photo_id => 1)
+Point.create!(:x => 20.0, :y => -55.0, :photo_id => 1)
+Point.create!(:x => 20.0, :y => 50.0, :photo_id => 1)
+Point.create!(:x => 20.0, :y => -10.0, :photo_id => 1)
+Point.create!(:x => 20.0, :y => 20.0, :photo_id => 1)
 
 #points sala 2
-Point.create!(:x => 14.1, :y => 1.5, :photo_id => 2)
-Point.create!(:x => -9.4, :y => 222.6, :photo_id => 2)
-Point.create!(:x => -0.9, :y => 144.4, :photo_id => 2)
+Point.create!(:x => 10.0, :y => -140.0, :photo_id => 2)
+Point.create!(:x => 25.0, :y => 0.0, :photo_id => 2)
+Point.create!(:x => -160.0, :y => -20, :photo_id => 2)
 
 
 #point translations sala suggia
@@ -257,4 +257,18 @@ PointTranslation.create!(
     :description => 'This chairs are a homage to the Portuguese designer Daciano da Costa, maker of this model in the 70\'s.',
     :point_id => 7,
     :language_id => 2
+)
+
+Video.create!(
+:url => 'https://www.youtube.com/embed/veRSr9lgg_k',
+:photo_id => 1,
+:x => -5.0,
+:y => 20.0
+)
+
+Video.create!(
+:url => 'https://www.youtube.com/embed/veRSr9lgg_k',
+:photo_id => 2,
+:x => 5.0,
+:y => 0.0
 )
