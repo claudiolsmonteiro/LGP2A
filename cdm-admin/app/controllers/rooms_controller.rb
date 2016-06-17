@@ -123,6 +123,13 @@ class RoomsController < ApplicationController
         room_temp[:translations][translation_language] = translation_temp
       end
 
+      room_temp[:audios] = {}
+      room.audios.each do |audio|
+        audio_temp = audio.attributes
+        audio_language = Language.find(audio.language_id).code
+        room_temp[:audios][audio_language] = audio_temp
+      end
+
       result[room.code] = room_temp
     end
 

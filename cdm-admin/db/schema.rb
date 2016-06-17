@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530235502) do
+ActiveRecord::Schema.define(version: 20160616234424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "audios", force: :cascade do |t|
+    t.string  "path"
+    t.integer "language_id"
+    t.integer "room_id"
+  end
+
+  add_index "audios", ["language_id"], name: "index_audios_on_language_id", using: :btree
+  add_index "audios", ["room_id"], name: "index_audios_on_room_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string   "code"
@@ -110,6 +119,8 @@ ActiveRecord::Schema.define(version: 20160530235502) do
 
   add_index "videos", ["photo_id"], name: "index_videos_on_photo_id", using: :btree
 
+  add_foreign_key "audios", "languages"
+  add_foreign_key "audios", "rooms"
   add_foreign_key "materials", "rooms"
   add_foreign_key "photos", "rooms"
   add_foreign_key "point_translations", "languages"
