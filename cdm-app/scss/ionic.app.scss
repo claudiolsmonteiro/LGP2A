@@ -336,3 +336,24 @@ dialog{
   }
 }
 
+.contacts-container{
+    text-align: center;
+    font-size: 1.5rem;
+
+    .contact{
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+
+      .contacts-subtitle{
+        color: rgba(255,255,255,1);
+      }
+      .phone-number, .email, .website{
+        color: rgba(255,255,255,0.5);
+      }  
+    }    
+    a{
+      text-decoration: none;
+      color: rgba(255,255,255,0.5);
+    }
+}
+

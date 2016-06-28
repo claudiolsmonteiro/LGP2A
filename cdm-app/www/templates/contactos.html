@@ -1,5 +1,44 @@
 <ion-view cache-view="false" view-title="Contacts" class="background">
     <ion-content class="">
+    	<div style="height: 100%;margin-top: 5rem;align-items:center;">
+			<div class="contacts-container">
+				<div class="contact">
+					<p class="contacts-subtitle">{{texts.contacts.website[language]}}</p>
+					<p class="website"><a href="http://www.casadamusica.com">http://www.casadamusica.com</a></p>
+				</div>
+				<div class="contact">
+					<p class="contacts-subtitle">{{texts.contacts.callcenter[language]}}</p>
+					<p class="phone-number">Tel.: 220 120 220</p>
+					<p class="email">info@casadamusica.com</p>
+				</div>
+
+				<div class="contact">
+					<p class="contacts-subtitle">{{texts.contacts.visitasguiadas[language]}}</p>
+					<p class="phone-number">Tel.: 220 120 210</p>
+					<p class="email">visitasguiadas@casadamusica.com</p>
+				</div>
+
+				<div class="contact">
+					<p class="contacts-subtitle">{{texts.contacts.servicoeducativo[language]}}</p>
+					<p class="phone-number">Tel.: 220 120 290</p>
+					<p class="email">seducativo@casadamusica.com</p>
+				</div>
+
+
+				<div class="contact">
+					<p class="contacts-subtitle">{{texts.contacts.eventos[language]}}</p>
+					<p class="phone-number">Tel.: 220 120 214 / 218</p>
+					<p class="email">eventos@casadamusica.com</p>
+				</div>
+
+				<div class="contact">
+					<p class="contacts-subtitle">{{texts.contacts.areaadministrativa[language]}}</p>
+					<p class="phone-number">Tel.: 220 120 200 </p>
+					<p class="email"></p>
+				</div>
+			</div>
+    	</div>
+
     </ion-content>
 
     <div ng-include src="'templates/sidebar.html'"></div>
@@ -8,3 +47,4 @@
 
 
 </ion-view>
+

@@ -46,6 +46,30 @@ texts['contacts'] = {
     title: {
         pt : 'Contactos',
         en : 'Contacts'
+    },
+    website: {
+        pt: 'Website',
+        en: 'Website'
+    },
+    callcenter: {
+        pt: 'Call Center',
+        en: 'Call Center'
+    },
+    visitasguiadas : {
+        pt: 'Visitas Guiadas',
+        en: 'Guided tours'
+    },
+    servicoeducativo : {
+        pt: 'Serviço Educativo',
+        en: 'Educational Service'
+    },
+    eventos : {
+        pt: 'Eventos',
+        en: 'Events'
+    },
+    areaadministrativa : {
+        pt: 'Área Administrativa',
+        en: 'Administration'
     }
 };
 

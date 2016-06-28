@@ -9998,3 +9998,17 @@ dialog {
     color: rgba(255, 255, 255, 0.5); }
     .options-container .option .current {
       color: white; }
+
+.contacts-container {
+  text-align: center;
+  font-size: 1.5rem; }
+  .contacts-container .contact {
+    margin-top: 2rem;
+    margin-bottom: 2rem; }
+    .contacts-container .contact .contacts-subtitle {
+      color: white; }
+    .contacts-container .contact .phone-number, .contacts-container .contact .email, .contacts-container .contact .website {
+      color: rgba(255, 255, 255, 0.5); }
+  .contacts-container a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5); }
